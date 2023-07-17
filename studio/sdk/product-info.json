@@ -1,0 +1,16 @@
+{
+  "name": "IntelliJ IDEA",
+  "version": "2019.3.5",
+  "buildNumber": "193.7288.26",
+  "productCode": "IC",
+  "svgIconPath": "bin/idea.svg",
+  "launch": [
+    {
+      "os": "Linux",
+      "launcherPath": "bin/idea.sh",
+      "javaExecutablePath": "jbr/bin/java",
+      "vmOptionsFilePath": "bin/idea64.vmoptions",
+      "startupWmClass": "jetbrains-idea-ce"
+    }
+  ]
+}

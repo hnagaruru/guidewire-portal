@@ -1,0 +1,1073 @@
+<?xml version='1.0' encoding='UTF-8'?><plugin-repository><ff>"Graphics"</ff><category name="Graphics"><idea-plugin downloads="9781" size="6316" date="1088635672000" updatedDate="1088635672000" url=""><name>ColourChooser</name><id>ColourChooser</id><description><![CDATA[Translates a colour, chosen in a colour pane, into java/css code and
+	<ul>
+		<li>inserts it at the cursor location, or</li>
+		<li>copies it into the clipboard</li>
+	</ul>
+	, in 1 click.]]></description><version>0.1</version><vendor email="alainravet-jetbrains@yahoo.com" url="">Alain Ravet</vendor><rating>4.1</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="3853" size="112690" date="1088635963000" updatedDate="1088635963000" url=""><name>Gold Section</name><id>Gold Section</id><description><![CDATA[Gold Section 2(GS2) is a design tool for building nice palette for HTML
+        documents by method of "gold section" (in base of one is magical number 1.618033985017358...).]]></description><version>2.26</version><vendor email="davidovsv@yandex.ru" url="">Stanislav Davydov</vendor><rating>4.4</rating><change-notes><![CDATA[<h3>2.26</h3>
+<ul>
+    <li>Some icons changed. Especialy thanks to Alex Efimov.</li>
+</ul>
+
+<h3>2.25</h3>
+<ul>
+    <li>Bugfixes.</li>
+</ul>
+
+<h3>2.23</h3>
+<ul>
+    <li>New HTML Preview functionality. Now you can set up some HTML template and
+    watch it in different color schemas.</li>
+    <li>Bugfixes.</li>
+</ul>
+
+<h3>2.19</h3>
+<ul>
+    <li>Bugfixes.</li>
+</ul>
+
+<h3>2.18</h3>
+<ul>
+    <li>Bugfixes.</li>
+</ul>
+
+<h3>2.17</h3>
+<ul>
+    <li>Favorits.</li>
+    <li>Bugfixes.</li>
+</ul>]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin><idea-plugin downloads="5375" size="2759695" date="1088637394000" updatedDate="1088637394000" url=""><name>SvgViewer</name><id>SvgViewer</id><description><![CDATA[A viewer for Scalable Vector Graphics (SVG) documents. Since SVG can render images, you can also use this viewer to display png, jpeg, tiff and gif files.]]></description><version>2.2.1</version><vendor email="a.armstrong@optusnet.com.au" url="">Andrew Armstrong</vendor><rating>00</rating><change-notes><![CDATA[Corrected version number :(.
+        Replaced the user agent with a GUI user agent that can handle prompts from scripts embedded in the SVG data.]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin></category><ff>"User Interface"</ff><category name="User Interface"><idea-plugin downloads="1571" size="10948" date="1089228577000" updatedDate="1089228577000" url=""><name>Refactor Popup</name><id>Refactor Popup</id><description><![CDATA[Mouse shortcut pops up refactor menu as context menu.
+ Action found under the "Plug-ins" category on Keymap.
+ By default mapped to Ctrl+Button3 (works best on Windows), but you can remap.]]></description><version>1.0a</version><vendor email="plugins@cooperdooper.org" url="">CooperDooper</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin><idea-plugin downloads="1481" size="10956" date="1088637307000" updatedDate="1088637307000" url=""><name>SkinLFPlugin</name><id>SkinLFPlugin</id><description><![CDATA[SkinLFPlugin loads and keeps list of available skinLF themespack (see www.l2fprod.com and www.javootoo.com)]]></description><version>1.0</version><vendor email="" url="">Tomas Knappek (tomas.knappek@centrum.cz)</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="5368" size="28821" date="1088635855000" updatedDate="1088635855000" url=""><name>CVS bar</name><id>CVS bar</id><description><![CDATA[Plugin creates quick access buttons for using CVS]]></description><version>0.3</version><vendor email="lomeo@mail.ru" url="">Dmitry Antonyuk</vendor><rating>4.3</rating><change-notes><![CDATA[<b>14.03.04 Initial version.</b><br>
+            <b>21.03.04 version 0.2 beta.</b><br>
+            <b>11.06.04 version 0.3 beta.</b><br>
+            <p>
+              <ul>
+                <li>Bug fixed: Buttons was be shown if plugin doesnt use CVS.</li>
+                <li>New buttons added: Undo Add, Show History, Diff.</li>
+                <li>Now user can choose inactive buttons behaviour - hide or disable.</li>
+                <li>Key-stroke was modified.</li>
+                <li>Built for Pallada.</li>
+              </ul>
+            </p>]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin><idea-plugin downloads="3874" size="15631" date="1088635888000" updatedDate="1088635888000" url=""><name>Describe Key</name><id>Describe Key</id><description><![CDATA[Allows to easily find out what a key or shortcut does. Bound to
+       Ctrl+Alt+K by default.]]></description><version>0.1</version><vendor email="vmallet@jfouffa.com" url="">Vincent Mallet</vendor><rating>00</rating><change-notes><![CDATA[Initial Version.]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin></category><ff>"Code Tools"</ff><category name="Code Tools"><idea-plugin downloads="3675" size="244800" date="1179099059000" updatedDate="1179099059000" url=""><name>API Comparator</name><id>API Comparator</id><description><![CDATA[Plugin for viewing API changes in jar files.]]></description><version>0.3</version><vendor email="" url="">Alexey Efimov</vendor><rating>4.1</rating><change-notes><![CDATA[
+  0.3<ul>
+   <li>IDE 6 and Selena Compatible, tested with both 6.0.5, 7.0 M1a and 6951</li></ul>
+  0.2.1<ul>
+   <li>Hide added/removed/changed filter option</li>
+   <li>Progress monitor while comparison and snapshot loading</li>
+   <li>View offline comparison results</li>
+   <li>Bug fixes</li></ul>
+  <p>0.2<ul>
+   <li>Export to plain text</li>
+   <li>Saving size of dialogs</li>
+   <li>Improvements in comparison engine (support for ProgressMonitor in next version)</li>
+   <li>Bug fixes</li></ul>
+  <p>0.1.1
+   <li>DiffTool support</li>
+   <li>Bug fixes in configuration states</li></ul>
+  <p>0.1
+   <li>Recent files</li>
+   <li>Option to show only changes in tree</li>
+   <li>Option to show/hide class members</li>
+   <li>Show comparison results in one tree</li>
+   <li>Whole changed core of plugin code</li></ul>
+  <p>0.0.2
+   <li>Rewriten comparison engine</li
+   ><li>Dialog with progress bar while processing</li>
+   <li>GUI improvements</li>
+   <li>All UI form rebuilded with UI designer</li></ul>
+  <p>0.0.1
+   <li>Refactored Timur's Zambalayev tool for API comparison (many thanks, Timur)</li>
+   <li>Simple GUI for comparator</li>
+   <li>Simple plugin for IntelliJ IDEA</li></ul>]]></change-notes><idea-version min="n/a" max="n/a" until-build="183.0"/></idea-plugin><idea-plugin downloads="1336" size="40696" date="1088635764000" updatedDate="1088635764000" url=""><name>ContextViewer</name><id>ContextViewer</id><description><![CDATA[Context Viewer plugin for IDEA.]]></description><version>0.7.4</version><vendor email="" url="">ksibilev@yahoo.com</vendor><rating>4.4</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="3048" size="4740" date="1088635779000" updatedDate="1088635779000" url=""><name>CopyFQNPlugin</name><id>CopyFQNPlugin</id><description><![CDATA[Copies Fully Qualified Name of the class under cursor.]]></description><version>1.0.5</version><vendor email="" url="">Richard Nemec</vendor><rating>4.7</rating><change-notes><![CDATA[FQN of a referred class works again (any class name in Java can be FQN-ed)]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="231" size="99305" date="1088636001000" updatedDate="1088636001000" url=""><name>GuiSource</name><id>GuiSource</id><description><![CDATA[The GUI Source Generator plugin generates GUI source code from the .form file created by Idea's UI Designer.  It can be configured to produce code that uses the Idea layout manager or code that uses the Swing GridBag layout manager.]]></description><version>0.7</version><vendor email="Ralph Saunders ralph@keystone.com" url="">Keystone Software, Inc.</vendor><rating>00</rating><change-notes><![CDATA[Added support for Swing components and user defined components.  Fixed an edit bug that required the top level component to be a JPanel.]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.2999"/></idea-plugin><idea-plugin downloads="1894" size="911637" date="1109975726000" updatedDate="1109975726000" url=""><name>Ideascript</name><id>Ideascript</id><description><![CDATA[Script engine for interacting with Idea<br>
+        IdeaScript has been completely re-written to allow you to write your scripts in Java mixed
+        with plain-text (JSPs).  Please see the documentation at <a href="http://www.casalus.com/ideascript">http://www.casalus.com/ideascript</a>.]]></description><version>2.0.0</version><vendor email="kirk.woll@gmail.com" url="">Casalus</vendor><rating>3.8</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="989" size="515121" date="1088636492000" updatedDate="1088636492000" url="https://sourceforge.net/projects/jscrappy/"><name>scrappy</name><id>scrappy</id><description><![CDATA[Dynamic code execution environment a la Smalltalk or Visual Age ScrapBook.
+        Type in your code, highlight it and then: Do It, Print It, or Inspect It.]]></description><version>1.0.3</version><vendor email="" url="">Leif Hanack (former Rhett Guthrie - bytecrafters)</vendor><rating>00</rating><change-notes><![CDATA[Now compatible with IDEA 4.1 EAP - Pallada - build 2013. (Bug fixing the bug fix, sorry;)]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="149" size="1557531" date="1088636648000" updatedDate="1088636648000" url=""><name>MetricsReported</name><id>MetricsReported</id><description><![CDATA[Port of Dave Griffith's excellent MetricsReloaded 0.2.1 for IDEA 4.0 (1179).
+        Over 150 automated code metrics for IDEA (4.0.x and Pallada).]]></description><version>0.2.1.1</version><vendor email="vmallet@jfouffa.com" url="">InspectionGadgets Software (4.0 Port by Vincent Mallet)</vendor><rating>00</rating><change-notes><![CDATA[Hacked around the source of MetricsReloaded to make it
+        work with 4.0 and 4.1 (tested with builds 1179
+        and 2013). (Known issue: the Exception related to the 
+        non-existing "Analyze" menu in 4.0 -- look for the "Other"
+        menu).]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.1999"/></idea-plugin><idea-plugin downloads="1051" size="102565" date="1088636991000" updatedDate="1088636991000" url=""><name>Code queries</name><id>Code queries</id><description><![CDATA[Structured code query and replace (EXPERIMENTAL)]]></description><version>1.0</version><vendor email="" url="">Konstantin Solomatov, Dmitry Lomov</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="703" size="88903" date="1481534949000" updatedDate="1481534949000" url=""><name>LeeInjectView</name><id>cn.leeii.plugin.annotation</id><description><![CDATA[只能用于自己的框架，其他框架请谨慎下载~]]></description><version>1.1.1</version><vendor email="leeiidesu@gmail.com" url="">Lee</vendor><rating>00</rating><change-notes><![CDATA[新增对ButterKnife 8.4.0 的适配]]></change-notes><idea-version min="n/a" max="n/a" since-build="2.0" until-build="201.0"/></idea-plugin><idea-plugin downloads="4055" size="389733" date="1583149071000" updatedDate="1583149071000" url=""><name>AfterFinal</name><id>com.chinaedu.aedu.plugin</id><description><![CDATA[
+      Plugin for: <br>
+      1）Generate fields by findViewById; <br>
+      2）Generate MVP structure for Aedu Frame; <br>
+      3）Generate Java bean with Gsonformat<br>
+      4）ADB Install<br>
+      5）ADB Show Current Activity<br>
+      Directions: <br>
+      <a href="http://docs.afterfinal.com/">http://docs.afterfinal.com/</a>
+    ]]></description><version>4.1.1</version><vendor email="365168907@qq.com" url="http://www.afterfinal.com">AfterFinal</vendor><rating>4.4</rating><change-notes><![CDATA[
+        【4.1.1】—— 2020/03/02 <br>
+         Adaptation for Aedu changes<br>
+        【4.1.0】—— 2019/12/20 <br>
+         adb install on multiple devices<br>
+        【4.0.1】—— 2019/12/19 <br>
+         adb install available<br>
+        【3.0.1】—— 2017/12/12 <br>
+         ID/package changed<br>
+        【1.0.0】—— 2016/06/24 <br>
+        Initial Release
+    
+    ]]></change-notes><idea-version min="n/a" max="n/a" since-build="2.0"/></idea-plugin><idea-plugin downloads="1016" size="127014" date="1530773425000" updatedDate="1530773425000" url=""><name>WSAnything</name><id>com.mario.WSAnything.plugin</id><description><![CDATA[Multi-KeyWord Search Plugin For IntelliJ IDEA]]></description><version>1.8</version><vendor email="mariotest@qq.com" url="https://github.com/mario206/WSAnything"></vendor><rating>00</rating><change-notes><![CDATA[fix some bugs]]></change-notes><idea-version min="n/a" max="n/a" since-build="1.0" until-build="193.*"/></idea-plugin><idea-plugin downloads="451" size="3903892" date="1559837998000" updatedDate="1559837998000" url=""><name>DGT-DOClever</name><id>com.dgtis.doclever.plugin.doclever-plugin</id><description><![CDATA[
+        
+            <p>TThe plug-in can right-click the Java file annotated by the Controller and select the doclever menu
+               Then select the method that needs to import DOCLever to generate JSON.</p>
+            <p>The functions of the plug-in are as follows: </p>
+            <ul>
+                <li>Generate JSON for the DOCLever import group</li>
+            </ul>
+        
+    ]]></description><version>1.0.1</version><vendor email="jiawq@dgtis.com" url="http://www.dgtis.com">DGT</vendor><rating>00</rating><change-notes><![CDATA[
+        <ul>
+		  <li>version 1.0.0<br>
+            Generate JSON for the DOCLever import group
+		  </li>
+		  <li>version 1.0.1<br>
+		    Plugin compatibility issues fixed , Improving the Content of  and 
+		  </li>
+		</ul>
+    ]]></change-notes><idea-version min="n/a" max="n/a" since-build="1.0"/></idea-plugin></category><ff>"Fun Stuff"</ff><category name="Fun Stuff"><idea-plugin downloads="1086" size="15258" date="1088635743000" updatedDate="1088635743000" url=""><name>Connect4</name><id>Connect4</id><description><![CDATA[An amusing plugin for IDEA.]]></description><version>1.0</version><vendor email="" url="">Sirovy Software</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="1674" size="21948" date="1088637345000" updatedDate="1088637345000" url=""><name>Sokoban</name><id>Sokoban</id><description><![CDATA[Classic game of Sokoban with 50 levels (see Tools Menu)]]></description><version>0.3</version><vendor email="vmallet@jfouffa.com" url="">Vincent Mallet</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin><idea-plugin downloads="2234" size="13094" date="1088637503000" updatedDate="1088637503000" url=""><name>Tetris</name><id>Tetris</id><description><![CDATA[An amusing plugin for IDEA.]]></description><version>1.0</version><vendor email="" url="">Sirovy Software</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin></category><ff>"Tools Integration"</ff><category name="Tools Integration"><idea-plugin downloads="4596" size="73077" date="1117705102000" updatedDate="1117705102000" url=""><name>Hibernate Tools</name><id>Hibernate Tools</id><description><![CDATA[Hibernate external tools plugin]]></description><version>0.2</version><vendor email="simone.ricciardi@gmail.com" url="">Simone Ricciardi</vendor><rating>3.1</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.1999"/></idea-plugin><idea-plugin downloads="59655" size="818589" date="1088636079000" updatedDate="1088636079000" url="http://www.tagtraum.com/ideajad.html"><name>IdeaJad</name><id>IdeaJad</id><description><![CDATA[Plugin for the popular decompiler JAD]]></description><version>2111</version><vendor email="hendrik.schreiber@tagtraum.com" url="http://www.tagtraum.com/">tagtraum industries incorporated</vendor><rating>4.6</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="495" size="2806316" date="1088637735000" updatedDate="1088637735000" url=""><name>Xp4IdeaProjectPlugin</name><id>Xp4IdeaProjectPlugin</id><description><![CDATA[Bring XP capabilities into Idea]]></description><version>1.0</version><vendor email="" url="">CRS4</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="942" size="1497461" date="1088637757000" updatedDate="1088637757000" url=""><name>XPlanner plugin</name><id>XPlanner plugin</id><description><![CDATA[XPlanner integration plugin]]></description><version>0.5</version><vendor email="ekarpov@klocwork.com" url="https://sourceforge.net/projects/xplanner-idea/">Evgeny Karpov</vendor><rating>00</rating><change-notes><![CDATA[New features:
+<ul>
+<li>Viewing task/story description as HTML</li>
+<li>Ability to manually specify server time zone when it different from local one</li>
+<li>XPlanner 0.6 only - starting task time is reflected in XPlanner database</li>
+</ul>
+Bug fixes:
+<ul>
+<li>Some minor bugs fixed</li>
+</ul>
+TODO:
+<ul>
+<li>Ability to specified additional Wiki formats</li>
+<li>Ability to navigate by URL in task/story description</li>
+<li>Any other suggestions?</li>
+</ul>]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="70113" size="11711780" date="1259003524000" updatedDate="1259003524000" url="https://www.atlassian.com/software/clover"><name>Atlassian Clover for IDEA</name><id>com.atlassian.clover</id><description><![CDATA[<b>Introduction</b>
+<br> Clover is an award-winning Java code coverage analysis tool. Clover instruments source code and then records precisely what is executed when tests are run. The detailed test coverage reports help developers easily identify areas where the testing is weak, enabling them to write better tests faster. Clover fits into a developer's environment, be it Ant, Maven, IDEA, Eclipse or the command line. Quality Assurance and Project Managers can access important quality metrics over time via html and pdf reports. Clover provides test analysis to thousands of companies and open source projects all over the world. 
+<br>
+<br> 
+<b>Resources</b>
+<br> Documentation is available online from 
+<a href="http://confluence.atlassian.com/x/i4U3CQ" rel="nofollow">http://confluence.atlassian.com/display/CLOVER/Clover-for-IDEA</a>. 
+<br> To activate this plugin, you will require a Clover license file, available from 
+<a href="http://my.atlassian.com" rel="nofollow">MyAtlassian page</a> 
+<br>
+<br> 
+<b>License</b>
+<br> Clover is licensed under the 
+<a href="http://www.atlassian.com/legal/customer-agreement" rel="nofollow">Atlassian Customer Agreement</a>.]]></description><version>idea7-2.6.3-v20091123140000</version><vendor email="sales@atlassian.com" url="https://www.atlassian.com/">Atlassian</vendor><rating>4.4</rating><change-notes><![CDATA[
+Clover2 for IDEA is now fully featured and final.
+<ul>
+<li>Easily find where to add your next test using Clover2's per-test coverage.
+<li>Spot potential project risks by using the 'coverage clouds' and 'coverage tree map' visualisations - directly in your IDE.
+<li><b>ALT-F1</b> to select the current class you are viewing in the Coverage Explorer.
+</ul>
+
+	]]></change-notes><idea-version min="n/a" max="n/a" until-build="183.0"/></idea-plugin><idea-plugin downloads="2507" size="667732" date="1197405385000" updatedDate="1197405385000" url="https://github.com/shvets/cafebabe-idea-plugin"><name>CafeBabe</name><id>CafeBabe</id><description><![CDATA[This plugin integrates CafeBabe Bytecode editor with Intellij IDEA.]]></description><version>1.0.0</version><vendor email="alexander.shvets@gmail.com" url="http://shvets.github.io/">Alexander Shvets</vendor><rating>00</rating><change-notes><![CDATA[
+    <p>This plugin integrates CafeBabe Bytecode Editor with Intellij IDEA.</p>
+
+    <p>How to use Class Viewer/Editor</p>
+
+    <ul>
+      <li>Select class file in the files tree or click on "Open File" icon within plugin toolwindow;</li>
+      <li>Activate context menu for the selected file;</li>
+      <li>Select "Open in CafeBabe" item from the context menu;</li>
+      <li>Class will be disassembled and represented in CafeBabe toolwindow.</li>
+      <li>If you want to disassemble some method, navigate to methods list, select one method 
+          and activate context menu. Follow "Go to method body" link. You will be redirected to 
+          "Bytecode Editor" toolwindow.</li>
+      <li>Now you can create/delete/edit bytecode instructions.</li>
+      <li>In constant pool you can modify UTF strings;</li>
+      <li>If you want to get explanation for a given instruction, click on Help icon.</li>
+      <li>If you modified the file and then trying to save it, "Save as" dialog will be initiated, allowing you to save modified class.</li>
+      <li>You can click on "Save as" icon any time when you want to save your modifications.</li>
+    </ul>
+
+    <p>How to use ClassHound</p>
+
+    <ul>
+      <li>Click on ClassHound icon - new toolwindow will be open;</li>
+      <li>In ClassHound toolwindow select archive, then package, class, fileld or method. You can select only package 
+          or only package class;</li>
+      <li>By double clicking on package, class, field or method - selected item will be loaded into Class Viewer/Editor. 
+          If it's field or method, Class File Viewer/Ediror will be positioned on selected field/method;</li>
+      <li>You can add new archive to the list of available archives - then you can explore it in standard way.</li>
+    </ul>
+
+    Changes:
+      <ul>
+        <li>1.0.0
+          <ol>
+            <li>Added implementation of ClassHound service.</li>
+            <li>Added implementation of Save Class File function.</li>
+          </ol>
+        </li>
+
+        <li>0.9.0
+          <ol>
+            <li>Bug fix: disabling initial openning of plugin toolwindow</li>
+          </ol>
+        </li>
+
+        <li>0.8.0
+          <ol>
+            <li>Initial Release.</li>
+          </ol>
+        </li>
+      </ul>
+  ]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin></category><ff>"Network"</ff><category name="Network"><idea-plugin downloads="2258" size="51346" date="1160184707000" updatedDate="1160184707000" url=""><name>FaTPlug</name><id>FaTPlug</id><description><![CDATA[FTP Plugin]]></description><version>0.1</version><vendor email="" url="">Me</vendor><rating>00</rating><change-notes><![CDATA[Version 0.2 of FaTPlug]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="26315" size="1776846" date="1112045540000" updatedDate="1112045540000" url=""><name>Axis TCP Monitor Plugin</name><id>Axis TCP Monitor Plugin</id><description><![CDATA[Integrates the Axis TCP Monitor]]></description><version>1.0.7</version><vendor email="iceman@niku.com" url="">Michael Hoefer</vendor><rating>4.7</rating><change-notes><![CDATA[@changes@]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="27031" size="38094" date="1088637633000" updatedDate="1088637633000" url=""><name>TunnelliJ</name><id>TunnelliJ</id><description><![CDATA[TunnelliJ plugin works as a TCP tunnel and it useful for any network development. It allows you to monitor, sniff TCP connections and display the content in a very effective way inside your IDE.]]></description><version>1.2.1</version><vendor email="milan.boruvka@gmail.com" url="https://blog.boruvka.net/">Milan Boruvka</vendor><rating>3.6</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin></category><ff>"Editor"</ff><category name="Editor"><idea-plugin downloads="6230" size="5547" date="1088636038000" updatedDate="1088636038000" url=""><name>Hungry BackSpace</name><id>Hungry BackSpace</id><description><![CDATA[Modifies BackSpace key to hungrily delete whitespace.]]></description><version>1.0</version><vendor email="alexws@xemapsNOSPAM321.com" url="">Alex L</vendor><rating>4.6</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin><idea-plugin downloads="1254" size="9009" date="1088636574000" updatedDate="1088636574000" url=""><name>LineMover</name><id>LineMover</id><description><![CDATA[Adds 4 text moving actions to the editor: (action prefix == LineMover.")
+<table>
+<tr><td><i><b><font>Ctrl-Shift-I</font></b></i></td><td>Move 1 Up</td><td>:</td><td>Move the <i><b>current 1/n line(s)</b></i> 1 row Up</td></tr>
+<tr><td><i><b><font>Ctrl-Shift-K</font></b></i></td><td>Move 1 Down</td><td>:</td><td>Move the <i><b>current 1/n line(s)</b></i> 1 row Down</td></tr>
+
+<tr><td><i><b><font>Alt-Ctrl-Shift-I</font></b></i></td><td>Move To Top</td><td>:</td><td>Move the <i><b>selected text</b></i> to the Top</td></tr>
+<tr><td><i><b><font>Alt-Ctrl-Shift-K</font></b></i></td><td>Move To Bottom</td><td>:</td><td>Move the <i><b>selected text</b></i> to the Bottom</td></tr>
+</table>]]></description><version>0.4b</version><vendor email="alainravet-jetbrains@yahoo.com" url="">Alain Ravet</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="485" size="8616" date="1088637172000" updatedDate="1088637172000" url=""><name>SelectWord</name><id>SelectWord</id><description><![CDATA[SelectMethod action (can select method, field with the javadoc; by default mapped to Ctrl-Shift-M).]]></description><version>0.2</version><vendor email="" url="">Timur Zambalayev (tzambalayev@nyc.rr.com)</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="1049" size="4216" date="1088637368000" updatedDate="1088637368000" url=""><name>Stringify</name><id>Stringify</id><description><![CDATA[Turns selected text into a String.]]></description><version>1.0</version><vendor email="" url="">Colin Evans colinhevans@yahoo.com</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="586" size="8290" date="1088637455000" updatedDate="1088637455000" url=""><name>Tagify</name><id>Tagify</id><description><![CDATA[Wraps the selected text (usually HTML) in 'out.println("");', escaping the necessary characters in the process, for use in a servlet of tag.]]></description><version>1.0</version><vendor email="" url="">Jason Dobies</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="14351" size="9041" date="1088637654000" updatedDate="1088637654000" url=""><name>UpperLowerCapitalize</name><id>UpperLowerCapitalize</id><description><![CDATA[Editor actions to UpperCase, LowerCase, Capitalize or invert the case of
+        characters in a word or selection with a behavior similar to Emacs'
+        upcase-region-or-word, downcase-region-or-word and capitalize-region-or-word.
+
+        If the cursor is not on a word, the next word following the cursor is
+        considered (even on another line). If the cursor is in the middle of a
+        word, only the part following the cursor is transformed. In any case,
+        the cursor is moved after the transformed word.
+
+        Actions can be found under Editor Actions and are by default bound to
+        Alt-C (Capitalize), Alt-L (Lowercase), Alt-P (Uppercase). The ToggleCase
+        action is unbound.]]></description><version>0.1.1</version><vendor email="vmallet@jfouffa.com" url="">Vincent Mallet</vendor><rating>4.4</rating><change-notes><![CDATA[Initial Version.]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin><idea-plugin downloads="952" size="469374" date="1126869061000" updatedDate="1126869061000" url=""><name>Locale Utility</name><id>Locale Utility</id><description><![CDATA[Auto-Resource Bundle - Replace string with resource bundle GUI.]]></description><version>1.0.0</version><vendor email="sujeewa@codegen.net" url="">Sujeewa</vendor><rating>00</rating><change-notes><![CDATA[Testing with IntelliJ 5. on Windows.]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="14751" size="2932118" date="1258510415000" updatedDate="1258510415000" url=""><name>ANTLRWorks</name><id>ANTLRWorks</id><description><![CDATA[ANTLRWorks is a grammar development environment for ANTLR v3 grammars. It combines an excellent grammar-aware editor with an interpreter for rapid prototyping and a language-agnostic debugger for isolating grammar errors. ANTLRWorks helps eliminate grammar nondeterminisms, one of the most difficult problems for beginners and experts alike, by highlighting nondeterministic paths in the syntax diagram associated with a grammar. ANTLRWorks' goal is to make grammars more accessible to the average programmer, improve maintainability and readability of grammars by providing excellent grammar navigation and refactoring tools, and address the most common questions and problems encountered by grammar developers]]></description><version>1.3.1</version><vendor email="" url="">ANTLR Project</vendor><rating>3.4</rating><change-notes><![CDATA[
+Version 1.3.1 - 11/17/2009<br>
+<br>
+Bug fix:<br>
+    [AW-256] - NPE when attempting to debug<br>
+    [AW-257] - Issue parsing IntelliJ build number<br>
+    [AW-258] - Use UTF-8 encoding for debug input file<br>
+<br>
+
+    ]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="13086" size="165761" date="1257726230000" updatedDate="1257726230000" url="http://confluence.jetbrains.com/display/CONTEST/Identifier+Highlighter"><name>Identifier Highlighter</name><id>Identifier Highlighter</id><description><![CDATA[Highlights identifiers under caret.  If more than one instance with the same identifier is used in the file, only the usages of that specific instance are highlighted.  For parameters, local variables, and fields, a differentiation between reads and writes to that identifier are made with separate configurable colors.  Use Shift+Alt+Up and Shift+Alt+Down to navigate up and down to each highlighted occurrence.  Use Shift+Alt+Right to return to original highlighted occurrence starting point.  Use Shift+Alt+Left to go to the declaration highlighted occurrence only if exists in the same file.  Use Shift+Alt+R to rename the highlighted occurrences in the file.  Use Shift+Alt+L and Shift+Alt+U to lock and unlock the highlighting to allow movement through the file without changing the highlighted occurences.  Use Shift+Alt+T to toggle the plugin on or off.]]></description><version>3.62</version><vendor email="scastrianni@lgc.com" url="http://confluence.jetbrains.com/display/CONTEST/Identifier+Highlighter">Shawn Castrianni</vendor><rating>4.6</rating><change-notes><![CDATA[
+    
+    <ul>
+      <li>3.62
+        <ol>
+          <li>Recompile for 9.0 beta release compatibility</li>
+        </ol>
+      </li>
+      <li>3.61
+        <ol>
+          <li>Recompile for latest Maia release compatibility</li>
+        </ol>
+      </li>
+      <li>3.60
+        <ol>
+          <li>Check for identifier to left of cursor (Idea contribution from Oliver Pfeiffer)</li>
+        </ol>
+      </li>
+      <li>3.50
+        <ol>
+          <li>Improved highlighting during editing (Implementation contribution from Pierre Ingmansson)</li>
+        </ol>
+      </li>
+      <li>3.47
+        <ol>
+          <li>Protected against another NPE.</li>
+        </ol>
+      </li>
+      <li>3.46
+        <ol>
+          <li>Compiled for older JDK support.</li>
+        </ol>
+      </li>
+      <li>3.45
+        <ol>
+          <li>Fix persistence of settings bug.</li>
+        </ol>
+      </li>
+      <li>3.44
+        <ol>
+          <li>New IntelliJ 8 compatible version.</li>
+        </ol>
+      </li>
+      <li>3.43
+        <ol>
+          <li>Disable for IntelliJ 8 and above.</li>
+        </ol>
+      </li>
+      <li>3.42
+        <ol>
+          <li>Catch some more erroneous exceptions.</li>
+        </ol>
+      </li>
+      <li>3.41
+        <ol>
+          <li>Catch some more erroneous exceptions.</li>
+        </ol>
+      </li>
+      <li>3.40
+        <ol>
+          <li>Added online help.</li>
+        </ol>
+      </li>
+      <li>3.26
+        <ol>
+          <li>Try to protect against exceptions in the resolve method.</li>
+        </ol>
+      </li>
+      <li>3.25
+        <ol>
+          <li>Added global ability to toggle the plugin on or off with Shift+Alt+T.</li>
+          <li>This toggle is also available in the settings dialog.</li>
+          <li>Added the differentiation between reads and writes of parameters, local variables, and fields with separate colors. These colors are configurable in the settings dialog.</li>
+        </ol>
+      </li>
+      <li>3.10
+        <ol>
+          <li>Added marker bar/right gutter highlighting and tooltips.</li>
+          <li>Also added the ability to configure this new option in the configuration panel.</li>
+        </ol>
+      </li>
+      <li>3.02
+        <ol>
+          <li>Grouped the editor popup menu actions into a cascade menu item.</li>
+        </ol>
+      </li>
+      <li>3.01
+        <ol>
+          <li>Fixed a bug in the new locking feature. The locking/unlocking worked, but the intent was to be able to edit the file while it was locked. This part did not work. Now it does and it works quite well now.</li>
+          <li>I also simplified some code so hopefully I didn't introduce some new bugs.</li>
+        </ol>
+      </li>
+      <li>3.00
+        <ol>
+          <li>Added new feature called locking. You can now lock the current set of identifier highlighting so that you can move the cursor throughout the file without losing the highlighting. This will allow you to edit a different part of the file while keeping the highlighting intact. You can then continue to navigate to each identifier occurrence as before.</li>
+          <li>Use Shift+Alt+L and Shift+Alt+U to lock and unlock respectively.</li>
+        </ol>
+      </li>
+      <li>2.82
+        <ol>
+          <li>Sorted usages by text offset to be compatible with Selena release.</li>
+        </ol>
+      </li>
+      <li>2.81
+        <ol>
+          <li>More Null pointer checking to help with 7.x.</li>
+        </ol>
+      </li>
+        </ol>
+      </li>
+      <li>2.80
+        <ol>
+          <li>Try to make compatible with Idea 7.x by using invokeLater.</li>
+        </ol>
+      </li>
+      <li>2.77
+        <ol>
+          <li>Try to fix an exception with -1 array index.</li>
+        </ol>
+      </li>
+      <li>2.76
+        <ol>
+          <li>Try to fix an exception with bad document length.</li>
+        </ol>
+      </li>
+      <li>2.75
+        <ol>
+          <li>Fixed a small bug to make it work properly with JSP files.</li>
+        </ol>
+      </li>
+      <li>2.72
+        <ol>
+          <li>Initialize the rename identifier dialog with the current identifier value to make small edits quicker.</li>
+        </ol>
+      </li>
+      <li>2.71
+        <ol>
+          <li>WARNING, the default hotkeys have been changed!!!!!</li>
+          <li>Due to a few complaints that I chose hotkeys that were already used, I changed to Shift+Alt+ where is Up, Down, Left, Right, or R.</li>
+          <li>You can change these to whatever you like in your keymapping.</li>
+        </ol>
+      </li>
+      <li>2.70
+        <ol>
+          <li>Added Alt+R to allow renaming the highlighted identifier occurrences.</li>
+        </ol>
+      </li>
+      <li>2.61
+        <ol>
+          <li>Found an exception that OpenAPI catches internally so I can't catch it myself. Had to check for it before it happens.</li>
+        </ol>
+      </li>
+      <li>2.60
+        <ol>
+          <li>Fixed browsing files from outside the current project like JDK's src.zip.</li>
+        </ol>
+      </li>
+      <li>2.57
+        <ol>
+          <li>Improved handling of declaration outside current file.</li>
+          <li>Fixed some ArrayIndexOutOfBounds exceptions when browsing JDK src.zip files.</li>
+        </ol>
+      </li>
+      <li>2.55
+        <ol>
+          <li>Added quick way to set all colors for all identifier types.</li>
+        </ol>
+      </li>
+      <li>2.50
+        <ol>
+          <li>Improved UI for setting colors with a ColorButton component.</li>
+          <li>Also, added tons more customizations so that you can independently enable/disable and change colors for different types of identifiers like Classes, Methods, Fields, Parameters, Local Variables, and Other.</li>
+        </ol>
+      </li>
+      <li>2.02
+        <ol>
+          <li>Fixed bug when variable started with same letters as its type.</li>
+        </ol>
+      </li>
+      <li>2.01
+        <ol>
+          <li>Fixed a few stupid bugs.</li>
+        </ol>
+      </li>
+      <li>2.00
+        <ol>
+          <li>I finally got the functionality I wanted.</li>
+          <li>Now only the usages of the specific instance of the identifier are highlighted.</li>
+          <li>So if you have the same name used for more than one local variable througout the file, for example, only the usages of that specific local variable are highlighted.</li>
+          <li>This allowed me to add Alt+Left to go to the highlighted occurrence where the variable is declared.</li>
+          <li>However, if the declared occurrence is in another file, it will NOT go there.</li>
+        </ol>
+      </li>
+      <li>1.51
+        <ol>
+          <li>Fix another NPE.</li>
+        </ol>
+      </li>
+      <li>1.50
+        <ol>
+          <li>Add configuration dialog to control highlight colors and highlighting layer in editor.</li>
+          <li>Dialog obtained from main settings panel.</li>
+        </ol>
+      </li>
+      <li>1.03
+        <ol>
+          <li>Fix another NPE. Add DocumentListener to handles changes to document better.</li>
+        </ol>
+      </li>
+      <li>1.02
+        <ol>
+          <li>Fix another NPE.</li>
+        </ol>
+      </li>
+      <li>1.01
+        <ol>
+          <li>Fix a NPE.</li>
+        </ol>
+      </li>
+      <li>1.00
+        <ol>
+          <li>Initial version.</li>
+        </ol>
+      </li>
+    </ul>
+    
+  ]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="1667" size="11366" date="1490595862000" updatedDate="1490595862000" url=""><name>DimenHelper</name><id>me.aheadlcx.dimenhelper</id><description><![CDATA[create others value dimen file by your current dimen file.
+<br>]]></description><version>1.3</version><vendor email="aheadlcxzhang@gmail.com" url="https://github.com/aheadlcx/DimenHelper">aheadlcx</vendor><rating>3.1</rating><change-notes><![CDATA[Fix known bug.]]></change-notes><idea-version min="n/a" max="n/a" since-build="1.3" until-build="201.0"/></idea-plugin><idea-plugin downloads="588" size="4277941" date="1663582554000" updatedDate="1663582554000" url=""><name>MoveFaster</name><id>org.kooni_boop.movefaster</id><description><![CDATA[
+        
+      Install to navigate lines 5 times faster. search for 'MoveFaster' in Settings/Keymaps and register your
+      keybindings and you are good to go! (ALT+UP, ALT+DOWN Default) source code can be found at: https://github.com/Kooni-Boop/MoveFast-Jetbrains-IDE-Plugin
+    
+    ]]></description><version>0.42</version><vendor email="" url="https://github.com/Kooni-Boop/MoveFast-Jetbrains-IDE-Plugin">Kooni-Boop</vendor><rating>00</rating><change-notes><![CDATA[
+        
+      <ul>
+        <li><b>0.41</b> - Compatability fixes.</li>
+        <li><b>0.4</b> - IntelliJ 2021 Platform compatibility support, added move with selection feature.</li>
+        <li><b>0.3</b> - Initial release.</li>
+      </ul>
+    
+    ]]></change-notes><idea-version min="n/a" max="n/a" since-build="1.0"/></idea-plugin></category><ff>"J2ME"</ff><category name="J2ME"><idea-plugin downloads="547" size="441894" date="1088636156000" updatedDate="1088636156000" url=""><name>J2ME Plugin</name><id>J2ME Plugin</id><description><![CDATA[Integrates SUN Microsystems WTK emulator into IntelliJ IDEA]]></description><version>0.2 build 10</version><vendor email="" url="">PinSoft</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.2999"/></idea-plugin></category><ff>"Plugin Development"</ff><category name="Plugin Development"><idea-plugin downloads="161287" size="97770" date="1088637001000" updatedDate="1088637001000" url="https://github.com/JetBrains/psiviewer"><name>PsiViewer</name><id>PsiViewer</id><description><![CDATA[A Program Structure Interface (PSI) tree viewer. This plugin may be useful for developers who are considering using the PSI interface in their own plugins.]]></description><version>2.20 build 4 20031021</version><vendor email="" url="">JetBrains, Andrew Armstrong, Vince Mallet, Ole Matzura, Jacques Morel, Colin Fleming, Jon Akhtar</vendor><rating>4.7</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="110.*"/></idea-plugin></category><ff>"TeamWork"</ff><category name="TeamWork"><idea-plugin downloads="4845" size="79669" date="1114181536000" updatedDate="1114181536000" url=""><name>ChatPlugin</name><id>ChatPlugin</id><description><![CDATA[This plugin provides a simple multi-user chat window, allowing you to chat
+    with other developers on your local LAN. It takes advantage of IP Multicast,
+    which means it doesn't require a standalone chat server but will only work
+    with developers on the same subnet. It has emoticon and whisper functions.]]></description><version>2.0</version><vendor email="andrew@senecaconsulting.com.au" url="">Andrew Harding</vendor><rating>4.6</rating><change-notes><![CDATA[<html>
+        * Fixed up character encoding for String to byte[] translation
+      </html>]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="788" size="353085" date="1088636612000" updatedDate="1088636612000" url=""><name>MailPlugin</name><id>MailPlugin</id><description><![CDATA[this plugin allows you to email all open files]]></description><version>0.0.3</version><vendor email="intellij@aiko.sh" url="">Aiko Mastboom</vendor><rating>00</rating><change-notes><![CDATA[initial release.<br>sources/mail.jar/activation.jar included.<br>see %IDEA_HOME%/plugins/MailPlugin/etc/ for details]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="619" size="230389" date="1088636701000" updatedDate="1088636701000" url=""><name>Net client</name><id>Net client</id><description><![CDATA[Net client for team work in a local network]]></description><version>1.1101</version><vendor email="" url="">Nikolay Chashnikov</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin></category><ff>"XML"</ff><category name="XML"><idea-plugin downloads="409" size="97001" date="1088637721000" updatedDate="1088637721000" url=""><name>XML Pack</name><id>XML Pack</id><description><![CDATA[XML Pack]]></description><version>1.0</version><vendor email="" url="">Orbeon (http://www.orbeon.com/)</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.1999"/></idea-plugin><idea-plugin downloads="5933" size="95440" date="1111545595000" updatedDate="1111545595000" url=""><name>XMLBean Generator</name><id>XMLBean Generator</id><description><![CDATA[XMLBean Integration.]]></description><version>0.0.2</version><vendor email="movink@gmail.com" url="">Movin Kulathilaka</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin></category><ff>"Modeling and CASE tools"</ff><category name="Modeling and CASE tools"><idea-plugin downloads="11615" size="100194" date="1088637187000" updatedDate="1088637187000" url=""><name>SequencePlugin</name><id>SequencePlugin</id><description><![CDATA[Simple Sequence Diagram Generator]]></description><version>0.5.3</version><vendor email="" url="">ksibilev@yahoo.com</vendor><rating>4.6</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="95115" size="805343" date="1088637290000" updatedDate="1088637290000" url="http://www.intellij.org/twiki/bin/view/Main/SimpleUML"><name>simpleUML</name><id>simpleUML</id><description><![CDATA[
+		
+		Providing support for Class, Dependency, Package and Sequence diagrams.
+		
+	]]></description><version>0.28a</version><vendor email="martin.schmid@gridvision.ch" url="">
+        Martin Schmid, Luke Burgess (Luke.E.Burgess@usa.xerox.com), Dimitar Dimitrov
+</vendor><rating>3.5</rating><change-notes><![CDATA[<html>
+			<ul>
+			<li>Changed Icon (thanks Alexey Efimov)</li>
+			<li>Fixed bugs</li>
+			</ul></html>]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="2680" size="1654209" date="1129070607000" updatedDate="1129070607000" url=""><name>DiamondSpin</name><id>DiamondSpin</id><description><![CDATA[DiamondSpin plugin for UML modelling]]></description><version>1.6</version><vendor email="office@crystalbyte.com" url="">Crystalbyte</vendor><rating>4.4</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin></category><ff>"Reporting"</ff><category name="Reporting"><idea-plugin downloads="1820543" size="115113" date="1259266043000" updatedDate="1259266043000" url="https://plugins.jetbrains.com/plugin/4509-statistic"><name>Statistic</name><id>Statistic</id><description><![CDATA[
+        
+        <p>Shows project statistic. This plugin shows files sorted by their extension along with size, line count
+        LOC etc.
+        User can select (Project/Module/Package/File) scope using the 'Refresh on selection' button. (This plugin
+        requires Java 1.8)</p>
+        <br>
+        <h3>For older versions of IDEs (IDEA, Android Studio, PHP Storm) please use version 3.8.1 !!!</h3>
+        <br>
+        <br>
+        <b>Sponsors</b>
+        <p><a title="Try CodeStream" href="https://sponsorlink.codestream.com/?utm_source=jbmarket&amp;utm_campaign=statistic&amp;utm_medium=banner"><img src="https://alt-images.codestream.com/codestream_logo_statistic.png"></a><br>
+        Eliminate context switching and costly distractions. Create and merge PRs and perform code reviews from inside your IDE while using jump-to-definition, your keybindings, and other IDE favorites.<br> <a title="Try CodeStream" href="https://sponsorlink.codestream.com/?utm_source=jbmarket&amp;utm_campaign=statistic&amp;utm_medium=banner">Learn more</a></p>
+        
+    ]]></description><version>1.6.3</version><vendor email="tomas.topinka@gmail.com" url="http://www.jpower8.com">Ing. Tomas Topinka</vendor><rating>4.3</rating><change-notes><![CDATA[
+        
+        
+          Version 1.6.3:
+          <ul>
+            <li>
+              changed: Filtering criteria has been changed.
+            </li>
+          </ul>
+          Version 1.6.2:
+          <ul>
+            <li>
+              changed: List of excluded file types has been changed.
+            </li>
+          </ul>
+          Version 1.6.1:
+          <ul>
+            <li>
+              changed: Filtering criteria has been changed.
+            </li>
+          </ul>
+          Version 1.6:
+          <ul>
+            <li>
+              added: 'Refresh on selection' button has been added. User can select Project/Module/Package/File as the scope for the plugin.
+            </li>
+          </ul>
+          Version 1.5.3:
+          <ul>
+            <li>
+              changed: Sorting criteria has been changed.
+            </li>
+          </ul>
+          Version 1.5.2:
+          <ul>
+            <li>
+              changed: Look&Feel has been changed.
+            </li>
+          </ul>
+          Version 1.5.1:
+          <ul>
+            <li>
+              changed: Comments & copyright updated.
+            </li>
+          </ul>
+          Version 1.5:
+          <ul>
+            <li>
+              added: Java tab has been added.
+            </li>
+          </ul>
+          Version 1.4:
+          <ul>
+            <li>
+              added: Summary row has been added.
+            </li>
+          </ul>
+          Version 1.3.1:
+          <ul>
+            <li>
+              changed: Bug fixed (when openning module with no associated output path).
+            </li>
+          </ul>
+          Version 1.3:
+          <ul>
+            <li>
+              added: Checkbox 'Exclude compiler output directories' has been added.
+            </li>
+            <li>
+              changed: List of excluded file types has been changed.
+            </li>
+          </ul>
+          Version 1.2:
+          <ul>
+            <li>
+              added: Posibility to open file from the list of files with the particular extension.
+            </li>
+            <li>
+              changed: List of excluded file types has been changed.
+            </li>
+          </ul>
+          Version 1.1:
+          <ul>
+            <li>
+              changed: List of excluded file types has been changed.
+            </li>
+          </ul>
+          Version 1.0:
+          <ul>
+            <li>
+              added: Settings->Statistic->ExcludeUser can exclude some file types from the statistic.
+            </li>
+            <li>
+              added: Size of the files (MIN,MAX,AVG).
+            </li>
+            <li>
+              added: Number of lines (MIN,MAX,AVG).
+            </li>
+          </ul>
+        
+        
+    ]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin></category><ff>"Web"</ff><category name="Web"><idea-plugin downloads="110" size="48770" date="1088636245000" updatedDate="1088636245000" url=""><name>StrutsComponent</name><id>StrutsComponent</id><description><![CDATA[A Bean Component Window which creates a Java Bean with all set get methods.]]></description><version>1.0</version><vendor email="" url="">Gandle Technologies, Inc</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.1999"/></idea-plugin><idea-plugin downloads="175" size="199420" date="1088637382000" updatedDate="1088637382000" url=""><name>StrutsLayout</name><id>StrutsLayout</id><description><![CDATA[A Struts Layout Window which creates a Struts Layout for Struts WebApp.]]></description><version>1.0</version><vendor email="" url="">Gandle Technologies, Inc</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.1999"/></idea-plugin><idea-plugin downloads="2448" size="13005" date="1088636524000" updatedDate="1088636524000" url=""><name>AndyTesters</name><id>AndyTesters</id><description><![CDATA[SystemTimePlugin]]></description><version>1.0</version><vendor email="" url="">aNDyHoT</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="222"/></idea-plugin><idea-plugin downloads="6963" size="86863" date="1130854899000" updatedDate="1130854899000" url=""><name>Jsp Internationalizer</name><id>Jsp Internationalizer</id><description><![CDATA[The plugin helps in internationalizing a web application. It allows you to convert all(or few) labels in the current JSP into custom tags. It also saves the (generated)key, (extracted-label)value pairs into the specified property files.]]></description><version>1.3</version><vendor email="" url="">ThoughtWorks</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin></category><ff>"Framework"</ff><category name="Framework"><idea-plugin downloads="102616" size="2309358" date="1257711333000" updatedDate="1257711333000" url=""><name>OSGi</name><id>Osmorc</id><description><![CDATA[
+    <p>Adds support for the development of OSGi-based applications.</p>
+
+    <ol>
+    <li>Open <b>Settings | OSGI | IDE Settings | Framework Definitions</b>.</li>
+    <li>Add the OSGi framework that you want to work with (Equinox, Felix, etc.).</li>
+    <li>Add the OSGi facet to any module that should be an OSGi bundle.</li>
+    <li>You can either write your own manifest or let the plugin calculate the manifest for you.</li>
+    </ol>
+
+    <p>
+      To run an OSGi bundle, create a new OSGi run configuration and select the framework that you set up in the first step.
+      Then add the bundles you want to run. The plugin will run all dependencies automatically, so you don't need to manually add them.
+      Finally run the newly created run configuration. If you chose to enable the OSGi console, you can then send commands
+      to the OSGi container and start/stop bundles.
+    </p>
+  ]]></description><version>1.1.0</version><vendor email="" url="">JetBrains</vendor><rating>3.3</rating><change-notes><![CDATA[
+        
+    
+    ]]></change-notes><idea-version min="n/a" max="n/a" until-build="201"/></idea-plugin></category><ff>"Profiling"</ff><category name="Profiling"><idea-plugin downloads="5955" size="164799" date="1088635899000" updatedDate="1088635899000" url=""><name>DevPartner</name><id>DevPartner</id><description><![CDATA[DevPartner Java Edition provides a performance profiler, coverage checker, deadlock analyzer and memory analysis tool]]></description><version>3.0.1</version><vendor email="" url="">Compuware Corporation - http://www.compuware.com/products/java</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="916" size="43460" date="1088636724000" updatedDate="1088636724000" url=""><name>OptimizeIt 5 Plugin</name><id>OptimizeIt 5 Plugin</id><description><![CDATA[Integration is currently just for the Profiler.  Allows you to Profile the selected Run Configuration through OptimizeIt 5 from IDEA.
+    Profiling via this plugin runs the selected configuration alongside the OptimizeIt Audit system and then automatically launches the OptimizeIt Profiler GUI connecting it to the vm.
+    The plugin also intercepts calls to the profiler's built in source viewer, showing the appropriate code inside IDEA instead (via RMI).]]></description><version>0.1.3</version><vendor email="nedski@yahoo.com" url="">Nathan Brown</vendor><rating>00</rating><change-notes><![CDATA[Recompiled for IDEA 4.0.2 (Build 1179)]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin></category><ff>"Database"</ff><category name="Database"><idea-plugin downloads="113475" size="1121516" date="1096664995000" updatedDate="1096664995000" url="http://java.sstiller.de/sql/index.html"><name>SQL Query Plugin</name><id>SQL Query Plugin</id><description><![CDATA[
+		<p>A tool for executing SQL statements through a JDBC connection.</p>
+		<p>Features:
+		<ul><li>Syntax highlighting
+			<li>Executing multiple statements at once
+			<li>Highlighting of primary and foreign keys
+			<li>Editing of results
+			<li>Support for easier configuration of common JDBC driver
+			<li>Support of different column formats (including custom formats)
+			<li>Browser for database structure
+			<li>Statement templates for often used statements
+			<li>Support for Java BLOB's
+			<li>Export into XML, HTML, CSV and Excel
+			<li>Data Load
+		</ul></p>
+	]]></description><version>1.4.1</version><vendor email="stefan.stiller@net-linx.com" url="http://java.sstiller.de">KiwiSoft</vendor><rating>4.6</rating><change-notes><![CDATA[<html><ul>
+<li>Added DB2 driver.
+<li>Added option to include query in HTML export.
+<li>Added menu item to copy the column name to the clipboard.
+<li>Added viewer for BLOB data
+<li>Made custom column formats working for IntelliJ IDEA 4.x (see help)
+	</ul></html>]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin></category><ff>"Programming Language"</ff><category name="Programming Language"><idea-plugin downloads="1721" size="290816" date="1088636874000" updatedDate="1088636874000" url=""><name>PropertiesEditor</name><id>PropertiesEditor</id><description><![CDATA[Editor for properties files like built-in editors (highlighting, navigation, refactoring, find usages, intentions, properties files specific features, bundle editing mode etc.)]]></description><version>1.8.1f</version><vendor email="kashin_d@hotmail.ru" url="">Dmitry Kashin</vendor><rating>00</rating><change-notes><![CDATA[<html>
+    			<ul>
+                <li>Minor improvements and reported bugs fixes</li>
+    			</ul></html>]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.3400"/></idea-plugin><idea-plugin downloads="427" size="5560957" date="1258159923000" updatedDate="1258159923000" url="http://idea-simsyn.tigris.org/"><name>Extended Syntax Highlighting for IDEA7</name><id>Extended Syntax Highlighting for IDEA7</id><description><![CDATA[
+        Provides extended syntax highlighting based on user-definable configuration files. Use
+        'Init SimpleSyntax' from Tools menu to install syntax highlighting. Clone files
+        in your IDEA 'config/options/SimpleSyntax' folder to enable highlighting for other
+        languages. Use 'Reload SimpleSyntax' from Tools menu to reload configuration changes.
+        ///
+        See http://idea-simsyn.tigris.org for more information.
+        ///
+        Credits: Includes the wonderful Groovy, JRuby, JFlex and JParsec systems. Also included
+        are a few files from the pythonid Python plugin as an example.
+    ]]></description><version>0.21</version><vendor email="simplesyntax@intensicode.net" url="">IntensiCode</vendor><rating>00</rating><change-notes><![CDATA[
+        [ V0.21 ] Deactivated Ruby highlighting to avoid clash with JetBrain's Ruby plugin.
+        [ V0.20 ] Fixed for IDEA version 7. Removed dynamic ColorSettingsPage because it breaks IDEA.
+        [ V0.19 ] Added support for dynamic JFlex-based syntax definitions. Added Python example configuration
+        [ V0.18 ] Switched to Groovy and JRuby lexer configuration using JParsec.
+        [ V0.17 ] Fully fixed for IDEA 6.0. Now highlighting of files works properly again.
+        [ V0.16 ] Fixed for IDEA 6.0. No more crashing IDEA 6.0 and later.
+        [ V0.15 ] Fixed more minor issues in Ruby highlighting.
+        [ V0.14 ] Fixed quirk in ColorSettingsPage when defining several rules for a syntax token.
+        [ V0.13 ] Fixed duplicate file type issue. (Occurred when using 'Reload SimpleSyntax'.)
+        [ V0.12 ] Speeded up example Ruby configuration by removing all 'ruby' and adding 'regex' tokens. Improved 'regex' performance.
+        [ V0.11 ] Cleaned up resource/file access codebase. Moved configuration to 'config/options/SimpleSyntax' subfolder.
+        [ V0.10 ] Fixed groovy rule implementation. Fixed DOC_COMMENT issue.
+        [ V0.9 ] Improved Ruby example configuration. Fixed locked config file issue.
+        [ V0.8 ] Implemented global registry collision work around when using more than one configuration.
+        [ V0.7 ] Fixed minor (doc) issues after first (offical) plugin release. Fixed reloading of token colors/attributes.
+        [ V0.6 ] Added 'groovy' syntax rule.
+        [ V0.5 ] Added reload action.
+        [ V0.4 ] Added init action.
+        [ V0.3 ] Added 'ruby' syntax rule.
+        [ V0.2 ] Implemented syntax configuration loading.
+        [ V0.1 ] Initial release with hardcoded Ruby syntax.
+    ]]></change-notes><idea-version min="n/a" max="n/a" until-build="75.7999"/></idea-plugin><idea-plugin downloads="363" size="2791969" date="1258161113000" updatedDate="1258161113000" url="http://idea-simsyn.tigris.org/"><name>Simple Syntax Highlighting for IDEA6</name><id>Simple Syntax Highlighting for IDEA6</id><description><![CDATA[
+        Provides simple syntax highlighting based on user-definable configuration files. Use
+        'Init SimpleSyntax' from Tools menu to install Ruby syntax highlighting. Clone files
+        in your IDEA 'config/options/SimpleSyntax' folder to enable highlighting for other
+        languages. Use 'Reload SimpleSyntax' form Tools menu to reload configuration changes.
+        ///
+        Credits: Includes the wonderful JRuby and Groovy binary distributions.
+    ]]></description><version>0.17</version><vendor email="simplesyntax@intensicode.net" url="">IntensiCode</vendor><rating>00</rating><change-notes><![CDATA[
+        [ V0.17 ] Fully fixed for IDEA 6.0. Now highlighting of files works properly again.
+        [ V0.16 ] Fixed for IDEA 6.0. No more crashing IDEA 6.0 and later.
+        [ V0.15 ] Fixed more minor issues in Ruby highlighting.
+        [ V0.14 ] Fixed quirk in ColorSettingsPage when defining several rules for a syntax token.
+        [ V0.13 ] Fixed duplicate file type issue. (Occurred when using 'Reload SimpleSyntax'.)
+        [ V0.12 ] Speeded up example Ruby configuration by removing all 'ruby' and adding 'regex' tokens. Improved 'regex' performance.
+        [ V0.11 ] Cleaned up resource/file access codebase. Moved configuration to 'config/options/SimpleSyntax' subfolder.
+        [ V0.10 ] Fixed groovy rule implementation. Fixed DOC_COMMENT issue.
+        [ V0.9 ] Improved Ruby example configuration. Fixed locked config file issue.
+        [ V0.8 ] Implemented global registry collision work around when using more than one configuration.
+        [ V0.7 ] Fixed minor (doc) issues after first (offical) plugin release. Fixed reloading of token colors/attributes.
+        [ V0.6 ] Added 'groovy' syntax rule.
+        [ V0.5 ] Added reload action.
+        [ V0.4 ] Added init action.
+        [ V0.3 ] Added 'ruby' syntax rule.
+        [ V0.2 ] Implemented syntax configuration loading.
+        [ V0.1 ] Initial release with hardcoded Ruby syntax.
+    ]]></change-notes><idea-version min="n/a" max="n/a" until-build="60.6499"/></idea-plugin><idea-plugin downloads="206" size="3862425" date="1258161918000" updatedDate="1258161918000" url="http://idea-simsyn.tigris.org/"><name>Extended Syntax Highlighting for IDEA6</name><id>Extended Syntax Highlighting for IDEA6</id><description><![CDATA[
+        Provides extended syntax highlighting based on user-definable configuration files. Use
+        'Init SimpleSyntax' from Tools menu to install syntax highlighting. Clone files
+        in your IDEA 'config/options/SimpleSyntax' folder to enable highlighting for other
+        languages. Use 'Reload SimpleSyntax' form Tools menu to reload configuration changes.
+        ///
+        In contrast to the Simple Syntax Highlighting plugin, this one uses more advanced lexer
+        definitions. Sorry for the lack of documentation.
+        ///
+        Credits: Includes the wonderful Groovy, JRuby and JParsec systems. Also included are
+        a few files from the pythonid Python plugin.
+    ]]></description><version>0.19</version><vendor email="simplesyntax@intensicode.net" url="">IntensiCode</vendor><rating>00</rating><change-notes><![CDATA[
+        [ V0.19 ] Added support for dynamic JFlex-based syntax definitions. Added Python example configuration
+        [ V0.18 ] Switched to Groovy and JRuby lexer configuration using JParsec.
+        [ V0.17 ] Fully fixed for IDEA 6.0. Now highlighting of files works properly again.
+        [ V0.16 ] Fixed for IDEA 6.0. No more crashing IDEA 6.0 and later.
+        [ V0.15 ] Fixed more minor issues in Ruby highlighting.
+        [ V0.14 ] Fixed quirk in ColorSettingsPage when defining several rules for a syntax token.
+        [ V0.13 ] Fixed duplicate file type issue. (Occurred when using 'Reload SimpleSyntax'.)
+        [ V0.12 ] Speeded up example Ruby configuration by removing all 'ruby' and adding 'regex' tokens. Improved 'regex' performance.
+        [ V0.11 ] Cleaned up resource/file access codebase. Moved configuration to 'config/options/SimpleSyntax' subfolder.
+        [ V0.10 ] Fixed groovy rule implementation. Fixed DOC_COMMENT issue.
+        [ V0.9 ] Improved Ruby example configuration. Fixed locked config file issue.
+        [ V0.8 ] Implemented global registry collision work around when using more than one configuration.
+        [ V0.7 ] Fixed minor (doc) issues after first (offical) plugin release. Fixed reloading of token colors/attributes.
+        [ V0.6 ] Added 'groovy' syntax rule.
+        [ V0.5 ] Added reload action.
+        [ V0.4 ] Added init action.
+        [ V0.3 ] Added 'ruby' syntax rule.
+        [ V0.2 ] Implemented syntax configuration loading.
+        [ V0.1 ] Initial release with hardcoded Ruby syntax.
+    ]]></change-notes><idea-version min="n/a" max="n/a" until-build="60.6499"/></idea-plugin></category><ff>"Formatting"</ff><category name="Formatting"><idea-plugin downloads="6182" size="12710" date="1123048323000" updatedDate="1123048323000" url=""><name>Auto-Format Text</name><id>Auto-Format Text</id><description><![CDATA[Adds to IntelliJ the ability to reformat text. This is particularly
+        useful when editing Javadoc comments or files with free text paragraphs
+        (like text files or XML document).]]></description><version>1.4.5</version><vendor email="avernet@scdi.org" url="">Alessandro Vernet</vendor><rating>00</rating><change-notes><![CDATA[Works with IntelliJ 5. Tested on Windows with EAP build 3431.]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="19822" size="387783" date="1088637013000" updatedDate="1088637013000" url="https://github.com/DaveKriewall/Rearranger"><name>Rearranger</name><id>Rearranger</id><description><![CDATA[
+ Rearranges (reorders) class and class member declarations according to a user-specified order and/or method call hierarchy;
+ generates section-marking comments;
+ provides several controls for spacing within and between methods and classes; and
+ permits the user to manually rearrange items.
+]]></description><version>3.5</version><vendor email="dave.kriewall at gmail.com" url="">Dave Kriewall</vendor><rating>4.4</rating><change-notes><![CDATA[1) Fixed rule matching for implemented/implementing/overridden/overriding method attributes.
+        2) Horizontal and vertical scroll bars in the Live Rearranger dialog are no longer focusable.  Focus goes
+           from tree to OK to Cancel button and back to tree.
+        3) Added a new spacing control to "Force <N> blank lines before method open brace".
+        4) When using Ctrl-Shift-(Up,Down)Arrow to move items in the Live Rearranger, keep the item being moved
+           visible by scrolling appropriately when it reaches the top or bottom edge.
+        5) Made some changes to allow project to compile under Pallada.  No longer able to use PsiJavaToken constants.]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin><idea-plugin downloads="1666" size="15350" date="1088637037000" updatedDate="1088637037000" url=""><name>Reformat</name><id>Reformat</id><description><![CDATA[ReformatCode (Ctrl-Alt-L) and OptimizeImports (Ctrl-Alt-O) without a dialog.
+        An additional action: ReformatPlugin.ReformatCodeAndOptimizeImports (Ctrl-Alt-R).]]></description><version>0.7.1</version><vendor email="" url="">Timur Zambalayev (timzam@yahoo.com)</vendor><rating>3.1</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="7384" size="181290" date="1088637436000" updatedDate="1088637436000" url="https://github.com/DaveKriewall/Tabifier"><name>Tabifier</name><id>Tabifier</id><description><![CDATA[The tabifier plugin retabs Java code so that syntactic elements are aligned vertically. Extensive, configurable control over alignment is provided. [Note: the following examples are aligned correctly when viewed within IDEA's plugin manager, but are misaligned when viewed on the JetBrains plugin repository page due to the use of a non-fixed font.] 
+<p> For example, I like to align variable declarations and assignment statements like this: </p>
+<pre>
+               int          v1;                  // loop variable
+               String       s2;                  // second string
+public  static PrintWriter  p;
+private static boolean      debugging    = true; // initialize
+private static OutputStream outputstream = null;
+
+outputstream = new FileOutputStream(f, true);
+p            = new DebuggingPrintWriter(outputstream, true);
+        </pre> IDEA likes to format them with single spaces separating the syntactic elements, like this: 
+<pre>
+int v1; // loop variable
+String s2; // second string
+public static PrintWriter p;
+private static boolean debugging = true; // initialize
+private static OutputStream outputstream = null;
+
+outputstream = new FileOutputStream(f, true);
+p = new DebuggingPrintWriter(outputstream, true);
+        </pre> The tabifier plugin automatically reformats the text into the first version, or any variation of it you choose. 
+<p> The Tabifier is able to right justify integer literals, e.g. </p>
+<pre>
+public static final int ONE    =  1;
+public static final int TWO    =  2;
+public static final int TEN    = 10;
+public static final int ELEVEN = 11;
+        </pre> It can align method declaration and method call parameters, even with multiple parameters per line: 
+<pre>
+public ExpressionListParser(TokenColumn       openParend,
+                            ColumnChoice      params,
+                            TokenColumn       closeParend,
+                            CodeStyleSettings codeStyleSettings, TabifierSettings settings,
+                            NestedParser      parser,            int              nestingLevel)
+        </pre> And its expression alignment is recursive, e.g. 
+<pre>
+if ((psiExpressionList.getExpressions().length               &gt;  expressionListIndex &amp;&amp;
+     psiExpressionList.getExpressions()[expressionListIndex] == child                 ) ||
+    (sawNoParameters                                         == false               &amp;&amp;
+     expressionListIndex                                     &gt;                    0   )   )
+        </pre> It is capable of reformatting &quot;if&quot; statements as follows: 
+<pre>
+if (param1 == p3 &amp;&amp;
+    j      &gt;  5     ) p3 = 7;
+....
+if      (param1 == p3) p3     = 6;
+else if (param1 == 2 ) method1(param1, true, 3);
+else                   param1 = 7;
+        </pre> Method calls can be reformatted to align parentheses, commas, or parameters: 
+<pre>
+align_params                    = (ColumnSetting ) find(ALIGN_PARAMS              );
+align_semicolon                 = (ColumnSetting ) find(ALIGN_SEMICOLON           );
+align_semicolon_with_comma      = (BooleanSetting) find(ALIGN_SEMICOLON_WITH_COMMA);
+        </pre> Typecast parentheses and types as well as many other expression components can also be aligned.]]></description><version>4.8</version><vendor email="dave.kriewall at gmail.com" url="">Dave Kriewall</vendor><rating>4.6</rating><change-notes><![CDATA[Handles alignment of one-line method declarations (code block braces on same line as method declaration).
+        Handles array initializers in 'new' statement better.
+        Fixed a number of problems with trailing comments (non-trailing comments considered trailing and vice versa).]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin></category><ff>"Navigation"</ff><category name="Navigation"><idea-plugin downloads="2641" size="34749" date="1088635661000" updatedDate="1088635661000" url=""><name>Code Outline</name><id>Code Outline</id><description><![CDATA[Shows a zoomed out "outline" of your code while you're editing it.]]></description><version>0.0.1</version><vendor email="keith@kano.net" url="http://keithlea.com/">Keith Lea</vendor><rating>4.1</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin></category><ff>"Code Editing"</ff><category name="Code Editing"><idea-plugin downloads="794" size="5441" date="1088637577000" updatedDate="1088637577000" url=""><name>ToggleKeyword</name><id>ToggleKeyword</id><description><![CDATA[Toggles public/protected/private and true/false.]]></description><version>1.2</version><vendor email="" url="">Thomas Vollmer (thomasvollmer@yahoo.com)</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="3270" size="14628" date="1105727478000" updatedDate="1105727478000" url=""><name>Type Refactoring</name><id>Type Refactoring</id><description><![CDATA[Adds an menu item to the Refactor menu, which allows you to change the type of a variable without breaking code.]]></description><version>0.1.1</version><vendor email="" url="">Thomas Singer</vendor><rating>4.1</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin><idea-plugin downloads="228" size="37994" date="1088635684000" updatedDate="1088635684000" url=""><name>Comment</name><id>Comment</id><description><![CDATA[Commenting (Ctrl-/, Ctrl-Shift-/) in custom file types (e.g. properties, rb, cs, bat, sh, pl, py, cpp, vm, sql).]]></description><version>0.3.3</version><vendor email="" url="">Timur Zambalayev (tzambalayev@nyc.rr.com)</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.2999"/></idea-plugin><idea-plugin downloads="245" size="82876" date="1088636261000" updatedDate="1088636261000" url=""><name>JavaDoc Editor</name><id>JavaDoc Editor</id><description><![CDATA[JavaDoc Editor]]></description><version>1.4</version><vendor email="" url="">Dmitry Skavish (dmitry@jzox.com)</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.1999"/></idea-plugin><idea-plugin downloads="900" size="56788" date="1088636676000" updatedDate="1088636676000" url=""><name>Modifier Modifier Plugin</name><id>Modifier Modifier Plugin</id><description><![CDATA[Allows you to quickly change the modifiers
+  (<code>static</code>, <code>final</code>, etc.) of one or
+  more fields, methods, variables, and classes using hotkeys.<br><br>
+  Provides hotkeys for toggling each Java modifier for the current method,
+  field, variable, or class, as well as for cycling through
+  <code>private</code>, default, <code>protected</code>, and
+  <code>public</code>.]]></description><version>0.1</version><vendor email="keith@cs.oswego.edu" url="http://keithlea.com/">Keith Lea</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="480" size="12436" date="1088636685000" updatedDate="1088636685000" url=""><name>MoveElement</name><id>MoveElement</id><description><![CDATA[Structure aware (PSI API) element moving.]]></description><version>0.2</version><vendor email="" url="">Timur Zambalayev (tzambalayev@nyc.rr.com)</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="507" size="3969" date="1256892524000" updatedDate="1256892524000" url=""><name>Simple Helpers</name><id>Simple Helpers</id><description><![CDATA[This is a plugin to provide simple shortcuts to help coding. The first shortcut is to convert a camel cased word to sentence. Like 'EditorActionImpl' to 'Editor action impl'.]]></description><version>1.1</version><vendor email="" url="">Udayakumar Rayala</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin></category><ff>"OS Integration"</ff><category name="OS Integration"><idea-plugin downloads="956" size="7112" date="1088637264000" updatedDate="1088637264000" url=""><name>IdeProcessPriority</name><id>IdeProcessPriority</id><description><![CDATA[(Windows Only!) This plugin adds a menu item that lets you choose what priority the process
+        should run as. It changes the priority (for example, I use "below normal"), and will persist
+        the setting, so I don't have to remember to do it everytime I start IntelliJ.]]></description><version>1.2</version><vendor email="pdm@acm.org" url="">Paul Mclachlan</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="27970" size="52302" date="1258409825000" updatedDate="1258409825000" url="https://code.google.com/archive/p/nativeneighbourhood"><name>Native Neighbourhood</name><id>Native Neighbourhood</id><description><![CDATA[Provides some actions to integrate IDEA into the native desktop environment.
+        <p>Actions include executing the currently active file in the platform's <b>default
+        application</b>, showing the active file in the platform <b>file manager</b> and opening a <b>command
+        shell</b> in the active file's directory.
+        </p><p>
+        Integrates the actions into Tools-menu and main toolbar and provides an entry for the
+        <b>SelectInTarget</b>-Menu to show in file manager.
+        </p><p>
+        Additionally a custom <b>binary file type</b> is registered and associated with several extensions.
+        These files may be executed in the platform's default application by double-clicking them
+        in the project view, for example.
+        </p><p>
+        Furthermore from native file manager <b>files may be dropped</b> on unused areas of the idea
+        frame (empty space in toolwindowbars, editor tab area, toolbar, menubar and statusbar).
+        </p><p>
+        The action commands may be configured in config/options/other.xml in section
+        NativeNeighbourhoodPlugin. Supported replacement variables are
+        $FilePath$, $FileDir$, $FileName$ and $PluginsHome$. All Icons
+        are loaded from configured "iconsDir" below /org/intellij/plugins/nativeNeighbourhood/icons/.
+        </p><p>
+        The labels may be customized in META-INF/plugin.xml in plugin directory.
+        The associated extensions may be configured in other.xml or using the filetypes-applet
+        in IDEA configuration.
+        </p>
+    ]]></description><version>1.2.2</version><vendor email="f.bruch@gmx.net" url="">Frank Bruch</vendor><rating>3.7</rating><change-notes><![CDATA[
+    ]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin><idea-plugin downloads="138" size="3506" date="1088636712000" updatedDate="1088636712000" url=""><name>OpenFolder</name><id>OpenFolder</id><description><![CDATA[Use this plugin to open the folder that contains the file currently open in the edit window.]]></description><version>1.0</version><vendor email="" url="">GooberDude</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.2999"/></idea-plugin></category><ff>"Administration Tools"</ff><category name="Administration Tools"><idea-plugin downloads="23356" size="91593" date="1088636906000" updatedDate="1088636906000" url=""><name>Perforce Helix Core</name><id>PerforceDirectPlugin</id><description><![CDATA[
+      
+      Allows working with <a href="https://www.perforce.com/">Perforce version control system</a>.
+      The following features are available:
+        <ul>
+        <li>Submit, merge, diff, shelf and more</li>
+        <li>Automatic checkout of files on editing</li>
+        <li>Dedicated item in the VCS menu and in the context menu</li>
+        </ul>
+         <p>To configure, open <b>Settings / Preferences</b> and go to <b>Version Control | Perforce</b>.</p>
+      
+   ]]></description><version>1.1.07</version><vendor email="" url="">JetBrains</vendor><rating>3.1</rating><change-notes><![CDATA[<b style="font-family:arial;font-size:120%;color:red">Pallada-only build</b>
+<br>Rebuilt for Pallada (same as older versions, just the Revision Diff fixed for changed API)]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.3075"/></idea-plugin></category><ff>"Miscellaneous"</ff><category name="Miscellaneous"><idea-plugin downloads="14514" size="28509" date="1088636015000" updatedDate="1088636015000" url=""><name>HexView</name><id>HexView</id><description><![CDATA[        <p><b>View any file in hexadecimal format</b></p>
+        <p><b>Using HexView</b><br>
+        <br/>
+        As Plugin :<br/>
+        a) Right click on the file on Project View and press "View Hex format",
+           a Frame will display the Hex format of the selected file. <br>
+        b) Right click on the Editor View and press "View Hex format",
+           a Frame will display the Hex format of the current file.<br>
+        </p>
+        <p>
+        As Standalone Program : <br/>
+        <br/>
+        java -jar HexView.jar [file]<br/>
+        <br/>
+        Tip: If you dont provide a filename, a file dialog box will appear.
+        </p>
+        <p><b>List of features : </b>
+        <ul>
+            <li> Two column layout of file in hex and text/binary format.</li>
+            <li> Conversion to Little Endian, Big Endian, Hex and Decimal.</li>
+            <li> Navigation using Home, End and Arrow keys.</li>
+        </ul>
+        </p>]]></description><version>1.0</version><vendor email="poweribo@yahoo.com" url="">Stephen Olano</vendor><rating>4.5</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="1454" size="118015" date="1088636186000" updatedDate="1088636186000" url=""><name>JarSpyPlugin</name><id>JarSpyPlugin</id><description><![CDATA[JarSpy Plugin]]></description><version>1.0</version><vendor email="" url="">Jeff Brown</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="23777" size="132049" date="1088636588000" updatedDate="1088636588000" url=""><name>Log4JPlugin</name><id>Log4JPlugin</id><description><![CDATA[<p>Log4J Plugin Monitoring (LF5_SOCKET)</p> 
+<p>Features:</p> 
+<ul> 
+ <li>Table view of log messages;</li> 
+ <li>Filtering by Level, Category, NDC and Message;</li> 
+ <li>Quick link to source code from detail panel;</li> 
+</ul> 
+<p>Configuration:</p> 
+<ul> 
+ <li>Download Log4JPlugin plugin</li> 
+ <li>Configure log4j.xml socket appender</li> 
+ <p> &lt;log4j:configuration xmlns:log4j=&quot;http://jakarta.apache.org/log4j/&quot; debug=&quot;true&quot;&gt;<br /> <br /> &lt;appender name=&quot;LF5_SOCKET&quot; class=&quot;org.apache.log4j.net.SocketAppender&quot;&gt;<br /> &nbsp;&nbsp;&lt;param name=&quot;RemoteHost&quot; value=&quot;localhost&quot;/&gt;<br /> &nbsp;&nbsp;&lt;param name=&quot;Port&quot; value=&quot;4454&quot;/&gt;<br /> &nbsp;&nbsp;&lt;param name=&quot;LocationInfo&quot; value=&quot;true&quot;/&gt;<br /> &nbsp;&nbsp;&lt;param name=&quot;ReconnectionDelay&quot; value=&quot;5000&quot;/&gt;<br /> &nbsp;&nbsp;&lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;<br /> &nbsp;&nbsp;&nbsp;&nbsp;&lt;param name=&quot;ConversionPattern&quot; value=&quot;<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[slf5s.start]<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%d{DATE}[slf5s.DATE]%n<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%p[slf5s.PRIORITY]%n<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${server.name}[slf5s.NDC]%n<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%c[slf5s.CATEGORY]%n<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%l[slf5s.LOCATION]%n<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%m[slf5s.MESSAGE]%n%n&quot;<br /> &nbsp;&nbsp;&nbsp;&nbsp;/&gt;<br /> &nbsp;&nbsp;&lt;/layout&gt;<br /> &lt;/appender&gt;<br /> <br /> &lt;root&gt;<br /> &nbsp;&nbsp;&lt;priority value=&quot;debug&quot;/&gt;<br /> &nbsp;&nbsp;&lt;appender-ref ref=&quot;LF5_SOCKET&quot;/&gt;<br /> &lt;/root&gt;<br /> <br /> &lt;/log4j:configuration&gt;<br /> </p> 
+ <li>Configure log4j2.xml socket appender</li> 
+ <p> &lt;Configuration status=&quot;DEBUG&quot;&gt;<br /> &nbsp;<br /> &nbsp;&lt;Appenders&gt;<br /> &nbsp;&nbsp;&lt;Console name=&quot;STDOUT&quot; target=&quot;SYSTEM_OUT&quot;/&gt;<br /> &nbsp;&nbsp;&lt;Socket name=&quot;LF5_SOCKET&quot; host=&quot;localhost&quot; port=&quot;4454&quot; protocol=&quot;TCP&quot; reconnectionDelay=&quot;5000&quot;/&gt;<br /> &nbsp;&lt;/Appenders&gt;<br /> &nbsp;<br /> &nbsp;&lt;Loggers&gt;<br /> &nbsp;&nbsp;&lt;Root level=&quot;trace&quot;&gt;<br /> &nbsp;&nbsp;&nbsp;&lt;AppenderRef ref=&quot;STDOUT&quot; level=&quot;DEBUG&quot;/&gt;<br /> &nbsp;&nbsp;&nbsp;&lt;AppenderRef ref=&quot;LF5_SOCKET&quot; level=&quot;DEBUG&quot;/&gt;<br /> &nbsp;&nbsp;&lt;/Root&gt;<br /> &nbsp;&lt;/Loggers&gt;<br /> &nbsp;<br /> &lt;/Configuration&gt;<br /> </p> 
+</ul>]]></description><version>0.9.3</version><vendor email="mcelano@directv.com" url="https://www.directv.com/">DIRECTV</vendor><rating>2.7</rating><change-notes><![CDATA[see %IDEA_HOME%\plugins\Log4jMonitor\etc for further instructions]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="742" size="240324" date="1088636601000" updatedDate="1088636601000" url=""><name>Macros Manager</name><id>Macros Manager</id><description><![CDATA[Macros Manager]]></description><version>1.0</version><vendor email="" url="">Dmitry Skavish (dmitry@jzox.com)</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="442" size="57973" date="1088636962000" updatedDate="1088636962000" url=""><name>PreconditionPlugin</name><id>PreconditionPlugin</id><description><![CDATA[Plugin for creating precondition assertions]]></description><version>1.0</version><vendor email="" url="">Eviware</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="80486" size="96097" date="1088637048000" updatedDate="1088637048000" url=""><name>RegexPlugin</name><id>RegexPlugin</id><description><![CDATA[Regular Expression Explorer for IntelliJ IDEA.
+<br /> Allows you to experiment with Java regular expressions in a dynamic environment.]]></description><version>0.5.7</version><vendor email="guy@wyrdrune.com" url="">Guy Gascoigne-Piggford, Christian Koestlin</vendor><rating>4.7</rating><change-notes><![CDATA[<ul>
+  <li> smaller icons</li>
+  <li> consistent l&f with the idea project toggle buttons (short description in the statusbar and ind the tooltips)</li>
+  <li> referencepage moved into the menu</li>
+  <li> iconhelp with some more information on how the buttons really work</li>
+</ul>]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="566" size="80924" date="1088637098000" updatedDate="1088637098000" url=""><name>SamePlugin</name><id>SamePlugin</id><description><![CDATA[Plugin for finding duplication in source]]></description><version>1.0</version><vendor email="" url="">Sergey Yevtushenko, sye@mail.ru</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="1138" size="5034" date="1088637280000" updatedDate="1088637280000" url=""><name>ShowEncodingPlugin</name><id>ShowEncodingPlugin</id><description><![CDATA[Show encoding of the selected file]]></description><version>1.1</version><vendor email="" url="">Guillaume Laforge</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="452" size="5227" date="1088637426000" updatedDate="1088637426000" url=""><name>SwitchFile</name><id>SwitchFile</id><description><![CDATA[Switch to last active file editor]]></description><version>1.0</version><vendor email="" url="">ioat</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="810" size="4974" date="1088637536000" updatedDate="1088637536000" url=""><name>com.nicity.plugins.idea.TimePlugin</name><id>com.nicity.plugins.idea.TimePlugin</id><description><![CDATA[It displays current time right on IDEA toolbar. Time is updated once
+ a minute with rounding to next value (could differ in one minute with system time).]]></description><version>0.2</version><vendor email="" url="">Maxim Mossienko</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="1141" size="13757" date="1093011947000" updatedDate="1093011947000" url=""><name>Time Convertor Plugin</name><id>Time Convertor Plugin</id><description><![CDATA[Ctrl+Shift+T convert unix or java time to specified format of date.
+  Time is selected text(primary) or content of clipboard.]]></description><version>1.0.2</version><vendor email="beranek@zoom-int.cz" url="">Tomas Beranek</vendor><rating>4.1</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="1176" size="24126" date="1093888436000" updatedDate="1093888436000" url=""><name>RSSPlugin</name><id>RSSPlugin</id><description><![CDATA[RSS Plugin for viewing RSS feeds within IntelliJ.
+RSS feeds are specified within an XML file.
+An XSLT script transforms all feeds to HTML.
+The feeds and transformation scripts are configurable.
+Default XSLT supports RSS 1.0 and 2.0 ...
+A timer can be set for automatically reloading the feeds.
+Visual indication of change is implemented.]]></description><version>1.0.1</version><vendor email="raf@uzleuven.be" url="">Rafael Van Durm</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="1456" size="34279" date="1088635877000" updatedDate="1088635877000" url=""><name>DERViewer</name><id>DERViewer</id><description><![CDATA[DER Viewer is a plugin to inspect ASN.1 structures encoded under DER (Distinguished Encoding Rules)]]></description><version>1.0</version><vendor email="" url="">Kevin O'Regan</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="118290" size="10027" date="1259833720000" updatedDate="1259833720000" url=""><name>Scratch</name><id>Scratch</id><description><![CDATA[Quickly opens temporary IntelliJ text editor tab. 
+<br> 
+<ul> 
+ <li>Alt+C, Alt+C - open default scratch</li> 
+ <li>Alt+C, Alt+S - open list with all scratches</li> 
+ <li>Alt+C, Alt+A - add new scratch</li> 
+</ul> In scratches list popup: 
+<ul> 
+ <li>Alt+Insert - add new scratch</li> 
+ <li>Alt+Up/Down - move scratch</li> 
+ <li>Shift+F6 - rename scratch</li> 
+ <li>Delete - delete scratch</li> 
+ <li>Ctrl+Delete - delete without prompt</li> 
+</ul> (See also "Main menu -&gt; Tools -&gt; Scratch") 
+<br>
+<br> For more details see 
+<a href="https://github.com/dkandalov/scratch" rel="nofollow">GitHub page</a>.]]></description><version>0.1</version><vendor email="" url="https://github.com/dkandalov/scratch">Dmitry Kandalov, Vojtech Krasa</vendor><rating>4.7</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin><idea-plugin downloads="78878" size="86608" date="1259863072000" updatedDate="1259863072000" url="https://github.com/jrana/quicknotes"><name>Quick Notes</name><id>Quick Notes</id><description><![CDATA[
+    Quick Notes is a plugin written for IntelliJ IDEA. This plugin adds the ability to manage multiple text notes
+    within the IDEA itself. These could be some tips, notes, code snippets, etc that usually comes to mind while
+    coding and Quick Notes provides an ideal way to save those thoughts quickly and easily.
+    <p>Quick Notes is compatible with multiple opened IDEA instances, so any change made to any note in one instance
+    of IDEA gets reflected in the other IDEA instances without any delay.
+
+    </p><p><b>Features</b>
+    <br>Quick Notes plugin provides many features aimed towards easy maintenance and quick access to the Notes.
+    Here are some of the major features of this plugin
+    </p><ul>
+    <li>Add and Manage multiple notes</li>
+    <li>Rename an existing note</li>
+    <li>Delete an existing note</li>
+    <li>Manage notes across multiple IDEA instances</li>
+    <li>Show or hide line numbers</li>
+    <li>Ability to change Font of notes</li>
+    <li>Ability to search notes</li>
+    </ul>
+    <br><a href="http://docs.google.com/fileview?id=0B6GyR43t58eXNzQ1ZmUyOTktZDc5NS00ZWRkLTlmMGMtOGQ0ZGIyZjdhM2E0&amp;hl=en">Click here</a> to read/download the manual for this plugin.
+    <br><br>For any bugs or suggestions, please leave a comment on the plugin page at
+    <br><a href="https://plugins.jetbrains.com/plugin/4456-quick-notes">https://plugins.jetbrains.com/plugin/4456-quick-notes</a>
+    <br><br>Quick Notes is an open source project hosted at <a href="https://github.com/jrana/quicknotes">github</a> and you are always welcome to join this project and contribute.
+    ]]></description><version>2.5</version><vendor email="jsrana@gmail.com" url="https://github.com/jrana/quicknotes">Jitendra Rana</vendor><rating>4.2</rating><change-notes><![CDATA[
+        ]]></change-notes><idea-version min="n/a" max="n/a"/></idea-plugin></category><ff>"VCS"</ff><category name="VCS"><idea-plugin downloads="848" size="66610" date="1088635647000" updatedDate="1088635647000" url=""><name>CM Synergy Integration</name><id>CM Synergy Integration</id><description><![CDATA[CM Synergy Integration]]></description><version>1.0</version><vendor email="" url="">Serge Shafarenka</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="4553" size="54542" date="1088636661000" updatedDate="1088636661000" url=""><name>MKS</name><id>MKS</id><description><![CDATA[Integrates MKS Source Integrity with IDEA 
+<br /> See 
+<a href="http://code.google.com/p/ideamksplugin/" rel="nofollow">here</a> for the googlecode project]]></description><version>0.2</version><vendor email="" url="https://code.google.com/archive/p/ideamksplugin">Eric Sheffer, Thibaut Fagart</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="9433" size="2002914" date="1257970167000" updatedDate="1257970167000" url=""><name>Code Review</name><id>Code Review</id><description><![CDATA[Allows a developer to send a code review email that details any changes to their code compared with the
+        repository. This email is sent before anything is checked in, so colleagues can have a chance to review your
+        changes before they are committed.
+    ]]></description><version>1.3.3</version><vendor email="chris_overseas@hotmail.com" url="http://plugins.intellij.net/plugin/?id=1199">Chris Miller</vendor><rating>00</rating><change-notes><![CDATA[
+<br>v1.3.3 for IDEA 7.0.3 and up (November 11th 2009)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[IMPROVEMENT] Provides better indication of whether binary files have been added/deleted/changed</li>
+<li>[BUG] Deleted binary files were being treated as text files and as a result their content was showing in the emails</li>
+</ul></p>
+
+<br>v1.3.2 for IDEA 7.0.3 and up (November 11th 2009)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[IMPROVEMENT] Removed until-build attribute from plugin.xml so this plugin plays nicer with various IDEA builds and the (buggy?) Plugin Manager</li>
+</ul></p>
+
+<br>v1.3.1 for IDEA 7.x and up (August 5th 2009)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[IMPROVEMENT] Emails are now sent with UTF-8 encoding</li>
+</ul></p>
+
+<br>v1.3.0 for IDEA 7.x and up (August 4th 2009)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[NEW] Copy to clipboard button. This copies the HTML and/or plaintext to the clipboard</li>
+<li>[NEW] SMTPS/SSL support. This allows the plugin to work with mailservers such as GMail</li>
+<li>[IMPROVEMENT] When a file has been renamed, the diff now shows what it was renamed to</li>
+<li>[IMPROVEMENT] The subject defaults to the (first 100 characters of) the commit message</li>
+<li>[BUG] Passwords weren't being decoded properly when settings were first loaded</li>
+<li>[BUG] Long subjects were causing the drop-downs to extend past the RHS of the Code Review dialog</li>
+<li>[BUG] Pressing CTRL-ENTER when the focus was on the subject drop-down could result in changes to the subject being lost</li>
+<li>[BUG] The Cancel button now returns the user to the Commit Changes dialog rather than the editor</li>
+</ul></p>
+
+<br>v1.2.2 for IDEA 7.x (June 26th 2008)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[IMPROVEMENT] When a diff fails due to a problem with the underlying VCS, more information is now shown in the error dialog to help diagnose the problem</li>
+<li>[IMPROVEMENT] Minor cosmetic changes</li>
+</ul></p>
+
+<br>v1.2.1 for IDEA 7.x (June 6th 2008)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[BUG] The "to:" field wasn't populating it's history correctly</li>
+<li>[BUG] Fixed spelling mistake</li>
+</ul></p>
+
+<br>v1.2.0 for IDEA 7.x (April 18th 2008)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[NEW] Option to ignore any trailing whitespace</li>
+<li>[NEW] Original line numbers are now shown</li>
+<li>[NEW] Added a button that copies the HTML to the clipboard</li>
+<li>[NEW] Files are sorted by path</li>
+<li>[NEW] More efficient memory usage</li>
+<li>[BUG] Was throwing an exception when a binary file was encountered. Now indicates correctly that the file is binary</li>
+</ul></p>
+
+<br>v1.1.0 for IDEA 6.0.2 (November 17th 2006)</br>
+<br>===========================================</br>
+<p><ul>
+<li>[NEW] A Zip file containing all the changed files can be attached to the email</li>
+<li>[NEW] The drop-down histories now display items with the most recently used entries at the top</li>
+<li>[NEW] Added line number information to the ChangedFile.Line class</li>
+<li>[BUG] Default settings work as originally intended</li>
+<li>[BUG] Fixed NullPointerException that occured when certain settings were blank</li>
+</ul></p>
+
+<br>v1.0.0 for IDEA 6.0.2 (October 31st 2006)</br>
+<br>===========================================</br>
+<p>Initial release.</p>
+
+    ]]></change-notes><idea-version min="n/a" max="n/a" until-build="222.*"/></idea-plugin></category><ff>"Search and Replace"</ff><category name="Search and Replace"><idea-plugin downloads="1211" size="93446" date="1088635955000" updatedDate="1088635955000" url=""><name>FunkySearch</name><id>FunkySearch</id><description><![CDATA[A highlighting search gizmo (like the Google Toolbar)]]></description><version>2.3</version><vendor email="andrew_armstrong(ad)unwired(dop)com(dop)au" url="">Andrew Armstrong</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="1882" size="11786" date="1088636132000" updatedDate="1088636132000" url=""><name>IgnoreFilesFolders</name><id>IgnoreFilesFolders</id><description><![CDATA[IgnoreFilesFoldersPlugin]]></description><version>1.0</version><vendor email="" url="">Gandle</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="1130" size="4683640" date="1403627596000" updatedDate="1403627596000" url=""><name>FullText search</name><id>com.mextor.intellij.plugin.search</id><description><![CDATA[Smart and fast search engine using Lucene (from apache).
+<br /> Very useful for large projects containing C/C++ code.]]></description><version>1.2</version><vendor email="stephane.passignat@mextor.com" url="">Mextor</vendor><rating>00</rating><change-notes><![CDATA[Works fine, but non navigation to line containing the search pattern.]]></change-notes><idea-version min="n/a" max="n/a" until-build="129.1561"/></idea-plugin></category><ff>"Build"</ff><category name="Build"><idea-plugin downloads="1146" size="3629" date="1098119972000" updatedDate="1098119972000" url=""><name>CompileWithoutDependencies</name><id>CompileWithoutDependencies</id><description><![CDATA[A patch that allows to compile a number of files without compiling dependent files]]></description><version>1.0</version><vendor email="" url="">IntelliJ</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="266" size="10043" date="1091808782000" updatedDate="1091808782000" url=""><name>AntXMLGenerator</name><id>AntXMLGenerator</id><description><![CDATA[Create Ant build.xml file for current module using your module settings]]></description><version>0.4</version><vendor email="" url="">d1k</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.2999"/></idea-plugin><idea-plugin downloads="2987" size="415803" date="1088635866000" updatedDate="1088635866000" url=""><name>dashboard</name><id>dashboard</id><description><![CDATA[Cruise Control build process indicator]]></description><version>1.0.2</version><vendor email="" url="">ThoughtWorks, Inc.</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin><idea-plugin downloads="555" size="45684" date="1088636062000" updatedDate="1088636062000" url=""><name>Ant Project File</name><id>Ant Project File</id><description><![CDATA[An action to create an ant build file from te current project]]></description><version>0.1</version><vendor email="" url="">Aiko</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.2999"/></idea-plugin><idea-plugin downloads="4578" size="46833" date="1258413769000" updatedDate="1258413769000" url="http://handyedit.com/antdebugger.html"><name>Ant Debugger</name><id>com.handyedit.AntDebugger</id><description><![CDATA[
+  Ant Debugger enables Apache Ant build script debugging:
+  <ul>
+  <li>Open build file in editor</li>
+  <li>Set debug breakpoints (screenshot 1)</li>
+  <li>Right click on editor to show context menu (screenshot 2) and
+  select the "Debug" menu item to launch Ant debugger</li>
+  <li>Wait until the Ant debugger stops on breakpoint then 
+  use step or resume debugger commands, investigate Ant variables and execution stack (screenshot 3)</li>
+  </ul>
+
+  <p>
+  You can add Ant debug configuration from the Edit configurations dialog (screenshot 4).
+  Then you select Ant file, Java SDK for debugging session (screenshot 5).
+  </p>
+
+  <p><b>Note.</b> Plugin requires Java SDK to launch Ant: plugin uses build file module, project or any SDK for JDK list 
+  (the plugin searches for Java SDK in this order and uses first found).</p>
+
+  <p><b>Installation:</b> use Idea plugins manager:<ul>
+  <li>open Settings > plugins</li>
+  <li>wait until the plugin list loads</li>
+  <li>right click on Ant Debugger plugin and select install / update from the context menu</li>
+  <li>restart Idea</li>
+  </ul>
+  </p>
+
+  <p><b>Supported Idea versions:</b> Idea 8.1.x, Idea 9 (community and ultimate editions).
+
+  <p>Please write to <strong>antdebugger at handyedit.com</strong> if there are errors / problems when using Ant debugger</p>
+  ]]></description><version>1.0</version><vendor email="antdebugger@handyedit.com" url="http://handyedit.com/">Alexei Orischenko</vendor><rating>4.4</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" until-build="130.0"/></idea-plugin></category><ff>"Notification and Visualizers"</ff><category name="Notification and Visualizers"><idea-plugin downloads="820" size="39573" date="1488114107000" updatedDate="1488114107000" url=""><name>Dao Code Generator</name><id>com.miui.gallery.dao.generator</id><description><![CDATA[Generate Code for Dao framework.]]></description><version>1.0</version><vendor email="pan_shu_xin@126.com" url="">mi</vendor><rating>00</rating><change-notes><![CDATA[]]></change-notes><idea-version min="n/a" max="n/a" since-build="0.0" until-build="201.0"/></idea-plugin></category><ff>"Testing"</ff><category name="Testing"><idea-plugin downloads="118" size="1284787" date="1088637482000" updatedDate="1088637482000" url=""><name>tddTracker</name><id>tddTracker</id><description><![CDATA[track test driven design activities and report on it]]></description><version>0.3</version><vendor email="jacmorel@yahoo.com" url="">Jacques Morel</vendor><rating>00</rating><change-notes><![CDATA[* Auto start when any operation is done
+   * Auto pause after 5mn of inaction
+   * Graph of all runs timing
+   * Fixed memory leak]]></change-notes><idea-version min="n/a" max="n/a" until-build="40.2999"/></idea-plugin><idea-plugin downloads="15493" size="1011801" date="1118276351000" updatedDate="1118276351000" url=""><name>unitTest</name><id>unitTest</id><description><![CDATA[Simplify creation and maintenance of junit tests]]></description><version>0.27.1c</version><vendor email="Jacques Morel" url="">Jacques Morel</vendor><rating>4.7</rating><change-notes><![CDATA[<ul>
+    <li>fixed velocity document errors</li>
+   <li>Fix automatic test methods rename refactoring that was refactoring each test method one at the time.<br>
+       Now it refactors all methods at once</li>
+   <li>The navigation from tested method to test methods now presents a choice menu to
+      <ul><li>Add a new test case or </li>
+          <li>Go to a test method (list all associated test methods)</li>
+      </ul>
+   </li>
+</ul>]]></change-notes><idea-version min="n/a" max="n/a" until-build="201.0"/></idea-plugin></category></plugin-repository>
