@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- This module was also published with a richer model, Gradle metadata,  -->
+  <!-- which should be used instead. Do not delete the following line which  -->
+  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
+  <!-- that they should prefer consuming it instead. -->
+  <!-- do_not_remove: published-with-gradle-metadata -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.guidewire.pl</groupId>
+  <artifactId>pl-osgi-plugins</artifactId>
+  <version>10.102.0</version>
+  <properties/>
+  <parent>
+    <groupId>com.guidewire.pl</groupId>
+    <artifactId>pl-parent</artifactId>
+    <version>10.102.0</version>
+    <relativePath>../../../../../platform/build/publications/mavenJava/pom-default.xml</relativePath>
+  </parent>
+  <dependencyManagement>
+    <dependencies/>
+  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.guidewire.pl</groupId>
+      <artifactId>pl</artifactId>
+      <version>10.102.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>it.ozimov</groupId>
+      <artifactId>embedded-redis</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.prometheus</groupId>
+      <artifactId>simpleclient</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.cmpn</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.guidewire.pl</groupId>
+      <artifactId>pl-gunit</artifactId>
+      <version>10.102.0</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.guidewire.pl.logging</groupId>
+  <artifactId>logging-parent</artifactId>
+  <version>1.1.0</version>
+  <packaging>pom</packaging>
+
+  <name>Aggregation POM for all Logging projects</name>
+
+  <organization>
+    <name>Guidewire, Inc.</name>
+    <url>http://guidewire.com</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>Guidewire proprietary license</name>
+    </license>
+  </licenses>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- plugins -->
+    <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+    <maven.jar.plugin.version>3.2.0</maven.jar.plugin.version>
+    <maven.release.plugin.version>3.0.0-M1</maven.release.plugin.version>
+
+    <!-- maven/java -->
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+
+    <!-- libraries -->
+    <guava.version>30.0-jre</guava.version>
+    <junit.version>4.13.1</junit.version>
+    <log4j2.version>2.14.0</log4j2.version>
+    <slf4j.version>1.7.30</slf4j.version>
+  </properties>
+
+  <modules>
+    <module>logging-api</module>
+    <module>logging-over-log4j2</module>
+    <module>log4j2-deps</module>
+  </modules>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven.release.plugin.version}</version>
+          <configuration>
+            <tagNameFormat>v@{project.version}</tagNameFormat>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven.compiler.plugin.version}</version>
+          <configuration>
+            <compilerArgs>
+              <arg>-Xlint:all,-options,-path</arg>
+            </compilerArgs>
+            <showWarnings>true</showWarnings>
+            <showDeprecation>true</showDeprecation>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${maven.jar.plugin.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <scm>
+    <developerConnection>scm:git:ssh://git@stash.guidewire.com/pl/logging.git</developerConnection>
+    <connection>scm:git:https://stash.guidewire.com/scm/pl/logging.git</connection>
+    <tag>v1.1.0</tag>
+  </scm>
+
+  <repositories>
+    <repository>
+      <id>gw.thirdparty</id>
+      <url>https://nexus.guidewire.com/content/repositories/thirdparty/</url>
+      <name>Guidewire Nexus repository for third party libs not in Central</name>
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <repository>
+      <id>com.guidewire.pl.releases</id>
+      <url>https://nexus.guidewire.com/content/repositories/releases/</url>
+      <name>Guidewire internal releases repository</name>
+    </repository>
+    <snapshotRepository>
+      <id>com.guidewire.pl.snapshots</id>
+      <url>https://nexus.guidewire.com/content/repositories/snapshots-dev/</url>
+      <name>Guidewire internal snapshots repository</name>
+    </snapshotRepository>
+  </distributionManagement>
+</project>
