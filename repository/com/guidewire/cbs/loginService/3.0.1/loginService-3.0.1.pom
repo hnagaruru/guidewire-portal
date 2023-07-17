@@ -1,0 +1,537 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.guidewire.cbs</groupId>
+  <artifactId>loginService</artifactId>
+  <version>3.0.1</version>
+  <packaging>pom</packaging>
+  <name>loginService</name>
+
+  <modules>
+    <module>loginServiceAPI</module>
+    <module>loginServiceAPIStandalone</module>
+    <module>loginServiceWebapp</module>
+    <module>loginServiceImpl</module>
+  </modules>
+
+  <properties>
+    <!-- component versions -->
+    <aws.version>1.10.15</aws.version>
+    <log4j.version>1.2.16</log4j.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring.version>4.2.1.RELEASE</spring.version>
+    <spring-security.version>4.0.2.RELEASE</spring-security.version>
+    <jetty.version>9.3.0.M1</jetty.version>
+
+    <!-- default topological values -->
+    <guidewire.log4j.debuglevel>INFO</guidewire.log4j.debuglevel>
+    <guidewire.logger.sumoEndPoint />
+    <guidewire.live.loginService.port>8090</guidewire.live.loginService.port>
+    <guidewire.live.loginService.stopPort>8091</guidewire.live.loginService.stopPort>
+    <guidewire.live.loginService.notAuthorizedUrl>/registration/login.htm
+    </guidewire.live.loginService.notAuthorizedUrl>
+    <guidewire.live.loginService.loginServiceEndpoint />
+    <guidewire.live.loginService.tokenCookieDomain />
+
+    <guidewire.live.loginService.aws.region>us-west-2</guidewire.live.loginService.aws.region>
+    <guidewire.live.loginService.credentials.default.roleArn>
+      arn:aws:iam::314072250866:role/sys-LoginService-us-west-2
+    </guidewire.live.loginService.credentials.default.roleArn>
+    <guidewire.live.loginService.credentials.default.accessKey>AKIAJBKG44NGLKAL7R3Q
+    </guidewire.live.loginService.credentials.default.accessKey>
+    <guidewire.live.loginService.credentials.default.secretKey>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
+    </guidewire.live.loginService.credentials.default.secretKey>
+
+    <!-- for this app, we share one table across all users in the env as the rows are by uuid and there is no scan op -->
+    <guidewire.live.loginService.dynamodb.tableprefix />
+    <guidewire.live.test.enableResourceCreate />
+    <guidewire.live.test.testGroup />
+
+    <guidewire.live.loginService.email.FromAddress>live-loginservice-qa@guidewire.com
+    </guidewire.live.loginService.email.FromAddress>
+    <guidewire.live.loginService.aws.endpoints.ses>email.us-east-1.amazonaws.com
+    </guidewire.live.loginService.aws.endpoints.ses>
+    <guidewire.live.loginService.email.useEmail>false</guidewire.live.loginService.email.useEmail>
+    <guidewire.live.loginService.envName>dev</guidewire.live.loginService.envName>
+    <guidewire.live.loginService.baseOrg>normal</guidewire.live.loginService.baseOrg>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <build.number>DEV</build.number>
+        <git.commit>cafebabe</git.commit>
+        <guidewire.log4j.debuglevel>DEBUG</guidewire.log4j.debuglevel>
+        <guidewire.live.aws.credentialsProvider>live.aws.gwCredentialsProvider
+        </guidewire.live.aws.credentialsProvider>
+      </properties>
+    </profile>
+    <profile>
+      <id>qa</id>
+      <properties>
+        <build.number>DEV-AWS</build.number>
+        <git.commit>cafebabe</git.commit>
+        <guidewire.logger.sumoEndPoint>
+          https://collectors.sumologic.com/receiver/v1/http/ZaVnC4dhaV0uHw7qLZXa0zRgQlKWfYhMuknWL1myEZJ-PSjXjkZWTz6_PlNg9ntG3301luVKiHGzfK502tL7Sipz8aWsEUjYt4BJfKVdiKb0lENlgMPjCw==
+        </guidewire.logger.sumoEndPoint>
+        <guidewire.live.loginService.loginServiceEndpoint>https://gw-loginservice-qa.dev-live.guidewire.net
+        </guidewire.live.loginService.loginServiceEndpoint>
+        <guidewire.live.loginService.email.useEmail>true</guidewire.live.loginService.email.useEmail>
+        <guidewire.live.aws.credentialsProvider>live.aws.instanceCredentialsProvider
+        </guidewire.live.aws.credentialsProvider>
+      </properties>
+    </profile>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <guidewire.live.aws.credentialsProvider>live.aws.instanceCredentialsProvider
+        </guidewire.live.aws.credentialsProvider>
+        <guidewire.live.loginService.envName>prod</guidewire.live.loginService.envName>
+      </properties>
+    </profile>
+    <profile>
+      <id>useEmail</id>
+      <properties>
+        <guidewire.live.loginService.email.useEmail>true</guidewire.live.loginService.email.useEmail>
+      </properties>
+    </profile>
+    <profile>
+      <id>usePrivateDB</id>
+      <properties>
+        <guidewire.live.loginService.dynamodb.tableprefix>${env.USERNAME}-
+        </guidewire.live.loginService.dynamodb.tableprefix>
+      </properties>
+    </profile>
+    <profile>
+      <id>only-test-resource-create</id>
+      <properties>
+        <guidewire.live.test.testGroup>resourceCreate</guidewire.live.test.testGroup>
+        <guidewire.live.test.enableResourceCreate>resourceCreate</guidewire.live.test.enableResourceCreate>
+      </properties>
+    </profile>
+  </profiles>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/*.properties</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+        <excludes>
+          <exclude>**/*.properties</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/*.properties</include>
+        </includes>
+      </testResource>
+      <testResource>
+        <directory>src/test/resources</directory>
+        <filtering>false</filtering>
+        <excludes>
+          <exclude>**/*.properties</exclude>
+        </excludes>
+      </testResource>
+    </testResources>
+
+    <plugins>
+      <!--///////////////////////////////////////////-->
+      <!--//// JAVA COMPILER SETTINGS                -->
+      <!--///////////////////////////////////////////-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.5.1</version>
+        <configuration>
+          <compilerArgument>-Xlint:unchecked</compilerArgument>
+          <debug>true</debug>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+
+      <!--///////////////////////////////////////////-->
+      <!--//// ATTACH SOURCES AND JAVADOC            -->
+      <!--///////////////////////////////////////////-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.0.4</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.5</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <!-- Restrict execution of source compilation to site -->
+            <phase>site</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <quiet>true</quiet>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.16</version>
+        <configuration>
+          <!-- this helps jetty to do the right thing under mvn test AND Idea unit tests... -->
+          <useSystemClassLoader>false</useSystemClassLoader>
+          <groups>${guidewire.live.test.testGroup}</groups>
+          <systemPropertyVariables>
+            <gwEnableResourceCreate>${guidewire.live.test.enableResourceCreate}</gwEnableResourceCreate>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <!--==================================================
+      ==== US
+      ===================================================-->
+      <dependency>
+        <groupId>com.guidewire.cbs</groupId>
+        <artifactId>loginServiceAPI</artifactId>
+        <version>3.0.1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.guidewire.cbs</groupId>
+        <artifactId>loginServiceAPIStandalone</artifactId>
+        <version>3.0.1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.guidewire.cbs</groupId>
+        <artifactId>loginServiceImpl</artifactId>
+        <version>3.0.1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.guidewire.cbs</groupId>
+        <artifactId>loginServiceWebapp</artifactId>
+        <version>3.0.1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.guidewire.cbs</groupId>
+        <artifactId>runtimeConfig</artifactId>
+        <version>2.0.1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.guidewire.cbs</groupId>
+        <artifactId>sumoLoggerStandalone</artifactId>
+        <version>3.0.6</version>
+      </dependency>
+
+      <!--==================================================
+      ==== STANDARDS
+      ===================================================-->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.1-b02</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jstl</artifactId>
+        <version>1.2</version>
+      </dependency>
+
+      <!--=============================================
+      ==== LOGGING
+      ==============================================-->
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.6.4</version>
+      </dependency>
+
+      <!--======================================
+       ==== AWS
+       =======================================-->
+      <dependency>
+        <groupId>com.amazonaws</groupId>
+        <artifactId>aws-java-sdk</artifactId>
+        <version>${aws.version}</version>
+      </dependency>
+
+      <!--======================================
+      ==== SPRING
+      =======================================-->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>4.3.0.Final</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+        <version>${spring-security.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-config</artifactId>
+        <version>${spring-security.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-taglibs</artifactId>
+        <version>${spring-security.version}</version>
+      </dependency>
+
+      <!-- these are required here to force version [not inherited version from spring-security, and others...] -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aop</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-expression</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>cglib</groupId>
+        <artifactId>cglib</artifactId>
+        <version>2.2</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.3.1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.2.2</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>commons-httpclient</groupId>
+        <artifactId>commons-httpclient</artifactId>
+        <version>3.1</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.6</version>
+      </dependency>
+
+      <!--======================================
+      ==== TEST
+      =======================================-->
+      <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>6.1.1</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>1.9.5</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.github.tomakehurst</groupId>
+        <artifactId>wiremock</artifactId>
+        <version>1.54</version>
+        <scope>test</scope>
+        <!-- Include everything below here if you have dependency conflicts -->
+        <classifier>standalone</classifier>
+        <exclusions>
+          <exclusion>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>xmlunit</groupId>
+            <artifactId>xmlunit</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>net.sf.jopt-simple</groupId>
+            <artifactId>jopt-simple</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-server</artifactId>
+        <version>${jetty.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-plus</artifactId>
+        <version>${jetty.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-jsp</artifactId>
+        <version>${jetty.version}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <!-- configuration for maven release plugin-->
+  <scm>
+    <connection>scm:git:ssh://git@stash.guidewire.com/live/loginservice.git</connection>
+    <url>https://stash.guidewire.com/projects/LIVE/repos/loginservice/browse</url>
+    <developerConnection>scm:git:ssh://git@stash.guidewire.com/live/loginservice.git</developerConnection>
+  </scm>
+
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <id>central</id>
+      <name>Central Repository Proxy</name>
+      <url>http://nexus.guidewire.com/content/groups/public</url>
+      <layout>default</layout>
+    </repository>
+    <repository>
+      <id>com.guidewire.cbs.releases</id>
+      <name>release repo</name>
+      <url>http://nexus.guidewire.com/content/repositories/releases</url>
+    </repository>
+    <repository>
+      <id>com.guidewire.thirdparty</id>
+      <name>Third party Nexus</name>
+      <url>http://nexus.guidewire.com/content/repositories/thirdparty</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>central</id>
+      <name>Central Repository Proxy</name>
+      <url>http://nexus.guidewire.com/content/groups/public</url>
+      <layout>default</layout>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <distributionManagement>
+    <repository>
+      <!-- be careful, these identifiers have to match what Nexus is expecting -->
+      <id>com.guidewire.cbs.releases</id>
+      <name>release repo</name>
+      <url>http://nexus.guidewire.com/content/repositories/releases</url>
+    </repository>
+    <snapshotRepository>
+      <!-- be careful, these identifiers have to match what Nexus is expecting -->
+      <id>com.guidewire.cbs.snapshots</id>
+      <name>snapshot repo</name>
+      <url>http://nexus.guidewire.com/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+</project>
