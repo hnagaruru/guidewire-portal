@@ -1,0 +1,1 @@
+{"_name":"GW_Workspace","_configRootAbsolutePath":"C:\\GW","_vcsConnectionInfo":{"_vcsType":"none","_perforceConfig":{"_serverNameAndPort":"","_userName":"","_password":"","_client":""}},"_testServerConfig":{"_serverURL":"http://localhost:8180/pc","_userName":"","_password":""},"_createdOn":1688126528640,"_creatorId":1,"_id":1}
