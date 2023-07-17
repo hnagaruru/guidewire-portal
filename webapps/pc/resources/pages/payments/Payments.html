@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!--
+       This is a Demo HTML page to mock how a payment gateway might behave and how it should integrate with
+       PolicyCenter using gw-embedded to commuincate.
+   -->
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Payment Form</title>
+
+        <script src="/pc/resources/js/gen/gw-embedded-ts.js"></script>
+        <script>
+            //Many payment gateways and GWEmbedded both use post messages.  GWEmbedded will return an error for messages
+            // from [PAYMENT GATEWAY] as an untrusted source by default.  Update the library to not fire error message
+            //about untrusted messages from [PAYMENT GATEWAY DOMAIN].  Replace the reference "sample.paymentgateway.com"
+            //e.g. for Guidewire Payments API, this might look like:  'js-sdk-prod.payments.guidewire.net'
+            //if (event.origin && event.origin.includes("js-sdk-prod.payments.guidewire.net")) {
+
+            /*
+            if (GwCrossOriginExternal) {
+                const originalReceive = GwCrossOriginExternal.receiveMessageFromGwApp;
+                const newRecieveFunctionThatWillBeBoundInTheInitMethod = function (event) {
+                    if (event.origin && event.origin.includes("sample.paymentgateway.com")) {
+                        return;
+                    }
+                    GwCrossOriginExternal.receiveMessageFromGwAp = originalReceive;
+                    originalReceive.call(GwCrossOriginExternal, event);
+                };
+                GwCrossOriginExternal.receiveMessageFromGwApp = newRecieveFunctionThatWillBeBoundInTheInitMethod;
+            }
+
+             */
+        </script>
+        <script> GwCrossOriginExternal.init(origin, "*") </script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div>
+                    <h2>Sample Credit Card Collection</h2>
+                    <script>
+                        var searchParams = new URLSearchParams(window.location.search);
+                        var config = {
+                            clientKey : searchParams.get("paymentGatewayKey")
+                        };
+
+                        /**
+                         * Handler for different actions from the PaymentGateway.
+                         */
+                        function handleCollectCardResult(paymentGatewayResponse){
+                            var action = paymentGatewayResponse.action;
+                            switch (action){
+                                case "SaveCardAsToken":
+                                    //this message will be sent to PaymentIntegrationUpdateHandler
+                                    var formattedSaveCardResponse = mapSaveCard(paymentGatewayResponse.data);
+                                    GwCrossOriginExternal.makeNonBlockingServerRequest(formattedSaveCardResponse).then(() => {
+                                        frameElement.remove()
+                                    });
+                                    break;
+                                case "ERROR":
+                                    //this message will be send to PaymentIntegrationActionHandler
+                                    var formattedErrorResponse = mapError(paymentGatewayResponse);
+                                    GwCrossOriginExternal.fireActionOnServer(formattedErrorResponse).then(() => {
+                                        frameElement.remove()
+                                    });
+                                    break;
+                            }
+                        }
+
+
+                        //Define your custom mapping code here!  Update this code to support your payment gateway.
+                        //Map the payment gateway payload to something InsuranceSuite/PolicyCenter will expect
+
+                        /**
+                         * The payment gateway will have its own format for save card messages - but PolicyCenter only
+                         * supports messages structured as described below.  It will require changes to
+                         * PaymentIntegrationUpdateHandler to support different formats.  Instead, it makes sense to
+                         * map the values here in the UI integration page to avoid changes to base and server updates.
+                         *
+                         Expected payload:
+
+                         {
+                                    "type": "CARD_TOKENIZED",
+                                    "tokenizedCard": {
+                                        "cardType": "visa",
+                                        "expDate": "2022-11",
+                                        "lastFour": "1111",
+                                        "opaqueData": "mj578gsskllkjj0000test",
+                                        "opaqueDataDescriptor": ""
+                                    },
+                                    "debug": {}
+                                }
+                         */
+                        function mapSaveCard(inputSaveCard) {
+                            /*
+                              mock save card payload
+                              {
+                                  "type": "visa",
+                                  "expiration": "2022-11",
+                                  "lastFour": "1234",
+                                  "token": tokenValue
+                              }
+                             */
+                            return {
+                                "type": "CARD_TOKENIZED",
+                                "tokenizedCard": {
+                                    "cardType": inputSaveCard.type,
+                                    "expDate": inputSaveCard.expiration,
+                                    "lastFour": inputSaveCard.lastFour,
+                                    "opaqueData": inputSaveCard.token,
+                                    "opaqueDataDescriptor": ""
+                                },
+                                "debug": {}
+                            };
+                        }
+
+                        /**
+                         * The payment gateway will have its own format.  Convert that to a standard format for
+                         * InsuranceSuite
+                         *
+
+                         Expected payload:
+
+                         {
+                                 ​  "type": "ERROR",
+                                 ​  "apiError": { // details of the failed API request (if any)
+                                      "title": "unauthorized-data-access",
+                                 ​     "status": 403,
+                                      "detail": "Not authorized to access requested data. Verify proper permissions have been granted for access."
+                                 ​  },
+                                   "debug": {}
+                                 }
+                         */
+                        function mapError(inputError) {
+                            /*
+                               mock input error
+                                {
+                                    "action": "ERROR",
+                                    "messageCode": "expired-card",
+                                    "message": "Expired card msg"
+                                };
+                             */
+                            return {
+                                "type": "ERROR",
+                                "apiError": {
+                                    "title": inputError.messageCode,
+                                    "status": "400",
+                                    "detail": inputError.message
+                                },
+                                "debug": {}
+                            };
+                        }
+
+                        /**
+                         * Sample method that returns one of two results:
+                         *
+                         * A token
+                         * An error message
+                         *
+                         * This method is meant to simulate any interaction between the payment gateway javascript SDK and the payment gateway.
+                         *
+                         * @param input string, either "happy-path" for a token, or "error" for a simulated error.
+                         * @param callback a callback provided by the page to handle the message.
+                         */
+                        function collectCardAndReturnToken(input, callback) {
+                            var timestamp = Date.now();
+                            var tokenValue = "sample_j578gsskllkjj00".concat(timestamp);
+                            var sampleCardTokenizePayload = {
+                                "action": "SaveCardAsToken",
+                                "data": {
+                                    "type": "visa",
+                                    "expiration": "2022-11",
+                                    "lastFour": "1234",
+                                    "token": tokenValue
+                                }
+                            };
+
+                            var sampleErrorPayload = {
+                                "action": "ERROR",
+                                "messageCode": "expired-card",
+                                "message": "Unable to store, the card provided has expired"
+                            };
+                            switch (input){
+                                case "happy-path":
+                                    callback(sampleCardTokenizePayload);
+                                    break;
+                                case "error":
+                                default:
+                                    callback(sampleErrorPayload);
+                                    break;
+                            }
+
+                        }
+
+                        var sdk = {
+                            mockCollectCardAndReturnToken: function (input, callback) {
+                                collectCardAndReturnToken(input, callback);
+                            }
+                        };
+                    </script>
+                    <div class="row">
+                        <div class="container-fluid" id="portalOneContainer"></div>
+                        <button onclick="sdk.mockCollectCardAndReturnToken('error', handleCollectCardResult)">Demo Card Error</button>
+                        <button onclick="sdk.mockCollectCardAndReturnToken('happy-path', handleCollectCardResult)">Demo Credit Card</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
