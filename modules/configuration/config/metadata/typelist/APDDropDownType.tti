@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The kind of drop down (only really applicable to clause terms as fields can only be a typelist)"
+  name="APDDropDownType">
+  <typecode
+    code="typelist"
+    desc="This dropdown is populated and managed by a typelist"
+    name="Typelist"/>
+  <typecode
+    code="option"
+    desc="Option term"
+    name="Option"/>
+  <typecode
+    code="package"
+    desc="Package term"
+    name="Package"/>
+  <typefilter
+    desc="Excludes options that are only applicable to clause terms"
+    includeAll="true"
+    name="Field">
+    <exclude
+      code="option"/>
+    <exclude
+      code="package"/>
+  </typefilter>
+</typelist>

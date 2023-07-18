@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The type of value returned by a default, minimum, or maximum rule on an installed line"
+  name="InstalledRuleValueType">
+  <typecode
+    code="boolean"
+    desc="A true/false indicator"
+    name="Boolean"/>
+  <typecode
+    code="date"
+    desc="A date, optionally with the time"
+    name="Date"/>
+  <typecode
+    code="decimal"
+    desc="An amount or percentage with up to 2 decimal places"
+    name="Decimal"/>
+  <typecode
+    code="integer"
+    desc="A number with no decimal places"
+    name="Integer"/>
+  <typecode
+    code="string"
+    desc="A name or description consisting of characters, numbers, etc"
+    name="String"/>
+  <typecode
+    code="typekey"
+    desc="A list of choices to select from"
+    name="Typekey"/>
+</typelist>

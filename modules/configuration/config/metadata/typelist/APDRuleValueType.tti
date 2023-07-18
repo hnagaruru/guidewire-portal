@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  name="APDRuleValueType"
+  desc="The type of rule value">
+  <typecode
+    code="fixed"
+    desc="Fixed value"
+    name="Fixed"
+    priority="1"/>
+  <typecode
+    code="calculated"
+    desc="Calculated value"
+    name="Calculated"
+    priority="2"/>
+</typelist>

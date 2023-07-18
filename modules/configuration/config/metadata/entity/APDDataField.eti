@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="The instance of a data field within a manual risk"
+  effDatedBranchType="PolicyPeriod"
+  entity="APDDataField"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="apddatafield"
+  type="effdated">
+  <foreignkey
+    columnName="AttributeID"
+    desc="The definition of the information captured in this field"
+    fkentity="APDAttribute"
+    name="Attribute"
+    nullok="false"/>
+  <column
+    desc="The value if text or a drop down entry"
+    name="StringValue"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The value if a number"
+    name="DecimalValue"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="2"/>
+    <columnParam
+      name="precision"
+      value="14"/>
+  </column>
+ <column
+    desc="The value if a scalable number"
+    name="ScalableDecimalValue"
+    nullok="true"
+    scalable="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="2"/>
+    <columnParam
+      name="precision"
+      value="14"/>
+  </column>
+  <column
+    desc="The value if an integer"
+    name="IntegerValue"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The value if a scalable integer"
+    name="ScalableIntegerValue"
+    nullok="true"
+    scalable="true"
+    type="integer"/>
+  <column
+    desc="The value if a true/false"
+    name="BitValue"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The value if a date/time"
+    name="DateValue"
+    nullok="true"
+    type="datetime"/>
+  <foreignkey
+    columnName="LocationID"
+    desc="The value if it is a location"
+    fkentity="PolicyLocation"
+    name="Location"
+    nullok="true"/>
+  <foreignkey
+    columnName="CodeValueID"
+    desc="The drop down list entry if this field is a drop down"
+    fkentity="APDDropdownEntry"
+    name="CodeValue"
+    nullok="true"/>
+  <foreignkey
+    columnName="PartyID"
+    desc="The value if it is a party"
+    fkentity="PolicyContactRole"
+    name="Party"
+    nullok="true"/>
+</entity>

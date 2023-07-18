@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A cost that makes up the price of the risk"
+  entity="APDRiskCovCost"
+  supertype="APDCost">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.apd.financials.APDCostAdapter"/>
+  <foreignkey
+    columnName="RiskCoverageID"
+    desc="The coverage to which this cost applies"
+    fkentity="APDRiskCoverage"
+    name="RiskCoverage"
+    nullok="false"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The exposure to which this relates (when there is exposure based pricing)"
+    fkentity="APDRiskExposure"
+    name="Exposure"
+    nullok="true"/>
+  <foreignkey
+    columnName="RiskID"
+    desc="The entity to which this relates (when there is entity/coverable based pricing)"
+    fkentity="APDRiskCoverable"
+    name="Risk"
+    nullok="true"/>
+</subtype>

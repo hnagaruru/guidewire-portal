@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Optional restriction of the claim cost category to a peril"
+  entity="APDClaimPeril"
+  exportable="true"
+  loadable="false"
+  table="apdclaimperil"
+  type="retireable">
+  <foreignkey
+    fkentity="APDClaimCostCategory"
+    name="ClaimCost"
+    nullok="false"/>
+  <foreignkey
+    desc="One of the perils to which this cost category is restricted"
+    fkentity="APDPeril"
+    name="Peril"
+    nullok="false"/>
+</entity>

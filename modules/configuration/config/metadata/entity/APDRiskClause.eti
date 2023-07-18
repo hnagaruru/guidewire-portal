@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A clause attaching to a risk"
+  effDatedBranchType="PolicyPeriod"
+  entity="APDRiskClause"
+  exportable="true"
+  extendable="false"
+  final="false"
+  loadable="false"
+  table="apdriskclause"
+  type="effdated">
+  <foreignkey
+    columnName="RiskCoverableID"
+    desc="The risk object for which this coverage provides protection"
+    fkentity="APDRiskCoverable"
+    name="RiskCoverable"
+    nullok="false"/>
+  <typekey
+    desc="The currency used by any terms (and the original currency of costs)"
+    name="Currency"
+    nullok="false"
+    typelist="Currency"/>
+  <array
+    arrayentity="APDRiskTerm"
+    desc="The terms that qualify this clause"
+    name="RiskTerms"
+    owner="true"/>
+  <array
+    arrayentity="APDRiskScheduleItem"
+    desc="Items covered by/included in this clause"
+    name="RiskItems"
+    owner="true"/>
+</entity>

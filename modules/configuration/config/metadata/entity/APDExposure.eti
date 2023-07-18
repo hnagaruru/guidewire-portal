@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Things that expose a risk object to risk"
+  entity="APDExposure"
+  exportable="true"
+  loadable="false"
+  table="apdexposure"
+  type="retireable">
+  <foreignkey
+    columnName="CoverableID"
+    desc="The coverable for with this defines the risk exposure"
+    fkentity="APDCoverable"
+    name="Coverable"
+    nullok="true"/>
+  <column
+    desc="The name of the type of exposure used in the UI as a title"
+    name="Name"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdexpname"/>
+  </column>
+  <column
+    desc="Exposure list label used in the UI"
+    name="MenuLabel"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdexplabel"/>
+  </column>
+  <column
+    desc="A description of what the exposure is, e.g. a driver, a class of employees, an industry class"
+    name="Description"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdexpdescription"/>
+  </column>
+  <column
+    desc="The entity used to persist this exposure"
+    name="TypeName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="22"/>
+    <columnParam
+      name="validator"
+      value="APDName"/>
+  </column>
+  <typekey
+    default="useParent"
+    desc="Defines how the jurisdiction/location of this coverable risk is determined"
+    name="RiskLocation"
+    nullok="false"
+    typefilter="ExposureLocation"
+    typelist="APDRiskLocationType"/>
+  <typekey
+    default="liab"
+    desc="The type of risk resulting from this exposure"
+    name="ExposureType"
+    nullok="false"
+    typelist="APDExposureType"/>
+  <typekey
+    desc="Where the exposure is a contact, this is the role of that contact on the policy"
+    name="ContactRole"
+    nullok="true"
+    typelist="APDExposureContactRole"/>
+  <array
+    arrayentity="APDExposureField"
+    cascadeDelete="true"
+    desc="The fields for this exposure type"
+    name="Fields"
+    owner="true"/>
+  <typekey
+    default="term"
+    desc="Determines how exposure based rating will be applied"
+    name="RatingType"
+    nullok="false"
+    typelist="APDExposureRatingType"/>
+  <column
+    default="false"
+    desc="Defines if the exposures are to be auto numbered (if this is needed?)"
+    name="IsAutoNumbered"
+    nullok="false"
+    type="bit"/>
+</entity>

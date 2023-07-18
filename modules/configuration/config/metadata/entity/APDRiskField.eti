@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="The instance of a field within a manual risk"
+  entity="APDRiskField"
+  supertype="APDDataField">
+  <foreignkey
+    columnName="RiskCoverableID"
+    desc="The coverable that this field qualifies"
+    fkentity="APDRiskCoverable"
+    name="RiskCoverable"
+    nullok="false"/>
+</subtype>

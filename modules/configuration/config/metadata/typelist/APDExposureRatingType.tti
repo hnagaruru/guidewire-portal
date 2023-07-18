@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Defines if term rates or basis irrespective of terms is used for rating (or mixed)"
+  name="APDExposureRatingType">
+  <typecode
+    code="term"
+    desc="Term premiums are calculated and then pro-rated for the term"
+    name="Pro-rata for term"
+    priority="1"/>
+  <typecode
+    code="basis"
+    desc="Rated on the basis amount irrespective of term"
+    name="Scaled within period"
+    priority="2"/>
+  <typecode
+    code="mixed"
+    desc="Pro-ration or basis scaled rated is determined by the individual exposure"
+    name="Mixed rating"
+    priority="3"/>
+</typelist>

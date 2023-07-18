@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="APDDropdownEntryRule"
+  desc="Rules that apply to a dropdown entry"
+  supertype="APDAttributeRule">
+  <foreignkey
+    columnName="DropdownEntryID"
+    desc="The dropdown entry to which this rule applies"
+    fkentity="APDDropdownEntry"
+    name="DropdownEntry"
+    nullok="false"/>
+</subtype>

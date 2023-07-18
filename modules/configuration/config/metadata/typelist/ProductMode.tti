@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The mode in which jobs run to support product development - Product Generator"
+  name="ProductMode">
+  <typecode
+    code="hide"
+    desc="Product design not available"
+    name="Hidden"
+    priority="1"/>  
+  <typecode
+    code="use"
+    desc="The manual products run as close to &quot;real&quot; as possible"
+    name="User"
+    priority="2"/>
+  <typecode
+    code="design"
+    desc="Product design data can be captured whilst running the system"
+    name="Designer"
+    priority="3"/>
+  <typecode
+    code="develop"
+    desc="Develop and generate the products"
+    name="Developer"
+    priority="4"/>
+  <typefilter
+    desc="Can design manual products"
+    includeAll="true"
+    name="designer">
+    <exclude
+      code="hide"/>
+    <exclude
+      code="use"/>
+  </typefilter>
+</typelist>

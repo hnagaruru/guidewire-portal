@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Style of coverable, e.g. property, liability"
+  name="APDCoverableType">
+  <typecode
+    code="prop"
+    desc="Provides cover for loss, damage, etc. to property"
+    name="Property Only"
+    priority="1"/>
+  <typecode
+    code="propwithliab"
+    desc="Provides cover for loss, damage, etc. to property and liability associated with the property"
+    name="Property With Associated Liability"
+    priority="2"/>
+  <typecode
+    code="liabsingle"
+    desc="Provides cover for liability for a single set of risk exposure"
+    name="Liability Only - Single Risk"
+    priority="3"/>
+  <typecode
+    code="liabmulti"
+    desc="Provides cover for liability for a number of sets of risk exposure"
+    name="Liability Only - Multiple Risks"
+    priority="4"/>
+  <typecode
+    code="comb"
+    desc="A combined package of property and liability risks"
+    name="Combined Property and Liability"
+    priority="5"/>
+  <typecode
+    code="other"
+    desc="Other risks that have risk groups, cover and exposure"
+    name="Other Casualty Risk"
+    priority="6"/>
+  <typefilter
+    desc="Property coverable that may have risk objects"
+    name="hasRiskObjects">
+    <include
+      code="prop"/>
+    <include
+      code="propwithliab"/>
+    <include
+      code="comb"/>
+    <include
+      code="other"/>
+    <include
+      code="liabmulti"/>
+  </typefilter>
+  <typefilter
+    desc="Any coverable that may have exposure"
+    includeAll="true"
+    name="hasExposure"/>
+</typelist>

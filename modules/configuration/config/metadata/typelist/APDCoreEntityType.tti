@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="APDCoreEntityType" desc="Entries that provide core fields to APD rules">
+  <typecode
+    code="Policy"
+    desc="Policy"
+    name="Policy"/>
+  <typecode
+    code="PolicyPeriod"
+    desc="PolicyPeriod"
+    name="PolicyPeriod"/>
+</typelist>

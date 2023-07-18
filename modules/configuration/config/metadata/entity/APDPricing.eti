@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Identifies the rate from which a cost is created"
+  effDatedBranchType="PolicyPeriod"
+  entity="APDPricing"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="apdriskpricing"
+  type="effdated">
+  <column
+    desc="The rate, excluding adjustments, to apply to the basis"
+    name="Rate"
+    nullok="true"
+    type="rate"/>
+  <foreignkey
+    columnName="CostDefinitionID"
+    desc="The definition of this price"
+    fkentity="APDCostDefinition"
+    name="CostDefinition"
+    nullok="false"/>
+</entity>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="The base definition of any type of field"
+  entity="APDField"
+  supertype="APDAttribute">
+  <foreignkey
+    columnName="CoverableID"
+    desc="The coverable definition to which this field belongs"
+    fkentity="APDCoverable"
+    name="Coverable"
+    nullok="false"/>
+  <column
+    default="false"
+    name="Identifier"
+    nullok="false"
+    type="bit"/>
+</subtype>

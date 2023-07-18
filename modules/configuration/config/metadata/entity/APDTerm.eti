@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="The base definition of any type of term"
+  entity="APDTerm"
+  supertype="APDAttribute">
+  <foreignkey
+    columnName="ClauseID"
+    desc="The clause to which this term belongs"
+    fkentity="APDClause"
+    name="Clause"
+    nullok="false"/>
+  <column
+    default="false"
+    name="ScheduleItemAttribute"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="false"
+    desc="If true and ScheduleItemAttribute is also true, this attribute will be generated as a linked clause term, otherwise, it will become a scheduled item property on the clause."
+    name="GenerateAsClauseTerm"
+    nullok="false"
+    type="bit"/>
+  <array
+    arrayentity="APDDropdownColumn"
+    cascadeDelete="true"
+    desc="The columns of values associated with dropdown entries"
+    name="DropdownColumns"
+    owner="true"/>
+</subtype>

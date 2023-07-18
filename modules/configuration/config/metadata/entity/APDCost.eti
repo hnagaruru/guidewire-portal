@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A unit of premium or other cost (taxes, fees, etc.) for the Manual Products line."
+  effDatedBranchType="PolicyPeriod"
+  entity="APDCost"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="apdcost"
+  type="effdated">
+  <implementsEntity
+    name="Cost"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.CostAdapter"
+    impl="gw.apd.financials.APDCostAdapter"/>
+  <implementsInterface
+    iface="gw.apd.financials.APDCostMethods"
+    impl="gw.apd.financials.APDCostMethodsImpl"/>
+  <foreignkey
+    desc="Manual Products line"
+    fkentity="APDManualPolicyLine"
+    name="ManualPolicyLine"
+    nullok="false"/>
+  <array
+    arrayentity="APDTransaction"
+    cascadeDelete="true"
+    desc="APD Transactions"
+    getterScriptability="doesNotExist"
+    name="Transactions"
+    setterScriptability="hidden"/>
+</entity>

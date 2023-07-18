@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Product definition"
+  entity="APDProduct"
+  exportable="true"
+  loadable="false"
+  table="apdproduct"
+  type="retireable">
+  <column
+    desc="The code used within the product model to identify this product"
+    name="CodeIdentifier"
+    nullok="true"
+    type="patterncode">
+    <columnParam
+      name="validator"
+      value="APDName"/>
+  </column>
+  <column
+    name="Name"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdproductname"/>
+  </column>
+  <column
+    desc="A description of the product"
+    name="Description"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdproductdesc"/>
+  </column>
+  <column
+    default="false"
+    desc="Whether this product can be subject to coinsurance (and layered)"
+    name="Coinsurance"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="false"
+    desc="Whether this product is multi-line; default false (single line)"
+    name="Multiline"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="The abbreviation used to identify the line"
+    name="Abbreviation"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="3"/>
+    <columnParam
+      name="validator"
+      value="APDName"/>
+  </column>
+  <array
+    arrayentity="APDProductToLine"
+    arrayfield="Product"
+    name="ProductLines"
+    owner="true"/>
+  <column
+    default="false"
+    name="UsesLocationListView"
+    nullok="false"
+    type="bit"/>
+  <typekey
+    default="domestic"
+    name="Currencies"
+    nullok="false"
+    typelist="APDCurrencyHandling"/>
+  <column
+    default="false"
+    desc="If true, this product is written by another insurance company (captured as an organisation)"
+    name="WrittenByThirdParty"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="0"
+    desc="Provides a generic sequence number for added definition objects to ensure a unique publicID for a product definition"
+    name="DefinitionSequence"
+    nullok="false"
+    type="integer"/>
+  <column
+    desc="The code of the actual product generated from this definition"
+    name="ProductCode"
+    nullok="true"
+    type="patterncode"/>
+  <column
+    default="false"
+    desc="Whether the product is available in the portal or not"
+    name="Portal"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="Date when product was last installed"
+    name="DateInstalled"
+    nullok="true"
+    type="datetime">
+  </column>
+  <column
+    desc="Date when product was last updated"
+    name="DateUpdated"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    default="Any"
+    desc="Account type of product"
+    name="ProductAccountType"
+    nullok="false"
+    typelist="ProductAccountType"/>
+  <index
+    desc="Index ensuring the uniqueness of product definitions"
+    name="APDProductUnique1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CodeIdentifier"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+</entity>

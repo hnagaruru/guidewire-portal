@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Used to define from where the location of the risk is obtained"
+  name="APDRiskLocationType">
+  <typecode
+    code="isLocation"
+    desc="The coverable is a type of location"
+    name="Risk is a location"
+    priority="3"
+    retired="true"/>
+  <typecode
+    code="isBuilding"
+    desc="The coverable is a type of building"
+    name="Risk is a building at a location"
+    priority="4"
+    retired="true"/>
+  <typecode
+    code="refLocation"
+    desc="The coverable includes a foreign key to a policy location that must be selected by the user"
+    name="Risk includes location reference"
+    priority="2"/>
+  <typecode
+    code="useParent"
+    desc="For the line, this is the policy base location/jurisdiction."
+    name="Risk is at parent's location"
+    priority="1"/>
+  <typefilter
+    desc="The set of locations types used by an exposure"
+    name="ExposureLocation">
+    <include
+      code="useParent"/>
+    <include
+      code="refLocation"/>
+  </typefilter>
+</typelist>

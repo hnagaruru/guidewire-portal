@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The role of the contact where a contact is the exposure"
+  name="APDExposureContactRole">
+  <typecode
+    code="driver"
+    desc="The exposure is a named driver"
+    name="Driver"/>
+  <typecode
+    code="named"
+    desc="The exposure is a named insured"
+    name="Named Insured"/>
+</typelist>

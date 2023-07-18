@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Coverage definition"
+  entity="APDCoverage"
+  supertype="APDClause">
+  <column
+    default="false"
+    desc="If true, this coverage will create an individual debtors charge items for billing"
+    name="SeparateBilling"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="false"
+    desc="If true, this coverage will create an individual debtors charge for cash allocation"
+    name="SeparateCollection"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="The order in which the price is calculated (within its set)"
+    name="PricingOrder"
+    nullok="false"
+    type="integer"/>
+  <array
+    arrayentity="APDCoverageCostDefinition"
+    desc="The definition of costs that apply to this coverage"
+    name="CostDefinitions"
+    owner="true"/>
+  <column
+    default="false"
+    desc="If true, this product is written by another insurance company (captured as an organisation)"
+    name="WrittenByThirdParty"
+    nullok="false"
+    type="bit"/>
+  <array
+    arrayentity="APDCoveragePeril"
+    desc="The perils included in the coverage"
+    name="Perils"
+    owner="true"/>
+  <array
+    arrayentity="APDCoverageClaim"
+    desc="The claim categories appropriate to this coverage"
+    name="ClaimCategories"
+    owner="true"/>
+</subtype>

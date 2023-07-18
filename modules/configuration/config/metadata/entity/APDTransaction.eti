@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A transaction for the Manual Products line"
+  effDatedBranchType="PolicyPeriod"
+  entity="APDTransaction"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="apdtransaction"
+  type="effdated">
+  <implementsEntity
+    name="Transaction"/>
+  <implementsInterface
+    iface="gw.api.domain.financials.TransactionAdapter"
+    impl="gw.apd.financials.APDTransactionAdapter"/>
+  <foreignkey
+    desc="The cost this transaction modifies."
+    fkentity="APDCost"
+    name="APDCost"
+    nonEffDated="true"
+    nullok="false"/>
+</entity>

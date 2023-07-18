@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Type of exposure, e.g. liability risk or property risk"
+  name="APDExposureType">
+  <typecode
+    code="liab"
+    desc="Provides an exposure to liability"
+    name="Liability"
+    priority="1"/>
+  <typecode
+    code="prop"
+    desc="Provides an exposure to property loss/damage"
+    name="Property"
+    priority="2"/>
+  <typecode
+    code="contact"
+    desc="A specific party is the exposure"
+    name="Party"
+    priority="3"/>
+  <typecode
+    code="other"
+    desc="Some other type of exposure"
+    name="Other"
+    priority="4"/>
+</typelist>

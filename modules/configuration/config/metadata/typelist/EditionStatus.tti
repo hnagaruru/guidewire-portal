@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="EditionStatus" desc="Status of Installed Edition">
+  <typecode
+    code="active"
+    desc="Currently active installed edition"
+    name="Active"/>
+  <typecode
+    code="preloaded"
+    desc="Loaded installed edition waiting to be activated"
+    name="Preloaded"/>
+  <typecode
+    code="withdrawn"
+    desc="Previously active edition"
+    name="Withdrawn"/>
+</typelist>

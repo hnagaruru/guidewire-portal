@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A entry in a drop down list attached to a field"
+  entity="APDDropdownEntry"
+  exportable="true"
+  loadable="false"
+  table="apddropdownentry"
+  type="retireable">
+  <implementsInterface
+    iface="gw.apd.model.APDTagContainer"
+    impl="gw.apd.model.APDDropdownEntryTagContainerImpl"/>
+  <column
+    desc="The name displayed in the drop-down"
+    name="Name"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="dropdownname"/>
+  </column>
+  <column
+    desc="The sequence in which the codes are to be listed"
+    name="Sequence"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The code used if generating this dropdown as a typelist"
+    name="Code"
+    nullok="true"
+    type="patterncode">
+    <columnParam
+      name="logicalSize"
+      value="45"/>
+    <columnParam
+      name="validator"
+      value="APDCode"/>
+  </column>
+  <column
+    desc="The description of this drop down entry"
+    name="Description"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="dropdowndescription"/>
+  </column>
+  <foreignkey
+    columnName="AttributeID"
+    desc="The attribute for which this is a drop down entry"
+    fkentity="APDAttribute"
+    name="Attribute"
+    nullok="false"/>
+  <array
+    arrayentity="APDDropdownValue"
+    cascadeDelete="true"
+    desc="The values of the option or package for this code"
+    name="Values"
+    owner="true"/>
+  <typekey
+    desc="The currency of the option/package values"
+    name="Currency"
+    nullok="true"
+    typelist="Currency"/>
+</entity>

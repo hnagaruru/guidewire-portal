@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<entity
+  exportable="true"
+  final="false"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="APDRuleElement"
+  desc="A set of conditions that make up a rule element"
+  table="apdruleelement"
+  type="retireable">
+  <foreignkey
+    columnName="RuleID"
+    desc="The rule to which this element belongs"
+    fkentity="APDRule"
+    name="Rule"
+    nullok="false"/>
+  <column
+    desc="The order in which the fields are displayed"
+    name="Sequence"
+    nullok="false"
+    type="integer"/>
+  <typekey
+    desc="The result for an existence rule"
+    name="Existence"
+    nullok="true"
+    typelist="APDDataExistenceType"/>
+  <column
+    desc="The value if text or a dropdown entry"
+    name="DefaultStringValue"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The value if a number"
+    name="DefaultDecimalValue"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="2"/>
+    <columnParam
+      name="precision"
+      value="14"/>
+  </column>
+  <column
+    desc="The value if an integer"
+    name="DefaultIntegerValue"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The value if a true/false"
+    name="DefaultBitValue"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The value if a date/time"
+    name="DefaultDateValue"
+    nullok="true"
+    type="datetime"/>
+  <foreignkey
+    columnName="CodeValueID"
+    desc="The dropdown list entry if this field is a dropdown"
+    fkentity="APDDropdownEntry"
+    name="DefaultCodeValue"
+    nullok="true"/>
+  <typekey
+    desc="The value if a tag"
+    name="DefaultTagValue"
+    nullok="true"
+    typelist="APDTagApplicability"/>
+  <array
+    arrayentity="APDRuleCondition"
+    cascadeDelete="true"
+    desc="The conditions that must match for this rule to fire"
+    name="RuleConditions"
+    owner="true"/>
+</entity>

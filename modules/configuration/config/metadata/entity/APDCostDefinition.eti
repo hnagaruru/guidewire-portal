@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="The definition of a cost"
+  entity="APDCostDefinition"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="apdcostdefinition"
+  type="retireable">
+  <foreignkey
+    columnName="CostCodeID"
+    fkentity="CostCode"
+    name="CostCode"
+    nullok="false"/>
+  <column
+    default="false"
+    desc="If true, this cost will create an individual debtors charge for billing"
+    name="SeparateBilling"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="false"
+    desc="If true, this cost will create an individual debtors charge for cash allocation"
+    name="SeparateCollection"
+    nullok="false"
+    type="bit"/>
+  <foreignkey
+    columnName="BasisID"
+    desc="The term/coverable attribute used as the basis, if appropriate"
+    fkentity="APDAttribute"
+    name="Basis"
+    nullok="true"/>
+  <typekey
+    default="1"
+    desc="The scale of the basis to which the rate is applied"
+    name="RatingScale"
+    nullok="true"
+    typelist="RatingScale"/>
+  <array
+    arrayentity="APDCostStepDefinition"
+    desc="The optional steps defined to create this price"
+    name="CostSteps"
+    owner="true"/>
+  <column
+    desc="The order in which the price is calculated (within its set)"
+    name="PricingOrder"
+    nullok="false"
+    type="integer"/>
+  <column
+    default="false"
+    desc="If true, the basis is the sum of prior calculated costs"
+    name="CumulativeCostBasis"
+    nullok="false"
+    type="bit"/>
+  <typekey
+    desc="If set, accumulated costs accumulate for only this jurisdiction when calculating the basis"
+    name="JurisdictionFilter"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <typekey
+    desc="If set, accumulated costs accumulate for only this rate amount type when calculating the basis"
+    name="RateAmountTypeFilter"
+    nullok="true"
+    typelist="RateAmountType"/>
+  <array
+    arrayentity="APDCostCodeFilter"
+    desc="If set, accumulated costs accumulate for only these cost codes when calculating the basis"
+    name="CostCodeFilters"
+    owner="true"/>
+</entity>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An exposure to risk within a manual line"
+  effDatedBranchType="PolicyPeriod"
+  entity="APDRiskExposure"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="apdriskexposure"
+  type="effdated">
+  <foreignkey
+    columnName="ExposureID"
+    desc="The definition of this exposure"
+    fkentity="APDExposure"
+    name="Exposure"
+    nullok="false"/>
+  <foreignkey
+    desc="The risk for which this is exposure"
+    fkentity="APDRiskCoverable"
+    name="RiskCoverable"
+    nullok="false"/>
+  <array
+    arrayentity="APDRiskExposureField"
+    desc="The fields for the exposure"
+    name="Fields"
+    owner="true"/>
+  <implementsInterface
+    iface="gw.lob.apd.APDSplittableRisk"
+    impl="gw.lob.apd.APDSplittableRiskExposure"/>
+</entity>

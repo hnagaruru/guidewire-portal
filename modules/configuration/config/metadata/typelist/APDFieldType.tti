@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The type of field"
+  name="APDFieldType">
+  <typecode
+    code="varchar"
+    desc="A name or description consisting of characters, numbers, etc"
+    name="Text"
+    priority="1"/>
+  <typecode
+    code="integer"
+    desc="A number with no decimal places"
+    name="Number"
+    priority="2"/>
+  <typecode
+    code="bigdecimal"
+    desc="An amount or percentage with up to 2 decimal places"
+    name="Decimal (14,2)"
+    priority="3"/>
+  <typecode
+    code="boolean"
+    desc="A true/false indicator"
+    name="True/false"
+    priority="5"/>
+  <typecode
+    code="date"
+    desc="A date, optionally with the time"
+    name="Date-time"
+    priority="6"/>
+  <typecode
+    code="money"
+    desc="An amount in the chosen currency"
+    name="Monetary amount"
+    priority="4"/>
+  <typecode
+    code="typekey"
+    desc="A list of choices to select from"
+    name="Drop-down list"
+    priority="7"/>
+  <typecode
+    code="location"
+    desc="A location of the risk"
+    name="Location"
+    priority="8"/>
+  <typecode
+    code="party"
+    desc="An involved party attaching as a PolicyContactRole"
+    name="Involved party"
+    priority="9"/>
+  <typefilter
+    desc="Subset allowed for clause terms"
+    includeAll="true"
+    name="TermTypes">
+    <exclude
+      code="location"/>
+    <exclude
+      code="party"/>
+  </typefilter>
+  <typefilter
+    desc="Subset used for coverable/exposure names"
+    name="IdentifierTypes">
+    <include
+      code="varchar"/>
+    <include
+      code="integer"/>
+    <include
+      code="date"/>
+    <include
+      code="party"/>
+    <include
+      code="location"/>
+    <include
+      code="typekey"/>
+  </typefilter>
+  <typefilter
+    desc="Types of fields that can be scaled when they are split by rating periods"
+    name="CanScale">
+    <include
+      code="integer"/>
+    <include
+      code="bigdecimal"/>
+    <include
+      code="money"/>
+  </typefilter>
+  <typefilter
+    desc="Field types that can only be compared for equality"
+    name="UsesEqualityOperators">
+    <include
+      code="varchar"/>
+    <include
+      code="boolean"/>
+    <include
+      code="typekey"/>
+    <include
+      code="location"/>
+  </typefilter>
+  <typefilter
+    desc="Field types that can be compared numerically"
+    name="UsesNumericOperators">
+    <include
+      code="integer"/>
+    <include
+      code="bigdecimal"/>
+    <include
+      code="date"/>
+    <include
+      code="money"/>
+  </typefilter>
+</typelist>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A term that is part of a schedule item"
+  entity="APDRiskScheduleTerm"
+  supertype="APDRiskTerm">
+  <foreignkey
+    columnName="RiskItemID"
+    desc="The schedule item that this is part of"
+    fkentity="APDRiskScheduleItem"
+    name="RiskItem"
+    nullok="false"/>
+</subtype>

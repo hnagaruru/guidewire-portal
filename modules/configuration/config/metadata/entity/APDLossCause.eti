@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Cause of Loss - used to create/sync with CC LossCause typelist"
+  entity="APDLossCause"
+  exportable="true"
+  loadable="false"
+  table="apdlosscause"
+  type="retireable">
+  <column
+    desc="The code used within the product model to identify this cause of loss"
+    name="CodeIdentifier"
+    nullok="true"
+    type="patterncode"/>
+  <column
+    desc="The name of the loss cause as displayed in the UI"
+    name="Name"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdlosscuasename"/>
+  </column>
+  <column
+    desc="A description of the loss cause"
+    name="Description"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdlosscausedesc"/>
+  </column>
+  <typekey
+    desc="The type of loss that this cause results in"
+    name="LossType"
+    nullok="false"
+    typelist="APDLossType"/>
+</entity>

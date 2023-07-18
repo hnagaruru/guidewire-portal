@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A item attached to a clause"
+  effDatedBranchType="PolicyPeriod"
+  entity="APDRiskScheduleItem"
+  exportable="true"
+  extendable="false"
+  loadable="false"
+  table="apdriskscheduleitem"
+  type="effdated">
+  <foreignkey
+    columnName="APDRiskClauseID"
+    desc="The clause that this field qualifies"
+    fkentity="APDRiskClause"
+    name="RiskClause"
+    nullok="false"/>
+  <array
+    arrayentity="APDRiskScheduleTerm"
+    cascadeDelete="true"
+    desc="The terms that belong to this schedule item"
+    name="ItemTerms"/>
+</entity>

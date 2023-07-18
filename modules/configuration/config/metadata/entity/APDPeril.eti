@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The peril or subclassification of a coverage; matches to the CoverageSubtype typelist in CC"
+  entity="APDPeril"
+  exportable="true"
+  loadable="false"
+  table="apdperil"
+  type="retireable">
+  <column
+    desc="The code used within the product model to identify this peril/part of a coverage"
+    name="CodeIdentifier"
+    nullok="true"
+    type="patterncode"/>
+  <column
+    desc="The name of the peril/part of a coverage as displayed in the UI"
+    name="Name"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdperilname"/>
+  </column>
+  <column
+    desc="A description of the loss cause"
+    name="Description"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdperildesc"/>
+  </column>
+  <array
+    arrayentity="APDPerilCause"
+    desc="The possible causes of a claim covered by this peril"
+    name="LossCauses"
+    owner="true"/>
+</entity>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Defines if the product is multi-currency"
+  name="APDCurrencyHandling">
+  <typecode
+    code="domestic"
+    desc="The local (base/reporting) currency is used"
+    name="Domestic"
+    priority="1"/>
+  <typecode
+    code="single"
+    desc="The policy simply uses the desired coverage currency"
+    name="Single"
+    priority="2"/>
+  <typecode
+    code="basicmulti"
+    desc="Multiple original currencies can be used with a single settlement currency"
+    name="Multiple original"
+    priority="3"/>
+  <typecode
+    code="fullmulti"
+    desc="Full multicurrency/multi-national risks"
+    name="Multiple settlement and original currencies"
+    priority="4"/>
+</typelist>

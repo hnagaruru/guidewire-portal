@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A type of cost resulting from a claim; matches CC CostCategory typelist"
+  entity="APDClaimCostCategory"
+  loadable="false"
+  table="apdclaimcostcategory"
+  type="retireable">
+  <column
+    desc="The code used within the product model to identify this claim cost category"
+    name="CodeIdentifier"
+    nullok="true"
+    type="patterncode"/>
+  <column
+    desc="The name of the claim cost category as displayed in the UI"
+    name="Name"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdclaimcostname"/>
+  </column>
+  <column
+    desc="A description of the claim cost category"
+    name="Description"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdclaimcostdesc"/>
+  </column>
+  <typekey
+    desc="The type of claim cost"
+    name="CostType"
+    nullok="false"
+    typelist="APDCostType"/>
+  <array
+    arrayentity="APDClaimPeril"
+    desc="The perils to which this cost is restricted; if empty it can be generally used for any claim against associated coverages"
+    name="RestrictedPerils"
+    owner="true"/>
+</entity>

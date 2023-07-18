@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Cost types included in the accumulation when calculating the basis of another cost"
+  entity="APDCostCodeFilter"
+  exportable="true"
+  loadable="false"
+  table="apdcosttypefilter"
+  type="retireable">
+  <foreignkey
+    columnName="CostDefinitionID"
+    desc="The cost definition that is filtered"
+    fkentity="APDCostDefinition"
+    name="CostDefinition"
+    nullok="false"/>
+  <foreignkey
+    columnName="CostCodeID"
+    desc="The cost code included"
+    fkentity="CostCode"
+    name="CostCode"
+    nullok="false"/>
+</entity>

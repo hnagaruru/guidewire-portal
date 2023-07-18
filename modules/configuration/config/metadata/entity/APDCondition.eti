@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<subtype
+  desc="Condition Definition"
+  xmlns="http://guidewire.com/datamodel"
+  entity="APDCondition"
+  supertype="APDClause"/>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The definition of a cost"
+  entity="CostCode"
+  exportable="true"
+  ignoreForEvents="true"
+  loadable="false"
+  table="costcode"
+  type="retireable">
+  <column
+    desc="The identifier (added to the cost key) that defines what this cost is"
+    name="CostCode"
+    nullok="false"
+    type="patterncode"/>
+  <column
+    desc="The name of the cost as displayed on the screen"
+    name="CostName"
+    nullok="false"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="costname"/>
+  </column>
+  <typekey
+    desc="The pattern used to group costs into a charge to be collected"
+    name="ChargePatern"
+    nullok="false"
+    typelist="ChargePattern"/>
+  <typekey
+    desc="The grouping for summary display of the quote"
+    name="RateAmountType"
+    nullok="false"
+    typelist="RateAmountType"/>
+  <column
+    desc="Describes what the cost is"
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    default="false"
+    name="Overrideable"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    default="ProRataByDays"
+    desc="The method of pro-rating short term (or long term) costs"
+    name="ProrationMethod"
+    nullok="true"
+    typelist="ProrationMethod"/>
+</entity>

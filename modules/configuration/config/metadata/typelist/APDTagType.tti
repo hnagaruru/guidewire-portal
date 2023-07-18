@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="APDTagType">
+  <typecode
+    code="rate"
+    desc="Tag for rate action"
+    name="Rate"
+    priority="10"/>
+  <typecode
+    code="submission"
+    desc="Tag for create submission action"
+    name="Submission"
+    priority="20"/>
+  <typecode
+    code="riskscore"
+    desc="Tag for risk score calculation action"
+    name="Risk Score"
+    priority="30"/>
+</typelist>

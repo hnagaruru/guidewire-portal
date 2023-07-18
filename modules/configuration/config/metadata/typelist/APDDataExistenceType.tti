@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="APDDataExistenceType" desc="How the data should exist">
+  <typecode
+    code="available"
+    desc="This option is available and can be selected"
+    name="Available"/>
+  <typecode
+    code="captured"
+    desc="This data attribute is captured in the UI"
+    name="User Entered"/>
+  <typecode
+    code="derived"
+    desc="This data attribute is derived and displayed. It cannot be overridden in the UI"
+    name="Derived"/>
+  <typecode
+    code="hidden"
+    desc="This data attribute is derived and stored but not shown on the UI"
+    name="Hidden"/>
+  <typecode
+    code="unavailable"
+    desc="This entity/term is unavailable and cannot be added"
+    name="Unavailable"/>
+  <typecode
+    code="required"
+    desc="This data is captured and required/clause is required"
+    name="Required"/>
+  <typecode
+    code="suggested"
+    desc="It is suggested that this data is captured/clause included"
+    name="Suggested"/>
+  <typecode
+    code="optional"
+    desc="Is optionally captured/clause may be optionally included"
+    name="Optional"/>
+  <typecode
+    code="capturedbind"
+    desc="This data attribute is captured in the UI and is required to bind"
+    name="User Entered: Required for Bind"/>
+  <typecode
+    code="capturedissue"
+    desc="This data attribute is captured in the UI and is required to issue"
+    name="User Entered: Required for Issue"/>
+  <typecode
+    code="capturedquote"
+    desc="This data attribute is captured in the UI and is required to quote"
+    name="User Entered: Required for Quote"/>
+  <typefilter
+    desc="Existence of clauses"
+    name="ClauseExistence">
+    <include
+      code="required"/>
+    <include
+      code="suggested"/>
+    <include
+      code="optional"/>
+    <include
+      code="unavailable"/>
+  </typefilter>
+  <typefilter
+    desc="Existence that can be set for fields and terms"
+    name="AttributeExistence">
+    <include
+      code="captured"/>
+    <include
+      code="derived"/>
+    <include
+      code="hidden"/>
+    <include
+      code="unavailable"/>
+    <include
+      code="capturedquote"/>
+    <include
+      code="capturedbind"/>
+    <include
+      code="capturedissue"/>
+  </typefilter>
+  <typefilter
+    desc="Existence that can be set for data rules for fields and terms"
+    name="DataExistence">
+    <include
+      code="captured"/>
+    <include
+      code="derived"/>
+    <include
+      code="unavailable"/>
+    <include
+      code="capturedquote"/>
+    <include
+      code="capturedbind"/>
+    <include
+      code="capturedissue"/>
+  </typefilter>
+  <typefilter
+    desc="Existence of options"
+    name="DropdownEntryExistence">
+    <include
+      code="available"/>
+    <include
+      code="unavailable"/>
+  </typefilter>
+  <typefilter
+    desc="Existence types for fields that are visible in the UI"
+    name="VisibleFieldExistence">
+    <include
+      code="captured"/>
+    <include
+      code="derived"/>
+    <include
+      code="capturedquote"/>
+    <include
+      code="capturedbind"/>
+    <include
+      code="capturedissue"/>
+  </typefilter>
+  <typefilter
+    desc="Existence types for fields that are editable in the UI"
+    name="EditableFieldExistence">
+    <include
+      code="captured"/>
+    <include
+      code="capturedquote"/>
+    <include
+      code="capturedbind"/>
+    <include
+      code="capturedissue"/>
+  </typefilter>
+</typelist>
