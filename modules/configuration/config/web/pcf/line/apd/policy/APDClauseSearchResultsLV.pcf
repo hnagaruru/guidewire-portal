@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="APDClauseSearchResultsLV">
+    <ExposeIterator
+      valueType="APDClause"
+      widget="APDClauseSearchResultsLV"/>
+    <Require
+      name="coveragePatterns"
+      type="ArrayList&lt;APDClause&gt;"/>
+    <Require
+      name="coverable"
+      type="APDCoverable"/>
+    <Require
+      name="searchCriteria"
+      type="gw.apd.model.APDClauseSearchCriteria"/>
+    <RowIterator
+      editable="true"
+      elementName="pattern"
+      hasCheckBoxes="true"
+      startChecked="pattern.New"
+      toCreateAndAdd="coverable.addCoverage(null)"
+      toRemove="coverable.removeClause(pattern)"
+      type="APDClause"
+      value="coveragePatterns"
+      valueType="ArrayList&lt;APDClause&gt;">
+      <IteratorSort
+        sortBy="pattern.Sequence"
+        sortOrder="1"/>
+      <Row>
+        <TextCell
+          editable="true"
+          id="Coverage"
+          label="DisplayKey.get(&quot;Web.APDClause.SearchPage.Clause&quot;)"
+          required="true"
+          value="pattern.Name"
+          width="200"
+          wrap="true"/>
+        <RangeCell
+          editable="true"
+          id="Category"
+          label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Category&quot;)"
+          required="true"
+          value="pattern.ClauseCategory"
+          valueRange="searchRange"
+          valueType="entity.APDClauseCategory"
+          width="300"
+          wrap="true">
+          <PickerMenuItem
+            action="APDNewLibraryCategoryPopup.push(coverable)"
+            id="AddNewCategory"
+            label="DisplayKey.get(&quot;Web.APDCoverageSearchResultsLV.AddNewCategoryMenu&quot;)"
+            onPick="pattern.ClauseCategory = PickedValue"/>
+        </RangeCell>
+        <TextCell
+          id="ClauseType"
+          label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Type&quot;)"
+          value="pattern.Subtype.DisplayName"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[property get searchRange() : APDClauseCategory[] {
+  return coverable.ClauseCategories.where(\cat -> ((searchCriteria.SearchType == CoveragePatternSearchType.TC_COVERAGE and not cat.Itemised)
+      or searchCriteria.SearchType != CoveragePatternSearchType.TC_COVERAGE)
+      and not cat.Hidden)
+}]]></Code>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterEnter="initialise()"
+    beforeCancel="removeUneditedCopy()"
+    beforeCommit="rule.removeIfUnnecessary()"
+    canEdit="true"
+    canVisit="true"
+    id="APDDropdownEntryRulePopup"
+    startInEditMode="startInEditMode"
+    title="gw.apd.web.APDRulePopupHelper.getRulePopupTitle(ruleType, typekey.APDRule.TC_APDDROPDOWNENTRYRULE)">
+    <LocationEntryPoint
+      signature="APDDropdownEntryRulePopup(currentRule:APDDropdownEntryRule, dropdownEntry:APDDropdownEntry, ruleType:APDRuleType, edition:APDProductLineEdition)"/>
+    <LocationEntryPoint
+      signature="APDDropdownEntryRulePopup(currentRule:APDDropdownEntryRule, dropdownEntry:APDDropdownEntry, ruleType:APDRuleType, edition:APDProductLineEdition, startInEditMode : boolean)"/>
+    <Variable
+      name="currentRule"
+      type="APDDropdownEntryRule"/>
+    <Variable
+      name="dropdownEntry"
+      type="APDDropdownEntry"/>
+    <Variable
+      name="ruleType"
+      type="APDRuleType"/>
+    <Variable
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Variable
+      name="startInEditMode"
+      type="boolean"/>
+    <Variable
+      name="rule"
+      type="APDDropdownEntryRule"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          editLabel="DisplayKey.get(&quot;Web.APDAttributeRule.EditButton&quot;)"
+          editVisible="currentRule.Edition != edition"/>
+        <ToolbarButton
+          action="dropdownEntry.Attribute.removeFromRules(rule); CurrentLocation.commit()"
+          id="Delete"
+          label="DisplayKey.get(&quot;Web.APDAttributeRule.Delete&quot;)"
+          visible="CurrentLocation.InEditMode and currentRule != null"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="dropdownEntryLabel"
+            label="DisplayKey.get(&quot;Web.APDAttributeRule.Label&quot;)"
+            value="dropdownEntry.Name"
+            visible="dropdownEntry.Name.HasContent"/>
+          <InputSet
+            visible="rule.RuleType == APDRuleType.TC_EXISTENCE">
+            <RangeInput
+              editable="true"
+              id="DefaultExistence"
+              label="gw.apd.web.APDRulePopupHelper.getDefaultValueLabel(rule)"
+              required="true"
+              value="rule.DefaultExistence"
+              valueRange="APDDataExistenceType.TF_DROPDOWNENTRYEXISTENCE.TypeKeys"
+              valueType="APDDataExistenceType">
+              <PostOnChange/>
+            </RangeInput>
+            <TextInput
+              id="RuleDescText"
+              labelAbove="true"
+              value="gw.apd.web.APDRulePopupHelper.getRuleDisplayDescription(rule)"/>
+          </InputSet>
+        </InputColumn>
+        <InputColumn>
+          <InputSetRef
+            def="APDRuleEditionInputSet(rule, edition)"/>
+        </InputColumn>  
+      </DetailViewPanel>
+      <PanelRef
+        def="APDRuleDV(rule, edition)"
+        editable="rule.Edition == edition"/>
+    </Screen>
+    <Code><![CDATA[function initialise() {
+  if (currentRule.Edition != edition) { // there is not a rule for the current edition
+    if (currentRule == null) { // there is no rule
+      rule = buildNewRule(edition)
+    } else { // there is a rule already of a previous edition
+      rule = currentRule.copyToNewEdition(edition) as APDDropdownEntryRule
+      dropdownEntry.Attribute.addToRules(rule)
+    }
+  } else if (currentRule == null) { // there is no rule (or edition!)
+    rule = buildNewRule(null) // this builds a base rule
+  } else { // there is a rule for the current edition
+    rule = currentRule
+  }
+}
+
+private function buildNewRule(e : APDEdition) : APDDropdownEntryRule {
+  var newRule = dropdownEntry.createAndAddRule(ruleType)
+  newRule.Edition = e
+  return newRule
+}
+
+function removeUneditedCopy() {
+  // when the rule is copied for display and potential editing ...
+  if (not CurrentLocation.InEditMode and currentRule != rule) {
+    dropdownEntry.Attribute.removeFromRules(rule)
+  }
+}]]></Code>
+  </Popup>
+</PCF>

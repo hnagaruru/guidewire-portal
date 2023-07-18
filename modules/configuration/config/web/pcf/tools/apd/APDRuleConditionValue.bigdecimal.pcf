@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ModalCell
+    id="APDRuleConditionValue"
+    mode="bigdecimal">
+    <Require
+      name="condition"
+      type="APDRuleCondition"/>
+    <TextCell
+      editable="true"
+      id="value"
+      required="true"
+      value="condition.DecimalValue"
+      valueType="java.math.BigDecimal"/>
+  </ModalCell>
+</PCF>

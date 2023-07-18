@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <WizardStepSet
+    id="LineWizardStepSet"
+    mode="Manual">
+    <Require
+      name="job"
+      type="Job"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <JobWizardStep
+      id="APDLineSelection"
+      save="openForEdit"
+      screen="APDLineSelectionScreen(policyPeriod, openForEdit, jobWizardHelper)"
+      title="DisplayKey.get(&quot;Web.LineWizardMenu.APD.LineSelection&quot;)"
+      visible="policyPeriod.Policy.APDProduct.Multiline"/>
+    <JobWizardStep
+      beforeSave="gw.policy.PolicyLocationValidation.validateLocationsStep(policyPeriod.PolicyLocations)"
+      id="Locations"
+      save="openForEdit"
+      screen="LocationsScreen(policyPeriod, openForEdit, jobWizardHelper, policyPeriod.ManualLine.SupportsNonSpecificLocations)"
+      title="DisplayKey.get(&quot;Web.LineWizardMenu.Locations&quot;)"
+      visible="policyPeriod.Policy.APDProduct.UsesLocationListView"/>
+    <WizardStepGroup
+      id="APDRiskLine0WizardStepGroup"
+      label="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[0].Coverable as APDProductLine).Name"
+      visible="policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine).Count &gt; 0">
+      <JobWizardStep
+        id="APDRiskScreen0"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[0]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[0].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDRiskScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[0], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDRiskDetails&quot;)"/>
+      <JobWizardStep
+        id="APDPricingScreen0"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[0]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[0].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDPricingScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[0], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDPricing&quot;)"/>
+    </WizardStepGroup>
+    <WizardStepGroup
+      id="APDRiskLine1WizardStepGroup"
+      label="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[1].Coverable as APDProductLine).Name"
+      visible="policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine).Count &gt; 1">
+      <JobWizardStep
+        id="APDRiskScreen1"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[1]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[1].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDRiskScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[1], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDRiskDetails&quot;)"/>
+      <JobWizardStep
+        id="APDPricingScreen1"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[1]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[1].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDPricingScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[1], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDPricing&quot;)"/>
+    </WizardStepGroup>
+    <WizardStepGroup
+      id="APDRiskLine2WizardStepGroup"
+      label="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[2].Coverable as APDProductLine).Name"
+      visible="policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine).Count &gt; 2">
+      <JobWizardStep
+        id="APDRiskScreen2"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[2]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[2].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDRiskScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[2], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDRiskDetails&quot;)"/>
+      <JobWizardStep
+        id="APDPricingScreen2"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[2]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[2].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDPricingScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[2], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDPricing&quot;)"/>
+    </WizardStepGroup>
+    <WizardStepGroup
+      id="APDRiskLine3WizardStepGroup"
+      label="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[3].Coverable as APDProductLine).Name"
+      visible="policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine).Count &gt; 3">
+      <JobWizardStep
+        id="APDRiskScreen3"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[3]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[3].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDRiskScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[3], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDRiskDetails&quot;)"/>
+      <JobWizardStep
+        id="APDPricingScreen3"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[3]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[3].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDPricingScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[3], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDPricing&quot;)"/>
+    </WizardStepGroup>
+    <WizardStepGroup
+      id="APDRiskLine4WizardStepGroup"
+      label="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[4].Coverable as APDProductLine).Name"
+      visible="policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine).Count &gt; 4">
+      <JobWizardStep
+        id="APDRiskScreen4"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[4]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[4].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDRiskScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[4], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDRiskDetails&quot;)"/>
+      <JobWizardStep
+        id="APDPricingScreen4"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[4]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[4].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDPricingScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[4], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDPricing&quot;)"/>
+    </WizardStepGroup>
+    <WizardStepGroup
+      id="APDRiskLine5WizardStepGroup"
+      label="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[5].Coverable as APDProductLine).Name"
+      visible="policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine).Count &gt; 5">
+      <JobWizardStep
+        id="APDRiskScreen5"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[5]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[5].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDRiskScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[5], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDRiskDetails&quot;)"/>
+      <JobWizardStep
+        id="APDPricingScreen5"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[5]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[5].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDPricingScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[5], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDPricing&quot;)"/>
+    </WizardStepGroup>
+    <WizardStepGroup
+      id="APDRiskLine6WizardStepGroup"
+      label="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[6].Coverable as APDProductLine).Name"
+      visible="policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine).Count &gt; 6">
+      <JobWizardStep
+        id="APDRiskScreen6"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[6]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[6].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDRiskScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[6], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDRiskDetails&quot;)"/>
+      <JobWizardStep
+        id="APDPricingScreen6"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[6]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[6].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDPricingScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[6], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDPricing&quot;)"/>
+    </WizardStepGroup>
+    <WizardStepGroup
+      id="APDRiskLine7WizardStepGroup"
+      label="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[7].Coverable as APDProductLine).Name"
+      visible="policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine).Count &gt; 7">
+      <JobWizardStep
+        id="APDRiskScreen7"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[7]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[7].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDRiskScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[7], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDRiskDetails&quot;)"/>
+      <JobWizardStep
+        id="APDPricingScreen7"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[7]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[7].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDPricingScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[7], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDPricing&quot;)"/>
+    </WizardStepGroup>
+    <WizardStepGroup
+      id="APDRiskLine8WizardStepGroup"
+      label="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[8].Coverable as APDProductLine).Name"
+      visible="policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine).Count &gt; 8">
+      <JobWizardStep
+        id="APDRiskScreen8"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[8]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[8].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDRiskScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[8], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDRiskDetails&quot;)"/>
+      <JobWizardStep
+        id="APDPricingScreen8"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[8]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[8].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDPricingScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[8], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDPricing&quot;)"/>
+    </WizardStepGroup>
+    <WizardStepGroup
+      id="APDRiskLine9WizardStepGroup"
+      label="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[9].Coverable as APDProductLine).Name"
+      visible="policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine).Count &gt; 9">
+      <JobWizardStep
+        id="APDRiskScreen9"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[9]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[9].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDRiskScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[9], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDRiskDetails&quot;)"/>
+      <JobWizardStep
+        id="APDPricingScreen9"
+        onChange="(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[9]).updateDateUpdatedOnRelatedProducts()"
+        onEnter="if (openForEdit) policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[9].reSyncAgainstModel()"
+        save="openForEdit"
+        screen="APDPricingScreen(policyPeriod.ManualLine.RiskCoverables.whereTypeIs(APDRiskPolicyLine)[9], openForEdit, jobWizardHelper)"
+        title="DisplayKey.get(&quot;Web.LineWizardMenu.APDPricing&quot;)"/>
+    </WizardStepGroup>
+  </WizardStepSet>
+</PCF>

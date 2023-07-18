@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterCommit="if (importedEditions*.Rules.where(\r -&gt; not r.Valid).Count &gt; 0) {gw.api.web.PebblesUtil.addUserDisplayableWebMessages(entryLocation, DisplayKey.get(&quot;Web.APD.ImportedEditionsContainsInvalidRules&quot;))} else {gw.api.admin.PCAdminUtil.clearMessages(entryLocation)}"
+    beforeCommit="importedEditions = xmlImportHelper.buildInstalledEditions(product)"
+    canEdit="true"
+    canVisit="true"
+    id="APDLoadEditionTemplatePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDNewProduct.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDLoadEditionTemplatePopup(entryLocation : pcf.api.Location, product : gw.api.productmodel.Product)"/>
+    <Variable
+      initialValue="new gw.apd.model.export.APDEditionsImportHelper()"
+      name="xmlImportHelper"
+      type="gw.apd.model.export.APDEditionsImportHelper"/>
+    <Variable
+      initialValue="{}"
+      name="importedEditions"
+      type="Collection&lt;InstalledEdition&gt;"/>
+    <Variable
+      name="entryLocation"
+      type="pcf.api.Location"/>
+    <Variable
+      name="product"
+      type="gw.api.productmodel.Product"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <AlertBar
+        id="AlertBar"
+        label="DisplayKey.get(&quot;Web.APD.SharedLineWarningMessage&quot;, product.Name)"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.APDNewProduct.Template&quot;)"/>
+          <FileInput
+            editable="true"
+            id="EditionTemplate"
+            label="DisplayKey.get(&quot;Web.APDNewProduct.ProductTemplate&quot;)"
+            required="true"
+            validationExpression="xmlImportHelper.validateXML()"
+            value="xmlImportHelper.XMLFile"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

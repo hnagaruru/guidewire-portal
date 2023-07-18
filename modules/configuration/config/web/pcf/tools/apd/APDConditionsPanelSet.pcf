@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="APDConditionsPanelSet">
+    <Require
+      name="coverable"
+      type="APDCoverable"/>
+    <Require
+      name="parentClause"
+      type="APDClause"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="inDevelopMode"
+      type="boolean"/>
+    <Variable
+      initialValue="parentClause as APDCondition"
+      name="parentCondition"
+      type="APDCondition"/>
+    <Variable
+      initialValue="parentCondition == null"
+      name="isTopLevel"
+      type="boolean"/>
+    <Variable
+      initialValue="isTopLevel ? coverable.TopLevelConditions : parentCondition.SubConditions"
+      name="conditions"
+      recalculateOnRefresh="true"
+      type="APDCondition[]"/>
+    <Variable
+      initialValue="parentCondition.AvailableSubClauses?.map(\cond -&gt; new gw.apd.web.APDClauseWrapper(cond))"
+      name="availableSubClauses"
+      recalculateOnRefresh="true"
+      type="gw.apd.web.APDClauseWrapper[]"/>
+    <ListDetailPanel
+      selectionName="conditionDetails"
+      selectionType="APDCondition">
+      <PanelRef>
+        <Toolbar>
+          <ToolbarButton
+            id="AddChildCondition"
+            label="DisplayKey.get(&quot;Web.APDCoverableCV.AddSubClauseButton&quot;)"
+            shortcut="A"
+            visible="openForEdit &amp;&amp; !isTopLevel">
+            <AddMenuItem
+              id="AddNewCondition"
+              iterator="ConditionsLV"
+              label="DisplayKey.get(&quot;Web.APDCoverableCV.AddNewCondition&quot;)"/>
+            <MenuItem
+              id="ExistingConditions"
+              label="DisplayKey.get(&quot;Web.APDCoverableCV.ExistingConditions&quot;)">
+              <MenuItemIterator
+                elementName="availableSubCond"
+                id="AvailableSubConditionsIterator"
+                value="availableSubClauses"
+                valueType="gw.apd.web.APDClauseWrapper[]">
+                <IteratorSort
+                  sortBy="availableSubCond.Label"
+                  sortOrder="1"/>
+                <MenuItem
+                  action="availableSubCond.Clause.assignParent(parentCondition)"
+                  id="ExistingCondition"
+                  label="availableSubCond.Label"/>
+              </MenuItemIterator>
+            </MenuItem>
+          </ToolbarButton>
+          <AddButton
+            id="Add"
+            iterator="ConditionsLV"
+            label="DisplayKey.get(&quot;Button.Add&quot;)"
+            shortcut="A"
+            visible="openForEdit &amp;&amp; isTopLevel"/>
+          <RemoveButton
+            confirmMessage="DisplayKey.get(&quot;Web.APDCoverableCV.RemoveClause.ConfirmMessage&quot;)"
+            id="Remove"
+            iterator="ConditionsLV"
+            label="DisplayKey.get(&quot;Button.Remove&quot;)"
+            shortcut="R"/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="CheckedValues*.unassignParent(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, entity.APDCondition)"
+            id="UnassignSubClause"
+            iterator="ConditionsLV"
+            label="DisplayKey.get(&quot;Web.APDCoverableCV.UnassignSubClauseButton&quot;)"
+            shortcut="U"
+            visible="!isTopLevel"/>
+          <ToolbarDivider/>
+          <ToolbarButton
+            action="APDManageClauseCategoriesPopup.push(coverable, openForEdit)"
+            id="ManageConditionCategories"
+            label="DisplayKey.get( &quot;Web.APDCoverableCV.ManageClauseCategoriesButton&quot; )"
+            shortcut="M"
+            visible="isTopLevel"/>
+        </Toolbar>
+        <ListViewPanel
+          id="ConditionsLV">
+          <RowIterator
+            editable="true"
+            elementName="condition"
+            toCreateAndAdd="isTopLevel ? coverable.addCondition(null) : parentCondition.createAndAddSubCondition()"
+            toRemove="coverable.removeClause(condition)"
+            type="APDCondition"
+            value="conditions"
+            valueType="APDCondition[]">
+            <IteratorSort
+              sortBy="condition.Sequence"
+              sortOrder="1"/>
+            <Row>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="Name"
+                label="DisplayKey.get(&quot;Web.APDCoverableCV.Name&quot;)"
+                required="true"
+                value="condition.Name"/>
+              <TextCell
+                action="APDClauseTermsPopup.push(condition, edition, openForEdit)"
+                enableSort="false"
+                id="TermsButton"
+                label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Terms&quot;)"
+                value="DisplayKey.get( &quot;Web.APDCoverableCV.EditTerms&quot;, gw.apd.util.APDStringUtil.makeLabelCount(condition.Terms.Count))"/>
+              <TextCell
+                action="APDSubConditionsPopup.push(condition, edition, openForEdit, inDevelopMode)"
+                enableSort="false"
+                id="SubClausesButton"
+                label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.SubClauses&quot;)"
+                value="DisplayKey.get(&quot;Web.APDCoverableCV.EditSubClauses&quot;, gw.apd.util.APDStringUtil.makeLabelCount(condition.SubConditions.Count))"/>
+              <RangeCell
+                actionAvailable="isTopLevel"
+                editable="isTopLevel"
+                enableSort="false"
+                id="ClauseCategory"
+                label="DisplayKey.get(&quot;Web.APDCoverableCV.ClauseCategory&quot;)"
+                required="true"
+                value="condition.ClauseCategory"
+                valueRange="condition.Coverable.ClauseCategories"
+                valueType="APDClauseCategory">
+                <MenuItem
+                  action="APDClauseCategoryPopup.push(condition.ClauseCategory, CurrentLocation.InEditMode)"
+                  available="condition.ClauseCategory != null"
+                  id="EditCategory"
+                  label="DisplayKey.get(&quot;Web.APDCoverableCV.EditClauseCategory&quot;)"/>
+                <PickerMenuItem
+                  action="APDNewLibraryCategoryPopup.push(coverable)"
+                  id="AddNewCategory"
+                  label="DisplayKey.get(&quot;Web.APDCoverageSearchResultsLV.AddNewCategoryMenu&quot;)"
+                  onPick="condition.ClauseCategory = PickedValue"/>
+              </RangeCell>
+              <RangeCell
+                action="APDClauseRulePopup.push(condition.getEditionRule(edition, APDRuleType.TC_EXISTENCE), condition, APDRuleType.TC_EXISTENCE, edition, openForEdit)"
+                enableSort="false"
+                id="Usage"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDCoverableCV.ExistenceRule&quot;)"
+                value="condition.getEditionRule(edition, APDRuleType.TC_EXISTENCE).DefaultExistence ?: APDDataExistenceType.TC_OPTIONAL"
+                valueRange="APDDataExistenceType.getTypeKeys(false)"
+                valueType="APDDataExistenceType"/>
+              <TextCell
+                action="APDTagPopup.push(condition, openForEdit)"
+                editable="false"
+                enableSort="false"
+                id="Tags"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDCoverableCV.Tags&quot;)"
+                value="condition.TagDisplayValue"
+                visible="false"/>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="Description"
+                label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverableCV.Description&quot;))"
+                value="condition.Description"/>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="CodeIdentifier"
+                label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverableCV.CodeIdentifier&quot;, coverable.LinePrefix))"
+                value="condition.CodeIdentifier"
+                visible="inDevelopMode"/>
+              <ButtonCell
+                hideIfDisabled="false"
+                hideIfReadOnly="true"
+                id="MoveButton"
+                label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Move&quot;)"
+                value="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Move&quot;)">
+                <MenuItem
+                  action="condition.moveUp()"
+                  available="condition.canMoveUp()"
+                  id="MoveUp"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDCoverage.Move.Up&quot;)"/>
+                <MenuItem
+                  action="condition.moveDown()"
+                  available="condition.canMoveDown()"
+                  id="MoveDown"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDCoverage.Move.Down&quot;)"/>
+              </ButtonCell>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+      <CardViewPanel
+        hideTabIfSingle="true">
+        <Card
+          id="ConditionsDetails"
+          title="&quot;&quot;">
+          <PanelRow>
+            <PanelColumn>
+              <PanelRef
+                def="LocalizedValuesDV(conditionDetails, {&quot;Name&quot;, &quot;Description&quot;}, {DisplayKey.get(&quot;Web.APDCoverableCV.Name&quot;), DisplayKey.get(&quot;Web.APDCoverableCV.Description&quot;)})"
+                id="ConditionLocalizedValues"/>
+            </PanelColumn>
+          </PanelRow>
+        </Card>
+      </CardViewPanel>
+    </ListDetailPanel>
+  </PanelSet>
+</PCF>

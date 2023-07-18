@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="coverage.Coverable.ProductLine.productLineUpdated()"
+    canEdit="startInEditMode"
+    canVisit="true"
+    id="APDCoveragePopup"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.APDCoveragePopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDCoveragePopup(coverage : APDCoverage)"/>
+    <LocationEntryPoint
+      signature="APDCoveragePopup(coverage : APDCoverage, startInEditMode : boolean)"/>
+    <Variable
+      name="coverage"
+      type="APDCoverage"/>
+    <Variable
+      initialValue="false"
+      name="startInEditMode"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.apd.model.CoverDefinitionHelper()"
+      name="coverDefinitionHelper"
+      type="gw.apd.model.CoverDefinitionHelper"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputHeaderSection>
+          <InputSetRef
+            def="APDCoverageInputSet(coverage)"/>
+          <Label
+            label="DisplayKey.get(&quot;Web.APDCoveragePopup.CoverDetails&quot;)"/>
+        </InputHeaderSection>
+      </DetailViewPanel>
+      <PanelRef
+        def="APDCoveragePerilsLV(coverage)">
+        <Toolbar>
+          <IteratorButtons
+            iterator="APDCoveragePerilsLV.perils"/>
+        </Toolbar>
+      </PanelRef>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.APDCoveragePopup.CostDetails&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="APDCoverageClaimCostCategoriesLV(coverage, coverDefinitionHelper)">
+        <Toolbar>
+          <IteratorButtons
+            iterator="APDCoverageClaimCostCategoriesLV.claimCosts"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    editable="openForEdit"
+    id="APDLineSelectionScreen">
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="policyPeriod.Policy.APDProduct"
+      name="product"
+      type="APDProduct"/>
+    <Variable
+      initialValue="policyPeriod.ManualLine"
+      name="lineContainer"
+      type="APDManualPolicyLine"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser().canDesign()"
+      name="canDesign"
+      type="Boolean"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="policyPeriod.Job.Subtype"
+        toolbarButtonSet="JobWizardToolbarButtonSet(policyPeriod, policyPeriod.Job, jobWizardHelper)"/>
+    </Toolbar>
+    <PanelRef
+      def="OOSEPanelSet(policyPeriod, jobWizardHelper)"/>
+    <PanelRef>
+      <Toolbar
+        visible="canDesign">
+        <ToolbarButton
+          available="policyPeriod.Policy.APDProduct.ProductLines.Count &lt; 5"
+          hideIfReadOnly="true"
+          id="AddButton"
+          label="DisplayKey.get(&quot;Button.Add&quot;)">
+          <MenuItem
+            id="Existing"
+            label="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.AddExistingLine&quot;)">
+            <MenuItemIterator
+              elementName="unusedLine"
+              value="product.UnusedProductLines"
+              valueType="APDProductLine[]">
+              <MenuItem
+                action="product.createAndAddLineLink(unusedLine); unusedLine.buildRiskPolicyLine(lineContainer)"
+                id="Unusedline"
+                label="unusedLine.Name"/>
+            </MenuItemIterator>
+          </MenuItem>
+          <MenuItem
+            action="APDNewCoverablePopup.push(lineContainer)"
+            id="NewLine"
+            label="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.NewLine&quot;)"/>
+        </ToolbarButton>
+        <CheckedValuesToolbarButton
+          checkedRowAction="if (lineContainer.getLineExists(productLine)) lineContainer.removeFromRiskCoverables(lineContainer.getLine(productLine)); product.removeProductLine(productLine, false)"
+          hideIfReadOnly="true"
+          id="RemoveLink"
+          iterator="ADPLinesLV"
+          label="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.RemoveLineUse&quot;)"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="if (lineContainer.getLineExists(productLine)) lineContainer.removeFromRiskCoverables(lineContainer.getLine(productLine)); product.removeProductLine(productLine, true)"
+          hideIfReadOnly="true"
+          id="DeleteLine"
+          iterator="ADPLinesLV"
+          label="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.DeleteLine&quot;)"/>
+      </Toolbar>
+      <ListViewPanel>
+        <RowIterator
+          canPick="openForEdit"
+          checkBoxVisible="canDesign"
+          editable="openForEdit"
+          elementName="productLine"
+          hasCheckBoxes="true"
+          hideCheckBoxesIfReadOnly="true"
+          id="ADPLinesLV"
+          value="policyPeriod.Policy.APDProduct.ProductLines*.ProductLine"
+          valueType="entity.APDProductLine[]">
+          <Variable
+            initialValue="new gw.apd.policy.APDLineSelectionCheckboxWrapper(productLine, policyPeriod)"
+            name="checkboxWrapper"
+            type="gw.apd.policy.APDLineSelectionCheckboxWrapper"/>
+          <Row>
+            <TextCell
+              id="Name"
+              label="DisplayKey.get(&quot;Web.APDLineSelection.ProductLineName&quot;)"
+              value="productLine.Name"/>
+            <CheckBoxCell
+              confirmMessage="DisplayKey.get(&quot;Web.APDLineSelection.Warning.ConfirmLine&quot;)"
+              editable="true"
+              id="LineSelected"
+              label="DisplayKey.get(&quot;Web.APDLineSelection.LineEnabled&quot;)"
+              showConfirmMessage="lineContainer.getLineExists(productLine) "
+              value="checkboxWrapper.Value">
+              <PostOnChange/>
+            </CheckBoxCell>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </PanelRef>
+  </Screen>
+</PCF>

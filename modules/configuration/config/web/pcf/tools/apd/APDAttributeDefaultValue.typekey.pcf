@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ModalCell
+    id="APDAttributeDefaultValue"
+    mode="typekey">
+    <Require
+      name="attribute"
+      type="APDAttribute"/>
+    <Require
+      name="ruleType"
+      type="APDRuleType"/>
+    <Require
+      name="dataField"
+      type="APDDataField"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="attribute.getEditionRule(edition, ruleType)"
+      name="rule"
+      recalculateOnRefresh="true"
+      type="APDAttributeRule"/>
+    <TextCell
+      action="APDAttributeRulePopup.push(rule, attribute, ruleType, edition, openForEdit)"
+      id="value"
+      value="UIValue"
+      valueVisible="ruleType == APDRuleType.TC_DEFAULT"/>
+    <Code><![CDATA[property get UIValue() : String {
+      if (dataField == null) return rule.DefaultCodeValue.Name
+      return dataField.getRuleCodeValue(ruleType).Name
+    }]]></Code>
+  </ModalCell>
+</PCF>

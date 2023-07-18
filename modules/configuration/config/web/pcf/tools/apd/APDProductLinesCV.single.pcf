@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    hideTabIfSingle="true"
+    id="APDProductLinesCV"
+    mode="single">
+    <Require
+      name="product"
+      type="APDProduct"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="product.ProductLines.first().ProductLine"
+      name="productLine"
+      type="APDProductLine"/>
+    <Card
+      id="SingleLine"
+      title="&quot;&quot;">
+      <PanelRef
+        def="APDCoverableCV(productLine, policyPeriod.ManualLine?.getLine(productLine).APDEdition, openForEdit)"/>
+    </Card>
+  </CardViewPanel>
+</PCF>

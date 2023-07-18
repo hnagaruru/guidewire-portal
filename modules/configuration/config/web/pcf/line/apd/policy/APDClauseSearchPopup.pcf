@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="userPreferences.canDesign()"
+    countsAsWork="false"
+    id="APDClauseSearchPopup"
+    returnType="APDClause[]"
+    title="searchType == CoveragePatternSearchType.TC_COVERAGE ? DisplayKey.get(&quot;Web.Coverage.SearchPage.Title&quot;, riskCoverable.DisplayName) : DisplayKey.get(&quot;Web.Search.ExclusionAndCondition.Title&quot;, riskCoverable.DisplayName)">
+    <LocationEntryPoint
+      signature="APDClauseSearchPopup(riskCoverable : APDRiskCoverable, searchType : CoveragePatternSearchType, coverageCategories : APDClauseCategory[], userPreferences : gw.api.web.userpreference.UserPreferencesOfCurrentUser)"/>
+    <Variable
+      name="riskCoverable"
+      type="APDRiskCoverable"/>
+    <Variable
+      initialValue="riskCoverable.Coverable"
+      name="coverable"
+      type="APDCoverable"/>
+    <Variable
+      name="coverageCategories"
+      type="APDClauseCategory[]"/>
+    <Variable
+      name="searchType"
+      type="CoveragePatternSearchType"/>
+    <Variable
+      name="userPreferences"
+      type="gw.api.web.userpreference.UserPreferencesOfCurrentUser"/>
+    <Screen
+      id="CoveragePatternSearchScreen">
+      <SearchPanel
+        cachingEnabled="false"
+        criteriaName="searchCriteria"
+        resultsName="coveragePatterns"
+        search="filteredSearchResults(searchCriteria)"
+        searchCriteria="new gw.apd.model.APDClauseSearchCriteria() { :SearchType = searchType, :Coverable = coverable }"
+        searchCriteriaType="gw.apd.model.APDClauseSearchCriteria"
+        searchOnEnter="false"
+        searchResultsType="ArrayList&lt;APDClause&gt;">
+        <PanelRef
+          def="APDClauseSearchDV(searchCriteria, coverable, coverageCategories)"/>
+        <PanelRef
+          def="APDClauseSearchResultsLV(coveragePatterns, coverable, searchCriteria)">
+          <Toolbar>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="CurrentLocation.pickValueAndCommit(CheckedValues)"
+              id="AddCoverageButton"
+              iterator="APDClauseSearchResultsLV.APDClauseSearchResultsLV"
+              label="searchType == CoveragePatternSearchType.TC_COVERAGE ? DisplayKey.get(&quot;Web.Coverage.SearchPage.AddSelectedCoverages&quot;) : DisplayKey.get(&quot;Web.Coverage.SearchPage.AddSelectedExclusionsAndConditions&quot;)"/>
+            <AddButton
+              id="AddCoverageDefinition"
+              iterator="APDClauseSearchResultsLV.APDClauseSearchResultsLV"
+              label="DisplayKey.get(&quot;Web.APDCoverageSearchPopup.AddCoverageDefinition&quot;)"
+              visible="userPreferences.canDesign() and searchType == CoveragePatternSearchType.TC_COVERAGE"/>
+            <AddButton
+              id="AddExclusionDefinition"
+              iterator="APDClauseSearchResultsLV.APDClauseSearchResultsLV"
+              label="DisplayKey.get(&quot;Web.APDCoverageSearchPopup.AddConditionDefinition&quot;)"
+              toCreateAndAdd="coverable.addCondition(null)"
+              visible="userPreferences.canDesign() and searchType != CoveragePatternSearchType.TC_COVERAGE"/>
+            <AddButton
+              id="AddConditionDefinition"
+              iterator="APDClauseSearchResultsLV.APDClauseSearchResultsLV"
+              label="DisplayKey.get(&quot;Web.APDCoverageSearchPopup.AddExclusionDefinition&quot;)"
+              toCreateAndAdd="coverable.addExclusion(null)"
+              visible="userPreferences.canDesign() and searchType != CoveragePatternSearchType.TC_COVERAGE"/>
+            <RemoveButton
+              id="RemoveClauseButton"
+              iterator="APDClauseSearchResultsLV.APDClauseSearchResultsLV"
+              label="DisplayKey.get(&quot;Web.APDCoverageSearchPopup.RemoveClauseDefinition&quot;)"
+              visible="userPreferences.canDesign()"/>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[uses gw.apd.model.APDClauseSearchCriteria
+
+    function filteredSearchResults(searchCriteria : APDClauseSearchCriteria) : ArrayList<APDClause> {
+
+      var results = searchCriteria.doSearch()
+
+  /* We should NOT allow duplicate clauses to be added, so we need to filter out those clauses that have already been
+     added to the coverable as library clauses. This may render the later removals redundant.*/
+      var allExistingRiskClauses = riskCoverable.RiskClauses*.Clause
+      var matchingClauses = results.where(\c -> allExistingRiskClauses.hasMatch(\ec -> ec == c)).toList()
+      results.removeAll(matchingClauses)
+      results.removeAll(results.where(\c -> not coverageCategories.hasMatch(\cc -> cc == c.ClauseCategory)))
+      results.removeAll(results.where(\c -> riskCoverable.availability(c) == APDDataExistenceType.TC_UNAVAILABLE))
+
+      return results
+    }]]></Code>
+  </Popup>
+</PCF>

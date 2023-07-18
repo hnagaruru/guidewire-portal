@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="true"
+    id="APDClauseCategoryPopup"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.APDClauseCategoryPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDClauseCategoryPopup(category: APDClauseCategory)"/>
+    <LocationEntryPoint
+      signature="APDClauseCategoryPopup(category : APDClauseCategory, startInEditMode : boolean)"/>
+    <Variable
+      name="category"
+      type="APDClauseCategory"/>
+    <Variable
+      initialValue="false"
+      name="startInEditMode"
+      type="boolean"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.APDClauseCategory.Title&quot;)"/>
+          <InputSetRef
+            def="APDClauseCategoryInputSet(category, false)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="LocalizedValuesDV(category, {&quot;Name&quot;, &quot;Description&quot;}, {DisplayKey.get(&quot;Web.APDProductScreen.APDProduct.Name&quot;), DisplayKey.get(&quot;Web.APDProductScreen.APDProduct.Description&quot;)})"
+        id="ProductLocalizedValues"/>
+    </Screen>
+  </Popup>
+</PCF>

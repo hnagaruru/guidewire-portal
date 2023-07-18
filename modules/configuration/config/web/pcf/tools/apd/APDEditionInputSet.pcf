@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="APDEditionInputSet">
+    <Require
+      name="edition"
+      type="APDEdition"/>
+    <TextInput
+      boldLabel="true"
+      boldValue="true"
+      editable="true"
+      id="EditionCode"
+      label="DisplayKey.get(&quot;Web.APDProduct.EditionCode&quot;)"
+      required="true"
+      value="edition.EditionCode"
+      visible="edition != null"/>
+    <DateInput
+      boldLabel="true"
+      boldValue="true"
+      editable="true"
+      id="EffectiveDate"
+      label="DisplayKey.get(&quot;Web.APDProduct.EffectiveDate&quot;)"
+      required="true"
+      value="edition.EffectiveDate"
+      visible="edition != null"/>
+    <TextInput
+      boldLabel="true"
+      boldValue="true"
+      id="EditionCodeForBaseProduct"
+      label="DisplayKey.get(&quot;Web.APDProduct.EditionCode&quot;)"
+      required="true"
+      value="DisplayKey.get(&quot;Web.APDProduct.Editions.BaseProductCode&quot;)"
+      visible="edition == null"/>
+    <TextInput
+      boldLabel="true"
+      boldValue="true"
+      id="EffectiveDateForBaseProduct"
+      label="DisplayKey.get(&quot;Web.APDProduct.EffectiveDate&quot;)"
+      required="true"
+      value="DisplayKey.get(&quot;Web.APDProduct.Editions.BaseProductEffectiveDate&quot;)"
+      visible="edition == null"/>
+  </InputSet>
+</PCF>

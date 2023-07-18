@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="APDDropdownEntryInputSet">
+    <Require
+      name="entry"
+      type="APDDropdownEntry"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser().inDevelopMode()"
+      name="inDevelopMode"
+      type="Boolean"/>
+    <TextInput
+      editable="true"
+      id="Code"
+      label="DisplayKey.get(&quot;Web.APDDropDownEntry.Code&quot;)"
+      required="false"
+      value="entry.Code"
+      visible="inDevelopMode"/>
+    <TextInput
+      editable="true"
+      id="Name"
+      label="DisplayKey.get(&quot;Web.APDDropDownEntry.Name&quot;)"
+      required="true"
+      value="entry.Name"/>
+    <TextInput
+      editable="true"
+      id="Description"
+      label="DisplayKey.get(&quot;Web.APDDropDownEntry.Description&quot;)"
+      required="false"
+      value="entry.Description"/>
+  </InputSet>
+</PCF>

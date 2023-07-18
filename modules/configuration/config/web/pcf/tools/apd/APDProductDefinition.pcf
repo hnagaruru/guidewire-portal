@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    beforeCommit="apdProduct.productUpdated(); apdProduct.anyProductLineUnderProductUpdated()"
+    canEdit="true"
+    id="APDProductDefinition"
+    parent="APDProductManagementPage()"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDProductDefinition.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDProductDefinition(apdProduct : entity.APDProduct)"/>
+    <Variable
+      name="apdProduct"
+      type="entity.APDProduct"/>
+    <ScreenRef
+      def="APDProductScreen(apdProduct, null)"/>
+  </Page>
+</PCF>

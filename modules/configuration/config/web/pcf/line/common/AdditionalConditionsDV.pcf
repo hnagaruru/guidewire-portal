@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="AdditionalConditionsDV">
+    <Require
+      name="coverable"
+      type="Coverable"/>
+    <Require
+      name="coverageCategories"
+      type="String[]"/>
+    <Require
+      name="includeExclude"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="coverable == null ? {} : filteredConditions()"
+      name="addedConditionsToShow"
+      recalculateOnRefresh="true"
+      type="gw.api.productmodel.ClausePattern[]"/>
+    <InputColumn>
+      <InputSet
+        visible="addedConditionsToShow.Count &gt; 0">
+        <InputIterator
+          elementName="pattern"
+          forceRefreshDespiteChangedEntries="true"
+          id="AddedConditionsIterator"
+          value="addedConditionsToShow"
+          valueType="gw.api.productmodel.ClausePattern[]">
+          <IteratorSort
+            sortBy="pattern.CoverageCategory.Priority"
+            sortOrder="1"/>
+          <IteratorSort
+            sortBy="pattern.Priority"
+            sortOrder="2"/>
+          <InputSetRef
+            def="CoverageInputSet( pattern, coverable, CurrentLocation.InEditMode, jobWizardHelper )"
+            mode="pattern.PublicID"/>
+        </InputIterator>
+      </InputSet>
+    </InputColumn>
+    <Code><![CDATA[uses gw.api.productedition.APDClauseHierarchyHelper
+uses gw.api.productmodel.ClausePattern
+
+function filteredConditions() : ClausePattern[] {
+  if (coverable == null) {
+    return null
+  }
+
+  var policyConditions = includeExclude
+      ? coverable.getConditionsInCategories(coverageCategories)
+      : coverable.getConditionsNotInCategories(coverageCategories)
+
+  var clausePatterns = policyConditions.map(\condition -> condition.Pattern)?.toTypedArray()
+  return APDClauseHierarchyHelper.filterTopLevelClauses(coverable, clausePatterns).orderBy(\cond -> cond.Priority).toTypedArray()
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="true"
+    id="APDNewDropdownEntryPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDNewDropDownEntry.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDNewDropdownEntryPopup(field: APDDataField)"/>
+    <Variable
+      name="field"
+      type="APDDataField"/>
+    <Variable
+      initialValue="field.assignNewDropdownEntry()"
+      name="entry"
+      type="APDDropdownEntry"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSetRef
+            def="APDDropdownEntryInputSet(entry)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="LocalizedValuesDV(entry, {&quot;Name&quot;, &quot;Description&quot;}, {DisplayKey.get(&quot;Web.APDDropDownEntry.Name&quot;), DisplayKey.get(&quot;Web.APDDropDownEntry.Description&quot;)})"
+        id="DropdownLocalizedValues"/>
+    </Screen>
+  </Popup>
+</PCF>

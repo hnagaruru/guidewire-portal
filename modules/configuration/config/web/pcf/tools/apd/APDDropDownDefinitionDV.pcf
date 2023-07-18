@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="APDDropDownDefinitionDV">
+    <Require
+      name="attribute"
+      type="APDAttribute"/>
+    <Require
+      name="isTerm"
+      type="Boolean"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser().inDevelopMode()"
+      name="inDevelopMode"
+      type="Boolean"/>
+    <Variable
+      initialValue="isTerm ? attribute as APDTerm : null "
+      name="term"
+      type="APDTerm"/>
+    <InputColumn>
+      <TextInput
+        id="DropdownLabel"
+        label="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.Label&quot;)"
+        value="attribute.Label"
+        visible="attribute.Label.HasContent"/>
+      <TypeKeyInput
+        editable="attribute.CanChangeType"
+        id="DropDownType"
+        label="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.DropDownType&quot;)"
+        required="true"
+        value="attribute.DropDownType"
+        valueType="typekey.APDDropDownType"
+        visible="isTerm">
+        <PostOnChange
+          onChange="attribute.switchDropdownType(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDDropdownColumn)"/>
+      </TypeKeyInput>
+      <InputSet
+        visible="attribute.DropDownType == APDDropDownType.TC_TYPELIST">
+        <RangeInput
+          editable="true"
+          helpText="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.OwningDropDown.Help&quot;)"
+          id="OwningDropDown"
+          label="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.OwningDropDown&quot;)"
+          optionLabel="VALUE.Typelist != null ? DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.OwningDropDown.Label&quot;, VALUE.QualifiedLabel, VALUE.Typelist) : VALUE.QualifiedLabel"
+          value="attribute.OwningDropDown"
+          valueRange="attribute.CandidateDropDownOwners"
+          valueType="entity.APDAttribute">
+          <PostOnChange
+            onChange="attribute.switchOwningDropDown()"/>
+        </RangeInput>
+        <TextInput
+          editable="true"
+          id="Typelist"
+          label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.Typelist&quot;))"
+          value="attribute.Typelist"
+          visible="attribute.OwningDropDown == null and inDevelopMode">
+          <MenuItem
+            action="attribute.sync()"
+            id="SyncTypelist"
+            label="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.Typelist.Sync&quot;)"
+            visible="attribute.TypelistExists"/>
+          <PostOnChange/>
+        </TextInput>
+        <BooleanRadioInput
+          boldValue="true"
+          editable="true"
+          falseLabel="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.RebuildTypelist.False&quot;)"
+          helpText="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.RebuildTypelist.Help&quot;)"
+          id="TypelistStatus"
+          label="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.RebuildTypelist&quot;)"
+          trueLabel="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.RebuildTypelist.True&quot;)"
+          value="attribute.DoNotRegenerate"
+          visible="attribute.OwningDropDown == null and inDevelopMode"/>
+      </InputSet>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

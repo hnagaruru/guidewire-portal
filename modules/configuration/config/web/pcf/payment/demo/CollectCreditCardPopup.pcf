@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="CollectCreditCardPopup"
+    returnType="String"
+    startInEditMode="true"
+    title="DisplayKey.get('Web.PaymentIntegration.CollectCreditCardPopup.Title')">
+    <LocationEntryPoint
+      signature="CollectCreditCardPopup(jobNumber : String, tokenInfo : gw.payment.paymentgateway.impl.TokenizedCreditCardDetails)"/>
+    <Variable
+      name="jobNumber"
+      type="String"/>
+    <Variable
+      name="tokenInfo"
+      type="gw.payment.paymentgateway.impl.TokenizedCreditCardDetails"/>
+    <Variable
+      initialValue="new gw.web.payment.demo.CollectCreditCardPopupHelper()"
+      name="popupHelper"
+      type="gw.web.payment.demo.CollectCreditCardPopupHelper"/>
+    <Variable
+      initialValue="&quot;${gw.api.web.WebUtil.BasePath}/resources/pages/payments/Payments.html&quot;"
+      name="appUrl"
+      type="String"/>
+    <Screen>
+      <DetailViewPanel>
+        <InputColumn>
+        </InputColumn>
+      </DetailViewPanel>
+      <EmbeddedPanel
+        actionHandler="new gw.web.payment.demo.PaymentIntegrationActionHandler()"
+        appOrigin="popupHelper.originOf(appUrl)"
+        appUrl="appUrl"
+        contextProvider="popupHelper.getPaymentContextProvider(jobNumber)"
+        height="900px"
+        hideIfReadOnly="true"
+        id="embeddedPanel"
+        requestType="GET"
+        updateHandler="new gw.web.payment.demo.PaymentIntegrationUpdateHandler(jobNumber, tokenInfo)">
+      </EmbeddedPanel>
+    </Screen>
+  </Popup>
+</PCF>

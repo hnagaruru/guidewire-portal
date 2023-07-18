@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="APDCoverableInputSet"
+    mode="default">
+    <Require
+      name="coverable"
+      type="APDCoverable"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser().inDevelopMode()"
+      name="inDevelopMode"
+      type="Boolean"/>
+    <TextInput
+      editable="true"
+      id="lineName"
+      label="DisplayKey.get(&quot;Web.APDCoverable.Name&quot;)"
+      required="true"
+      value="coverable.Name"/>
+    <TextInput
+      editable="true"
+      id="lineDescription"
+      label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverable.Description&quot;))"
+      required="false"
+      value="coverable.Description"/>
+    <BooleanRadioInput
+      editable="true"
+      helpText="DisplayKey.get(&quot;Web.APDCoverable.AutoNumber.HelpText&quot;)"
+      id="IsAutoNumbered"
+      label="DisplayKey.get(&quot;Web.APDCoverable.IsAutoNumbered&quot;, coverable.Name)"
+      value="coverable.IsAutoNumbered"
+      visible="coverable.CanBeAutoNumbered"/>
+    <TypeKeyInput
+      editable="true"
+      id="CoverableType"
+      label="DisplayKey.get(&quot;Web.APDCoverable.CoverableType&quot;)"
+      required="true"
+      value="coverable.CoverableType"
+      valueType="APDCoverableType">
+      <PostOnChange/>
+    </TypeKeyInput>
+    <TypeKeyInput
+      editable="true"
+      id="RiskLocation"
+      label="DisplayKey.get(&quot;Web.APDCoverable.RiskLocation&quot;)"
+      required="true"
+      value="coverable.RiskLocation"
+      valueType="APDRiskLocationType">
+      <PostOnChange
+        onChange="coverable.toggleJurisdictionLocation(); if(!coverable.CanBeAutoNumbered) {coverable.IsAutoNumbered = false}"/>
+    </TypeKeyInput>
+    <BooleanRadioInput
+      confirmMessage="DisplayKey.get(&quot;Web.APDConfirmationMessage.RemoveChildRiskObjects&quot;)"
+      editable="true"
+      id="HasChildren"
+      label="DisplayKey.get(&quot;Web.APDCoverable.HasChildren&quot;)"
+      showConfirmMessage="coverable.showChildDeletionConfirmationMessage()"
+      value="coverable.HasChildren"
+      visible="APDCoverableType.TF_HASRISKOBJECTS.TypeKeys.hasMatch(\tk -&gt; tk == coverable.CoverableType)">
+      <PostOnChange
+        onChange="if (coverable.hasChildRiskObjectsToBeRemoved()) {coverable.removeAllChildRiskObjects()}"/>
+    </BooleanRadioInput>
+    <TextInput
+      editable="true"
+      id="ChildrenLabel"
+      label="DisplayKey.get(&quot;Web.APDCoverable.ChildrenLabel&quot;)"
+      required="true"
+      value="coverable.ChildrenLabel"
+      visible="APDCoverableType.TF_HASRISKOBJECTS.TypeKeys.hasMatch(\tk -&gt; tk == coverable.CoverableType) and coverable.HasChildren"/>
+    <BooleanRadioInput
+      confirmMessage="DisplayKey.get(&quot;Web.APDConfirmationMessage.RemoveExposures&quot;)"
+      editable="true"
+      id="HasExposure"
+      label="DisplayKey.get(&quot;Web.APDCoverable.HasExposure&quot;, coverable.Name)"
+      showConfirmMessage="coverable.showExposureDeletionConfirmationMessage()"
+      value="coverable.HasExposure"
+      visible="APDCoverableType.TF_HASEXPOSURE.TypeKeys.hasMatch(\tk -&gt; tk == coverable.CoverableType)">
+      <PostOnChange
+        onChange="if (coverable.hasExposuresToBeRemoved()) {coverable.removeAllExposures()}"/>
+    </BooleanRadioInput>
+    <TextInput
+      editable="true"
+      id="ExposureLabel"
+      label="DisplayKey.get(&quot;Web.APDNewProduct.ExposureLabel&quot;)"
+      required="true"
+      value="coverable.ExposureLabel"
+      visible="APDCoverableType.TF_HASEXPOSURE.TypeKeys.hasMatch(\tk -&gt; tk == coverable.CoverableType) and coverable.HasExposure"/>
+    <TextInput
+      editable="true"
+      id="lineMenuLabel"
+      label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverable.MenuLabel&quot;))"
+      value="coverable.MenuLabel"/>
+    <TextInput
+      editable="true"
+      id="TypeName"
+      label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverable.TypeName&quot;))"
+      required="false"
+      value="coverable.TypeName"
+      visible="inDevelopMode"/>
+  </InputSet>
+</PCF>

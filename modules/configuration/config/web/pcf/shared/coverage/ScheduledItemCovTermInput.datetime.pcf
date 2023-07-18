@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ModalCell
+    id="ScheduledItemCovTermInput"
+    mode="datetime">
+    <Require
+      name="covTerm"
+      type="gw.api.domain.covterm.CovTerm"/>
+    <Variable
+      initialValue="covTerm as gw.api.domain.covterm.GenericCovTerm&lt;Date&gt;"
+      name="dateCovTerm"
+      type="gw.api.domain.covterm.GenericCovTerm&lt;Date&gt;"/>
+    <DateCell
+      editable="true"
+      id="DateValue"
+      required="dateCovTerm.Pattern.Required"
+      value="dateCovTerm.Value"/>
+  </ModalCell>
+</PCF>

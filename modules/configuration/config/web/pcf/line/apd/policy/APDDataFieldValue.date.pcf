@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ModalCell
+    id="APDDataFieldValue"
+    mode="date">
+    <Require
+      name="dataField"
+      type="APDDataField"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <DateCell
+      editable="true"
+      id="value"
+      validationExpression="dataField.MinMaxError"
+      value="dataField.DateValue"
+      valueVisible="dataField.VisibleInUI">
+    <PostOnChange
+      disablePostOnEnter="not dataField.Attribute.UsedToConditionPeer"
+      onChange="dataField.syncPeerClauses(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDRiskField)"/>
+    </DateCell>
+  </ModalCell>
+</PCF>

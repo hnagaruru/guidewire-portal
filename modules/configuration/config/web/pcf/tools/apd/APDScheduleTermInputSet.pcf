@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="APDScheduleTermInputSet">
+    <Require
+      name="term"
+      type="APDTerm"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser().inDevelopMode()"
+      name="inDevelopMode"
+      type="Boolean"/>
+    <InputSetRef
+      def="APDAttributeInputSet(term, edition)"/>
+    <TypeKeyInput
+      editable="true"
+      id="Type"
+      label="DisplayKey.get(&quot;Web.Policy.ManualLine.APDField.Type&quot;)"
+      required="true"
+      value="term.Type"
+      valueType="APDFieldType">
+      <PostOnChange
+        onChange="term.DropDownType = term.Type == APDFieldType.TC_TYPEKEY ? APDDropDownType.TC_TYPELIST : null; term.updateGenerateAsClauseTermBasedOnType()"/>
+      <MenuItem
+        action="APDDropDownDefinitionPopup.push(term, true, edition, CurrentLocation.InEditMode)"
+        id="DropDownDefinition"
+        label="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.Button&quot;)"
+        visible="term.Type == APDFieldType.TC_TYPEKEY"/>
+    </TypeKeyInput>
+    <BooleanRadioInput
+      editable="not term.CanOnlyBeAClauseTermBasedOnType"
+      helpText="DisplayKey.get(&quot;Web.Policy.ManualLine.Clause.Schedule.Term.GenerateAsClauseTerm.Help&quot;)"
+      id="GenerateAsClauseTerm"
+      label="DisplayKey.get(&quot;Web.Policy.ManualLine.Clause.Schedule.Term.GenerateAsClauseTerm&quot;)"
+      value="term.GenerateAsClauseTerm"
+      visible="inDevelopMode">
+      <PostOnChange/>
+    </BooleanRadioInput>
+  </InputSet>
+</PCF>

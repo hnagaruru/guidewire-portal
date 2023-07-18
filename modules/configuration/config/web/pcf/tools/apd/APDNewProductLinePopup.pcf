@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="APDNewProductLinePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDNewProductLine.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDNewProductLinePopup(product : APDProduct)"/>
+    <Variable
+      name="product"
+      type="APDProduct"/>
+    <Variable
+      initialValue="product.createAndAddProductLine()"
+      name="line"
+      type="APDProductLine"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="APDCoverableCV(line, null, CurrentLocation.InEditMode)"/>
+    </Screen>
+  </Popup>
+</PCF>

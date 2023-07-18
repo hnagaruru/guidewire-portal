@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ModalCell
+    id="APDDataFieldValue"
+    mode="typekey">
+    <Require
+      name="dataField"
+      type="APDDataField"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser()"
+      name="userPreferences"
+      type="gw.api.web.userpreference.UserPreferencesOfCurrentUser"/>
+    <RangeCell
+      editable="true"
+      id="DropDownCode"
+      optionLabel="VALUE.Name"
+      required="false"
+      sortValueRange="false"
+      validationExpression="dataField.MinMaxError"
+      value="dataField.CodeValue"
+      valueRange="dataField.AvailableCodes.orderBy(\c -&gt; c.Sequence)"
+      valueType="APDDropdownEntry"
+      valueVisible="dataField.VisibleInUI">
+      <PostOnChange
+        disablePostOnEnter="not dataField.Attribute.UsedToConditionPeer"
+        onChange="dataField.syncPeerClauses(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDDataField)"/>
+      <MenuItem
+        action="APDNewDropdownEntryPopup.push(dataField)"
+        id="AddChoice"
+        label="DisplayKey.get(&quot;Web.APDRiskFieldValue.Typekey.Add&quot;)"
+        visible="userPreferences.canDesign() and dataField.Attribute.OwningDropDown == null"/>
+      <MenuItem
+        action="APDDropdownEntryPopup.push(dataField.CodeValue, CurrentLocation.InEditMode)"
+        available="dataField.CodeValue != null"
+        id="EditChoice"
+        label="DisplayKey.get(&quot;Web.APDRiskFieldValue.Typekey.Edit&quot;)"
+        visible="userPreferences.canDesign() and dataField.Attribute.OwningDropDown == null"/>
+      <MenuItem
+        action="APDDropDownDefinitionPopup.push(dataField.Attribute, dataField.Attribute typeis APDTerm, edition, CurrentLocation.InEditMode)"
+        id="Definition"
+        label="DisplayKey.get(&quot;Web.APDRiskFieldValue.Typekey.Definition&quot;)"
+        visible="userPreferences.canDesign()"/>
+    </RangeCell>
+  </ModalCell>
+</PCF>

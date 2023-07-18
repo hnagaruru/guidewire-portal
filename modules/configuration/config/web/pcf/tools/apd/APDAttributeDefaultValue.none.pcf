@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ModalCell
+    id="APDAttributeDefaultValue"
+    mode="none">
+    <Require
+      name="attribute"
+      type="APDAttribute"/>
+    <Require
+      name="ruleType"
+      type="APDRuleType"/>
+    <Require
+      name="dataField"
+      type="APDDataField"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="attribute.getEditionRule(edition, ruleType)"
+      name="rule"
+      recalculateOnRefresh="true"
+      type="APDAttributeRule"/>
+    <TextCell
+      action="APDAttributeRulePopup.push(rule, attribute, ruleType, edition, openForEdit)"
+      id="value"
+      value="DisplayKey.get(&quot;Java.NameValueView.NoneSelected&quot;)"
+      valueVisible="ShouldDisplayValue"/>
+    <Code><![CDATA[property get ShouldDisplayValue() : Boolean {
+      var isSupportedAttributeType = APDFieldType.TF_USESNUMERICOPERATORS.TypeKeys.contains(attribute.Type)
+      if (dataField == null) {
+        var exist = attribute.getEditionRule(edition, APDRuleType.TC_EXISTENCE).DefaultExistence
+        return exist != APDDataExistenceType.TC_HIDDEN
+          and attribute.Type != APDFieldType.TC_PARTY
+          and attribute.Type != APDFieldType.TC_LOCATION
+          and (ruleType == APDRuleType.TC_DEFAULT or isSupportedAttributeType or attribute.SupportsCalculatedValue)
+      }
+      return dataField.Availability == APDDataExistenceType.TC_CAPTURED
+        and attribute.Type != APDFieldType.TC_PARTY
+        and attribute.Type != APDFieldType.TC_LOCATION
+        and (ruleType == APDRuleType.TC_DEFAULT or isSupportedAttributeType or attribute.SupportsCalculatedValue)
+    }]]></Code>
+  </ModalCell>
+</PCF>

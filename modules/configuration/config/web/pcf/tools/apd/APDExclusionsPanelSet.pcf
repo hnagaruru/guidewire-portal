@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="APDExclusionsPanelSet">
+    <Require
+      name="coverable"
+      type="APDCoverable"/>
+    <Require
+      name="parentClause"
+      type="APDClause"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="inDevelopMode"
+      type="boolean"/>
+    <Variable
+      initialValue="parentClause as APDExclusion"
+      name="parentExclusion"
+      type="APDExclusion"/>
+    <Variable
+      initialValue="parentExclusion == null"
+      name="isTopLevel"
+      type="boolean"/>
+    <Variable
+      initialValue="isTopLevel ? coverable.TopLevelExclusions : parentExclusion.SubExclusions"
+      name="exclusions"
+      recalculateOnRefresh="true"
+      type="APDExclusion[]"/>
+    <Variable
+      initialValue="parentExclusion.AvailableSubClauses?.map(\excl -&gt; new gw.apd.web.APDClauseWrapper(excl))"
+      name="availableSubClauses"
+      recalculateOnRefresh="true"
+      type="gw.apd.web.APDClauseWrapper[]"/>
+    <ListDetailPanel
+      selectionName="exclusionDetails"
+      selectionType="APDExclusion">
+      <PanelRef>
+        <Toolbar>
+          <ToolbarButton
+            id="AddChildExclusion"
+            label="DisplayKey.get(&quot;Web.APDCoverableCV.AddSubClauseButton&quot;)"
+            shortcut="A"
+            visible="openForEdit &amp;&amp; !isTopLevel">
+            <AddMenuItem
+              id="AddNewExclusion"
+              iterator="ExclusionsLV"
+              label="DisplayKey.get(&quot;Web.APDCoverableCV.AddNewExclusion&quot;)"/>
+            <MenuItem
+              id="ExistingExclusions"
+              label="DisplayKey.get(&quot;Web.APDCoverableCV.ExistingExclusions&quot;)">
+              <MenuItemIterator
+                elementName="availableSubExcl"
+                id="AvailableSubExclusionsIterator"
+                value="availableSubClauses"
+                valueType="gw.apd.web.APDClauseWrapper[]">
+                <IteratorSort
+                  sortBy="availableSubExcl.Label"
+                  sortOrder="1"/>
+                <MenuItem
+                  action="availableSubExcl.Clause.assignParent(parentExclusion)"
+                  id="ExistingExclusion"
+                  label="availableSubExcl.Label"/>
+              </MenuItemIterator>
+            </MenuItem>
+          </ToolbarButton>
+          <AddButton
+            id="Add"
+            iterator="ExclusionsLV"
+            label="DisplayKey.get(&quot;Button.Add&quot;)"
+            shortcut="A"
+            visible="openForEdit &amp;&amp; isTopLevel"/>
+          <RemoveButton
+            confirmMessage="DisplayKey.get(&quot;Web.APDCoverableCV.RemoveClause.ConfirmMessage&quot;)"
+            id="Remove"
+            iterator="ExclusionsLV"
+            label="DisplayKey.get(&quot;Button.Remove&quot;)"
+            shortcut="R"/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="CheckedValues*.unassignParent(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, entity.APDExclusion)"
+            id="UnassignSubClause"
+            iterator="ExclusionsLV"
+            label="DisplayKey.get(&quot;Web.APDCoverableCV.UnassignSubClauseButton&quot;)"
+            shortcut="U"
+            visible="!isTopLevel"/>
+          <ToolbarDivider/>
+          <ToolbarButton
+            action="APDManageClauseCategoriesPopup.push(coverable, openForEdit)"
+            id="ManageExclusionCategories"
+            label="DisplayKey.get(&quot;Web.APDCoverableCV.ManageClauseCategoriesButton&quot;)"
+            shortcut="M"
+            visible="isTopLevel"/>
+        </Toolbar>
+        <ListViewPanel
+          id="ExclusionsLV">
+          <RowIterator
+            editable="true"
+            elementName="exclusion"
+            selectLabel="DisplayKey.get(&quot;Button.Select&quot;)"
+            toCreateAndAdd="isTopLevel ? coverable.addExclusion(null) : parentExclusion.createAndAddSubExclusion()"
+            toRemove="coverable.removeClause(exclusion)"
+            type="APDExclusion"
+            value="exclusions"
+            valueType="APDExclusion[]">
+            <IteratorSort
+              sortBy="exclusion.Sequence"
+              sortOrder="1"/>
+            <Row>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="Name"
+                label="DisplayKey.get(&quot;Web.APDCoverableCV.Name&quot;)"
+                required="true"
+                value="exclusion.Name"/>
+              <TextCell
+                action="APDClauseTermsPopup.push(exclusion, edition, openForEdit)"
+                enableSort="false"
+                id="TermsButton"
+                label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Terms&quot;)"
+                value="DisplayKey.get(&quot;Web.APDCoverableCV.EditTerms&quot;, gw.apd.util.APDStringUtil.makeLabelCount(exclusion.Terms.Count))"/>
+              <TextCell
+                action="APDSubExclusionsPopup.push(exclusion, edition, openForEdit, inDevelopMode)"
+                enableSort="false"
+                id="SubClausesButton"
+                label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.SubClauses&quot;)"
+                value="DisplayKey.get(&quot;Web.APDCoverableCV.EditSubClauses&quot;, gw.apd.util.APDStringUtil.makeLabelCount(exclusion.SubExclusions.Count))"/>
+              <RangeCell
+                actionAvailable="isTopLevel"
+                editable="isTopLevel"
+                enableSort="false"
+                id="ClauseCategory"
+                label="DisplayKey.get(&quot;Web.APDCoverableCV.ClauseCategory&quot;)"
+                required="true"
+                value="exclusion.ClauseCategory"
+                valueRange="exclusion.Coverable.ClauseCategories"
+                valueType="APDClauseCategory">
+                <MenuItem
+                  action="APDClauseCategoryPopup.push(exclusion.ClauseCategory, CurrentLocation.InEditMode)"
+                  available="exclusion.ClauseCategory != null"
+                  id="EditCategory"
+                  label="DisplayKey.get(&quot;Web.APDCoverableCV.EditClauseCategory&quot;)"/>
+                <PickerMenuItem
+                  action="APDNewLibraryCategoryPopup.push(coverable)"
+                  id="AddNewCategory"
+                  label="DisplayKey.get(&quot;Web.APDCoverageSearchResultsLV.AddNewCategoryMenu&quot;)"
+                  onPick="exclusion.ClauseCategory = PickedValue"/>
+              </RangeCell>
+              <RangeCell
+                action="APDClauseRulePopup.push(exclusion.getEditionRule(edition, APDRuleType.TC_EXISTENCE), exclusion, APDRuleType.TC_EXISTENCE, edition, openForEdit)"
+                enableSort="false"
+                id="Usage"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDCoverableCV.ExistenceRule&quot;)"
+                value="exclusion.getEditionRule(edition, APDRuleType.TC_EXISTENCE).DefaultExistence ?: APDDataExistenceType.TC_OPTIONAL"
+                valueRange="APDDataExistenceType.getTypeKeys(false)"
+                valueType="APDDataExistenceType"/>
+              <TextCell
+                action="APDTagPopup.push(exclusion, openForEdit)"
+                editable="false"
+                enableSort="false"
+                id="Tags"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDCoverableCV.Tags&quot;)"
+                value="exclusion.TagDisplayValue"
+                visible="false"/>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="Description"
+                label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverableCV.Description&quot;))"
+                value="exclusion.Description"/>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="CodeIdentifier"
+                label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverableCV.CodeIdentifier&quot;, coverable.LinePrefix))"
+                value="exclusion.CodeIdentifier"
+                visible="inDevelopMode"/>
+              <ButtonCell
+                hideIfDisabled="false"
+                hideIfReadOnly="true"
+                id="MoveButton"
+                label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Move&quot;)"
+                value="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Move&quot;)">
+                <MenuItem
+                  action="exclusion.moveUp()"
+                  available="exclusion.canMoveUp()"
+                  id="MoveUp"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDCoverage.Move.Up&quot;)"/>
+                <MenuItem
+                  action="exclusion.moveDown()"
+                  available="exclusion.canMoveDown()"
+                  id="MoveDown"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDCoverage.Move.Down&quot;)"/>
+              </ButtonCell>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+      <CardViewPanel
+        hideTabIfSingle="true">
+        <Card
+          id="ExclusionDetails"
+          title="&quot;&quot;">
+          <PanelRow>
+            <PanelColumn>
+              <PanelRef
+                def="LocalizedValuesDV(exclusionDetails, {&quot;Name&quot;, &quot;Description&quot;}, {DisplayKey.get(&quot;Web.APDCoverableCV.Name&quot;), DisplayKey.get(&quot;Web.APDCoverableCV.Description&quot;)})"
+                id="ExclusionLocalizedValues"/>
+            </PanelColumn>
+          </PanelRow>
+        </Card>
+      </CardViewPanel>
+    </ListDetailPanel>
+  </PanelSet>
+</PCF>

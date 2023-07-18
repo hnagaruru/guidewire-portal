@@ -1,0 +1,293 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="clause.Coverable.ProductLine.productLineUpdated()"
+    canEdit="startInEditMode"
+    canVisit="true"
+    id="APDClauseTermsPopup"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.APDClauseTerms.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDClauseTermsPopup(clause : APDClause, edition : APDProductLineEdition)"/>
+    <LocationEntryPoint
+      signature="APDClauseTermsPopup(clause : APDClause, edition : APDProductLineEdition, startInEditMode : boolean)"/>
+    <Variable
+      name="clause"
+      type="APDClause"/>
+    <Variable
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Variable
+      initialValue="false"
+      name="startInEditMode"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser().inDevelopMode()"
+      name="inDevelopMode"
+      type="Boolean"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <ListDetailPanel
+        selectionName="termDetail"
+        selectionType="APDTerm">
+        <PanelRef>
+          <Toolbar>
+            <IteratorButtons
+              iterator="Terms"/>
+          </Toolbar>
+          <ListViewPanel
+            id="TermsLV">
+            <RowIterator
+              editable="true"
+              elementName="term"
+              id="Terms"
+              toCreateAndAdd="clause.createAndAddTerm()"
+              toRemove="clause.removeTerm(term)"
+              value="clause.StandardTerms"
+              valueType="APDTerm[]">
+              <Variable
+                initialValue="term.Type"
+                name="prevFieldType"
+                type="APDFieldType"/>
+              <IteratorSort
+                sortBy="term.Sequence"
+                sortOrder="1"/>
+              <Row>
+                <TextCell
+                  editable="true"
+                  enableSort="false"
+                  id="Label"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Label&quot;)"
+                  required="true"
+                  value="term.Label"/>
+                <TypeKeyCell
+                  confirmMessage="DisplayKey.get(&quot;Web.APDAttribute.ChangeType.ConfirmMessage&quot;)"
+                  editable="term.CanChangeType"
+                  enableSort="false"
+                  filter="APDFieldType.TF_TERMTYPES.TypeKeys.contains(VALUE)"
+                  hideChildrenIfReadOnly="false"
+                  id="Type"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Type&quot;)"
+                  required="true"
+                  showConfirmMessage="term.Type == APDFieldType.TC_TYPEKEY"
+                  value="term.Type"
+                  valueType="APDFieldType">
+                  <PostOnChange
+                    onChange="term.updateDropdownPropertiesOnFieldTypeChange(prevFieldType); prevFieldType = term.Type"/>
+                  <MenuItem
+                    action="APDDropDownDefinitionPopup.push(term, true, edition, CurrentLocation.InEditMode)"
+                    id="DropDownDefinition"
+                    label="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.Button&quot;)"
+                    visible="term.Type == APDFieldType.TC_TYPEKEY"/>
+                </TypeKeyCell>
+                <RangeCell
+                  action="APDAttributeRulePopup.push(term.getEditionRule(edition, APDRuleType.TC_EXISTENCE), term, APDRuleType.TC_EXISTENCE, edition, startInEditMode)"
+                  enableSort="false"
+                  id="Usage"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDTerm.ExistenceRule&quot;)"
+                  value="term.getEditionRule(edition, APDRuleType.TC_EXISTENCE).DefaultExistence ?: APDDataExistenceType.TC_CAPTURED"
+                  valueRange="APDDataExistenceType.getTypeKeys(false)"
+                  valueType="APDDataExistenceType"/>
+                <ModalCellRef
+                  def="APDAttributeDefaultValue(term, APDRuleType.TC_DEFAULT, null, edition, startInEditMode)"
+                  editable="false"
+                  grow="true"
+                  id="DefaultValue"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.DefaultingRule&quot;)"
+                  mode="term.getUIRuleMode(edition, APDRuleType.TC_DEFAULT)"
+                  required="false"/>
+                <ModalCellRef
+                  def="APDAttributeDefaultValue(term, APDRuleType.TC_MIN, null, edition, startInEditMode)"
+                  editable="false"
+                  grow="true"
+                  id="MinimumValue"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.MinimumAmountRule&quot;)"
+                  mode="term.getUIRuleMode(edition, APDRuleType.TC_MIN)"
+                  required="false"/>
+                <ModalCellRef
+                  def="APDAttributeDefaultValue(term, APDRuleType.TC_MAX, null, edition, startInEditMode)"
+                  editable="false"
+                  grow="true"
+                  id="MaximumValue"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.MaximumAmountRule&quot;)"
+                  mode="term.getUIRuleMode(edition, APDRuleType.TC_MAX)"
+                  required="false"/>
+                <TextCell
+                  action="APDTagPopup.push(term, startInEditMode)"
+                  editable="false"
+                  enableSort="false"
+                  id="Tags"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.Tags&quot;)"
+                  value="term.TagDisplayValue"
+                  valueVisible="term.ShowDisplayValue"
+                  visible="false"/>
+                <CheckBoxCell
+                  editable="true"
+                  enableSort="false"
+                  id="SplitByRatingPeriods"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.SplitByRatingPeriods&quot;)"
+                  value="term.SplitByRatingPeriods">
+                  <PostOnChange
+                    onChange="if (term.SplitByRatingPeriods == false) {term.Scalable = false}"/>
+                </CheckBoxCell>
+                <CheckBoxCell
+                  editable="true"
+                  enableSort="false"
+                  id="Scalable"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Scalable&quot;)"
+                  value="term.Scalable"
+                  valueVisible="term.CanScale"/>
+                <TextCell
+                  editable="true"
+                  enableSort="false"
+                  id="Description"
+                  label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDProductScreen.APDField.Description&quot;))"
+                  value="term.Description"/>
+                <TextCell
+                  editable="true"
+                  enableSort="false"
+                  id="Name"
+                  label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDProductScreen.APDField.Name&quot;))"
+                  value="term.Name"
+                  visible="inDevelopMode"/>
+                <ButtonCell
+                  hideIfReadOnly="true"
+                  hideIfDisabled="false"
+                  id="MoveButton"
+                  label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Move&quot;)"
+                  value="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Move&quot;)">
+                  <MenuItem
+                    action="term.moveUp()"
+                    available="term.Sequence != 1"
+                    id="MoveUp"
+                    label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Move.Up&quot;)"/>
+                  <MenuItem
+                    action="term.moveDown()"
+                    available="term.Sequence != term.Clause.StandardTerms.Count"
+                    id="MoveDown"
+                    label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Move.Down&quot;)"/>
+                </ButtonCell>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </PanelRef>
+        <CardViewPanel
+          hideTabIfSingle="true">
+          <Card
+            id="TermDetail"
+            title="&quot;&quot;">
+            <PanelRef
+              def="LocalizedValuesDV(termDetail, {&quot;Label&quot;, &quot;Description&quot;}, {DisplayKey.get(&quot;Web.APDProductScreen.APDField.Label&quot;), DisplayKey.get(&quot;Web.APDProductScreen.APDField.Description&quot;)})"
+              id="TermLocalizedValues"/>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+      <ListDetailPanel
+        selectionName="scheduleTermDetails"
+        selectionType="APDTerm">
+        <PanelRef>
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.APDClauseSchedule.ScheduleDetails.ClauseScheduleTerms&quot;)"/>
+          <Toolbar>
+            <IteratorButtons
+              iterator="ScheduleTerms"/>
+          </Toolbar>
+          <ListViewPanel
+            id="ScheduleTermsLV">
+            <RowIterator
+              editable="true"
+              elementName="term"
+              id="ScheduleTerms"
+              toCreateAndAdd="clause.createAndAddScheduleTerm()"
+              toRemove="clause.removeScheduleTerm(term)"
+              value="clause.ScheduleTerms"
+              valueType="APDTerm[]">
+              <IteratorSort
+                sortBy="term.Sequence"
+                sortOrder="1"/>
+              <Row>
+                <TextCell
+                  editable="true"
+                  enableSort="false"
+                  id="Label"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Label&quot;)"
+                  required="true"
+                  value="term.Label"/>
+                <TypeKeyCell
+                  editable="true"
+                  enableSort="false"
+                  id="Type"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Type&quot;)"
+                  required="true"
+                  value="term.Type"
+                  valueType="APDFieldType">
+                  <PostOnChange
+                    onChange="term.updateGenerateAsClauseTermBasedOnType()"/>
+                  <MenuItem
+                    action="APDDropDownDefinitionPopup.push(term, true, edition, CurrentLocation.InEditMode)"
+                    id="DropDownDefinition"
+                    label="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.Button&quot;)"
+                    visible="term.Type == APDFieldType.TC_TYPEKEY"/>
+                </TypeKeyCell>
+                <ButtonCell
+                  hideIfReadOnly="true"
+                  hideIfDisabled="false"
+                  id="MoveButton"
+                  label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Move&quot;)"
+                  value="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Move&quot;)">
+                  <MenuItem
+                    action="term.moveUp()"
+                    available="term.Sequence != 1"
+                    id="MoveUp"
+                    label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Move.Up&quot;)"/>
+                  <MenuItem
+                    action="term.moveDown()"
+                    available="term.Sequence != term.Clause.ScheduleTerms.Count"
+                    id="MoveDown"
+                    label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Move.Down&quot;)"/>
+                </ButtonCell>
+                <TextCell
+                  editable="true"
+                  enableSort="false"
+                  id="Description"
+                  label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDProductScreen.APDField.Description&quot;))"
+                  value="term.Description"/>
+                <TextCell
+                  editable="true"
+                  enableSort="false"
+                  id="Name"
+                  label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDProductScreen.APDField.Name&quot;))"
+                  value="term.Name"
+                  visible="inDevelopMode"/>
+                <CheckBoxCell
+                  editable="not (term.CanOnlyBeAClauseTermBasedOnType or term.CanNotBeAClauseTermBasedOnType)"
+                  enableSort="false"
+                  id="GenerateNewCoverage"
+                  label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.GenerateAsClauseTerm&quot;)"
+                  tooltip="DisplayKey.get(&quot;Web.APDClauseSchedule.ScheduleDetails.GenerateAsClauseTerm.Help&quot;)"
+                  value="term.GenerateAsClauseTerm"
+                  visible="inDevelopMode">
+                  <PostOnChange/>
+                </CheckBoxCell>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </PanelRef>
+        <CardViewPanel
+          hideTabIfSingle="true">
+          <Card
+            id="ScheduleTermTranslations"
+            title="&quot;&quot;">
+            <PanelRef
+              def="LocalizedValuesDV(scheduleTermDetails, {&quot;Label&quot;, &quot;Description&quot;}, {DisplayKey.get(&quot;Web.APDProductScreen.APDField.Label&quot;), DisplayKey.get(&quot;Web.APDProductScreen.APDField.Description&quot;)})"
+              id="ScheduleTermLocalizedValues"/>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </Screen>
+  </Popup>
+</PCF>

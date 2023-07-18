@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="AdditionalCoveragesPanelSet">
+    <Require
+      name="coverable"
+      type="Coverable"/>
+    <Require
+      name="coverageCategories"
+      type="String[]"/>
+    <Require
+      name="includeExclude"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <PanelRef
+      def="AdditionalCoveragesDV(coverable, coverageCategories, includeExclude, jobWizardHelper)">
+      <Toolbar>
+        <PickerToolbarButton
+          action="CoveragePatternSearchPopup.push(coverable, CoveragePatternSearchType.TC_COVERAGE, coverageCategories, includeExclude)"
+          hideIfReadOnly="true"
+          id="Add"
+          label="DisplayKey.get(&quot;Web.Policy.Coverages.AddCoverages&quot;)"
+          onPick="gw.apd.APDCreateCoveragesAndExclusionsAndConditionsHelper.createCoveragesExclusionsAndConditions(PickedValue, coverable, jobWizardHelper)"/>
+      </Toolbar>
+    </PanelRef>
+  </PanelSet>
+</PCF>

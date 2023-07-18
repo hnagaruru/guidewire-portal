@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="APDRiskExposureLV"
+    mode="basis|mixed">
+    <Require
+      name="riskCoverable"
+      type="APDRiskCoverable"/>
+    <Require
+      name="exposure"
+      type="APDExposure"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Variable
+      initialValue="riskCoverable.RiskExposuresWM.where(\re -&gt; re.Exposure == exposure)"
+      name="riskExposures"
+      type="APDRiskExposure[]"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser()"
+      name="userPreferences"
+      type="gw.api.web.userpreference.UserPreferencesOfCurrentUser"/>
+    <ExposeIterator
+      valueType="APDRiskExposure"
+      widget="riskExposureLV"/>
+    <ExposeIterator
+      valueType="APDExposureField"
+      widget="exposureHeading"/>
+    <Row>
+      <TextCell
+        id="EffectiveDate"
+        value="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskExposure.EffectiveDate&quot;)"
+        visible="riskCoverable.Branch.Job typeis PolicyChange"/>
+      <TextCell
+        id="ExpiryDate"
+        value="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskExposure.ExpirationDate&quot;)"
+        visible="riskCoverable.Branch.Job typeis PolicyChange"/>
+      <CellIterator
+        elementName="exposureHeading"
+        id="exposureHeading"
+        value="exposure.Fields"
+        valueType="APDExposureField[]">
+        <IteratorSort
+          sortBy="exposureHeading.Sequence"
+          sortOrder="1"/>
+        <TextCell
+          bold="true"
+          editable="userPreferences.canDesign()"
+          id="exposureFieldHeading"
+          required="true"
+          value="exposureHeading.Label"
+          visible="not (exposureHeading.getEditionRule(edition, APDRuleType.TC_EXISTENCE).DefaultExistence == APDDataExistenceType.TC_HIDDEN) or userPreferences.canDesign()"
+          width="200">
+          <MenuItem
+            action="exposureHeading.moveUp(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDExposure)"
+            available="exposureHeading.Sequence != 1"
+            id="MoveUp"
+            label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskExposure.RiskField.Move.Up&quot;)"/>
+          <MenuItem
+            action="exposureHeading.moveDown(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDExposure)"
+            available="exposureHeading.Sequence != exposureHeading.Exposure.Fields.Count"
+            id="MoveDown"
+            label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskExposure.RiskField.Move.Down&quot;)"/>
+          <MenuItem
+            action="APDExposureFieldPopup.push(exposureHeading, edition, CurrentLocation.InEditMode)"
+            id="EditField"
+            label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskExposure.RiskField.Edit&quot;)"/>
+          <MenuItem
+            action="exposure.removeField(exposureHeading, riskCoverable)"
+            id="RemoveField"
+            label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskExposure.RiskField.Remove&quot;)"
+            visible="not(exposureHeading.Type == APDFieldType.TC_PARTY and exposureHeading.ExposureParty)"/>
+          <MenuItemSetRef
+            def="APDRiskJurisdictionMenuItemSet(exposureHeading, userPreferences.canDesign())"/>
+        </TextCell>
+      </CellIterator>
+    </Row>
+    <RowIterator
+      editable="true"
+      elementName="riskExposure"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      id="riskExposureLV"
+      toCreateAndAdd="exposure.buildRiskExposureWM(riskCoverable)"
+      toRemove="riskCoverable.removeExposureWM(riskExposure)"
+      value="riskExposures"
+      valueType="APDRiskExposure[]">
+      <Row>
+        <DateCell
+          dateFormat="short"
+          id="EffectiveDate"
+          value="riskExposure.EffectiveDate"
+          visible="riskCoverable.Branch.Job typeis PolicyChange"/>
+        <DateCell
+          dateFormat="short"
+          id="ExpiryDate"
+          value="riskExposure.ExpirationDate"
+          visible="riskCoverable.Branch.Job typeis PolicyChange"/>
+        <CellIterator
+          elementName="exposureField"
+          id="exposureFields"
+          value="exposure.Fields"
+          valueType="APDExposureField[]">
+          <IteratorSort
+            sortBy="exposureField.Sequence"
+            sortOrder="1"/>
+          <ModalCellRef
+            def="APDDataFieldValue(riskExposure.Fields.firstWhere(\t -&gt; t.Attribute == exposureField), edition)"
+            editable="riskExposure.editableInUI(exposureField)"
+            id="value"
+            mode="exposureField.Type"
+            visible="not (exposureField.getEditionRule(edition, APDRuleType.TC_EXISTENCE).DefaultExistence == APDDataExistenceType.TC_HIDDEN) or userPreferences.canDesign()"/>
+        </CellIterator>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

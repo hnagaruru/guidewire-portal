@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    hideTabIfSingle="true"
+    id="APDProductLinesCV"
+    mode="multi">
+    <Require
+      name="product"
+      type="APDProduct"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>    
+    <Card
+      id="MultiLine"
+      title="&quot;&quot;">
+      <PanelRef
+        def="APDProductLinesLV(product, policyPeriod, openForEdit)"
+        id="ProductLines">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.Title&quot;)"/>
+        <Toolbar>
+          <ToolbarButton
+            hideIfReadOnly="true"
+            id="AddButton"
+            iterator="ProductLines.ProductLinesLV"
+            label="DisplayKey.get(&quot;Button.Add&quot;)"
+            visible="product.isMultiline() or product.ProductLines.Count == 0">
+            <MenuItem
+              id="Existing"
+              label="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.AddExistingLine&quot;)">
+              <MenuItemIterator
+                elementName="unusedLine"
+                value="product.UnusedProductLines"
+                valueType="APDProductLine[]">
+                <MenuItem
+                  action="product.createAndAddLineLink(unusedLine)"
+                  id="Unusedline"
+                  label="unusedLine.Name"/>
+              </MenuItemIterator>
+            </MenuItem>
+            <MenuItem
+              action="APDNewProductLinePopup.push(product)"
+              id="NewLine"
+              label="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.NewLine&quot;)"/>
+          </ToolbarButton>
+          <CheckedValuesToolbarButton
+            checkedRowAction="product.removeProductLine(CheckedValue, false)"
+            hideIfReadOnly="true"
+            id="RemoveLink"
+            iterator="ProductLines.ProductLinesLV"
+            label="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.RemoveLineUse&quot;)"/>
+          <CheckedValuesToolbarButton
+            checkedRowAction="product.removeProductLine(CheckedValue, true)"
+            hideIfReadOnly="true"
+            id="DeleteLine"
+            iterator="ProductLines.ProductLinesLV"
+            label="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.DeleteLine&quot;)"/>
+        </Toolbar>
+      </PanelRef>
+    </Card>
+  </CardViewPanel>
+</PCF>

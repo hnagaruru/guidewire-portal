@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="CoverageCategoryInputSet">
+    <Require
+      name="clausePatterns"
+      type="gw.api.productmodel.ClausePattern[]"/>
+    <Require
+      name="coverable"
+      type="Coverable"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <InputIterator
+      elementName="clausePattern"
+      forceRefreshDespiteChangedEntries="true"
+      id="clausePatternIterator"
+      value="gw.api.productedition.APDClauseHierarchyHelper.filterTopLevelClauses(coverable, clausePatterns).orderBy(\clause -&gt; clause.Priority).toTypedArray()"
+      valueType="gw.api.productmodel.ClausePattern[]">
+      <IteratorSort
+        sortBy="clausePattern.Priority"
+        sortOrder="1"/>
+      <InputSetRef
+        def="CoverageInputSet(clausePattern, coverable, openForEdit, jobWizardHelper)"
+        mode="clausePattern.CodeIdentifier"/>
+    </InputIterator>
+  </InputSet>
+</PCF>

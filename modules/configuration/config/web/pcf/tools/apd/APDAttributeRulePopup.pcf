@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterEnter="initialise()"
+    beforeCancel="removeUneditedCopy()"
+    beforeCommit="rule.adjustDefaultValues(valueType, selectedAttributes); rule.removeIfUnnecessary()"
+    canEdit="openForEdit"
+    canVisit="true"
+    id="APDAttributeRulePopup"
+    startInEditMode="currentRule.Edition == edition"
+    title="gw.apd.web.APDRulePopupHelper.getRulePopupTitle(ruleType, typekey.APDRule.TC_APDATTRIBUTERULE)">
+    <LocationEntryPoint
+      signature="APDAttributeRulePopup(currentRule:APDAttributeRule, attribute:APDAttribute, ruleType:APDRuleType, edition:APDProductLineEdition, openForEdit:boolean)"/>
+    <Variable
+      name="currentRule"
+      type="APDAttributeRule"/>
+    <Variable
+      name="attribute"
+      type="APDAttribute"/>
+    <Variable
+      name="ruleType"
+      type="APDRuleType"/>
+    <Variable
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Variable
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      name="rule"
+      type="APDAttributeRule"/>
+    <Variable
+      name="defaultValueInputsVisible"
+      type="boolean"/>
+    <Variable
+      name="canBeCalculated"
+      type="boolean"/>
+    <Variable
+      initialValue="true"
+      name="canChangeValueType"
+      type="boolean"/>
+    <Variable
+      initialValue="APDRuleValueType.TC_FIXED"
+      name="valueType"
+      type="APDRuleValueType"/>
+    <Variable
+      name="allAttributes"
+      type="APDAttribute[]"/>
+    <Variable
+      name="selectedAttributes"
+      type="APDAttribute[]"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          editLabel="DisplayKey.get(&quot;Web.APDAttributeRule.EditButton&quot;)"
+          editVisible="currentRule.Edition != edition"/>
+        <ToolbarButton
+          action="attribute.removeFromRules(rule); CurrentLocation.commit()"
+          id="Delete"
+          label="DisplayKey.get(&quot;Web.APDAttributeRule.Delete&quot;)"
+          visible="CurrentLocation.InEditMode and currentRule != null"/>
+      </Toolbar>
+      <DetailViewPanel
+        editable="rule.Edition == edition">
+        <InputColumn>
+          <TextInput
+            id="attributeLabel"
+            label="DisplayKey.get(&quot;Web.APDAttributeRule.Label&quot;)"
+            value="attribute.Label"
+            visible="attribute.Label.HasContent"/>
+          <InputSet
+            visible="defaultValueInputsVisible">
+            <TypeKeyRadioInput
+              editable="canChangeValueType"
+              id="ValueType"
+              label="DisplayKey.get(&quot;Web.APDAttributeRule.ValueType&quot;)"
+              required="true"
+              value="valueType"
+              valueType="APDRuleValueType"
+              visible="canBeCalculated">
+              <PostOnChange/>
+            </TypeKeyRadioInput>
+            <InputSet
+            visible="valueType == APDRuleValueType.TC_CALCULATED">
+            <TypeKeyInput
+                editable="true"
+                id="Function"
+                label="DisplayKey.get(&quot;Web.APDAttributeRule.Function&quot;)"
+                required="true"
+                value="rule.DefaultCalculatedValue.Func"
+                valueType="typekey.APDFunctionType">
+                <PostOnChange/>
+              </TypeKeyInput>
+              <RangeInput
+                editable="true"
+                id="FunctionArguments"
+                label="DisplayKey.get(&quot;Web.APDAttributeRule.Arguments&quot;)"
+                multiSelect="true"
+                numRows="5"
+                optionLabel="VALUE.QualifiedLabel"
+                required="true"
+                value="selectedAttributes"
+                valueRange="attribute.FunctionArgumentCandidates"
+                valueType="entity.APDAttribute[]">
+                <PostOnChange/>
+              </RangeInput>
+            </InputSet>
+            <InputSet
+              visible="valueType == APDRuleValueType.TC_FIXED">
+              <TextInput
+                editable="true"
+                id="DefaultDecimalValue"
+                label="gw.apd.web.APDRulePopupHelper.getDefaultValueLabel(rule)"
+                userInputRestriction="decimal"
+                value="rule.DefaultDecimalValue"
+                valueType="java.math.BigDecimal"
+                visible="attribute.Type == APDFieldType.TC_BIGDECIMAL or attribute.Type == APDFieldType.TC_MONEY">
+                <PostOnChange/>
+              </TextInput>
+              <BooleanDropdownInput
+                editable="true"
+                id="DefaultBitValue"
+                label="gw.apd.web.APDRulePopupHelper.getDefaultValueLabel(rule)"
+                value="rule.DefaultBitValue"
+                visible="attribute.Type == APDFieldType.TC_BOOLEAN and rule.RuleType == APDRuleType.TC_DEFAULT">
+                <PostOnChange/>
+              </BooleanDropdownInput>
+              <DateInput
+                editable="true"
+                id="DefaultDateValue"
+                label="gw.apd.web.APDRulePopupHelper.getDefaultValueLabel(rule)"
+                value="rule.DefaultDateValue"
+                visible="attribute.Type == APDFieldType.TC_DATE">
+                <PostOnChange/>
+              </DateInput>
+              <TextInput
+                editable="true"
+                id="DefaultStringValue"
+                label="gw.apd.web.APDRulePopupHelper.getDefaultValueLabel(rule)"
+                value="rule.DefaultStringValue"
+                visible="attribute.Type == APDFieldType.TC_VARCHAR and rule.RuleType == APDRuleType.TC_DEFAULT">
+                <PostOnChange/>
+              </TextInput>
+              <TextInput
+                editable="true"
+                id="DefaultIntegerValue"
+                label="gw.apd.web.APDRulePopupHelper.getDefaultValueLabel(rule)"
+                userInputRestriction="integer"
+                value="rule.DefaultIntegerValue"
+                valueType="Integer"
+                visible="attribute.Type == APDFieldType.TC_INTEGER">
+                <PostOnChange/>
+              </TextInput>
+              <RangeInput
+                editable="true"
+                id="DefaultCodeValue"
+                label="gw.apd.web.APDRulePopupHelper.getDefaultValueLabel(rule)"
+                value="rule.DefaultCodeValue"
+                valueRange="attribute.CodesToUse"
+                valueType="APDDropdownEntry"
+                visible="attribute.Type == APDFieldType.TC_TYPEKEY and rule.RuleType == APDRuleType.TC_DEFAULT">
+                <PostOnChange/>
+              </RangeInput>
+            </InputSet>
+          </InputSet>
+          <InputSet
+            visible="rule.RuleType == APDRuleType.TC_EXISTENCE">
+            <RangeInput
+              editable="true"
+              id="DefaultExistence"
+              label="gw.apd.web.APDRulePopupHelper.getDefaultValueLabel(rule)"
+              required="true"
+              value="rule.DefaultExistence"
+              valueRange="APDDataExistenceType.TF_ATTRIBUTEEXISTENCE.TypeKeys"
+              valueType="APDDataExistenceType">
+              <PostOnChange/>
+            </RangeInput>
+          </InputSet>
+          <TextInput
+            id="RuleDescText"
+            labelAbove="true"
+            value="gw.apd.web.APDRulePopupHelper.getRuleDisplayDescription(rule, valueType)"/>
+          <TextInput
+            id="FunctionText"
+            labelAbove="true"
+            value="formatFunctionWithArguments()"
+            visible="valueType == APDRuleValueType.TC_CALCULATED and rule.DefaultCalculatedValue.Func != null"/>
+        </InputColumn>
+        <InputColumn>
+          <InputSetRef
+            def="APDRuleEditionInputSet(CurrentLocation.InEditMode ? rule : currentRule, edition)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="APDRuleDV(rule, edition)"
+        editable="rule.Edition == edition"
+        visible="rule.DefaultExistence != APDDataExistenceType.TC_HIDDEN and not(attribute.Type == APDFieldType.TC_TYPEKEY and {APDRuleType.TC_MIN, APDRuleType.TC_MAX}.contains(rule.RuleType))"/>
+    </Screen>
+    <Code><![CDATA[function initialise() {
+  if (currentRule.Edition != edition) { // there is not a rule for the current edition
+    if (currentRule == null) { // there is no rule
+      rule = buildNewRule(edition)
+    } else { // there is a rule already of a previous edition
+      rule = currentRule.copyToNewEdition(edition) as APDAttributeRule
+      attribute.addToRules(rule)
+    }
+  } else if (currentRule == null) { // there is no rule (or edition!)
+    rule = buildNewRule(null) // this builds a base rule
+  } else { // there is a rule for the current edition
+    rule = currentRule
+  }
+
+  canBeCalculated = attribute.SupportsCalculatedValue and rule.SupportsCalculatedValue
+  if (canBeCalculated) {
+    valueType = rule.DefaultCalculatedValue != null ? TC_CALCULATED : TC_FIXED
+    allAttributes = attribute.FunctionArgumentCandidates
+    selectedAttributes = rule.DefaultCalculatedValue.FunctionArguments*.Attribute
+  
+    if (attribute.IsOptionTerm) {
+      canChangeValueType = false
+      valueType = TC_CALCULATED
+    }
+  }
+
+  defaultValueInputsVisible = {APDRuleType.TC_DEFAULT, APDRuleType.TC_MIN, APDRuleType.TC_MAX}.contains(rule.RuleType)
+}
+
+private function buildNewRule(e : APDEdition) : APDAttributeRule {
+  var newRule = attribute.createAndAddRule(ruleType)
+  newRule.Edition = e
+  return newRule
+}
+
+function removeUneditedCopy() {
+  // when the rule is copied for display and potential editing ...
+  if (not CurrentLocation.InEditMode and currentRule != rule) {
+    attribute.removeFromRules(rule)
+  }
+}
+
+function formatFunctionWithArguments() : String {
+  var argLabels = selectedAttributes
+      .map(\attr -> attr.QualifiedLabel)
+      .join(", ")
+  return "${rule.DefaultCalculatedValue.Func.DisplayName}(${argLabels})"
+}]]></Code>
+  </Popup>
+</PCF>

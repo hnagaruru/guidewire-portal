@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="true"
+    id="APDNewEditionPopup"
+    returnType="APDEdition"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDNewEditionPopup.Title&quot;, productLine.Name)">
+    <LocationEntryPoint
+      signature="APDNewEditionPopup(productLine : APDProductLine, currentEdition : APDEdition)"/>
+    <Variable
+      name="productLine"
+      type="APDProductLine"/>
+    <Variable
+      initialValue="initialiseEdition()"
+      name="edition"
+      type="APDEdition"/>
+    <Variable
+      name="currentEdition"
+      type="APDEdition"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          pickValue="edition"
+          updateLabel="DisplayKey.get(&quot;Web.APDProduct.UpdateAndEdit&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            editable="true"
+            id="EditionCode"
+            label="DisplayKey.get(&quot;Web.APDProduct.EditionName&quot;)"
+            required="true"
+            value="edition.EditionCode"/>
+          <TextInput
+            editable="true"
+            id="EditionDescription"
+            label="DisplayKey.get(&quot;Web.APDProduct.EditionDescription&quot;)"
+            value="edition.EditionDescription"/>
+        </InputColumn>
+        <InputColumn>
+          <TextInput
+            id="EditionContext"
+            label="DisplayKey.get(&quot;Web.APDProduct.EditionContext&quot;)"
+            required="true"
+            value="productLine.Name"/>
+          <DateInput
+            editable="true"
+            id="EffectiveDate"
+            label="DisplayKey.get(&quot;Web.APDProduct.EffectiveDate&quot;)"
+            required="true"
+            validationExpression="validateDate(edition.EffectiveDate)"
+            value="edition.EffectiveDate"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[function initialiseEdition() : APDEdition {
+      var e : APDEdition
+      e = productLine.addNewEdition()
+      e.EffectiveDate = Date.Today
+      return e
+    }
+
+    function validateDate(d : Date) : String {
+      var editions = productLine.Editions.where(\e -> e != edition)
+      if (editions*.EffectiveDate.contains(edition.EffectiveDate)) {
+        return DisplayKey.get("Web.APDNewEditionPopup.EffectiveDate.Duplicate")
+      } 
+      return null
+    }
+]]></Code>
+  </Popup>
+</PCF>

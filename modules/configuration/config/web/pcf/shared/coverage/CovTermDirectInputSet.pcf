@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <InputSet
+    editable="isEditable"
+    id="CovTermDirectInputSet"
+    visible="isVisible">
+    <Require
+      name="term"
+      type="gw.api.domain.covterm.DirectCovTerm"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="term.Clause.OwningCoverable"
+      name="coverable"
+      type="Coverable"/>
+    <Variable
+      initialValue="gw.web.rules.APDRulesHelper.isVisible(coverable, term.Pattern)"
+      name="isVisible"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.web.rules.APDRulesHelper.isEditable(coverable, term.Pattern)"
+      name="isEditable"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <TextInput
+      editable="true"
+      id="DirectTermInput"
+      inputConversion="gw.pcf.coverage.CovTermDirectInputSetHelper.convertFromString(VALUE)"
+      label="term.Pattern.DisplayName"
+      outputConversion="gw.pcf.coverage.CovTermDirectInputSetHelper.convertToString(VALUE)"
+      required="term.Pattern.Required"
+      validationExpression="gw.pcf.coverage.CovTermDirectInputSetHelper.validate(term)"
+      value="term.Value"
+      valueType="java.math.BigDecimal">
+      <PostOnChange
+        deferUpdate="false"
+        disablePostOnEnter="not gw.web.rules.APDRulesHelper.hasDependents(coverable, term.Pattern)"
+        onChange="gw.web.rules.APDRulesHelper.onChange(coverable, jobWizardHelper)"/>
+    </TextInput>
+  </InputSet>
+</PCF>
