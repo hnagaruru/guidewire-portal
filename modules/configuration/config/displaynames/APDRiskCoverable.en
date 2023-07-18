@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDRiskCoverable">
+  <Columns>
+    <Column
+      beanPath="APDRiskCoverable.Identifiers"
+      name="ids"/>
+    <Column
+      beanPath="APDRiskCoverable.Coverable.Name"
+      name="name"/>
+    <Column
+      beanPath="APDRiskCoverable.SequenceNumber"
+      name="seqNum"/>
+  </Columns>
+  <DisplayName><![CDATA[return (seqNum != null)
+  ? gw.api.locale.DisplayKey.get("APDRiskCoverable.DisplayName.WithSequence", seqNum, name, ids)
+  : gw.api.locale.DisplayKey.get("APDRiskCoverable.DisplayName.WithoutSequence", name, ids)
+]]></DisplayName>
+</Entity>

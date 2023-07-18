@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDRiskCovCost">
+  <Columns>
+    <Column
+      beanPath="APDRiskCovCost.RiskCoverage.Coverage.Name"
+      name="coverage"/>
+    <Column
+      beanPath="APDRiskCovCost.CostCode.CostName"
+      name="costName"/>
+    <Column
+      beanPath="APDRiskCovCost.Exposure"
+      name="exposure"/>
+    <Column
+      beanPath="APDRiskCovCost.Coverable"
+      name="risk"/>
+  </Columns>
+  <DisplayName><![CDATA[uses gw.api.locale.DisplayKey
+
+if (exposure != null) return DisplayKey.get("APDRiskCovCost.Risk.DisplayName", exposure.DisplayName, coverage, costName)
+if (risk != null) return DisplayKey.get("APDRiskCovCost.Risk.DisplayName", risk.DisplayName, coverage, costName)
+
+return DisplayKey.get("APDRiskCovCost.Coverage.DisplayName", coverage, costName)]]></DisplayName>
+</Entity>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDTransaction">
+  <Columns>
+    <Column
+      beanPath="APDTransaction.APDCost"
+      name="cost"/>
+  </Columns>
+  <DisplayName><![CDATA[cost]]></DisplayName>
+</Entity>

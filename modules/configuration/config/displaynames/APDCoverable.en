@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDCoverable">
+  <Columns>
+    <Column
+      beanPath="APDCoverable.Name"
+      name="name"/>
+  </Columns>
+  <DisplayName>return name</DisplayName>
+</Entity>

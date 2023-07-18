@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDAttribute">
+  <Columns>
+    <Column
+      beanPath="APDAttribute.Label"
+      name="Label"/>
+  </Columns>
+  <DisplayName><![CDATA[Label]]></DisplayName>
+</Entity>

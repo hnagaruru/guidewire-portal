@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDRiskScheduleTerm">
+  <Columns>
+    <Column
+      beanPath="APDRiskScheduleTerm.Attribute.Label"
+      name="Label"/>
+  </Columns>
+  <DisplayName>Label</DisplayName>
+</Entity>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDInvolvedParty">
+  <Columns/>
+  <DisplayName>gw.api.locale.DisplayKey.get("entity.APDInvolvedParty")</DisplayName>
+</Entity>

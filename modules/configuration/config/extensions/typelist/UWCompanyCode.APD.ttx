@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  name="UWCompanyCode">
+  <typecode
+    code="default"
+    desc="Default underwriting company"
+    name="Default"/>
+</typelistextension>
