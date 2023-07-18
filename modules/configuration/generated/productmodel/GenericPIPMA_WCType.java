@@ -1,0 +1,13 @@
+package productmodel;
+
+@gw.lang.SimplePropertyProcessing
+@javax.annotation.Generated(comments = "config/resources/productmodel/policylinepatterns/BusinessAutoLine/coveragepatterns/CAPIP_MA.xml", date = "", value = "com.guidewire.pc.productmodel.codegen.ProductModelCodegen")
+public interface GenericPIPMA_WCType extends gw.api.domain.covterm.BooleanCovTerm {
+  productmodel.CAPIP_MA getCAPIP_MA();
+  
+  
+  productmodel.CAPIP_MA getCoverage();
+  
+  
+  
+}
