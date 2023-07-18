@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="template_gen_config.xsd">
+  <AllLines>
+    <AllTypes>
+      <Field name="FrozenSet" ignored="true"/>
+      <Field name="PreferredCoverageCurrency" ignored="true"/>
+      <Field name="ReferenceDateInternal" ignored="true"/>
+    </AllTypes>
+    <Type name="Coverable">
+      <Field name="InitialConditionsCreated" ignored="true"/>
+      <Field name="InitialCoveragesCreated" ignored="true"/>
+      <Field name="InitialExclusionsCreated" ignored="true"/>
+    </Type>
+  </AllLines>
+  <PolicyLine code="BOPLine">
+    <Type name="BOPBldgAddlInterest" handling="exposure"/>
+    <Type name="BOPScheduledEquipment" handling="exposure"/>
+    <Type name="BusinessOwnersLine">
+      <Field name="ViewBundledCoverages" ignored="true"/>
+    </Type>
+  </PolicyLine>
+  <PolicyLine code="BusinessAutoLine">
+    <Type name="BAHiredAutoBasis" handling="exposure"/>
+    <Type name="BANonOwnedBasis" handling="exposure"/>
+    <Type name="BAVhcleAddlInterest" handling="exposure"/>
+    <Type name="CommercialDriver" handling="exposure"/>
+  </PolicyLine>
+  <PolicyLine code="CPLine">
+    <Type name="CPBldgAddlInterest" handling="exposure"/>
+  </PolicyLine>
+  <PolicyLine code="GLLine">
+    <Type name="GLExposure" handling="exposure">
+      <Field name="AuditedBasis" split="true"/>
+      <Field name="FixedBasisAmount" split="true"/>
+      <Field name="ScalableBasisAmount" split="true" scalable="true"/>
+    </Type>
+  </PolicyLine>
+  <PolicyLine code="HOPLine">
+    <Type name="DwellingAnimal" handling="exposure"/>
+    <Type name="DwellingHazard" handling="exposure"/>
+    <Type name="HOPDwellAddlInterest" handling="exposure"/>
+    <Type name="HOPDwelling" handling="location"/>
+    <Type name="HOPSwimmingPool" handling="exposure"/>
+  </PolicyLine>
+  <PolicyLine code="IMLine">
+    <Type name="IMBuilding" handling="exposure"/>
+    <Type name="IMCoveragePart" handling="coverable"/>
+    <Type name="IMExcludedAccount" handling="exposure"/>
+    <Type name="IMLocation" handling="location"/>
+    <Type name="IMSchEquipAddlInterest" handling="exposure"/>
+  </PolicyLine>
+  <PolicyLine code="PersonalAutoLine">
+    <Type name="PAVhcleAddlInterest" handling="exposure"/>
+    <Type name="PolicyDriverMVR" handling="exposure"/>
+    <Type name="VehicleDriver" handling="exposure"/>
+  </PolicyLine>
+  <PolicyLine code="WorkersCompLine">
+    <Type name="InclusionPerson" handling="exposure"/>
+    <Type name="RatingPeriodStartDate" handling="exposure"/>
+    <Type name="WCAircraftSeat" handling="exposure"/>
+    <Type name="WCCoveredEmployeeBase" handling="coverable"/>
+    <Type name="WCExcludedWorkplace" handling="exposure"/>
+    <Type name="WCParticipatingPlan" handling="exposure"/>
+    <Type name="WCRetroRatingLetterOfCredit" handling="exposure"/>
+    <Type name="WCRetrospectiveRatingPlan" handling="coverable"/>
+    <Type name="WCStateMultiplier" handling="exposure"/>
+    <Type name="WCWaiverOfSubro" handling="exposure"/>
+  </PolicyLine>
+</Config>
