@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="APDCoreFieldType" desc="Defines which core fields are avaiable for use in rules">
+  <typecode
+    code="APDProduct"
+    desc="The APD product that is being used; from the Policy"
+    name="Product">
+    <category
+      code="Policy"
+      typelist="APDCoreEntityType"/>
+  </typecode>
+  <typecode
+    code="UWCompanyCode"
+    desc="Underwriting company for the policy; from the PolicyPeriod"
+    name="Underwriting Company">
+    <category
+      code="PolicyPeriod"
+      typelist="APDCoreEntityType"/>
+  </typecode>
+  <typecode
+    code="BaseState"
+    desc="Base jurisdiction of the policy; from the PolicyPeriod"
+    name="Base Jurisdiction">
+    <category
+      code="PolicyPeriod"
+      typelist="APDCoreEntityType"/>
+  </typecode>
+  <typecode
+    code="PreferredCoverageCurrency"
+    desc="Contract Currency (preferred coverage currency)"
+    name="Contract Currency">
+    <category
+      code="PolicyPeriod"
+      typelist="APDCoreEntityType"/>
+  </typecode>
+</typelist>

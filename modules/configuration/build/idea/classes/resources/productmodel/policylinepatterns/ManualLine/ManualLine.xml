@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PolicyLinePattern
+  codeIdentifier="ManualLine"
+  policyLineSubtype="APDManualPolicyLine"
+  priority="-1"
+  public-id="ManualLine"
+  territoryCodeNeeded="false">
+  <CoverageCategories/>
+  <CoverageSymbolGroupPatterns/>
+  <ModifierPatterns/>
+  <OfficialIdPatterns/>
+  <AvailableCoverageCurrencies>
+    <AvailableCoverageCurrency
+      codeIdentifier="ManualLineusd"
+      currency="usd"
+      public-id="ManualLineusd"/>
+  </AvailableCoverageCurrencies>
+</PolicyLinePattern>

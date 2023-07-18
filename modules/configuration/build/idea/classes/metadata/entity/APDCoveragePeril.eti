@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A peril included in the given coverage"
+  entity="APDCoveragePeril"
+  exportable="true"
+  loadable="false"
+  table="apdcoverageperil"
+  type="retireable">
+  <foreignkey
+    fkentity="APDCoverage"
+    name="Coverage"
+    nullok="false"/>
+  <foreignkey
+    fkentity="APDPeril"
+    name="Peril"
+    nullok="false"/>
+  <column
+    desc="The fixed amount to be used as the limit"
+    name="PerilLimit"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="2"/>
+    <columnParam
+      name="precision"
+      value="14"/>
+  </column>
+  <column
+    desc="The fixed amount to be used as the deductible"
+    name="Deductible"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="2"/>
+    <columnParam
+      name="precision"
+      value="14"/>
+  </column>
+  <foreignkey
+    desc="The attribute that holds the limit for this peril"
+    fkentity="APDAttribute"
+    name="LimitAttribute"
+    nullok="true"/>
+  <foreignkey
+    desc="The attribute that holds the deductible for this peril"
+    fkentity="APDAttribute"
+    name="DeductibleAttribute"
+    nullok="true"/>
+</entity>

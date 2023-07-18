@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDAttributeRule">
+  <Columns>
+    <Column
+      beanPath="APDAttributeRule.Attribute"
+      name="attribute"/>
+  </Columns>
+  <DisplayName>attribute.Label</DisplayName>
+</Entity>

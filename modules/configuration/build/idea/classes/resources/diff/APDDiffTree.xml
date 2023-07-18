@@ -1,0 +1,43 @@
+<DiffTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema/difftree.xsd">
+  <Section label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyInfo')" sortorder="1">
+    <RootProperties includefromtype="PolicyPeriod" sortorder="1"/>
+    <RootProperties includefromtype="EffectiveDatedFields" sortorder="2"/>
+    <RootEntity type="PolicyPriNamedInsured" label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyPriNamedInsured', ENTITY.DisplayName)" sortorder="3"/>
+    <RootEntity type="PolicySecNamedInsured" label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicySecNamedInsured', ENTITY.DisplayName)" sortorder="4"/>
+    <RootEntity type="PolicyAddlInterest" showadds="false" showremoves="false" label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyAddlInterest', ENTITY.DisplayName)" sortorder="5"/>
+    <RootEntity type="PolicyAddress" label="gw.api.locale.DisplayKey.get('Web.Differences.LOB.Common.PolicyAddress)', ENTITY.AddressType)" sortorder="6"/>
+    <RootEntity type="APDRiskCoverable" label="ENTITY.DisplayName" sortorder="7">
+      <Properties includefromtype="APDRiskField" parentpath="ENTITY.RiskCoverable" sortorder="1">
+        <PropertyDisplay propertyname="BitValue" label="ENTITY.Attribute.Label"/>
+        <PropertyDisplay propertyname="CodeValue" label="ENTITY.Attribute.Label"/>
+        <PropertyDisplay propertyname="DateValue" label="ENTITY.Attribute.Label"/> 
+        <PropertyDisplay propertyname="DecimalValue" label="ENTITY.Attribute.Label"/>
+        <PropertyDisplay propertyname="IntegerValue" label="ENTITY.Attribute.Label"/>
+        <PropertyDisplay propertyname="Location" label="ENTITY.Attribute.Label"/>
+        <PropertyDisplay propertyname="StringValue" label="ENTITY.Attribute.Label"/>
+      </Properties>
+      <Entity type="APDRiskClause" parentpath="ENTITY.RiskCoverable" sortorder="2">
+        <Properties includefromtype="APDRiskTerm" parentpath="ENTITY.RiskClause" sortorder="1">
+          <PropertyDisplay propertyname="BitValue" label="ENTITY.Attribute.Label"/>
+          <PropertyDisplay propertyname="CodeValue" label="ENTITY.Attribute.Label"/>
+          <PropertyDisplay propertyname="DateValue" label="ENTITY.Attribute.Label"/>
+          <PropertyDisplay propertyname="DecimalValue" label="ENTITY.Attribute.Label"/>
+          <PropertyDisplay propertyname="IntegerValue" label="ENTITY.Attribute.Label"/>
+          <PropertyDisplay propertyname="Location" label="ENTITY.Attribute.Label"/>
+          <PropertyDisplay propertyname="StringValue" label="ENTITY.Attribute.Label"/>
+        </Properties>
+      </Entity>
+      <Entity type="APDRiskExposure" parentpath="ENTITY.RiskCoverable" label="ENTITY.Exposure.Name" sortorder="3">
+        <Properties includefromtype="APDRiskExposureField" parentpath="ENTITY.RiskExposure">
+          <PropertyDisplay propertyname="BitValue" label="ENTITY.Attribute.Label"/>
+          <PropertyDisplay propertyname="CodeValue" label="ENTITY.Attribute.Label"/>
+          <PropertyDisplay propertyname="DateValue" label="ENTITY.Attribute.Label"/>
+          <PropertyDisplay propertyname="DecimalValue" label="ENTITY.Attribute.Label"/>
+          <PropertyDisplay propertyname="IntegerValue" label="ENTITY.Attribute.Label"/>
+          <PropertyDisplay propertyname="Location" label="ENTITY.Attribute.Label"/>
+          <PropertyDisplay propertyname="StringValue" label="ENTITY.Attribute.Label"/>
+        </Properties>
+      </Entity>
+     </RootEntity>
+  </Section>
+</DiffTree>

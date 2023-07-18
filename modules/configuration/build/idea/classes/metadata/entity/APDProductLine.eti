@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Product line definition"
+  entity="APDProductLine"
+  supertype="APDCoverable">
+  <column
+    desc="The code of the actual product line generated from this definition"
+    name="ProductLineCode"
+    nullok="true"
+    type="patterncode"/>
+  <column
+    desc="The code used within the product model to identify this line"
+    name="CodeIdentifier"
+    nullok="true"
+    type="patterncode">
+    <columnParam
+      name="validator"
+      value="APDName"/>
+  </column>
+  <column
+    desc="The prefix uses for all objects that belong to this line"
+    name="LinePrefix"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="3"/>
+    <columnParam
+      name="validator"
+      value="APDName"/>
+  </column>
+  <array
+    arrayentity="APDProductToLine"
+    arrayfield="ProductLine"
+    desc="Link to the products that use this line"
+    name="Products"/>
+  <column
+    default="0"
+    desc="Provides a generic sequence number for added definition objects to ensure a unique publicID for an LOB definition"
+    name="DefinitionSequence"
+    nullok="false"
+    type="integer"/>
+  <typekey
+    default="domestic"
+    desc="The currencies used by this line"
+    name="Currencies"
+    nullok="false"
+    typelist="APDCurrencyHandling"/>
+  <array
+    arrayentity="APDProductLineEdition"
+    desc="The editions of this product line"
+    name="Editions"
+    owner="true"/>
+  <index
+    desc="Index ensuring the uniqueness of product line definitions"
+    name="APDProdLineUnique1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CodeIdentifier"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+</subtype>

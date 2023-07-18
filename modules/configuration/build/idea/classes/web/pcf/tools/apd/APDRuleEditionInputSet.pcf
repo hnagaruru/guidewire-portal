@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="APDRuleEditionInputSet">
+    <Require
+      name="rule"
+      type="APDRule"/>
+    <Require
+      name="edition"
+      type="APDEdition"/>
+    <DateInput
+      boldLabel="true"
+      boldValue="true"
+      id="RuleDate"
+      label="DisplayKey.get(&quot;Web.APDAttributeRule.Rule.Edition.EffectiveDate&quot;)"
+      value="rule.Edition.EffectiveDate"
+      visible="rule.Edition.EffectiveDate != null"/>
+    <TextInput
+      boldLabel="true"
+      boldValue="true"
+      id="EmpryRuleDate"
+      label="DisplayKey.get(&quot;Web.APDAttributeRule.Rule.Edition.EffectiveDate&quot;)"
+      value="DisplayKey.get(&quot;Web.APDAttributeRule.Rule.Edition.EffectiveDate.Null&quot;)"
+      visible="rule.Edition.EffectiveDate == null"/>
+    <TextInput
+      id="EditionCode"
+      label="DisplayKey.get(&quot;Web.APDAttributeRule.Edition.EditionCode&quot;)"
+      value="edition.EditionCode"
+      visible="edition != null"/>
+    <DateInput
+      id="EditionDate"
+      label="DisplayKey.get(&quot;Web.APDAttributeRule.Edition.EffectiveDate&quot;)"
+      value="edition.EffectiveDate"
+      visible="rule.Edition != edition"/>
+  </InputSet>
+</PCF>

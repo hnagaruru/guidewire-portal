@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ModalCell
+    id="APDDropdownEntryValue"
+    mode="money|percent|other">
+    <Require
+      name="value"
+      type="APDDropdownValue"/>
+    <TextCell
+      editable="true"
+      id="value"
+      value="value.DecimalValue"
+      valueType="java.math.BigDecimal"/>
+  </ModalCell>
+</PCF>

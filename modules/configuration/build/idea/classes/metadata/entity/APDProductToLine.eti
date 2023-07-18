@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The many to many line between products and lines"
+  entity="APDProductToLine"
+  exportable="true"
+  loadable="false"
+  table="apdproducttoline"
+  type="joinarray">
+  <foreignkey
+    columnName="ProductID"
+    fkentity="APDProduct"
+    name="Product"
+    nullok="false"/>
+  <foreignkey
+    columnName="ProductLineID"
+    fkentity="APDProductLine"
+    name="ProductLine"
+    nullok="false"/>
+</entity>

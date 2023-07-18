@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDRiskExposure">
+  <Columns>
+    <Column
+      beanPath="APDRiskExposure.Identifiers"
+      name="ids"/>
+    <Column
+      beanPath="APDRiskExposure.Exposure.Name"
+      name="name"/>
+  </Columns>
+  <DisplayName><![CDATA[return gw.api.locale.DisplayKey.get("APDRiskExposure.DisplayName", name, ids)]]></DisplayName>
+</Entity>

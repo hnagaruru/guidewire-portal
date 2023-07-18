@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDRiskClause">
+  <Columns>
+    <Column
+      beanPath="APDRiskClause.Clause.Name"
+      name="Name"/>
+  </Columns>
+  <DisplayName><![CDATA[Name]]></DisplayName>
+</Entity>

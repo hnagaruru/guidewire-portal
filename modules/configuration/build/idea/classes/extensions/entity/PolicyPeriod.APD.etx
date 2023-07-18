@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="PolicyPeriod">
+  <array
+    arrayentity="APDTransaction"
+    cascadeDelete="true"
+    name="APDTransactions"/>
+</extension>

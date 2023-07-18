@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="APDRuleType" desc="The type of data rule being defined">
+  <typecode
+    code="existence"
+    desc="Data existence rule"
+    name="Existence"/>
+  <typecode
+    code="default"
+    desc="Default value"
+    name="Default"/>
+  <typecode
+    code="min"
+    desc="Minimum amount for an attribute"
+    name="Minimum"/>
+  <typecode
+    code="max"
+    desc="Maximum amount for an attribute"
+    name="Maximum"/>
+  <typecode
+    code="tag"
+    desc="Tag for an attribute"
+    name="Tag"/>
+</typelist>

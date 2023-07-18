@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Pricing that creates a coverage cost"
+  entity="APDRiskCovPricing"
+  supertype="APDPricing">
+  <foreignkey
+    columnName="RiskCoverageID"
+    desc="The coverage for which this will create a cost"
+    fkentity="APDRiskCoverage"
+    name="RiskCoverage"
+    nullok="false"/>
+  <array
+    arrayentity="APDExposurePrice"
+    desc="The set of prices used when rating by exposure"
+    name="ExposurePrices"
+    owner="true"/>
+</subtype>

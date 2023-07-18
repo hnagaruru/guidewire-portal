@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="APDProductLineEdition"
+  desc="A version of a product line"
+  supertype="APDEdition">
+  <foreignkey
+    columnName="ProductLineID"
+    desc="The product line for which this is an edition (version)"
+    fkentity="APDProductLine"
+    name="ProductLine"
+    nullok="false"/>
+</subtype>

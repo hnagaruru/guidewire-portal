@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="true"
+    id="APDNewLibraryCategoryPopup"
+    returnType="APDClauseCategory"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDNewCoverageCategory.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDNewLibraryCategoryPopup(coverable: APDCoverable)"/>
+    <Variable
+      name="coverable"
+      type="APDCoverable"/>
+    <Variable
+      initialValue="coverable.addClauseCategory(false)"
+      name="category"
+      type="APDClauseCategory"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          pickValue="category"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.APDClauseCategory.Title&quot;)"/>
+          <InputSetRef
+            def="APDClauseCategoryInputSet(category, true)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="LocalizedValuesDV(category, {&quot;Name&quot;, &quot;Description&quot;}, {DisplayKey.get(&quot;Web.APDClauseCategoryInputSet.Name&quot;), DisplayKey.get(&quot;Web.APDClauseCategoryInputSet.Description&quot;)})"
+        id="ProductLocalizedValues"/>
+    </Screen>
+  </Popup>
+</PCF>

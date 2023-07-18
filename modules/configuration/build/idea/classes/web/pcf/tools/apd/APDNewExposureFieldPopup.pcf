@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterEnter="riskExposures.each(\re -&gt; field.buildField(re))"
+    canEdit="true"
+    canVisit="true"
+    id="APDNewExposureFieldPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Policy.ManualLine.APDNewExposureField.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDNewExposureFieldPopup(riskExposures: APDRiskExposure[], exposure: APDExposure, edition : APDProductLineEdition)"/>
+    <Variable
+      name="riskExposures"
+      type="APDRiskExposure[]"/>
+    <Variable
+      name="exposure"
+      type="APDExposure"/>
+    <Variable
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Variable
+      initialValue="exposure.createAndAddField()"
+      name="field"
+      type="APDExposureField"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSetRef
+            def="APDExposureFieldInputSet(field, edition)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="LocalizedValuesDV(field, {&quot;Label&quot;}, {DisplayKey.get(&quot;Web.Policy.ManualLine.APDAttribute.Label&quot;)})"
+        id="ExposureLocalizedValues"/>
+    </Screen>
+  </Popup>
+</PCF>

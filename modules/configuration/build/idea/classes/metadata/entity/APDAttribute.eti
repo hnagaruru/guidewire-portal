@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="The base definition of any attribute"
+  entity="APDAttribute"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="apdattribute"
+  type="retireable">
+  <implementsInterface
+    iface="gw.apd.model.APDTagContainer"
+    impl="gw.apd.model.APDAttributeTagContainerImpl"/>
+  <column
+    desc="The label for this field on the screen"
+    name="Label"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdfieldlabel"/>
+  </column>
+  <column
+    desc="The order in which the fields are displayed"
+    name="Sequence"
+    nullok="false"
+    type="integer"/>
+  <typekey
+    default="varchar"
+    desc="The type of field "
+    name="Type"
+    nullok="false"
+    typelist="APDFieldType"/>
+  <column
+    desc="The name of the field in the object model"
+    name="Name"
+    nullok="true"
+    type="shorttext">
+    <columnParam
+      name="validator"
+      value="APDName"/>
+    <columnParam
+      name="logicalSize"
+      value="30"/>
+  </column>
+  <column
+    desc="The description of the field in the object model"
+    name="Description"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdfielddescription"/>
+  </column>
+  <array
+    arrayentity="APDDropdownEntry"
+    cascadeDelete="true"
+    desc="The list of available drop down entries"
+    name="Codes"
+    owner="true"/>
+  <column
+    default="false"
+    desc="Identifies that this field is the location that provides the jurisdiction of the risk"
+    name="Jurisdiction"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The name of the typelist that implements this attribute as a drop down (if relevant)"
+    name="Typelist"
+    nullok="true"
+    type="patterncode">
+    <columnParam
+      name="validator"
+      value="APDName"/>
+  </column>
+  <typekey
+    desc="The way this attribute will be implemented as a dropdown "
+    name="DropDownType"
+    nullok="true"
+    typelist="APDDropDownType"/>
+  <edgeForeignKey
+    desc="The attribute that owns the list "
+    edgeTableName="apdowningdropdown"
+    fkentity="APDAttribute"
+    name="OwningDropDown"
+    nullok="true"/>
+  <column
+    desc="If set, this attribute is an owner of a dropdown list"
+    name="IsDropDownOwner"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="If set, this is a typelist whose content is being maintained outside of the product definition"
+    name="DoNotRegenerate"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The category of this attribute"
+    name="Category"
+    nullok="true"
+    type="shorttext"/>
+  <array
+    arrayentity="APDAttributeRule"
+    cascadeDelete="true"
+    desc="Rules that apply to this attribute"
+    name="Rules"
+    owner="true"/>
+  <column
+    default="false"
+    desc="If true, this attribute should be pro-rated on splits and changes to period width"
+    name="Scalable"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="false"
+    desc="If true, this attribute will have values defined by rating periods"
+    name="SplitByRatingPeriods"
+    nullok="false"
+    type="bit"/>
+  <index name="TypelistColGroup" desc="Support typelist queries">
+    <indexcol keyposition="1" name="Type"/>
+    <indexcol keyposition="2" name="DropDownType"/>
+    <indexcol keyposition="3" name="Typelist"/>
+  </index>
+</entity>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="InstalledClauseHierarchy"
+  type="retireable"
+  desc="The parent to subclause relationship in a specific edition"
+  exportable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="installedclausehierarchy">
+  <column
+    desc="The identifier of the subclause (child clause)"
+    name="CodeIdentifier"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="The identifier of the parent clause"
+    name="ParentCodeIdentifier"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    desc="The edition that this relationship belongs to"
+    fkentity="InstalledEdition"
+    name="InstalledEdition"
+    nullok="false"/>
+</entity>

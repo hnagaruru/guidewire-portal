@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="openForEdit"
+    canVisit="true"
+    id="APDPricingPopup"
+    startInEditMode="openForEdit"
+    title="DisplayKey.get(&quot;Web.APDPricingPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDPricingPopup(riskCoverable: APDRiskCoverable, jobWizardHelper: gw.api.web.job.JobWizardHelper, openForEdit: Boolean, costCodeHelper: gw.apd.model.CostCodeHelper)"/>
+    <Variable
+      name="riskCoverable"
+      type="APDRiskCoverable"/>
+    <Variable
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      name="openForEdit"
+      type="Boolean"/>
+    <Variable
+      name="costCodeHelper"
+      type="gw.apd.model.CostCodeHelper"/>
+    <Variable
+      initialValue="gw.apd.web.APDPricingScreenUIHelper.getCostPricingWithEmptyBasisOptionValue(riskCoverable)"
+      name="basisWithNoValue"
+      recalculateOnRefresh="true"
+      type="APDPricing[]"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <AlertBar
+        id="emptyBasisAlertBar"
+        label="DisplayKey.get(&quot;Web.APDPricing.EmptyValueAlert&quot;, gw.apd.web.APDPricingScreenUIHelper.getEmptyBasisDisplayString(basisWithNoValue))"
+        visible="basisWithNoValue.HasElements"/>
+      <PanelRef
+        def="APDRiskPricingPanelSet(riskCoverable, jobWizardHelper, openForEdit, costCodeHelper)"/>
+    </Screen>
+  </Popup>
+</PCF>

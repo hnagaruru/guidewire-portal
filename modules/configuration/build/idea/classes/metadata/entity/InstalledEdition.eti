@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="InstalledEdition"
+  type="retireable"
+  desc="An edition of a product line"
+  exportable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="installededition">
+  <column
+    desc="The PolicyLinePattern that owns this edition."
+    name="LineCode"
+    nullok="false"
+    type="patterncode"/>
+  <column
+    desc="The effective date of the edition. May be null for the base edition of a line."
+    name="EffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <array
+    desc="All parent to subclause relationships within this edition"
+    arrayentity="InstalledClauseHierarchy"
+    name="ClauseHierarchy"
+    owner="true"/>
+  <array
+    desc="Rules associated with this edition"
+    arrayentity="InstalledRule"
+    name="Rules"
+    owner="true"/>
+  <column
+    name="EditionCode"
+    nullok="true"
+    type="patterncode"></column>
+  <typekey
+    name="EditionStatus"
+    nullok="true"
+    typelist="EditionStatus"/>
+  <column
+    name="ActivationUser"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    name="ActivationDate"
+    nullok="true"
+    type="datetime"/>
+  <!-- Add unique index on LineCode, EffectiveDate (and Retired) to prevent multiple editions with the same effective date -->
+  <index
+    desc="Index for querying installed editions"
+    name="EditionPerf">
+    <indexcol
+      keyposition="1"
+      name="LineCode"/>
+  </index>
+</entity>

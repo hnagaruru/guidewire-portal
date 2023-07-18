@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="InstalledRule"
+  type="retireable"
+  desc="A single rule for a product model pattern or entity"
+  exportable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="installedrule">
+  <typekey
+    desc="Type of ruleset (e.g., existence, default, min, max)"
+    name="Type"
+    nullok="false"
+    typelist="APDRuleType"/>
+  <column
+    desc="The identifier of the element (e.g., coverage, term, option, field, typekey) owning the rule."
+    name="CodeIdentifier"
+    nullok="false"
+    type="shorttext"/>
+  <typekey
+    desc="Default existence if none of the rule elements match. Only valid for existence rules."
+    name="DefaultExistence"
+    nullok="true"
+    typelist="APDDataExistenceType"/>
+  <column
+    desc="The default for a boolean value"
+    name="DefaultBooleanValue"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The default for a date value"
+    name="DefaultDateValue"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The default for a decimal value"
+    name="DefaultDecimalValue"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="2"/>
+    <columnParam
+      name="precision"
+      value="14"/>
+  </column>
+  <column
+    desc="The default for an integer value"
+    name="DefaultIntegerValue"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The default for a string value"
+    name="DefaultStringValue"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The code for a default typekey value"
+    name="DefaultTypekeyValue"
+    nullok="true"
+    type="patterncode"/>
+  <column
+    desc="The typelist name for a default typekey value"
+    name="DefaultTypelist"
+    nullok="true"
+    type="patterncode"/>
+  <column
+    desc="Gosu expression to evaluate calculated default value"
+    name="DefaultValueScript"
+    nullok="true"
+    type="longtext"/>
+  <typekey
+    desc="The type of value returned by this default rule"
+    name="ValueType"
+    nullok="true"
+    typelist="InstalledRuleValueType"/>
+  <array
+    cascadeDelete="true"
+    desc="Rule elements that are evaluated in order by sequence. This array may be empty."
+    arrayentity="InstalledRuleElement"
+    name="Elements"
+    owner="true"/>
+  <foreignkey
+    desc="The edition that this rule belongs to"
+    fkentity="InstalledEdition"
+    name="InstalledEdition"
+    nullok="false"/>
+  <column
+    desc="Fully-qualified type of the entity this rule applies to"
+    name="RootEntity"
+    nullok="false"
+    type="shorttext"/>
+  <typekey
+    desc="The type of entity or property that owns this rule"
+    name="OwnerType"
+    nullok="false"
+    typelist="InstalledRuleOwnerType"/>
+  <!-- Add a unique index on CodeIdentifier, Type, InstalledEdition (and Retired) to prevent duplicate rules -->
+</entity>

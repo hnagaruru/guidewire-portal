@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="APDProductLinesLV">
+    <Require
+      name="product"
+      type="APDProduct"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <ExposeIterator
+      valueType="APDProductLine"
+      widget="ProductLinesLV"/>
+    <RowIterator
+      editable="true"
+      elementName="line"
+      hasCheckBoxes="true"
+      id="ProductLinesLV"
+      value="product.ProductLines*.ProductLine"
+      valueType="APDProductLine[]">
+      <Row
+        id="lineRow">
+        <TextCell
+          action="APDCoverablePopup.push(line, policyPeriod.ManualLine?.getLine(line).APDEdition, openForEdit)"
+          id="Name"
+          label="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.Name&quot;)"
+          value="line.Name"/>
+        <TextCell
+          id="Description"
+          label="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.Description&quot;)"
+          value="line.Description"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterCommit="if (account != null) xMindHelper.NewProduct.createSubmission(account, selectionOfProducer)"
+    beforeCommit="xMindHelper.buildProduct(defaultFieldsRequiredForCodegen)"
+    canEdit="true"
+    canVisit="true"
+    id="APDLoadXmindPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDNewProduct.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDLoadXmindPopup(account : Account, selectionOfProducer: ProducerSelection)"/>
+    <LocationEntryPoint
+      signature="APDLoadXmindPopup(existingVisualizedProduct : APDProduct)"/>
+    <LocationEntryPoint
+      signature="APDLoadXmindPopup(existingInstalledProduct : gw.api.productmodel.Product)"/>
+    <LocationEntryPoint
+      signature="APDLoadXmindPopup()"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Variable
+      name="selectionOfProducer"
+      type="ProducerSelection"/>
+    <Variable
+      name="existingVisualizedProduct"
+      type="APDProduct"/>
+    <Variable
+      name="existingInstalledProduct"
+      type="gw.api.productmodel.Product"/>
+    <Variable
+      initialValue="if (existingVisualizedProduct != null) { return new gw.apd.xmind.XMindImportHelper(existingVisualizedProduct) } else if (existingInstalledProduct != null) { return new gw.apd.xmind.XMindImportHelper(existingInstalledProduct) } else { return new gw.apd.xmind.XMindImportHelper() }"
+      name="xMindHelper"
+      type="gw.apd.xmind.XMindImportHelper"/>
+    <Variable
+      initialValue="false"
+      name="defaultFieldsRequiredForCodegen"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser().inDevelopMode()"
+      name="inDevelopMode"
+      type="Boolean"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <AlertBar
+        id="AlertBar"
+        label="DisplayKey.get(&quot;Web.APD.SharedLineWarningMessageOnImport&quot;, xMindHelper.ZipFile.Name)"
+        visible="xMindHelper.ZipFile.Name != null"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.APDNewProduct.Xmind&quot;)"/>
+          <FileInput
+            editable="true"
+            id="fileInput"
+            label="DisplayKey.get(&quot;Web.APDNewProduct.XmindFile&quot;)"
+            required="true"
+            validationExpression="xMindHelper.validateXMindFile()"
+            value="xMindHelper.ZipFile"/>
+          <RangeInput
+            editable="true"
+            id="LocalLanguage"
+            label="DisplayKey.get(&quot;Web.APDNewProduct.LocalLanguage&quot;)"
+            value="xMindHelper.LocalLanguage"
+            valueRange="xMindHelper.LocalLanguageOptions"
+            valueType="LanguageType"/>
+          <BooleanRadioInput
+            editable="true"
+            helpText="DisplayKey.get(&quot;Web.APDNewProduct.DefaultFields.Warning&quot;)"
+            id="DefaultCodegenFields"
+            label="DisplayKey.get(&quot;Web.APDNewProduct.DefaultFields.Label&quot;)"
+            value="defaultFieldsRequiredForCodegen"
+            visible="inDevelopMode"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

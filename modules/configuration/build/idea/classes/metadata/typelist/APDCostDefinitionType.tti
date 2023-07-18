@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="APDCostDefinitionType" desc="Type of charge breakdown item that a cost definition row applies to">
+  <typecode
+    code="covcost"
+    desc="Applies to coverage costs"
+    name="CoverageCost"/>
+  <typecode
+    code="cblcost"
+    desc="Applies to coverable costs"
+    name="CoverableCost"/>
+  <typecode
+    code="coverage"
+    desc="Applies to coverages"
+    name="Coverage"/>
+  <typecode
+    code="coverable"
+    desc="Applies to coverables"
+    name="Coverable"/>
+</typelist>

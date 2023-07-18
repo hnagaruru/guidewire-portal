@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="The pricing for a coverage cost"
+  entity="APDRiskPricing"
+  supertype="APDPricing">
+  <foreignkey
+    columnName="RiskCoverableID"
+    desc="The coverable for which this will create a cost"
+    fkentity="APDRiskCoverable"
+    name="RiskCoverable"
+    nullok="false"/>
+</subtype>

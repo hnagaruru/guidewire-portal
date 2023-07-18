@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  name="APDFunctionType"
+  desc="The type of the function used for a calculated value">
+  <typecode
+    code="min"
+    desc="Find the minimum in a set of values"
+    name="Minimum"/>
+  <typecode
+    code="max"
+    desc="Find the maximum in a set of values"
+    name="Maximum"/>
+  <typecode
+    code="sum"
+    desc="Find the sum of all values in a set"
+    name="Sum"/>
+</typelist>

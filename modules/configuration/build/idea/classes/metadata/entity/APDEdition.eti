@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  final="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="APDEdition"
+  desc="An edition of a base product or a variant"
+  loadable="false"
+  table="apdedition"
+  type="retireable"
+  exportable="true">
+  <column
+    desc="The name or code given to the edition"
+    name="EditionCode"
+    nullok="true"
+    type="patterncode"/>
+  <column
+    desc="The date this edition becomes available to select"
+    name="EffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The description associated with this edition"
+    name="EditionDescription"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="240"/>
+  </column>
+  <array
+    arrayentity="APDRule"
+    cascadeDelete="true"
+    desc="Rules associated with this edition"
+    name="EditionRules"
+    owner="true"/>
+</entity>

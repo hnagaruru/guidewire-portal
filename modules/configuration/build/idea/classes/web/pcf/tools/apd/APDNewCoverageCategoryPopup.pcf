@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="true"
+    id="APDNewCoverageCategoryPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDNewCoverageCategory.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDNewCoverageCategoryPopup(riskCoverable: APDRiskCoverable)"/>
+    <Variable
+      name="riskCoverable"
+      type="APDRiskCoverable"/>
+    <Variable
+      initialValue="riskCoverable.Coverable.addClauseCategory(true)"
+      name="category"
+      type="APDClauseCategory"/>
+    <Variable
+      initialValue="riskCoverable.Coverable.addCoverage(category)"
+      name="coverage"
+      type="APDCoverage"/>
+    <Variable
+      initialValue="coverage.buildRiskCoverage(riskCoverable)"
+      name="riskCoverage"
+      type="APDRiskCoverage"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.APDClauseCategory.Title&quot;)"/>
+          <InputSetRef
+            def="APDClauseCategoryInputSet(category, true)"/>
+          <Label
+            label="DisplayKey.get(&quot;Web.APDRiskCoverage.Title&quot;)"/>
+          <InputSetRef
+            def="APDCoverageInputSet(coverage)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,385 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="APDRiskClauseInputSet">
+    <Require
+      name="riskCoverable"
+      type="APDRiskCoverable"/>
+    <Require
+      name="clauses"
+      type="APDClause[]"/>
+    <Require
+      name="coverDefinitionHelper"
+      type="gw.apd.model.CoverDefinitionHelper"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser().inDevelopMode()"
+      name="inDevelopMode"
+      type="Boolean"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser()"
+      name="userPreferences"
+      type="gw.api.web.userpreference.UserPreferencesOfCurrentUser"/>
+    <InputIterator
+      elementName="clause"
+      forceRefreshDespiteChangedEntries="true"
+      id="ClauseIterator"
+      value=" userPreferences.canDesign() ? clauses : clauses.where(\clause -&gt; riskCoverable.availability(clause) != APDDataExistenceType.TC_UNAVAILABLE)"
+      valueType="APDClause[]">
+      <IteratorSort
+        sortBy="clause.Subtype.Code"
+        sortOrder="1"/>
+      <IteratorSort
+        sortBy="clause.ClauseCategory.Sequence"
+        sortOrder="2"/>
+      <IteratorSort
+        sortBy="clause.Sequence"
+        sortOrder="3"/>
+      <IteratorSort
+        sortBy="clause.Name"
+        sortOrder="4"/>
+      <InputSet>
+        <Variable
+          initialValue="riskCoverable.getRiskClause(clause)"
+          name="riskClause"
+          recalculateOnRefresh="true"
+          type="APDRiskClause"/>
+        <Variable
+          initialValue="riskClause typeis APDRiskCoverage ? riskClause as APDRiskCoverage : null"
+          name="riskCoverage"
+          recalculateOnRefresh="true"
+          type="APDRiskCoverage"/>
+        <Variable
+          initialValue="clause.HasSchedule"
+          name="hasClauseSchedule"
+          type="Boolean"/>
+        <Label
+          id="CoverageDetails"
+          label="clause.UIDetailsLabel"
+          visible="userPreferences.canDesign()"/>
+        <TextInput
+          editable="true"
+          id="ClauseName"
+          label="DisplayKey.get(&quot;Web.APDRiskClauseInputSet.Clause.Name&quot;)"
+          required="true"
+          value="clause.Name"
+          valueType="String"
+          visible="userPreferences.canDesign()">
+          <MenuItem
+            action="APDCoveragePopup.push(clause as APDCoverage, CurrentLocation.InEditMode)"
+            id="Details"
+            label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.Coverage.Details&quot;)"
+            visible="(typeof clause) == APDCoverage"/>
+          <MenuItem
+            action="gw.apd.web.APDRiskClauseInputSetHelper.moveClauseUp(clauses, clause)"
+            available="clause.Sequence &gt; gw.apd.web.APDRiskClauseInputSetHelper.minSequenceForClauseCategoryAndType(clauses, clause)"
+            id="MoveUp"
+            label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.RiskField.Move.Up&quot;)"/>
+          <MenuItem
+            action="gw.apd.web.APDRiskClauseInputSetHelper.moveClauseDown(clauses, clause)"
+            available="clause.Sequence &lt; gw.apd.web.APDRiskClauseInputSetHelper.maxSequenceForClauseCategoryAndType(clauses, clause)"
+            id="MoveDown"
+            label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.RiskField.Move.Down&quot;)"/>
+          <MenuItem
+            action="clause.unassignParent()"
+            available="not clause.HasAnyTermsReferencedByExtraneousRules"
+            id="Unassign"
+            label="DisplayKey.get(&quot;Web.APDRiskClauseInputSet.Clause.Menu.UnassignSubClauseButton.Label&quot;)"
+            tooltip="DisplayKey.get(&quot;Web.APDRiskClauseInputSet.Clause.Menu.UnassignSubClauseButton.Tooltip&quot;)"
+            visible="not clause.IsTopLevelClause"/>
+          <MenuItem
+            action="riskCoverable.setClauseExists(clause, false); riskCoverable.Coverable.removeClause(clause)"
+            available="not clause.HasAnyTermsReferencedByExtraneousRules"
+            confirmMessage="clause.HasSubClauses ? DisplayKey.get(&quot;Web.APDRiskClauseInputSet.Clause.Menu.RemoveWithSubClauses.ConfirmMessage&quot;, clause.SubClauses.Count) : DisplayKey.get(&quot;Web.APDRiskClauseInputSet.Clause.Menu.Remove.ConfirmMessage&quot;)"
+            id="Remove"
+            label="DisplayKey.get(&quot;Web.APDRiskClauseInputSet.Clause.Menu.Remove.Label&quot;)"
+            tooltip="DisplayKey.get(&quot;Web.APDRiskClauseInputSet.Clause.Menu.Remove.Tooltip&quot;)"/>
+          <PostOnChange/>
+        </TextInput>
+        <RangeInput
+          action="APDClauseRulePopup.push(clause.getEditionRule(edition, APDRuleType.TC_EXISTENCE), clause, APDRuleType.TC_EXISTENCE, riskCoverable, edition, openForEdit)"
+          id="Usage"
+          label="DisplayKey.get(&quot;Web.APDProductScreen.APDCoverableCV.ExistenceRule&quot;)"
+          value="riskCoverable.availability(clause)"
+          valueRange="typekey.APDDataExistenceType.AllTypeKeys"
+          valueType="typekey.APDDataExistenceType"
+          visible="userPreferences.canDesign()"/>
+        <TextInput
+          action="APDTagPopup.push(clause, openForEdit)"
+          editable="false"
+          id="Tags"
+          label="DisplayKey.get(&quot;Web.APDRiskClauseInputSet.Clause.Tags&quot;)"
+          value="clause.TagDisplayValue"
+          visible="false"/>
+        <InputGroup
+          allowToggle="riskCoverable.availability(clause) != APDDataExistenceType.TC_REQUIRED and riskCoverable.availability(clause) != APDDataExistenceType.TC_UNAVAILABLE"
+          alwaysShowCheckbox="true"
+          childrenVisible="riskClause != null"
+          id="ClauseInputGroup"
+          label="clause.Name"
+          onToggle="riskCoverable.setClauseExists(clause, VALUE)">
+          <TypeKeyInput
+            editable="true"
+            id="Currency"
+            label="DisplayKey.get(&quot;Web.APDRiskClauseInputSet.Clause.Currency&quot;)"
+            required="true"
+            value="riskClause.Currency"
+            valueType="Currency"
+            visible="riskCoverable.Branch.Policy.APDProduct.Currencies == APDCurrencyHandling.TC_BASICMULTI or riskCoverable.Branch.Policy.APDProduct.Currencies == APDCurrencyHandling.TC_FULLMULTI"/>
+          <ListViewInput
+            editable="true"
+            labelAbove="true"
+            visible="userPreferences.canDesign() or riskClause.RiskTerms.Count &gt; 0">
+            <Toolbar>
+              <IteratorButtons
+                addVisible="userPreferences.canDesign()"
+                iterator="RiskTerms"
+                removeVisible="userPreferences.canDesign()"/>
+            </Toolbar>
+            <ListViewPanel
+              disableUserCustomization="true"
+              id="RiskTermsLV">
+              <RowIterator
+                checkBoxVisible="userPreferences.canDesign()"
+                editable="true"
+                elementName="riskTerm"
+                hideCheckBoxesIfReadOnly="true"
+                id="RiskTerms"
+                toCreateAndAdd="riskClause.createAndAddStandardTerm()"
+                toRemove="riskClause.removeStandardTerm(riskTerm)"
+                value="userPreferences.canDesign() ? riskClause.StandardRiskTerms : riskClause.StandardRiskTerms.where(\f -&gt; f.Availability == APDDataExistenceType.TC_CAPTURED or f.Availability == APDDataExistenceType.TC_CAPTUREDISSUE or f.Availability == APDDataExistenceType.TC_CAPTUREDBIND or f.Availability == APDDataExistenceType.TC_CAPTUREDQUOTE or f.Availability == APDDataExistenceType.TC_DERIVED)"
+                valueType="APDRiskTerm[]">
+                <IteratorSort
+                  sortBy="riskTerm.Attribute.Sequence"
+                  sortOrder="1"/>
+                <Row
+                  id="RiskTerm">
+                  <TextCell
+                    editable="userPreferences.canDesign()"
+                    enableSort="false"
+                    grow="true"
+                    id="FieldLabel"
+                    label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskTerm.FieldLabel&quot;)"
+                    required="true"
+                    value="riskTerm.Attribute.Label"/>
+                  <ModalCellRef
+                    def="APDDataFieldValue(riskTerm, edition)"
+                    editable="riskTerm.EditableInUI"
+                    grow="true"
+                    id="value"
+                    label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskTerm.FieldValue&quot;)"
+                    mode="riskTerm.Attribute.Type"/>
+                  <ButtonCell
+                    hideIfDisabled="false"
+                    hideIfReadOnly="true"
+                    id="MoveButton"
+                    label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Move&quot;)"
+                    value="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.RiskField.Move&quot;)"
+                    visible="userPreferences.canDesign()">
+                    <MenuItem
+                      action="riskTerm.moveUp()"
+                      available="riskTerm.Attribute.Sequence != 1"
+                      id="MoveUp"
+                      label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.RiskField.Move.Up&quot;)"/>
+                    <MenuItem
+                      action="riskTerm.moveDown()"
+                      available="riskTerm.Attribute.Sequence != riskClause.Clause.StandardTerms.Count"
+                      id="MoveDown"
+                      label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.RiskField.Move.Down&quot;)"/>
+                  </ButtonCell>
+                  <TypeKeyCell
+                    editable="riskTerm.Attribute.CanChangeType"
+                    enableSort="false"
+                    filter="APDFieldType.TF_TERMTYPES.TypeKeys.contains(VALUE)"
+                    hideChildrenIfReadOnly="false"
+                    id="type"
+                    label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskTerm.FieldType&quot;)"
+                    required="true"
+                    value="riskTerm.Attribute.Type"
+                    valueType="APDFieldType"
+                    visible="userPreferences.canDesign()">
+                    <PostOnChange/>
+                    <MenuItem
+                      action="APDDropDownDefinitionPopup.push(riskTerm.Attribute, true, edition, CurrentLocation.InEditMode)"
+                      id="DropDownDefinition"
+                      label="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.Button&quot;)"
+                      visible="riskTerm.Attribute.Type == APDFieldType.TC_TYPEKEY"/>
+                  </TypeKeyCell>
+                  <RangeCell
+                    action="APDAttributeRulePopup.push(riskTerm.Attribute.getEditionRule(edition, APDRuleType.TC_EXISTENCE), riskTerm.Attribute, APDRuleType.TC_EXISTENCE, edition, openForEdit)"
+                    enableSort="false"
+                    id="Usage"
+                    label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.ExistenceRule.Attribute.Term&quot;)"
+                    value="riskTerm.Availability"
+                    valueRange="APDDataExistenceType.getTypeKeys(false)"
+                    valueType="APDDataExistenceType"
+                    visible="userPreferences.canDesign()"/>
+                  <ModalCellRef
+                    def="APDAttributeDefaultValue(riskTerm.Attribute, APDRuleType.TC_DEFAULT, riskTerm, edition, openForEdit)"
+                    grow="true"
+                    id="DefaultValue"
+                    label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.DefaultingRule&quot;)"
+                    mode="riskTerm.Attribute.getUIRuleMode(edition, APDRuleType.TC_DEFAULT)"
+                    required="false"
+                    visible="userPreferences.canDesign()"/>
+                  <ModalCellRef
+                    def="APDAttributeDefaultValue(riskTerm.Attribute, APDRuleType.TC_MIN, riskTerm, edition, openForEdit)"
+                    editable="false"
+                    grow="true"
+                    id="MinimumValue"
+                    label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.MinimumAmountRule&quot;)"
+                    mode="riskTerm.Attribute.getUIRuleMode(edition, APDRuleType.TC_MIN)"
+                    required="false"
+                    visible="userPreferences.canDesign()"/>
+                  <ModalCellRef
+                    def="APDAttributeDefaultValue(riskTerm.Attribute, APDRuleType.TC_MAX, riskTerm, edition, openForEdit)"
+                    grow="true"
+                    id="MaximumValue"
+                    label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.MaximumAmountRule&quot;)"
+                    mode="riskTerm.Attribute.getUIRuleMode(edition, APDRuleType.TC_MAX)"
+                    required="false"
+                    visible="userPreferences.canDesign()"/>
+                  <TextCell
+                    action="APDTagPopup.push(riskTerm.Attribute, openForEdit)"
+                    editable="false"
+                    enableSort="false"
+                    id="Tags"
+                    label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.Tags&quot;)"
+                    value="riskTerm.Attribute.TagDisplayValue"
+                    valueVisible="riskTerm.Attribute.ShowDisplayValue"
+                    visible="false"/>
+                  <TextCell
+                    editable="true"
+                    enableSort="false"
+                    grow="true"
+                    id="FieldDescription"
+                    label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskTerm.FieldDescription&quot;)"
+                    required="false"
+                    value="riskTerm.Attribute.Description"
+                    visible="userPreferences.canDesign()"/>
+                  <TextCell
+                    editable="true"
+                    enableSort="false"
+                    grow="true"
+                    id="FieldName"
+                    label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskTerm.FieldName&quot;)"
+                    required="false"
+                    value="riskTerm.Attribute.Name"
+                    visible="inDevelopMode"/>
+                </Row>
+              </RowIterator>
+            </ListViewPanel>
+          </ListViewInput>
+          <PostOnChange
+            onChange="riskCoverable.syncClauseAvailabilities()"/>
+          <ButtonInput
+            action="APDRiskSubClausePopup.push(riskCoverable, riskClause.Clause, coverDefinitionHelper, edition, openForEdit)"
+            boldLabel="true"
+            id="SubClausesButton"
+            label="DisplayKey.get(&quot;Web.APDRiskClauseInputSet.Clause.SubClauses&quot;)"
+            value="DisplayKey.get(&quot;Web.APDRiskClauseInputSet.Clause.SubClauses.Button&quot;)"
+            visible="not userPreferences.inUseMode() or riskClause.Clause.HasSubClauses"/>
+          <CheckBoxInput
+            boldLabel="true"
+            editable="userPreferences.canDesign()"
+            id="hasClauseSchedule"
+            label="DisplayKey.get(&quot;Web.APDRiskClauseInputSet.Clause.Schedule&quot;)"
+            value="hasClauseSchedule"
+            visible="userPreferences.canDesign() and (InEditMode or hasClauseSchedule)">
+            <PostOnChange
+              onChange="riskClause.setSchedule(hasClauseSchedule)"/>
+          </CheckBoxInput>
+          <ListViewInput
+            disableUserCustomization="false"
+            labelAbove="true"
+            visible="hasClauseSchedule">
+            <Toolbar>
+              <IteratorButtons
+                iterator="ScheduleItems"/>
+              <ToolbarButton
+                action="APDNewScheduleTermPopup.push(riskClause.RiskItems, clause, edition); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDTerm)"
+                hideIfReadOnly="true"
+                id="addTerm"
+                iterator="TermNames"
+                label="DisplayKey.get(&quot;Web.Policy.ManualLine.Clause.Schedule.AddColumn&quot;)"
+                visible="userPreferences.canDesign()"/>
+            </Toolbar>
+            <ListViewPanel
+              id="ScheduleItemsLV">
+              <Row>
+                <CellIterator
+                  elementName="term"
+                  id="TermNames"
+                  value="riskClause.Clause.ScheduleTermsSortedBySequence"
+                  valueType="entity.APDTerm[]">
+                  <IteratorSort
+                    sortBy="term.Sequence"
+                    sortOrder="1"/>
+                  <TextCell
+                    bold="true"
+                    editable="userPreferences.canDesign()"
+                    id="TermName"
+                    required="true"
+                    value="term.Label">
+                    <MenuItem
+                      action="term.moveUp(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDTerm)"
+                      available="term.Sequence != 1"
+                      id="MoveUp"
+                      label="DisplayKey.get(&quot;Web.Policy.ManualLine.Clause.Schedule.Term.Move.Up&quot;)"/>
+                    <MenuItem
+                      action="term.moveDown(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDTerm)"
+                      available="term.Sequence != term.SiblingAttributes.Count"
+                      id="MoveDown"
+                      label="DisplayKey.get(&quot;Web.Policy.ManualLine.Clause.Schedule.Term.Move.Down&quot;)"/>
+                    <MenuItem
+                      action="APDScheduleTermPopup.push(term, edition, CurrentLocation.InEditMode)"
+                      id="EditTerm"
+                      label="DisplayKey.get(&quot;Web.Policy.ManualLine.Clause.Schedule.Term.Edit&quot;)"/>
+                    <MenuItem
+                      action="clause.removeScheduleTerm(term as APDTerm, riskClause); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDTerm)"
+                      id="RemoveTerm"
+                      label="DisplayKey.get(&quot;Web.Policy.ManualLine.Clause.Schedule.Term.Remove&quot;)"/>
+                  </TextCell>
+                </CellIterator>
+              </Row>
+              <RowIterator
+                editable="true"
+                elementName="item"
+                hideCheckBoxesIfReadOnly="true"
+                id="ScheduleItems"
+                toCreateAndAdd="riskClause.createAndAddScheduleItem()"
+                toRemove="riskClause.removeScheduleItem(item)"
+                type="APDRiskScheduleItem"
+                value="riskClause.RiskItems"
+                valueType="APDRiskScheduleItem[]">
+                <Row>
+                  <CellIterator
+                    elementName="term"
+                    id="TermValues"
+                    value="riskClause.Clause.ScheduleTermsSortedBySequence"
+                    valueType="entity.APDTerm[]">
+                    <ModalCellRef
+                      def="APDDataFieldValue(item.ItemTerms.firstWhere(\t -&gt; t.Attribute == term), edition)"
+                      editable="item.ItemTerms.firstWhere(\t -&gt; t.Attribute == term).Availability == APDDataExistenceType.TC_CAPTURED"
+                      grow="true"
+                      id="value"
+                      mode="term.Type"/>
+                  </CellIterator>
+                </Row>
+              </RowIterator>
+            </ListViewPanel>
+          </ListViewInput>
+        </InputGroup>
+      </InputSet>
+      <InputDivider
+        visible="userPreferences.canDesign()"/>
+    </InputIterator>
+  </InputSet>
+</PCF>

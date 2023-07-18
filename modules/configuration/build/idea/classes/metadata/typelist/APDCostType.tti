@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Claim cost types - matches/subset of CC CostType typelist"
+  name="APDCostType">
+  <typecode
+    code="claimscost"
+    desc="Loss payments to claimants or repairers"
+    name="Claim Cost"/>
+  <typecode
+    code="aoexpense"
+    desc="Adjusting and other expenses"
+    name="Expenses - A&amp;O"/>
+  <typecode
+    code="dccexpense"
+    desc="Defence and cost containment expenses"
+    name="Expenses - D&amp;CC"/>
+</typelist>

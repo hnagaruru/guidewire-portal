@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="openForEdit"
+    canVisit="true"
+    id="APDSubExclusionsPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDSubExclusionsPopup.Title&quot;, clause.Name)">
+    <LocationEntryPoint
+      signature="APDSubExclusionsPopup(clause : APDClause, edition : APDProductLineEdition, openForEdit : boolean, inDevelopMode : boolean)"/>
+    <Variable
+      name="clause"
+      type="APDClause"/>
+    <Variable
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Variable
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      name="inDevelopMode"
+      type="boolean"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="APDExclusionsPanelSet(clause.Coverable, clause, edition, openForEdit, inDevelopMode)"/>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDManualPolicyLine">
+  <Columns>
+    <Column
+      beanPath="APDManualPolicyLine.Branch.Policy.ProductDisplayName"
+      name="productName"/>
+  </Columns>
+  <DisplayName><![CDATA[productName]]></DisplayName>
+</Entity>

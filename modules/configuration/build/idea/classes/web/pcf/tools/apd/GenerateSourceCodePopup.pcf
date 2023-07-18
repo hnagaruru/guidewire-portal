@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterCommit="TopLocation.commit(); TopLocation.startEditing()"
+    afterEnter="if (productTreeIsValid) helper.compareCheckSum(mode)"
+    beforeCommit="helper.generateConfiguration(mode)"
+    canEdit="true"
+    canVisit="true"
+    id="GenerateSourceCodePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.Title&quot;)">
+    <LocationEntryPoint
+      signature="GenerateSourceCodePopup(product : APDProduct, mode : gw.apd.model.generate.ProductGeneratorHelper.GenerationMode)"/>
+    <Variable
+      name="product"
+      type="APDProduct"/>
+    <Variable
+      name="mode"
+      type="gw.apd.model.generate.ProductGeneratorHelper.GenerationMode"/>
+    <Variable
+      initialValue="new gw.apd.model.generate.CheckSumManager(new gw.apd.model.generate.GeneratorPathUtil().createCheckSumPath(product.CodeIdentifier.toLowerCase()))"
+      name="checkSumManager"
+      type="gw.apd.model.generate.CheckSumManager"/>
+    <Variable
+      initialValue="new gw.apd.model.generate.ProductGeneratorHelper(product, checkSumManager)"
+      name="helper"
+      type="gw.apd.model.generate.ProductGeneratorHelper"/>
+    <Variable
+      initialValue="isProductTreeValid()"
+      name="productTreeIsValid"
+      type="boolean"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.Cancel&quot;)"
+          updateConfirmMessage="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.Confirm&quot;)"
+          updateLabel="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.Update&quot;)"
+          updateVisible="productTreeIsValid"/>
+      </Toolbar>
+      <AlertBar
+        id="currencyMismatchAlert"
+        label="DisplayKey.get(&quot;Web.APD.CurrencyMismatch.WarningMessage&quot;,helper.findFirstMulticurrencyMode())"
+        visible="helper.CurrencyDisplayModeMismatch"/>
+      <AlertBar
+        id="changesDetectionAlert"
+        label="helper.ModifiedFileWarning"
+        visible="helper.HasModifiedFileWarning"/>
+      <ListViewPanel
+        id="ProductTree_LV">
+        <RowTree
+          id="ProductTree"
+          contentType="gw.xml.XMLNode"
+          elementName="item"
+          value="helper.ProductTree">
+          <Row>
+            <TextCell
+              id="ElementName"
+              label="DisplayKey.get(&quot;Web.APD.ProductGenerationTree.ElementType&quot;)"
+              value="{&quot;WARNING&quot;,&quot;ERROR&quot;}.contains(item.ElementName) ? &quot;&quot; : item.getAttributeValue(&quot;Type&quot;)"/>
+            <BooleanRadioCell
+              enableSort="false"
+              icon="helper.getValidityIcon(item).First"
+              iconColor="helper.getValidityIcon(item).Second"
+              iconType="svgFileName"
+              id="ValidityIcon"
+              showHeaderIcon="false"
+              value="true"/>
+            <TextCell
+              id="Description"
+              label="DisplayKey.get(&quot;Web.APD.ProductGenerationTree.Description&quot;)"
+              value="item.getAttributeValue(&quot;Name&quot;)"/>
+          </Row>
+        </RowTree>
+      </ListViewPanel>
+    </Screen>
+    <Code>function isProductTreeValid() : boolean {
+  var productTree = helper.ProductTree
+  var rootNode = (productTree.Children.first().Data as gw.xml.XMLNode)
+  return rootNode.getAttributeValue("Valid") == "true"
+}
+</Code>
+  </Popup>
+</PCF>

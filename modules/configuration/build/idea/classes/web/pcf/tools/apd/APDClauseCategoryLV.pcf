@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="APDClauseCategoryLV">
+    <Require
+      name="coverable"
+      type="APDCoverable"/>
+    <Expose
+      widget="APDClauseCategoryLV"/>
+    <ExposeIterator
+      flags="isUsedOnCoverable,isItemised"
+      valueType="APDClauseCategory"
+      widget="CategoryIterator"/>
+    <RowIterator
+      checkBoxVisible="CurrentLocation.InEditMode"
+      editable="true"
+      elementName="category"
+      hasCheckBoxes="true"
+      id="CategoryIterator"
+      toCreateAndAdd="coverable.addClauseCategory(false)"
+      toRemove="coverable.removeFromClauseCategories(category)"
+      value="coverable.ClauseCategories"
+      valueType="APDClauseCategory[]">
+      <ToolbarFlag
+        condition="category.ClausesUsingThisCategory != null &amp;&amp; category.ClausesUsingThisCategory.HasElements"
+        name="isUsedOnCoverable"/>
+      <ToolbarFlag
+        name="isSelected"/>
+      <IteratorSort
+        sortBy="category.Sequence"
+        sortOrder="1"/>
+      <IteratorSort
+        sortBy="category.Name"
+        sortOrder="2"/>
+      <ToolbarFlag
+        condition="category.Itemised == true"
+        name="isItemised"/>
+      <Row>
+        <CheckBoxCell
+          __disabled="true"
+          id="SelectClause"/>
+        <TextCell
+          id="CategoryName"
+          label="DisplayKey.get( &quot;Web.APDClauseCategoryInputSet.Name&quot; )"
+          value="category.Name"/>
+        <TextCell
+          id="CategoryDescription"
+          label="DisplayKey.get( &quot;Web.APDClauseCategoryInputSet.Description&quot; )"
+          value="category.Description"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

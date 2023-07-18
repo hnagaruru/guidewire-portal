@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="coverable.ProductLine.productLineUpdated()"
+    canEdit="startInEditMode"
+    canVisit="true"
+    id="APDCoverablePopup"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.APDCoverable.Title&quot;, coverable.Name)">
+    <LocationEntryPoint
+      signature="APDCoverablePopup(coverable : APDCoverable, edition : APDProductLineEdition)"/>
+    <LocationEntryPoint
+      signature="APDCoverablePopup(coverable : APDCoverable, edition : APDProductLineEdition, startInEditMode : boolean)"/>
+    <Variable
+      name="coverable"
+      type="APDCoverable"/>
+    <Variable
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Variable
+      initialValue="false"
+      name="startInEditMode"
+      type="boolean"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="APDCoverableCV(coverable, edition, CurrentLocation.InEditMode)"/>
+    </Screen>
+  </Popup>
+</PCF>

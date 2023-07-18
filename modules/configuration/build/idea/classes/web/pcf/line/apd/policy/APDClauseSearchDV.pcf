@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="APDClauseSearchDV">
+    <Require
+      name="searchCriteria"
+      type="gw.apd.model.APDClauseSearchCriteria"/>
+    <Require
+      name="coverable"
+      type="APDCoverable"/>
+    <Require
+      name="categories"
+      type="APDClauseCategory[]"/>
+    <InputColumn>
+      <RangeInput
+        editable="true"
+        id="CoverageCategory"
+        label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Category&quot;)"
+        noneSelectedLabel="DisplayKey.get(&quot;Web.Coverage.SearchPage.NoneSelectedLabel&quot;)"
+        value="searchCriteria.ClauseCategory"
+        valueRange="filterCategories()"
+        valueType="APDClauseCategory"/>
+      <TextInput
+        editable="true"
+        id="Keyword"
+        label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Keyword&quot;)"
+        value="searchCriteria.Keyword"/>
+      <RangeRadioInput
+        editable="true"
+        id="SearchType"
+        label="DisplayKey.get(&quot;Web.Coverage.SearchPage.Type&quot;)"
+        required="true"
+        value="searchCriteria.SearchType"
+        valueRange="{ CoveragePatternSearchType.TC_EXCLCOND, CoveragePatternSearchType.TC_CONDITION, CoveragePatternSearchType.TC_EXCLUSION }"
+        valueType="typekey.CoveragePatternSearchType"
+        visible="searchCriteria.SearchType != CoveragePatternSearchType.TC_COVERAGE"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+    <Code><![CDATA[function filterCategories() : java.util.List<APDClauseCategory> {
+    return coverable.ClauseCategories.where( \ c -> categories.hasMatch(\cc -> cc == c)).toList()
+  }
+]]></Code>
+  </DetailViewPanel>
+</PCF>

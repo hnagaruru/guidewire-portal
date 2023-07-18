@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ModalCell
+    id="APDRuleConditionValue"
+    mode="typekey">
+    <Require
+      name="condition"
+      type="APDRuleCondition"/>
+    <RangeCell
+      editable="true"
+      id="value"
+      required="true"
+      value="condition.TypekeyValue"
+      valueRange="condition.Attribute.CodesToUse.orderBy(\ code -&gt; code.Name)"
+      valueType="entity.APDDropdownEntry"/>
+  </ModalCell>
+</PCF>

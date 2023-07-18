@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canEdit="true"
+    id="CollectCreditCardPage"
+    startInEditMode="true"
+    title="DisplayKey.get('Web.PaymentIntegration.CollectCreditCardPage.Title')">
+    <LocationEntryPoint
+      signature="CollectCreditCardPage(jobNumber : String)"/>
+    <Variable
+      name="jobNumber"
+      type="String"/>
+    <ScreenRef
+      def="CollectCreditCardScreen(jobNumber)"/>
+  </Page>
+</PCF>

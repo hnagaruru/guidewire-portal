@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The claim cost categories appropriate to the coverage"
+  entity="APDCoverageClaim"
+  exportable="true"
+  loadable="false"
+  table="apdcoverageclaim"
+  type="retireable">
+  <foreignkey
+    desc="The coverage that can have the given cost category on a claim"
+    fkentity="APDCoverage"
+    name="Coverage"
+    nullok="false"/>
+  <foreignkey
+    desc="A claim cost allowed for the coverage"
+    fkentity="APDClaimCostCategory"
+    name="ClaimCostCategory"
+    nullok="false"/>
+</entity>

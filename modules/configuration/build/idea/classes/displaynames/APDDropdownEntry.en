@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDDropdownEntry">
+  <Columns>
+    <Column
+      beanPath="APDDropdownEntry.Name"
+      name="Name"/>
+  </Columns>
+  <DisplayName><![CDATA[Name]]></DisplayName>
+</Entity>

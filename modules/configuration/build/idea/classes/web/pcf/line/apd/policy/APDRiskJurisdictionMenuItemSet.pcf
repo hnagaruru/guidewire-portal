@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="APDRiskJurisdictionMenuItemSet">
+    <Require
+      name="exposureHeading"
+      type="APDExposureField"/>
+    <Require
+      name="canDesign"
+      type="Boolean"/>
+    <MenuItemDivider/>
+    <MenuItem
+      id="IsJurisdiction"
+      label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.Location.MenuItem.JurisdictionEnabled&quot;)"
+      visible="canDesign and exposureHeading.IsLocationAndJurisdiction">
+      <MenuItem
+        action="exposureHeading.toggleJurisdiction()"
+        id="TurnOffJurisdiction"
+        label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.Location.MenuItem.JurisdictionTurnOff&quot;)"/>
+    </MenuItem>
+    <MenuItem
+      id="NotJurisdiction"
+      label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.Location.MenuItem.JurisdictionDisabled&quot;)"
+      visible="canDesign and exposureHeading.Type == APDFieldType.TC_LOCATION and !exposureHeading.Jurisdiction">
+      <MenuItem
+        action="exposureHeading.toggleJurisdiction()"
+        id="TurnOnJurisdiction"
+        label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.Location.MenuItem.JurisdictionTurnOn&quot;)"/>
+    </MenuItem>
+  </MenuItemSet>
+</PCF>

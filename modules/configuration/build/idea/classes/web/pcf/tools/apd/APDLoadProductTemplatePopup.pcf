@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterCommit="if (account != null) xmlImportHelper.NewProduct.createSubmission(account, selectionOfProducer)"
+    beforeCommit="xmlImportHelper.importProduct()"
+    canEdit="true"
+    canVisit="true"
+    id="APDLoadProductTemplatePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDNewProduct.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDLoadProductTemplatePopup(account : Account, selectionOfProducer: ProducerSelection)"/>
+    <LocationEntryPoint
+      signature="APDLoadProductTemplatePopup(existingVisualizedProduct : APDProduct)"/>
+    <LocationEntryPoint
+      signature="APDLoadProductTemplatePopup(existingInstalledProduct : gw.api.productmodel.Product)"/>
+    <LocationEntryPoint
+      signature="APDLoadProductTemplatePopup()"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Variable
+      name="selectionOfProducer"
+      type="ProducerSelection"/>
+    <Variable
+      name="existingVisualizedProduct"
+      type="APDProduct"/>
+    <Variable
+      name="existingInstalledProduct"
+      type="gw.api.productmodel.Product"/>
+    <Variable
+      initialValue="User.util.CurrentUser"
+      name="currentUser"
+      type="User"/>
+    <Variable
+      initialValue="if (account != null) { return new gw.apd.model.export.APDProductImportHelper(account) } else if (existingVisualizedProduct != null) { return new gw.apd.model.export.APDProductImportHelper(existingVisualizedProduct) } else if (existingInstalledProduct != null) { return new gw.apd.model.export.APDProductImportHelper(existingInstalledProduct) } else { return new gw.apd.model.export.APDProductImportHelper() }"
+      name="xmlImportHelper"
+      type="gw.apd.model.export.APDProductImportHelper"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <AlertBar
+        id="AlertBar"
+        label="DisplayKey.get(&quot;Web.APD.SharedLineWarningMessageOnImport&quot;, xmlImportHelper.XMLFile.Name)"
+        visible="xmlImportHelper.XMLFile.Name != null"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.APDNewProduct.Template&quot;)"/>
+          <FileInput
+            editable="true"
+            id="ProductTemplate"
+            label="DisplayKey.get(&quot;Web.APDNewProduct.ProductTemplate&quot;)"
+            required="true"
+            validationExpression="xmlImportHelper.validateXML()"
+            value="xmlImportHelper.XMLFile"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

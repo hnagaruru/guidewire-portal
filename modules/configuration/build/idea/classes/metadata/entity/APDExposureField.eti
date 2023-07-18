@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="The definition of a field that is part of the exposure"
+  entity="APDExposureField"
+  supertype="APDAttribute">
+  <foreignkey
+    desc="The exposure to which this field belongs"
+    fkentity="APDExposure"
+    name="Exposure"
+    nullok="false"/>
+  <column
+    default="false"
+    desc="Identifies that this field is the PolicyContactRole that is the exposure"
+    name="ExposureParty"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="Where the exposure is rated basis scalable, this is part of the key to the exposure"
+    name="BasisScalingKey"
+    nullok="true"
+    type="bit"/>
+</subtype>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<typelist
+  desc="Types of comparisons to perform in rule conditions"
+  name="APDRuleConditionOperator"
+  xmlns="http://guidewire.com/typelists">
+  <typecode
+    code="equals"
+    desc="Equals"
+    name="="
+    priority="10"/>
+  <typecode
+    code="notEquals"
+    desc="Is not equal to"
+    name="!="
+    priority="20"/>
+  <typecode
+    code="lessThan"
+    desc="Less than"
+    name="&lt;"
+    priority="30"/>
+  <typecode
+    code="lessThanOrEqual"
+    desc="Less than or equal to"
+    name="&lt;="
+    priority="40"/>
+  <typecode
+    code="greaterThan"
+    desc="Greater than"
+    name="&gt;"
+    priority="50"/>
+  <typecode
+    code="greaterThanOrEqual"
+    desc="Greater than or equal to"
+    name="&gt;="
+    priority="60"/>
+  <typecode
+    code="selected"
+    desc="Is selected"
+    name="Is selected"
+    priority="70"/>
+  <typecode
+    code="notSelected"
+    desc="Is not selected"
+    name="Is not selected"
+    priority="80"/>
+  <typefilter
+    desc="Equality operators"
+    name="EqualityOperators">
+    <include
+      code="equals"/>
+    <include
+      code="notEquals"/>
+  </typefilter>
+  <typefilter
+    desc="Numeric operators"
+    name="NumericOperators">
+    <include
+      code="equals"/>
+    <include
+      code="notEquals"/>
+    <include
+      code="lessThan"/>
+    <include
+      code="lessThanOrEqual"/>
+    <include
+      code="greaterThan"/>
+    <include
+      code="greaterThanOrEqual"/>
+  </typefilter>
+  <typefilter
+    desc="Selection operators"
+    name="SelectionOperators">
+    <include
+      code="selected"/>
+    <include
+      code="notSelected"/>
+  </typefilter>
+</typelist>

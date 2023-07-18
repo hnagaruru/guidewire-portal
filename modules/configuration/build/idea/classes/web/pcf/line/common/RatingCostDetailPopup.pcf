@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="RatingCostDetailPopup"
+    title="DisplayKey.get(&quot;Web.RatingCostDetailPopup.Title&quot;, costs.first().CostCode.CostName)">
+    <LocationEntryPoint
+      signature="RatingCostDetailPopup(period: PolicyPeriod, costs: List&lt;Cost&gt;)"/>
+    <Variable
+      name="costs"
+      type="List&lt;Cost&gt;"/>
+    <Variable
+      name="period"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="costs.first()"
+      name="firstCost"
+      type="Cost"/>
+    <Screen>
+      <DetailViewPanel>
+        <InputColumn>
+          <TypeKeyInput
+            id="ChargePattern"
+            label="DisplayKey.get(&quot;Web.RatingCostDetailPopup.ChargePattern&quot;)"
+            value="firstCost.ChargePattern"
+            valueType="ChargePattern"/>
+          <TextInput
+            id="ChargeGroup"
+            label="DisplayKey.get(&quot;Web.RatingCostDetailPopup.ChargeGroup&quot;)"
+            value="firstCost.ChargeGroup"/>
+        </InputColumn>
+        <InputColumn>
+          <TypeKeyInput
+            id="RateAmountType"
+            label="DisplayKey.get(&quot;Web.RatingCostDetailPopup.RateAmountType&quot;)"
+            value="firstCost.RateAmountType"
+            valueType="RateAmountType"/>
+          <TextInput
+            id="BillGroup"
+            label="DisplayKey.get(&quot;Web.RatingCostDetailPopup.BillGroup&quot;)"
+            value="firstCost.BillGroup"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef>
+        <Toolbar/>
+        <ListViewPanel>
+          <RowIterator
+            editable="false"
+            elementName="cost"
+            type="Cost"
+            value="costs"
+            valueType="List&lt;Cost&gt;">
+            <Row>
+              <DateCell
+                id="EffDate"
+                label="DisplayKey.get(&quot;Web.RatingCostDetailPopup.EffDate&quot;)"
+                sortOrder="1"
+                value="cost.EffDate"/>
+              <DateCell
+                id="ExpDate"
+                label="DisplayKey.get(&quot;Web.RatingCostDetailPopup.ExpDate&quot;)"
+                value="cost.ExpDate"/>
+              <TextCell
+                id="Basis"
+                label="DisplayKey.get(&quot;Web.RatingCostDetailPopup.Basis&quot;)"
+                value="cost.Basis"
+                valueType="java.math.BigDecimal"/>
+              <TextCell
+                fontColor="cost.OverrideBaseRate == null ? &quot;Normal&quot; : &quot;red&quot;"
+                id="ActualBaseRate"
+                label="DisplayKey.get(&quot;Web.RatingCostDetailPopup.ActualBaseRate&quot;)"
+                value="cost.ActualBaseRate == 0 ? cost.StandardBaseRate : cost.ActualBaseRate "
+                valueType="java.math.BigDecimal"/>
+              <TextCell
+                fontColor="cost.OverrideAdjRate == null ? &quot;Normal&quot; : &quot;red&quot;"
+                id="ActualAdjRate"
+                label="DisplayKey.get(&quot;Web.RatingCostDetailPopup.ActualAdjRate&quot;)"
+                value="cost.ActualAdjRate == 0 ? cost.StandardAdjRate : cost.ActualAdjRate"
+                valueType="java.math.BigDecimal"/>
+              <TextCell
+                fontColor="cost.OverrideTermAmount == null ? &quot;Normal&quot; : &quot;red&quot;"
+                formatType="currency"
+                id="ActualTermAmount"
+                label="period.Policy.Product.DefaultTermType == TermType.TC_ANNUAL ?  DisplayKey.get(&quot;Web.RatingCostDetailPopup.ActualAnnualAmount&quot;) : DisplayKey.get(&quot;Web.RatingCostDetailPopup.ActualTermAmount&quot;)"
+                value="cost.ActualTermAmount == 0 ? cost.StandardTermAmount : cost.ActualTermAmount"
+                valueType="gw.pl.currency.MonetaryAmount"/>
+              <TextCell
+                id="Proration"
+                label="DisplayKey.get(&quot;Web.RatingCostDetailPopup.Proration&quot;)"
+                value="cost.Proration"
+                valueType="Double"/>
+              <TextCell
+                fontColor="cost.OverrideAmount == null ? &quot;Normal&quot; : &quot;red&quot;"
+                formatType="currency"
+                id="ActualAmount"
+                label="DisplayKey.get(&quot;Web.RatingCostDetailPopup.ActualAmount&quot;)"
+                value="cost.ActualAmount"
+                valueType="gw.pl.currency.MonetaryAmount"/>
+              <TextCell
+                fontColor="&quot;red&quot;"
+                id="OverrideReason"
+                label="DisplayKey.get(&quot;Web.RatingCostDetailPopup.OverrideReason&quot;)"
+                value="cost.OverrideReason"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

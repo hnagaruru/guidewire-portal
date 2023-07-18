@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An optional definition of a step in the calculation of a cost"
+  entity="APDCostStepDefinition"
+  exportable="true"
+  loadable="false"
+  table="apdcoststepdefinition"
+  type="retireable">
+  <foreignkey
+    columnName="CostDefinitionID"
+    desc="The cost for which this is a calculation step"
+    fkentity="APDCostDefinition"
+    name="CostDefinition"
+    nullok="false"/>
+  <column
+    desc="Describes what this step is, including key factors"
+    name="Description"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    columnName="PrimaryFactorID"
+    fkentity="APDAttribute"
+    name="PrimaryFactor"
+    nullok="true"/>
+</entity>

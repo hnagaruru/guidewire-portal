@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="APDCoverableCovPricingLV">
+    <Require
+      name="coverable"
+      type="APDCoverable"/>
+    <Require
+      name="costCodeHelper"
+      type="gw.apd.model.CostCodeHelper"/>
+    <ExposeIterator
+      valueType="APDCoverage"
+      widget="CoveragesIterator"/>
+    <Row
+      highlighted="true"
+      renderAsSmartHeader="true"
+      useTitleStyle="true">
+      <TextCell
+        id="CodeHeading"
+        value="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.CostCode&quot;)"/>
+      <TextCell
+        id="NameHeading"
+        value="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.CostName&quot;)"/>
+      <TextCell
+        id="TypeHeading"
+        value="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.RateAmountType&quot;)"/>
+      <TextCell
+        id="BillingHeading"
+        tooltip="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.SeparateBilling.Tooltip&quot;)"
+        value="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.SeparateBilling&quot;)"/>
+      <TextCell
+        id="PatternHeading"
+        value="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.ChargePattern&quot;)"/>
+      <TextCell
+        id="CollectionHeading"
+        tooltip="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.SeparateCollection.Tooltip&quot;)"
+        value="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.SeparateCollection&quot;)"/>
+      <TextCell
+        id="BasisDefinitionHeading"
+        value="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.BasisDefinition&quot;)"/>
+      <TextCell
+        id="RatingScaleHeading"
+        value="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.RatingScale&quot;)"/>
+    </Row>
+    <RowIterator
+      editable="true"
+      elementName="coverage"
+      id="CoveragesIterator"
+      pageSize="6"
+      value="coverable.Clauses.whereTypeIs(APDCoverage)"
+      valueType="APDCoverage[]">
+      <IteratorSort
+        sortBy="coverage.PricingOrder"
+        sortOrder="1"/>
+      <Row>
+        <TextCell
+          bold="true"
+          colspan="2"
+          id="CoverageName"
+          value="coverage.Name">
+        </TextCell>
+        <ButtonCell
+          hideIfReadOnly="true"
+          id="CoverageMenu"
+          value="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.ActionsButton&quot;)">
+          <MenuItem
+            action="coverage.createAndAddCostDefinition(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDCoverageCostDefinition) "
+            id="AddCost"
+            label="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.AddCost&quot;)"/>
+          <MenuItem
+            action="coverage.pricingUp(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDCoverage)"
+            available="coverage.PricingOrder != 1"
+            id="MoveUp"
+            label="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.Move.Up&quot;)"/>
+          <MenuItem
+            action="coverage.pricingDown(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDCoverage)"
+            available="coverage.PricingOrder != coverable.Coverages.Count"
+            id="MoveDown"
+            label="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.Move.Down&quot;)"/>
+        </ButtonCell>
+        <BooleanRadioCell
+          editable="true"
+          id="SeparateBilling"
+          value="coverage.SeparateBilling"/>
+        <EmptyCell
+          id="ChargePattern"/>
+        <BooleanRadioCell
+          editable="true"
+          id="SeparateCollection"
+          value="coverage.SeparateCollection"/>
+        <EmptyCell
+          colspan="2"
+          id="EmptyCell"
+          visible="true"/>
+      </Row>
+      <RowIterator
+        editable="true"
+        elementName="costDefinition"
+        pageSize="0"
+        value="coverage.CostDefinitions"
+        valueType="APDCoverageCostDefinition[]">
+        <IteratorSort
+          sortBy="costDefinition.PricingOrder"
+          sortOrder="1"/>
+        <Row>
+          <RangeCell
+            editable="true"
+            id="ChargeCode"
+            optionLabel="VALUE.CostCode"
+            required="true"
+            unique="true"
+            value="costDefinition.CostCode"
+            valueRange="costCodeHelper.CostCodes"
+            valueType="CostCode">
+            <PostOnChange/>
+            <MenuItem
+              action="costDefinition.moveUp(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDCoverageCostDefinition)"
+              available="costDefinition.PricingOrder != 1"
+              id="MoveUp"
+              label="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.Move.Up&quot;)"/>
+            <MenuItem
+              action="costDefinition.moveDown(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDCoverageCostDefinition)"
+              available="costDefinition.PricingOrder != coverage.CostDefinitions.Count"
+              id="MoveDown"
+              label="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.Move.Down&quot;)"/>
+            <MenuItem
+              action="APDCostCodesPopup.push(costCodeHelper)"
+              id="EditCostcodes"
+              label="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.Edit&quot;)"/>
+            <MenuItem
+              action="coverage.removeCostDefinition(costDefinition); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDCoverage)"
+              id="RemoveCost"
+              label="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.Remove&quot;)"/>
+          </RangeCell>
+          <TextCell
+            id="ChargeName"
+            required="true"
+            value="costDefinition.CostCode.CostName"/>
+          <TypeKeyCell
+            id="RateAmountType"
+            required="true"
+            value="costDefinition.CostCode.RateAmountType"
+            valueType="RateAmountType"/>
+          <BooleanRadioCell
+            editable="true"
+            id="SeparateBilling"
+            value="costDefinition.SeparateBilling"/>
+          <TypeKeyCell
+            id="ChargePattern"
+            required="true"
+            value="costDefinition.CostCode.ChargePatern"
+            valueType="ChargePattern"/>
+          <BooleanRadioCell
+            editable="true"
+            id="SeparateCollection"
+            value="costDefinition.SeparateCollection"/>
+          <RangeCell
+            editable="true"
+            id="BasisDefinition"
+            noneSelectedLabel="costDefinition.isCumulativeCostBasis()? DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.PriorCosts.NoneSelected&quot;) : DisplayKey.get(&quot;Java.NameValueView.NoneSelected&quot;)"
+            optionLabel="VALUE.QualifiedLabel"
+            value="costDefinition.Basis"
+            valueRange="costDefinition.BasisCandidates"
+            valueType="APDAttribute">
+            <PostOnChange
+              onChange="if (costDefinition.Basis != null) costDefinition.CumulativeCostBasis = false"/>
+            <MenuItem
+              action="costDefinition.CumulativeCostBasis = true; APDDependantPricePopup.push(costDefinition, true)"
+              id="DefPriorCosts"
+              label="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.PriorCosts&quot;)"
+              visible="not costDefinition.isCumulativeCostBasis()"/>
+            <MenuItem
+              action="APDDependantPricePopup.push(costDefinition, true)"
+              id="EditPriorCosts"
+              label="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.EditPriorCosts&quot;)"
+              visible="costDefinition.isCumulativeCostBasis()"/>
+            <MenuItem
+              action="costDefinition.CumulativeCostBasis = false"
+              id="DeletePriorCosts"
+              label="DisplayKey.get(&quot;Web.APDRiskPricingPanelSet.DeletePriorCosts&quot;)"
+              visible="costDefinition.isCumulativeCostBasis()"/>
+          </RangeCell>
+          <TypeKeyCell
+            editable="true"
+            id="RatingScale"
+            required="true"
+            value="costDefinition.RatingScale"
+            valueType="RatingScale"/>
+        </Row>
+      </RowIterator>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

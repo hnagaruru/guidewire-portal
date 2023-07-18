@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDDropdownEntryRule">
+  <Columns>
+    <Column
+      beanPath="APDDropdownEntryRule.DropdownEntry"
+      name="entry"/>
+  </Columns>
+  <DisplayName>entry.Name</DisplayName>
+</Entity>

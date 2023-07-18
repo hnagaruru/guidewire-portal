@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<entity
+  exportable="true"
+  final="false"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="APDReference"
+  desc="A reference to APD attribute"
+  table="apdreference"
+  type="retireable">
+  <foreignkey
+    columnName="AttributeID"
+    desc="Reference to an attribute"
+    fkentity="APDAttribute"
+    name="Attribute"
+    nullok="false"/>
+  <foreignkey
+    fkentity="APDFunctionOperand"
+    name="FunctionOperand"
+    nullok="false"/>
+</entity>

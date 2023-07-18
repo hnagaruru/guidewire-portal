@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A category that groups clauses for data entry"
+  entity="APDClauseCategory"
+  exportable="true"
+  loadable="false"
+  table="apdclausecategory"
+  type="retireable">
+  <column
+    desc="The name of the category"
+    name="Name"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="clausecatname"/>
+  </column>
+  <column
+    name="Description"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="clausecatdesc"/>
+  </column>
+  <column
+    desc="The pattern code used in the product model definition"
+    name="CodeIdentifier"
+    nullok="true"
+    type="patterncode">
+    <columnParam
+      name="logicalSize"
+      value="45"/>
+    <columnParam
+      name="validator"
+      value="APDName"/>
+  </column>
+  <column
+    desc="The sequence that coverage categories are displayed. Sequence no. 1 is assumed to be primary coverage"
+    name="Sequence"
+    nullok="true"
+    type="integer"/>
+  <column
+    default="false"
+    desc="If itemised, the clauses are listed in their own tab (in the given sequence), otherwise it is available for &quot;library lookup&quot;. Only applies to categories of coverages"
+    name="Itemised"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="false"
+    desc="Hidden categories do not list the coverages as these are &quot;assumed&quot; by the packaged cover; they may list conditions that provide common terms to the packaged covers"
+    name="Hidden"
+    nullok="false"
+    type="bit"/>
+  <foreignkey
+    columnName="CoverableID"
+    desc="The coverable to which this category belongs"
+    fkentity="APDCoverable"
+    name="Coverable"
+    nullok="false"/>
+</entity>

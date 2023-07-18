@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="splittableRisks.each(\splittableRisk -&gt; splittableRisk.addSplitDate(splitDate))"
+    canEdit="true"
+    countsAsWork="false"
+    id="APDSplitRiskPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDSplitRiskPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDSplitRiskPopup(splittableRisks : List&lt;gw.lob.apd.APDSplittableRisk&gt;)"/>
+    <Variable
+      name="splittableRisks"
+      type="List&lt;gw.lob.apd.APDSplittableRisk&gt;"/>
+    <Variable
+      initialValue="(splittableRisks.first() as EffDated).BranchUntyped.EditEffectiveDate"
+      name="splitDate"
+      type="java.util.Date"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          editVisible="false"
+          updateLabel="DisplayKey.get(&quot;Web.APDSplitRiskPopup.Split&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel
+        editable="true">
+        <InputColumn>
+          <DateInput
+            editable="true"
+            id="SplitDate"
+            label="DisplayKey.get(&quot;Web.APDSplitRiskPopup.Date&quot;)"
+            required="true"
+            value="splitDate"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

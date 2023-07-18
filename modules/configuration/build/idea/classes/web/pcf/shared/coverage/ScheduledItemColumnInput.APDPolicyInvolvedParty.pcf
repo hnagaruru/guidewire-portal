@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ModalCell
+    id="ScheduledItemColumnInput"
+    mode="APDPolicyInvolvedParty">
+    <Require
+      name="schedulePropertyInfo"
+      type="gw.api.productmodel.SchedulePropertyInfo"/>
+    <Require
+      name="scheduledItem"
+      type="ScheduledItem"/>
+    <Variable
+      initialValue="schedulePropertyInfo.createValueProvider(scheduledItem) as gw.api.productmodel.SchedulePropertyValueProvider&lt;KeyableBean&gt;"
+      name="valueProvider"
+      type="gw.api.productmodel.SchedulePropertyValueProvider&lt;KeyableBean&gt;"/>
+    <Variable
+      initialValue="scheduledItem as Coverable"
+      name="schedItemAsCoverable"
+      type="Coverable"/>
+    <RangeCell
+      editable="true"
+      id="RangeValue"
+      required="schedulePropertyInfo.Required"
+      value="valueProvider.Value"
+      valueRange="gw.api.upgrade.Coercions.makeArray&lt;entity.KeyableBean&gt;(schedulePropertyInfo.ValueRange)"
+      valueType="entity.KeyableBean">
+      <PickerMenuItem
+        onPick="valueProvider.Value = (scheduledItem.BranchUntyped as PolicyPeriod).addNewPolicyContactRoleForContact(PickedValue, TC_APDPOLICYINVOLVEDPARTY)"
+        id="AddFromSearch"
+        label="DisplayKey.get(&quot;Web.Policy.Contact.FromAddressBook&quot;)"
+        action="ContactSearchPopup.push(TC_APDINVOLVEDPARTY)"/>
+      <MenuItemIterator
+        elementName="contactType"
+        value="gw.plugin.Plugins.get(gw.plugin.contact.IContactConfigPlugin).getAllowedContactTypesForPolicyContactRoleType(TC_APDPOLICYINVOLVEDPARTY)"
+        valueType="typekey.ContactType[]">
+        <IteratorSort
+          sortBy="contactType.DisplayName"
+          sortOrder="1"/>
+        <PickerMenuItem
+          id="ContactType"
+          label="DisplayKey.get(&quot;Web.Contact.AddNewOfType&quot;, contactType)"
+          action="NewAPDPolicyInvolvedPartyPopup.push(schedItemAsCoverable.PolicyLine,contactType)"
+          onPick="valueProvider.Value = PickedValue"/>
+      </MenuItemIterator>
+      <MenuItem
+        id="existingInvolvedParties"
+        label="DisplayKey.get(&quot;Web.Policy.Contact.AddExisting&quot;,APDPolicyInvolvedParty.Type.TypeInfo.DisplayName)">
+        <MenuItemIterator
+          elementName="availableInvolvedParty"
+          id="AddOtherInvolvedParty"
+          value="(scheduledItem.BranchUntyped as PolicyPeriod).UnassignedAPDInvolvedParties"
+          valueType="entity.AccountContactView[]">
+          <MenuItem
+            action="valueProvider.Value = schedItemAsCoverable.PolicyLine.addNewAPDPolicyInvolvedPartyForContact(availableInvolvedParty.AccountContact.Contact)"
+            id="OtherInvolvedParty"
+            label="availableInvolvedParty.DisplayName"/>
+        </MenuItemIterator>
+      </MenuItem>
+      <MenuItem
+        id="availableContacts"
+        label="DisplayKey.get(&quot;Web.Policy.Contact.AddOtherContacts&quot;)">
+        <MenuItemIterator
+          elementName="availableContact"
+          id="AddOtherContact"
+          value="(scheduledItem.BranchUntyped as PolicyPeriod).APDInvolvedPartyOtherCandidates"
+          valueType="entity.AccountContactView[]">
+          <MenuItem
+            action="valueProvider.Value = schedItemAsCoverable.PolicyLine.addNewAPDPolicyInvolvedPartyForContact(availableContact.AccountContact.Contact)"
+            id="OtherContact"
+            label="availableContact.DisplayName"/>
+        </MenuItemIterator>
+      </MenuItem>
+    </RangeCell>
+  </ModalCell>
+</PCF>

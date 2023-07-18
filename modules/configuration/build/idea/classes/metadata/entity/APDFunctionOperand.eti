@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="APDFunctionOperand"
+  desc="Function operand for an APD rule"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="apdfunctionoperand"
+  type="retireable">
+  <typekey
+    columnName="func"
+    desc="Function name"
+    name="Func"
+    nullok="false"
+    typelist="APDFunctionType"/>
+  <array
+    arrayentity="APDReference"
+    cascadeDelete="true"
+    desc="Function argument references"
+    name="FunctionArguments"/>
+</entity>

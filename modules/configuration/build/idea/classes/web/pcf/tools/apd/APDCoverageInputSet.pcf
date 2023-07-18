@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="APDCoverageInputSet">
+    <Require
+      name="coverage"
+      type="APDCoverage"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser().inDevelopMode()"
+      name="inDevelopMode"
+      type="Boolean"/>
+    <TextInput
+      editable="true"
+      id="CodeIdentifier"
+      label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverableCV.CodeIdentifier&quot;, coverage.Coverable.LinePrefix))"
+      required="false"
+      value="coverage.CodeIdentifier"
+      visible="inDevelopMode"/>
+    <TextInput
+      editable="true"
+      id="Name"
+      label="DisplayKey.get(&quot;Web.APDCoverableCV.Name&quot;)"
+      required="true"
+      value="coverage.Name"/>
+    <TextAreaInput
+      editable="true"
+      id="Description"
+      label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverableCV.Description&quot;))"
+      numRows="2"
+      required="false"
+      value="coverage.Description"/>
+    <BooleanRadioInput
+      editable="true"
+      id="WrittenByThirdParty"
+      label="DisplayKey.get(&quot;Web.APDCoverageInputSet.WrittenByThirdParty&quot;)"
+      value="coverage.WrittenByThirdParty"/>
+  </InputSet>
+</PCF>

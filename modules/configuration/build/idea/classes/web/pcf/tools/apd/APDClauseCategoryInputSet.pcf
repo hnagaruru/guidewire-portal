@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="APDClauseCategoryInputSet">
+    <Require
+      name="category"
+      type="APDClauseCategory"/>
+    <Require
+      name="basicOnly"
+      type="Boolean"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser().inDevelopMode()"
+      name="inDevelopMode"
+      type="Boolean"/>
+    <TextInput
+      editable="true"
+      id="CodeIdentifier"
+      label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDClauseCategoryInputSet.CodeIdentifier&quot;))"
+      required="false"
+      value="category.CodeIdentifier"
+      visible="inDevelopMode"/>
+    <TextInput
+      editable="true"
+      id="Name"
+      label="DisplayKey.get(&quot;Web.APDClauseCategoryInputSet.Name&quot;)"
+      required="true"
+      value="category.Name"/>
+    <TextInput
+      editable="true"
+      id="Description"
+      label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDClauseCategoryInputSet.Description&quot;))"
+      required="false"
+      value="category.Description"/>
+    <BooleanRadioInput
+      editable="true"
+      helpText="DisplayKey.get(&quot;Web.APDClauseCategoryInputSet.Itemised.HelpText&quot;)"
+      id="Itemised"
+      label="DisplayKey.get(&quot;Web.APDClauseCategoryInputSet.Itemised&quot;)"
+      value="category.Itemised"
+      visible="not basicOnly"/>
+    <TextInput
+      id="UsedOnClauses"
+      label="DisplayKey.get( &quot;Web.APDClauseCategoryInputSet.UsedOnClauses&quot; )"
+      required="false"
+      value="category.UsedOnClausesText"
+      visible="not basicOnly"/>
+  </InputSet>
+</PCF>

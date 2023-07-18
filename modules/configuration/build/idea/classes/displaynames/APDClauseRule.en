@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Entity
+  name="APDClauseRule">
+  <Columns>
+    <Column
+      beanPath="APDClauseRule.Clause"
+      name="clause"/>
+  </Columns>
+  <DisplayName>clause.Name</DisplayName>
+</Entity>

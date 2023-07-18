@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ModalCell
+    id="APDDataFieldValue"
+    mode="location">
+    <Require
+      name="dataField"
+      type="APDDataField"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser()"
+      name="userPreferences"
+      type="gw.api.web.userpreference.UserPreferencesOfCurrentUser"/>
+    <Variable
+      initialValue="userPreferences.canDesign()"
+      name="canDesign"
+      type="Boolean"/>
+    <RangeCell
+      align="left"
+      editable="true"
+      id="value"
+      optionLabel="dataField.Branch.getPolicyLocationOptionDisplayName(VALUE)"
+      required="dataField.Attribute.Jurisdiction"
+      value="dataField.AccountLocation"
+      valueRange="dataField.Branch.Policy.Account.AccountLocations"
+      valueType="AccountLocation"
+      valueVisible="dataField.VisibleInUI">
+      <PostOnChange
+        disablePostOnEnter="not dataField.Attribute.UsedToConditionPeer"
+        onChange="dataField.syncPeerClauses(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDRiskField)"/>
+      <PickerMenuItem
+        action="LocationPopup.push(null, null, dataField.Branch, true, true, true)"
+        id="NewLocation"
+        label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.New&quot;)"
+        onPick="dataField.Location = PickedValue"/>
+      <PickerMenuItem
+        action="LocationPopup.push(null, dataField.Location, dataField.Branch, true, true, true)"
+        id="EditLocation"
+        label="DisplayKey.get(&quot;Web.Policy.LocationContainer.Location.EditLocation&quot;)"
+        onPick="dataField.Location = PickedValue"
+        visible="dataField.Location != null"/>
+    </RangeCell>
+  </ModalCell>
+</PCF>

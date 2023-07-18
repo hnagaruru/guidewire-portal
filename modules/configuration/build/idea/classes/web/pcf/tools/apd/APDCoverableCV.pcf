@@ -1,0 +1,280 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    id="APDCoverableCV">
+    <Require
+      name="coverable"
+      type="APDCoverable"/>
+    <Require
+      name="initialEdition"
+      type="APDProductLineEdition"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser()"
+      name="userPreferences"
+      type="gw.api.web.userpreference.UserPreferencesOfCurrentUser"/>
+    <Variable
+      initialValue="userPreferences.inDevelopMode()"
+      name="inDevelopMode"
+      type="Boolean"/>
+    <Variable
+      initialValue="coverable.LocalizationFields"
+      name="localizationFields"
+      recalculateOnRefresh="true"
+      type="String[]"/>
+    <Variable
+      initialValue="coverable.LocalizationLabels"
+      name="localizationLabels"
+      recalculateOnRefresh="true"
+      type="String[]"/>
+    <Variable
+      initialValue="new gw.apd.model.CostCodeHelper()"
+      name="costCodeHelper"
+      type="gw.apd.model.CostCodeHelper"/>
+    <Variable
+      initialValue="initialEdition"
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Card
+      id="CoverableDetail"
+      title="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.Details&quot;)">
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSetRef
+            def="APDCoverableInputSet(coverable)"
+            mode="coverable typeis APDProductLine ? &quot;line&quot; : &quot;default&quot;"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="LocalizedValuesDV(coverable, localizationFields, localizationLabels)"
+        id="ProductLineLocalizedValues"/>
+    </Card>
+    <Card
+      id="Editions"
+      title="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.Editions&quot;, gw.apd.util.APDStringUtil.makeLabelCount((coverable as APDProductLine).Editions.Count))"
+      visible="coverable typeis APDProductLine">
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSetRef
+            def="APDEditionInputSet(edition)"
+            editable="openForEdit"/>
+          <ListViewInput
+            boldLabel="true"
+            label="DisplayKey.get(&quot;Web.APDProduct.Editions&quot;)"
+            labelAbove="true">
+            <Toolbar>
+              <PickerToolbarButton
+                action="APDNewEditionPopup.push(coverable as APDProductLine, edition as APDEdition)"
+                id="AddEdition"
+                label="DisplayKey.get(&quot;Web.APDProduct.CreateEdition&quot;)"
+                onPick="edition = (PickedValue as APDProductLineEdition)"/>
+              <CheckedValuesToolbarButton
+                checkedRowAction="edition = (CheckedValue.EditionRef as APDProductLineEdition)"
+                flags="one canSwitchToEdition"
+                id="SwitchEdition"
+                iterator="APDEditionRowSet.APDEditionsLV"
+                label="DisplayKey.get(&quot;Web.APDProduct.SwitchEdition&quot;)"/>
+              <ToolbarButton
+                action="print(edition); print(edition.EditionCode)"
+                id="CompareEdition"
+                label="DisplayKey.get(&quot;Web.APDProduct.Compare&quot;)"
+                visible="false"/>
+              <ToolbarDivider/>
+              <CheckedValuesToolbarButton
+                checkedRowAction="(CheckedValue.EditionRef).remove(); edition = null"
+                confirmMessage="DisplayKey.get(&quot;Web.APDProduct.DeleteEditionWarning&quot;)"
+                flags="no isBaseProduct,one isEdition"
+                id="DeleteEdition"
+                iterator="APDEditionRowSet.APDEditionsLV"
+                label="DisplayKey.get(&quot;Web.APDProduct.Delete&quot;)"/>
+            </Toolbar>
+            <ListViewPanel>
+              <RowSetRef
+                def="APDEditionRowSet(coverable.ProductLine.getEditionsDisplay(), edition)"/>
+            </ListViewPanel>
+          </ListViewInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </Card>
+    <Card
+      id="CoverableFields"
+      title="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.Fields&quot;, gw.apd.util.APDStringUtil.makeLabelCount(coverable.Fields.Count))">
+      <PanelRef
+        def="APDCoverableFieldsPanelSet(coverable, edition, openForEdit, inDevelopMode)"/>
+    </Card>
+    <Card
+      id="CoverableExposures"
+      title="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.Exposures&quot;, gw.apd.util.APDStringUtil.makeLabelCount(coverable.Exposures.Count))"
+      visible="coverable.HasExposure">
+      <ListDetailPanel
+        selectionName="exposureDetails"
+        selectionType="APDExposure">
+        <PanelRef>
+          <Toolbar>
+            <IteratorButtons
+              iterator="ExposuresLV"/>
+          </Toolbar>
+          <ListViewPanel>
+            <RowIterator
+              editable="true"
+              elementName="exposure"
+              id="ExposuresLV"
+              toCreateAndAdd="coverable.addExposure()"
+              toRemove="coverable.removeFromExposures(exposure)"
+              value="coverable.Exposures"
+              valueType="APDExposure[]">
+              <Row>
+                <TextCell
+                  editable="true"
+                  enableSort="false"
+                  id="Name"
+                  label="DisplayKey.get(&quot;Web.APDCoverableCV.APDExposure.Name&quot;)"
+                  required="true"
+                  sortOrder="1"
+                  value="exposure.Name"/>
+                <TextCell
+                  action="APDExposureFieldsPopup.push(exposure, edition, openForEdit)"
+                  enableSort="false"
+                  id="TermsButton"
+                  label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Fields&quot;)"
+                  value="DisplayKey.get(&quot;Web.APDCoverableCV.EditFields&quot;, gw.apd.util.APDStringUtil.makeLabelCount(exposure.Fields.Count))"/>
+                <TypeKeyCell
+                  editable="true"
+                  enableSort="false"
+                  id="ExposureType"
+                  label="DisplayKey.get(&quot;Web.APDCoverableCV.APDExposure.ExposureType&quot;)"
+                  required="true"
+                  value="exposure.ExposureType"
+                  valueType="APDExposureType">
+                  <PostOnChange/>
+                </TypeKeyCell>
+                <TypeKeyCell
+                  editable="true"
+                  enableSort="false"
+                  id="ContactRole"
+                  label="DisplayKey.get(&quot;Web.APDCoverableCV.APDExposure.ContactRole&quot;)"
+                  required="false"
+                  validationExpression="return (exposure.ExposureType == APDExposureType.TC_CONTACT &amp;&amp; exposure.ContactRole == null)? DisplayKey.get(&quot;Web.APDValidation.Exposure.MissingContactRole&quot;) : null"
+                  value="exposure.ContactRole"
+                  valueType="APDExposureContactRole"
+                  valueVisible="exposure.ExposureType == APDExposureType.TC_CONTACT">
+                  <PostOnChange/>
+                </TypeKeyCell>
+                <TypeKeyCell
+                  editable="true"
+                  enableSort="false"
+                  id="RiskLocation"
+                  label="DisplayKey.get(&quot;Web.APDCoverableCV.APDExposure.RiskLocation&quot;)"
+                  required="true"
+                  value="exposure.RiskLocation"
+                  valueType="APDRiskLocationType">
+                  <PostOnChange
+                    onChange="exposure.toggleJurisdictionLocation()"/>
+                </TypeKeyCell>
+                <TypeKeyCell
+                  editable="true"
+                  enableSort="false"
+                  id="RatingType"
+                  label="DisplayKey.get(&quot;Web.APDCoverableCV.APDExposure.RatingType&quot;)"
+                  required="true"
+                  value="exposure.RatingType"
+                  valueType="APDExposureRatingType"/>
+                <TextCell
+                  editable="true"
+                  enableSort="false"
+                  id="MenuLabel"
+                  label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverableCV.APDExposure.MenuLabel&quot;))"
+                  sortOrder="1"
+                  value="exposure.MenuLabel"/>
+                <TextCell
+                  editable="true"
+                  enableSort="false"
+                  id="Description"
+                  label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverableCV.APDExposure.Description&quot;))"
+                  value="exposure.Description"/>
+                <TextCell
+                  editable="true"
+                  enableSort="false"
+                  id="TypeName"
+                  label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverableCV.APDExposure.TypeName&quot;))"
+                  value="exposure.TypeName"
+                  visible="inDevelopMode"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </PanelRef>
+        <CardViewPanel
+          hideTabIfSingle="true">
+          <Card
+            id="ExposureTranslations"
+            title="&quot;&quot;">
+            <PanelRef
+              def="LocalizedValuesDV(exposureDetails, {&quot;Name&quot;, &quot;Description&quot;, &quot;MenuLabel&quot;}, {DisplayKey.get(&quot;Web.APDCoverableCV.APDExposure.Name&quot;), DisplayKey.get(&quot;Web.APDCoverableCV.APDExposure.Description&quot;), DisplayKey.get(&quot;Web.APDCoverableCV.APDExposure.MenuLabel&quot;)})"
+              id="ExposureLocalizedValues"/>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </Card>
+    <Card
+      id="CoverableCoverages"
+      title="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.Coverages&quot;, gw.apd.util.APDStringUtil.makeLabelCount(coverable.TopLevelCoverages.Count))">
+      <PanelRef
+        def="APDCoveragesPanelSet(coverable, null, edition, openForEdit, inDevelopMode)"/>
+    </Card>
+    <Card
+      id="CoverableExclusions"
+      title="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.Exclusions&quot;, gw.apd.util.APDStringUtil.makeLabelCount(coverable.TopLevelExclusions.Count))">
+      <PanelRef
+        def="APDExclusionsPanelSet(coverable, null, edition, openForEdit, inDevelopMode)"/>
+    </Card>
+    <Card
+      id="CoverableConditions"
+      title="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.Conditions&quot;, gw.apd.util.APDStringUtil.makeLabelCount(coverable.TopLevelConditions.Count))">
+      <PanelRef
+        def="APDConditionsPanelSet(coverable, null, edition, openForEdit, inDevelopMode)"/>
+    </Card>
+    <Card
+      id="CoverablePricing"
+      title="DisplayKey.get( &quot;Web.APDProductScreen.APDCoverable.Pricing&quot;, gw.apd.util.APDStringUtil.makeLabelCount((coverable.CostDefinitions.Count+coverable.Coverages.sum(\elt -&gt; elt.CostDefinitions.Count))))">
+      <PanelRef
+        def="APDCoverablePricingPanelSet(coverable, costCodeHelper)"/>
+    </Card>
+    <Card
+      id="CoverableChildren"
+      title="DisplayKey.get(&quot;Web.APDProductScreen.APDProductLine.Children&quot;, gw.apd.util.APDStringUtil.makeLabelCount(coverable.ChildCoverables.Count))"
+      visible="coverable.HasChildren">
+      <PanelRef>
+        <Toolbar>
+          <IteratorButtons
+            iterator="CoverableLV"/>
+        </Toolbar>
+        <ListViewPanel>
+          <RowIterator
+            editable="true"
+            elementName="child"
+            id="CoverableLV"
+            toCreateAndAdd="coverable.addCoverable()"
+            toRemove="coverable.removeCoverable(child)"
+            value="coverable.ChildCoverables"
+            valueType="APDCoverable[]">
+            <Row>
+              <TextCell
+                action="APDCoverablePopup.push(child, edition, openForEdit)"
+                id="childName"
+                label="DisplayKey.get(&quot;Web.APDCoverable.Name&quot;)"
+                value="child.Name"/>
+              <TextCell
+                id="childDescription"
+                label="DisplayKey.get(&quot;Web.APDCoverable.Description&quot;)"
+                value="child.Description"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+    </Card>
+  </CardViewPanel>
+</PCF>

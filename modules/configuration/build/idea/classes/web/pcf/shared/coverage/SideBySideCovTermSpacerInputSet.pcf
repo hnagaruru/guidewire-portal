@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="SideBySideCovTermSpacerInputSet">
+    <Require
+      name="covTermInfo"
+      type="gw.job.sxs.SideBySideCovTermInfo"/>
+    <TextInput
+      id="spacer1"
+      labelAbove="true"
+      value="&quot;&quot;">
+      <LayoutConfig
+        tdClass="&quot;pc-sxs-col-&quot; + (covTermInfo.CovInfo.PeriodInfo.ColumnIndex % 2)"/>
+    </TextInput>
+    <TextInput
+      id="spacer2"
+      labelAbove="true"
+      value="&quot;&quot;">
+      <LayoutConfig
+        tdClass="&quot;pc-sxs-col-&quot; + (covTermInfo.CovInfo.PeriodInfo.ColumnIndex % 2)"/>
+    </TextInput>
+  </InputSet>
+</PCF>

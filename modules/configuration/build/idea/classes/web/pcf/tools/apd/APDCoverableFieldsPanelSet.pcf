@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="APDCoverableFieldsPanelSet">
+    <Require
+      name="coverable"
+      type="APDCoverable"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="inDevelopMode"
+      type="boolean"/>
+    <ListDetailPanel
+      selectionName="fieldDetails"
+      selectionType="APDField">
+      <PanelRef>
+        <Toolbar>
+          <IteratorButtons
+            iterator="FieldsLV"
+            removeFlags="all canDelete"/>
+        </Toolbar>
+        <ListViewPanel
+          disableUserCustomization="true"
+          id="FieldsLV">
+          <RowIterator
+            editable="true"
+            elementName="field"
+            toCreateAndAdd="coverable.createAndAddField()"
+            toRemove="coverable.removeField(field)"
+            value="coverable.Fields"
+            valueType="APDField[]">
+            <Variable
+              initialValue="field.Type"
+              name="prevFieldType"
+              type="APDFieldType"/>
+            <IteratorSort
+              sortBy="field.Sequence"
+              sortOrder="1"/>
+            <ToolbarFlag
+              condition="not field.Jurisdiction"
+              name="canDelete"/>
+            <Row>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="Label"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Label&quot;)"
+                required="true"
+                value="field.Label"/>
+              <TypeKeyCell
+                confirmMessage="DisplayKey.get(&quot;Web.APDAttribute.ChangeType.ConfirmMessage&quot;)"
+                editable="field.CanChangeType"
+                enableSort="false"
+                id="Type"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Type&quot;)"
+                required="true"
+                showConfirmMessage="field.Type == APDFieldType.TC_TYPEKEY"
+                value="field.Type"
+                valueType="APDFieldType">
+                <PostOnChange
+                  onChange="field.updateDropdownPropertiesOnFieldTypeChange(prevFieldType); prevFieldType = field.Type"/>
+                <MenuItem
+                  action="APDDropDownDefinitionPopup.push(field, false, edition, CurrentLocation.InEditMode)"
+                  id="DropDownDefinition"
+                  label="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.Button&quot;)"
+                  visible="field.Type == APDFieldType.TC_TYPEKEY"/>
+              </TypeKeyCell>
+              <CheckBoxCell
+                available="APDFieldType.TF_IDENTIFIERTYPES.TypeKeys.hasMatch(\tk -&gt; tk == field.Type)"
+                editable="true"
+                enableSort="false"
+                id="Identifier"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Identifier&quot;)"
+                value="field.Identifier"/>
+              <CheckBoxCell
+                editable="true"
+                enableSort="false"
+                id="Jurisdiction"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Jurisdiction&quot;)"
+                value="field.Jurisdiction"
+                valueVisible="field.Type == APDFieldType.TC_LOCATION"
+                visible="not (coverable typeis APDProductLine)">
+                <PostOnChange
+                  onChange="field.autoSetRiskLocation()"/>
+              </CheckBoxCell>
+              <RangeCell
+                action="APDAttributeRulePopup.push(field.getEditionRule(edition, APDRuleType.TC_EXISTENCE), field, APDRuleType.TC_EXISTENCE, edition, openForEdit)"
+                enableSort="false"
+                id="Usage"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.ExistenceRule&quot;)"
+                value="field.getEditionRule(edition, APDRuleType.TC_EXISTENCE).DefaultExistence ?: APDDataExistenceType.TC_CAPTURED"
+                valueRange="APDDataExistenceType.getTypeKeys(false)"
+                valueType="APDDataExistenceType"/>
+              <ModalCellRef
+                def="APDAttributeDefaultValue(field, APDRuleType.TC_DEFAULT, null, edition, openForEdit)"
+                editable="false"
+                grow="true"
+                id="DefaultValue"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.DefaultingRule&quot;)"
+                mode="field.getUIRuleMode(edition, APDRuleType.TC_DEFAULT)"
+                required="false"/>
+              <ModalCellRef
+                def="APDAttributeDefaultValue(field, APDRuleType.TC_MIN, null, edition, openForEdit)"
+                editable="false"
+                grow="true"
+                id="MinimumValue"
+                label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.MinimumAmountRule&quot;)"
+                mode="field.getUIRuleMode(edition, APDRuleType.TC_MIN)"
+                required="false"/>
+              <ModalCellRef
+                def="APDAttributeDefaultValue(field, APDRuleType.TC_MAX, null, edition, openForEdit)"
+                editable="false"
+                grow="true"
+                id="MaximumValue"
+                label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.MaximumAmountRule&quot;)"
+                mode="field.getUIRuleMode(edition, APDRuleType.TC_MAX)"
+                required="false"/>
+              <TextCell
+                action="APDTagPopup.push(field, openForEdit)"
+                enableSort="false"
+                id="Tags"
+                label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.Tags&quot;)"
+                value="field.TagDisplayValue"
+                valueVisible="field.ShowDisplayValue"
+                visible="false"/>
+              <CheckBoxCell
+                editable="true"
+                enableSort="false"
+                id="SplitByRatingPeriods"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.SplitByRatingPeriods&quot;)"
+                value="field.SplitByRatingPeriods">
+                <PostOnChange
+                  onChange="if (field.SplitByRatingPeriods == false) {field.Scalable = false}"/>
+              </CheckBoxCell>
+              <CheckBoxCell
+                editable="true"
+                enableSort="false"
+                id="Scalable"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Scalable&quot;)"
+                value="field.Scalable"
+                valueVisible="field.CanScale"/>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="Category"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Category&quot;)"
+                value="field.Category"/>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="Description"
+                label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDProductScreen.APDField.Description&quot;))"
+                value="field.Description"/>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="Name"
+                label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDProductScreen.APDField.Name&quot;))"
+                value="field.Name"
+                visible="inDevelopMode"/>
+              <ButtonCell
+                hideIfDisabled="false"
+                hideIfReadOnly="true"
+                id="MoveButton"
+                label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Move&quot;)"
+                value="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Move&quot;)">
+                <MenuItem
+                  action="field.moveUp()"
+                  available="field.Sequence != 1"
+                  id="MoveUp"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Move.Up&quot;)"/>
+                <MenuItem
+                  action="field.moveDown()"
+                  available="field.Sequence != coverable.Fields.Count"
+                  id="MoveDown"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Move.Down&quot;)"/>
+              </ButtonCell>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+      <CardViewPanel
+        hideTabIfSingle="true">
+        <Card
+          id="FieldDetails"
+          title="&quot;&quot;">
+          <PanelRow>
+            <PanelColumn>
+              <PanelRef
+                def="LocalizedValuesDV(fieldDetails, {&quot;Label&quot;, &quot;Description&quot;}, {DisplayKey.get(&quot;Web.APDProductScreen.APDField.Label&quot;), DisplayKey.get(&quot;Web.APDProductScreen.APDField.Description&quot;)})"
+                id="FieldLocalizedValues"/>
+            </PanelColumn>
+          </PanelRow>
+        </Card>
+      </CardViewPanel>
+    </ListDetailPanel>
+  </PanelSet>
+</PCF>

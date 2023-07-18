@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The coverable for a manual line"
+  effDatedBranchType="PolicyPeriod"
+  entity="APDRiskCoverable"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="riskcoverable"
+  type="effdated">
+  <implementsEntity
+    name="Coverable"/>
+  <implementsInterface
+    iface="gw.api.domain.CoverableAdapter"
+    impl="gw.apd.APDRiskCoverableAdapter"/>
+  <foreignkey
+    columnName="ManualPolicyLineID"
+    desc="The policy line that this belongs"
+    fkentity="APDManualPolicyLine"
+    name="ManualPolicyLine"
+    nullok="false"/>
+  <foreignkey
+    columnName="CoverableID"
+    desc="Definition of the coverable"
+    fkentity="APDCoverable"
+    name="Coverable"
+    nullok="false"/>
+  <edgeForeignKey
+    desc="The risk object that this is a part of"
+    edgeTableName="apdriskcoverableparent"
+    fkentity="APDRiskCoverable"
+    name="Parent"
+    nullok="true"/>
+  <foreignkey
+    columnName="LocationID"
+    desc="The location when this coverable is a location"
+    fkentity="PolicyLocation"
+    name="Location"
+    nullok="true"/>
+  <foreignkey
+    columnName="BuildingID"
+    desc="The building this coverable is (when it is a building)"
+    fkentity="Building"
+    name="Building"
+    nullok="true"/>
+  <array
+    arrayentity="APDRiskField"
+    desc="The fields describing this coverable"
+    name="RiskFields"
+    owner="true"/>
+  <array
+    arrayentity="APDRiskExposure"
+    desc="A list of things that expose this coverable to risk"
+    name="RiskExposures"
+    owner="true"/>
+  <foreignkey
+    columnName="ThirdPartyUnderwriterID"
+    desc="The organisation that underwrites the coverable/line"
+    exportasid="true"
+    fkentity="ProducerCode"
+    name="ThirdPartyUnderwriter"
+    nullok="true"/>
+  <array
+    arrayentity="APDRiskClause"
+    desc="The cover required for this risk object"
+    name="RiskClauses"
+    owner="true"/>
+  <array
+    arrayentity="APDRiskCost"
+    cascadeDelete="true"
+    desc="A cost that makes up the price of the risk"
+    name="RiskCosts"
+    owner="false"/>
+  <array
+    arrayentity="APDRiskPricing"
+    desc="Pricing for this coverable that are used to create costs"
+    name="CostPricing"
+    owner="true"/>
+  <column
+    desc="The index of this risk coverable"
+    name="SequenceNumber"
+    nullok="true"
+    setterScriptability="all"
+    type="integer"/>
+  <foreignkey
+    desc="Sequence to autonumber child risk objects"
+    fkentity="AutoNumberSequence"
+    name="ChildRiskObjectAutoNumberSeq"
+    nullok="true"/>
+  <implementsInterface
+    iface="gw.lob.apd.APDSplittableRisk"
+    impl="gw.lob.apd.APDSplittableRiskCoverable"/>
+</entity>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="InstalledRuleOwnerType" desc="The type of property or entity that owns this installed rule">
+  <typecode
+    code="RiskObjectProperty"
+    desc="For entity properties that own a rule (coverable and exposure fields)"
+    name="Risk Object Property"/>
+  <typecode
+    code="RiskObjectTypekey"
+    desc="For typekeys that own a rule where the APD dropdown list is a risk object field"
+    name="Risk Object Typekey"/>
+  <typecode
+    code="Clause"
+    desc="For clauses that own a rule"
+    name="Clause"/>
+  <typecode
+    code="ClauseTerm"
+    desc="For clause terms that own a rule"
+    name="Clause Term"/>
+  <typecode
+    code="TermTypekey"
+    desc="For typekeys that own a rule which are on a APD term dropdown list"
+    name="Term typekey"/>
+  <typecode
+    code="TermOptionChoice"
+    desc="For clause term option choices"
+    name="Term Option Choice"/>
+  <typecode
+    code="TermPackageChoice"
+    desc="For clause term package choices"
+    name="Term Package Choice"/>
+</typelist>

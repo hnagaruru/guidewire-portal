@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListDetailPanel
+    id="APDDropDownDefinitionListDetail"
+    selectionName="dropdownEntry"
+    selectionType="APDDropdownEntry">
+    <Require
+      name="attribute"
+      type="APDAttribute"/>
+    <Require
+      name="isTerm"
+      type="Boolean"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser().inDevelopMode()"
+      name="inDevelopMode"
+      type="Boolean"/>
+    <Variable
+      initialValue="isTerm ? attribute as APDTerm : null "
+      name="term"
+      type="APDTerm"/>
+    <PanelRef>
+      <Toolbar>
+        <IteratorButtons
+          iterator="APDDropdownEntries"/>
+      </Toolbar>
+      <ListViewPanel>
+        <Row
+          useTitleStyle="true">
+          <TextCell
+            id="nameHeading"
+            value="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.DropdownEntry.Name&quot;)"/>
+          <TextCell
+            id="AvailabilityHeading"
+            value="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Availability&quot;)"/>
+          <TextCell
+            id="TagHeading"
+            value="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Tags&quot;)"
+            visible="false"/>
+          <TextCell
+            id="CurrencyHeading"
+            value="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.DropdownEntry.Currency&quot;)"
+            visible="attribute.DropDownType == APDDropDownType.TC_OPTION or attribute.DropDownType == APDDropDownType.TC_PACKAGE"/>
+          <CellIterator
+            elementName="ddColumn"
+            id="ddColumnName"
+            value="term.DropdownColumns"
+            valueType="APDDropdownColumn[]">
+            <IteratorSort
+              sortBy="ddColumn.Sequence"
+              sortOrder="1"/>
+            <TextCell
+              editable="true"
+              format="&quot;#&quot; + DisplayKey.get(&quot;Web.APD.RequiredForGeneration.Suffix&quot;)"
+              id="colName"
+              outputConversion="VALUE.HasContent ? VALUE : DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.AddColumnName&quot;)"
+              value="ddColumn.Name"
+              width="250">
+              <PostOnChange/>
+              <MenuItem
+                action="term.addDropdownColumn(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDDropdownColumn)"
+                id="AddColumn"
+                label="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.DropdownEntry.AddColumn&quot;)"
+                visible="attribute.DropDownType == APDDropDownType.TC_PACKAGE"/>
+              <MenuItem
+                action="term.removeDropdownColumn(ddColumn); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDDropdownColumn)"
+                id="RemoveColumn"
+                label="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.DropdownEntry.RemoveColumn&quot;)"
+                visible="attribute.DropDownType == APDDropDownType.TC_PACKAGE and (attribute as APDTerm).DropdownColumns.Count &gt; 1"/>
+            </TextCell>
+          </CellIterator>
+          <TextCell
+            id="DescriptionHeading"
+            value="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.DropdownEntry.Description&quot;))"/>
+          <TextCell
+            id="CodeHeading"
+            value="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.DropdownEntry.Code&quot;))"
+            visible="inDevelopMode"/>
+          <TextCell
+            id="MoveHeading"
+            value="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Move&quot;)"/>
+        </Row>
+        <Row
+          useTitleStyle="true"
+          visible="attribute.DropDownType == APDDropDownType.TC_OPTION or attribute.DropDownType == APDDropDownType.TC_PACKAGE">
+          <EmptyCell
+            id="EmptyType1"/>
+          <EmptyCell
+            id="EmptyType2"/>
+          <EmptyCell
+            id="EmptyType3"
+            visible="false"/>
+          <EmptyCell
+            id="EmptyType4"/>
+          <CellIterator
+            elementName="ddColumn"
+            id="ddColumnType"
+            value="term.DropdownColumns"
+            valueType="APDDropdownColumn[]">
+            <IteratorSort
+              sortBy="ddColumn.Sequence"
+              sortOrder="1"/>
+            <TypeKeyCell
+              editable="attribute.CanChangeType"
+              id="colType"
+              noneSelectedLabel="DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.SelectValueType&quot;)"
+              value="ddColumn.ValueType"
+              valueType="CovTermModelVal">
+              <PostOnChange/>
+            </TypeKeyCell>
+          </CellIterator>
+          <EmptyCell
+            id="EmptyType5"/>
+          <EmptyCell
+            id="EmptyType6"
+            visible="inDevelopMode"/>
+          <EmptyCell
+            id="EmptyType7"/>
+        </Row>
+        <RowIterator
+          editable="true"
+          elementName="code"
+          id="APDDropdownEntries"
+          toCreateAndAdd="attribute.addDropdownEntry()"
+          toRemove="attribute.removeDropdownEntry(code)"
+          value="attribute.CodesToUse"
+          valueType="entity.APDDropdownEntry[]">
+          <IteratorSort
+            sortBy="code.Sequence"
+            sortOrder="1"/>
+          <Row>
+            <TextCell
+              editable="true"
+              id="Name"
+              required="true"
+              value="code.Name"/>
+            <TypeKeyCell
+              action="APDDropdownEntryRulePopup.push(attribute.getDropdownEditionRule(code, edition, APDRuleType.TC_EXISTENCE), code, APDRuleType.TC_EXISTENCE, edition, CurrentLocation.InEditMode)"
+              enableSort="false"
+              id="Existence"
+              value="attribute.getDropdownEditionRule(code, edition, APDRuleType.TC_EXISTENCE).DefaultExistence ?: APDDataExistenceType.TC_AVAILABLE"
+              valueType="typekey.APDDataExistenceType"/>
+            <TextCell
+              action="APDTagPopup.push(code, CurrentLocation.InEditMode)"
+              editable="false"
+              enableSort="false"
+              id="Tags"
+              value="code.TagDisplayValue"
+              visible="false"/>
+            <TypeKeyCell
+              editable="true"
+              id="Currency"
+              value="code.Currency"
+              valueType="typekey.Currency"
+              visible="attribute.DropDownType == APDDropDownType.TC_OPTION or attribute.DropDownType == APDDropDownType.TC_PACKAGE"/>
+            <CellIterator
+              elementName="ddColumn"
+              value="term.DropdownColumns"
+              valueType="APDDropdownColumn[]">
+              <IteratorSort
+                sortBy="ddColumn.Sequence"
+                sortOrder="1"/>
+              <ModalCellRef
+                def="APDDropdownEntryValue(code.Values.firstWhere(\v -&gt; v.DropdownColumn == ddColumn))"
+                editable="true"
+                id="colName"
+                mode="ddColumn.ValueType.Code"/>
+            </CellIterator>
+            <TextCell
+              editable="true"
+              enableSort="false"
+              id="Description"
+              value="code.Description"/>
+            <TextCell
+              editable="true"
+              enableSort="false"
+              id="Code"
+              value="code.Code"
+              visible="inDevelopMode"/>
+            <ButtonCell
+              hideIfDisabled="false"
+              hideIfReadOnly="true"
+              id="MoveButton"
+              value="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.RiskField.Move&quot;)">
+              <MenuItem
+                action="code.moveUp(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDDropdownEntry)"
+                available="code.Sequence &gt; 1"
+                id="MoveUp"
+                label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.RiskField.Move.Up&quot;)"/>
+              <MenuItem
+                action="code.moveDown(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDRiskField)"
+                available="attribute.canMoveDown(code)"
+                id="MoveDown"
+                label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.RiskField.Move.Down&quot;)"/>
+            </ButtonCell>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </PanelRef>
+    <CardViewPanel
+      hideTabIfSingle="true">
+      <Card
+        id="LocalizationDetail"
+        title="&quot;&quot;">
+        <PanelRef
+          def="LocalizedValuesDV(dropdownEntry, {&quot;Name&quot;, &quot;Description&quot;}, {DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.DropdownEntry.NameNotRequired&quot;),DisplayKey.get(&quot;Web.APDAttributeDropDownDefinition.DropdownEntry.Description&quot;)})"
+          id="DropdownLocalizedValues"/>
+      </Card>
+    </CardViewPanel>
+  </ListDetailPanel>
+</PCF>

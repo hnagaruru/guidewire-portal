@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="APDRuleDV">
+    <Require
+      name="rule"
+      type="APDRule"/>
+    <Require
+      name="edition"
+      type="APDEdition"/>
+    <Variable
+      initialValue="if (rule typeis APDAttributeRule) return rule.Attribute else return null"
+      name="attribute"
+      type="APDAttribute"/>
+    <InputColumn>
+      <ListViewInput
+        labelAbove="true">
+        <Toolbar>
+          <ToolbarInput
+            id="ToolbarLabel"
+            value="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.ToolbarLabel&quot;)"
+            valueType="String"/>
+          <RemoveButton
+            hideIfReadOnly="true"
+            id="RemoveElement"
+            iterator="ElementLV"
+            label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Remove&quot;)"/>
+          <ToolbarButton
+            action="APDRuleElementPopup.push(rule, rule.createAndAddElement(), CurrentLocation.InEditMode)"
+            hideIfReadOnly="true"
+            id="AddButton"
+            label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Add&quot;)"
+            visible="rule.CandidateDataRuleAttributes.HasElements"/>
+        </Toolbar>
+        <ListViewPanel>
+          <RowIterator
+            editable="true"
+            elementName="element"
+            hideCheckBoxesIfReadOnly="true"
+            id="ElementLV"
+            pageSize="0"
+            toRemove="rule.removeElement(element)"
+            value="rule.RuleElements"
+            valueType="entity.APDRuleElement[]">
+            <IteratorSort
+              sortBy="element.Sequence"
+              sortOrder="1"/>
+            <Row>
+              <TextCell
+                enableSort="false"
+                id="Priority"
+                label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Priority&quot;)"
+                value="element.Sequence.toString()">
+              </TextCell>
+              <TypeKeyCell
+                action="APDRuleElementPopup.push(rule, element, CurrentLocation.InEditMode)"
+                enableSort="false"
+                id="Existence"
+                label="gw.apd.web.APDRulePopupHelper.getRuleTypeString(rule)"
+                value="element.Existence"
+                valueType="typekey.APDDataExistenceType"
+                visible="rule.RuleType == APDRuleType.TC_EXISTENCE"/>
+              <TextCell
+                action="APDRuleElementPopup.push(rule, element, CurrentLocation.InEditMode)"
+                enableSort="false"
+                id="DefaultBitValue"
+                label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Value&quot;)"
+                value="element.DefaultBitValue.toString()"
+                visible="attribute.Type == APDFieldType.TC_BOOLEAN and rule.RuleType != APDRuleType.TC_EXISTENCE and rule.RuleType != APDRuleType.TC_TAG">
+              </TextCell>
+              <RangeCell
+                action="APDRuleElementPopup.push(rule, element, CurrentLocation.InEditMode)"
+                enableSort="false"
+                id="DefaultCodeValue"
+                label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Value&quot;)"
+                value="element.DefaultCodeValue"
+                valueRange="attribute.CodesToUse"
+                valueType="entity.APDDropdownEntry"
+                visible="attribute.Type == APDFieldType.TC_TYPEKEY and rule.RuleType != APDRuleType.TC_EXISTENCE and rule.RuleType != APDRuleType.TC_TAG"/>
+              <DateCell
+                action="APDRuleElementPopup.push(rule, element, CurrentLocation.InEditMode)"
+                enableSort="false"
+                id="DefaultDateValue"
+                label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Value&quot;)"
+                value="element.DefaultDateValue"
+                visible="attribute.Type == APDFieldType.TC_DATE and rule.RuleType != APDRuleType.TC_EXISTENCE and rule.RuleType != APDRuleType.TC_TAG"/>
+              <TextCell
+                action="APDRuleElementPopup.push(rule, element, CurrentLocation.InEditMode)"
+                enableSort="false"
+                id="DefaultDecimalValue"
+                label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Value&quot;)"
+                userInputRestriction="decimal"
+                value="element.DefaultDecimalValue"
+                valueType="java.math.BigDecimal"
+                visible="(attribute.Type == APDFieldType.TC_BIGDECIMAL or attribute.Type == APDFieldType.TC_MONEY) and rule.RuleType != APDRuleType.TC_EXISTENCE and rule.RuleType != APDRuleType.TC_TAG">
+              </TextCell>
+              <TextCell
+                action="APDRuleElementPopup.push(rule, element, CurrentLocation.InEditMode)"
+                enableSort="false"
+                id="DefaultIntegerValue"
+                label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Value&quot;)"
+                userInputRestriction="integer"
+                value="element.DefaultIntegerValue"
+                valueType="Integer"
+                visible="attribute.Type == APDFieldType.TC_INTEGER and rule.RuleType != APDRuleType.TC_EXISTENCE and rule.RuleType != APDRuleType.TC_TAG">
+              </TextCell>
+              <TextCell
+                action="APDRuleElementPopup.push(rule, element, CurrentLocation.InEditMode)"
+                enableSort="false"
+                id="DefaultStringValue"
+                label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Value&quot;)"
+                value="element.DefaultStringValue"
+                visible="attribute.Type == APDFieldType.TC_VARCHAR and rule.RuleType != APDRuleType.TC_EXISTENCE and rule.RuleType != APDRuleType.TC_TAG">
+              </TextCell>
+              <TypeKeyCell
+                action="APDRuleElementPopup.push(rule, element, CurrentLocation.InEditMode)"
+                enableSort="false"
+                id="DefaultTagValue"
+                label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Value&quot;)"
+                value="element.DefaultTagValue"
+                valueType="APDTagApplicability"
+                visible="rule.RuleType == APDRuleType.TC_TAG"/>
+              <TextCell
+                enableSort="false"
+                id="ConditionDisplay"
+                label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.ConditionLabel&quot;)"
+                value="element.ConditionLabel"/>
+              <ButtonCell
+                hideIfReadOnly="true"
+                id="MoveButton"
+                label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Move.Heading&quot;)"
+                value="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Move&quot;)"
+                visible="rule.RuleElements.Count &gt; 1">
+                <MenuItem
+                  action="element.moveUp(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDRuleElement)"
+                  available="element.Sequence != 1"
+                  id="MoveUp"
+                  label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Move.Up&quot;)"/>
+                <MenuItem
+                  action="element.moveDown(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDRuleElement)"
+                  available="element.Sequence != rule.RuleElements.Count"
+                  id="MoveDown"
+                  label="DisplayKey.get(&quot;Web.APDAttributeRule.APDRuleElement.Move.Down&quot;)"/>
+              </ButtonCell>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

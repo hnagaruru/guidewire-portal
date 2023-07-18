@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Coverable definition"
+  entity="APDCoverable"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="apdcoverable"
+  type="retireable">
+  <column
+    desc="The name of the line or type of coverable used in the UI as a title"
+    name="Name"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdcblname"/>
+  </column>
+  <column
+    desc="Line detail label or coverable list label used in the UI"
+    name="MenuLabel"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdcbllabel"/>
+  </column>
+  <column
+    desc="A description of what the coverable is, e.g. a vehicle"
+    name="Description"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdcbldescription"/>
+  </column>
+  <column
+    desc="The entity (or subtype for lines) used to persist this coverable"
+    name="TypeName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="22"/>
+    <columnParam
+      name="validator"
+      value="APDName"/>
+  </column>
+  <typekey
+    desc="The type of coverable, such as property, liability, etc"
+    name="CoverableType"
+    nullok="true"
+    typelist="APDCoverableType"/>
+  <typekey
+    default="useParent"
+    desc="Defines how the jurisdiction/location of this coverable risk is determined"
+    name="RiskLocation"
+    nullok="false"
+    typelist="APDRiskLocationType"/>
+  <edgeForeignKey
+    edgeTableName="apdcoverableparent"
+    fkentity="APDCoverable"
+    name="Parent"
+    nullok="true"/>
+  <array
+    arrayentity="APDClause"
+    cascadeDelete="true"
+    desc="All clauses relating to this coverable"
+    name="Clauses"
+    owner="true"/>
+  <array
+    arrayentity="APDField"
+    cascadeDelete="true"
+    desc="Fields available for this coverable"
+    name="Fields"
+    owner="true"/>
+  <column
+    default="false"
+    desc="Defines if this coverable can have child coverables."
+    name="HasChildren"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="The label given to the tab or reference to the child objects"
+    name="ChildrenLabel"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdcblchildlabel"/>
+  </column>
+  <array
+    arrayentity="APDClauseCategory"
+    cascadeDelete="true"
+    desc="The set of clause categories used by this coverable"
+    name="ClauseCategories"
+    owner="true"/>
+  <column
+    default="false"
+    desc="If true, this coverable will create an individual debtors charge items for billing"
+    name="SeparateBilling"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="false"
+    desc="If true, this coverable will crate an individual debtors charge for cash allocation"
+    name="SeparateCollection"
+    nullok="false"
+    type="bit"/>
+  <array
+    arrayentity="APDRiskCostDefinition"
+    cascadeDelete="true"
+    desc="The definitions of costs that attach directly to this coverable"
+    name="CostDefinitions"
+    owner="true"/>
+  <column
+    default="false"
+    name="HasExposure"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="The label given to the tab or reference to the exposure objects"
+    name="ExposureLabel"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="apdcblexposurelabel"/>
+  </column>
+  <array
+    arrayentity="APDExposure"
+    cascadeDelete="true"
+    desc="The types of risk exposure for this coverable"
+    name="Exposures"
+    owner="true"/>
+  <column
+    default="false"
+    desc="If true, this product is written by another insurance company (captured as an organisation)"
+    name="WrittenByThirdParty"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="false"
+    desc="Whether this coverable has modifiers"
+    name="HasModifiers"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="false"
+    desc="Defines if the coverable is automatically numbered (ignored for the line)"
+    name="IsAutoNumbered"
+    nullok="false"
+    type="bit"/>
+  <array
+    arrayentity="APDCoreAttribute"
+    cascadeDelete="true"
+    desc="Standard PolicyCenter fields that may be referred to in rules"
+    name="CoreFields"
+    owner="true"/>
+</entity>

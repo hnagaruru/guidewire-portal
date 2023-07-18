@@ -1,0 +1,507 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="APDRiskPanelSet">
+    <Require
+      name="riskCoverable"
+      type="APDRiskCoverable"/>
+    <Require
+      name="coverDefinitionHelper"
+      type="gw.apd.model.CoverDefinitionHelper"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Require
+      name="openForEdit"
+      type="Boolean"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser()"
+      name="userPreferences"
+      type="gw.api.web.userpreference.UserPreferencesOfCurrentUser"/>
+    <Variable
+      initialValue="userPreferences.inDevelopMode()"
+      name="inDevelopMode"
+      type="Boolean"/>    
+    <CardViewPanel>
+      <Card
+        id="RiskDetails"
+        title="DisplayKey.get(&quot;Web.Policy.APDRiskCoverable.Details&quot;)"
+        visible="userPreferences.canDesign() or riskCoverable.RiskFields.hasMatch(\f -&gt; f.ShowInUseMode) ">
+        <DetailViewPanel>
+          <InputColumn>
+            <TypeKeyInput
+              editable="true"
+              id="PreferredCoverageCurrency"
+              label="DisplayKey.get(&quot;Web.APDRiskPanelSet.Coverable.Currency&quot;)"
+              required="true"
+              value="riskCoverable.PreferredCoverageCurrency"
+              valueType="Currency"
+              visible="riskCoverable.Branch.Policy.APDProduct.Currencies == APDCurrencyHandling.TC_BASICMULTI or riskCoverable.Branch.Policy.APDProduct.Currencies == APDCurrencyHandling.TC_FULLMULTI"/>
+          </InputColumn>
+        </DetailViewPanel>
+        <PanelRef
+          visible="userPreferences.canDesign()">
+          <Toolbar
+            id="designRiskFieldsToolbar"
+            visible="userPreferences.canDesign()">
+            <IteratorButtons
+              id="designRiskFieldsAddRemove"
+              iterator="riskFields"
+              removeFlags="all canDelete"/>
+            <ToolbarButton
+              hideIfReadOnly="true"
+              id="AddDesignElementButton"
+              label="DisplayKey.get(&quot;Web.APDRiskCoverable.ADPRiskPanelSet.AddProductElement&quot;)">
+              <MenuItem
+                id="AddPackage"
+                label="DisplayKey.get(&quot;Web.APDRiskCoverable.ADPRiskPanelSet.PackagedCover&quot;)"/>
+              <MenuItem
+                action="APDNewCoverageCategoryPopup.push(riskCoverable)"
+                id="ItemisedCover"
+                label="DisplayKey.get(&quot;Web.APDRiskCoverable.ADPRiskPanelSet.AddItemisedCoverSet&quot;)"/>
+            </ToolbarButton>
+          </Toolbar>
+          <ListViewPanel
+            id="designModeRiskFieldsLV">
+            <RowIterator
+              checkBoxVisible="userPreferences.canDesign()"
+              editable="true"
+              elementName="riskField"
+              hasCheckBoxes="true"
+              hideCheckBoxesIfReadOnly="true"
+              id="riskFields"
+              toCreateAndAdd="riskCoverable.createAndAddField()"
+              toRemove="riskCoverable.removeField(riskField)"
+              value="riskCoverable.RiskFields"
+              valueType="APDRiskField[]">
+              <IteratorSort
+                sortBy="riskField.Attribute.Sequence"
+                sortOrder="1"/>
+              <ToolbarFlag
+                condition="riskField.Attribute.Jurisdiction != true"
+                name="canDelete"/>
+              <Row>
+                <TextCell
+                  editable="userPreferences.canDesign()"
+                  enableSort="false"
+                  grow="true"
+                  id="FieldLabel"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.FieldLabel&quot;)"
+                  required="true"
+                  value="riskField.Attribute.Label"/>
+                <ModalCellRef
+                  def="APDDataFieldValue(riskField, edition)"
+                  editable="riskField.EditableInUI"
+                  grow="true"
+                  id="value"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.FieldValue&quot;)"
+                  mode="riskField.Attribute.CellMode"/>
+                <ButtonCell
+                  hideIfDisabled="false"
+                  hideIfReadOnly="true"
+                  id="MoveButton"
+                  label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Move&quot;)"
+                  value="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.RiskField.Move&quot;)"
+                  visible="userPreferences.canDesign()">
+                  <MenuItem
+                    action="riskField.moveUp(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDRiskField)"
+                    available="riskField.Attribute.Sequence != 1"
+                    id="MoveUp"
+                    label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.RiskField.Move.Up&quot;)"/>
+                  <MenuItem
+                    action="riskField.moveDown(); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDRiskField)"
+                    available="riskField.Attribute.Sequence != riskCoverable.RiskFields.Count"
+                    id="MoveDown"
+                    label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.RiskField.Move.Down&quot;)"/>
+                </ButtonCell>
+                <CheckBoxCell
+                  available="APDFieldType.TF_IDENTIFIERTYPES.TypeKeys.hasMatch(\tk -&gt; tk == riskField.Attribute.Type)"
+                  editable="true"
+                  enableSort="false"
+                  id="Identifier"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.Identifier&quot;)"
+                  value="(riskField.Attribute as APDField).Identifier"
+                  visible="userPreferences.canDesign()"/>
+                <CheckBoxCell
+                  editable="true"
+                  enableSort="false"
+                  id="Jurisdiction"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.Jurisdiction&quot;)"
+                  value="(riskField.Attribute as APDField).Jurisdiction"
+                  valueVisible="riskField.Attribute.Type == APDFieldType.TC_LOCATION"
+                  visible="userPreferences.canDesign() and not (riskCoverable typeis APDRiskPolicyLine)">
+                  <PostOnChange
+                    onChange="riskField.Attribute.autoSetRiskLocation()"/>
+                </CheckBoxCell>
+                <TypeKeyCell
+                  editable="not riskField.Attribute.Jurisdiction"
+                  enableSort="false"
+                  id="type"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.FieldType&quot;)"
+                  required="true"
+                  value="riskField.Attribute.Type"
+                  valueType="APDFieldType"
+                  visible="userPreferences.canDesign()">
+                  <PostOnChange
+                    onChange="if (riskField.Attribute.Type != APDFieldType.TC_VARCHAR and riskField.Attribute.Type != APDFieldType.TC_LOCATION and riskField.Attribute.Type != APDFieldType.TC_PARTY) (riskField.Attribute as APDField).Identifier = false"/>
+                </TypeKeyCell>
+                <RangeCell
+                  action="APDAttributeRulePopup.push(riskField.Attribute.getEditionRule(edition, APDRuleType.TC_EXISTENCE), riskField.Attribute, APDRuleType.TC_EXISTENCE, edition, openForEdit)"
+                  enableSort="false"
+                  id="Usage"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.ExistenceRule.Attribute.Field&quot;)"
+                  value="riskField.Availability"
+                  valueRange="APDDataExistenceType.getTypeKeys(false)"
+                  valueType="APDDataExistenceType"
+                  visible="userPreferences.canDesign()"/>
+                <ModalCellRef
+                  def="APDAttributeDefaultValue(riskField.Attribute, APDRuleType.TC_DEFAULT, riskField, edition, openForEdit)"
+                  editable="false"
+                  grow="true"
+                  id="DefaultValue"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.DefaultingRule&quot;)"
+                  mode="riskField.Attribute.getUIRuleMode(edition, APDRuleType.TC_DEFAULT)"
+                  required="false"
+                  visible="userPreferences.canDesign()"/>
+                <ModalCellRef
+                  def="APDAttributeDefaultValue(riskField.Attribute, APDRuleType.TC_MIN, riskField, edition, openForEdit)"
+                  editable="false"
+                  grow="true"
+                  id="MinimumValue"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.MinimumAmountRule&quot;)"
+                  mode="riskField.Attribute.getUIRuleMode(edition, APDRuleType.TC_MIN)"
+                  required="false"
+                  visible="userPreferences.canDesign()"/>
+                <ModalCellRef
+                  def="APDAttributeDefaultValue(riskField.Attribute, APDRuleType.TC_MAX, riskField, edition, openForEdit)"
+                  grow="true"
+                  id="MaximumValue"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.MaximumAmountRule&quot;)"
+                  mode="riskField.Attribute.getUIRuleMode(edition, APDRuleType.TC_MAX)"
+                  required="false"
+                  visible="userPreferences.canDesign()"/>
+                <TextCell
+                  action="APDTagPopup.push(riskField.Attribute, openForEdit)"
+                  editable="false"
+                  enableSort="false"
+                  id="Tags"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.Tags&quot;)"
+                  value="riskField.Attribute.TagDisplayValue"
+                  valueVisible="riskField.Attribute.ShowDisplayValue"
+                  visible="false"/>
+                <TextCell
+                  editable="true"
+                  enableSort="false"
+                  grow="true"
+                  id="FieldDescription"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.FieldDescription&quot;)"
+                  required="false"
+                  value="riskField.Attribute.Description"
+                  visible="userPreferences.canDesign()"/>
+                <TextCell
+                  editable="true"
+                  enableSort="false"
+                  grow="true"
+                  id="FieldName"
+                  label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.FieldName&quot;)"
+                  required="false"
+                  value="riskField.Attribute.Name"
+                  visible="inDevelopMode"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </PanelRef>
+        <PanelRef
+          visible="not userPreferences.canDesign()">
+          <DetailViewPanel
+            id="useModeRiskFieldDV">
+            <Variable
+              initialValue="riskCoverable.RiskFields.where(\f -&gt; f.ShowInUseMode)"
+              name="availableFields"
+              recalculateOnRefresh="true"
+              type="APDRiskField[]"/>
+            <Variable
+              initialValue="getMiddleFieldSequence(availableFields)"
+              name="middleSequence"
+              recalculateOnRefresh="true"
+              type="Integer"/>
+            <InputColumn>
+              <ListViewInput
+                id="useModeRiskFieldLV1"
+                labelAbove="true"
+                listViewStyle="minimalStyle">
+                <Toolbar/>
+                <ListViewPanel
+                  alternateEntryStyle="false"
+                  disableUserCustomization="true"
+                  listViewStyle="minimalStyle">
+                  <RowIterator
+                    checkBoxVisible="false"
+                    editable="true"
+                    elementName="riskField"
+                    hasCheckBoxes="true"
+                    hideCheckBoxesIfReadOnly="true"
+                    id="riskFieldsLeft"
+                    pageSize="0"
+                    toCreateAndAdd="riskCoverable.createAndAddField()"
+                    toRemove="riskCoverable.removeField(riskField)"
+                    value="availableFields.where(\f -&gt; f.Attribute.Sequence &lt;= middleSequence)"
+                    valueType="APDRiskField[]">
+                    <IteratorSort
+                      sortBy="riskField.Attribute.Sequence"
+                      sortOrder="1"/>
+                    <ToolbarFlag
+                      condition="riskField.Attribute.Jurisdiction != true"
+                      name="canDelete"/>
+                    <Row>
+                      <TextCell
+                        enableSort="false"
+                        grow="true"
+                        id="FieldLabel"
+                        value="riskField.Attribute.Label"/>
+                      <ModalCellRef
+                        def="APDDataFieldValue(riskField, edition)"
+                        editable="riskField.Availability == APDDataExistenceType.TC_CAPTURED or riskField.Availability == APDDataExistenceType.TC_CAPTUREDQUOTE or riskField.Availability == APDDataExistenceType.TC_CAPTUREDBIND or riskField.Availability == APDDataExistenceType.TC_CAPTUREDISSUE"
+                        grow="true"
+                        id="value"
+                        mode="riskField.Attribute.Type"/>
+                    </Row>
+                  </RowIterator>
+                </ListViewPanel>
+              </ListViewInput>
+            </InputColumn>
+            <InputColumn>
+              <ListViewInput
+                id="useModeRiskFieldLV2"
+                labelAbove="true"
+                listViewStyle="minimalStyle">
+                <Toolbar/>
+                <ListViewPanel
+                  alternateEntryStyle="false"
+                  disableUserCustomization="true"
+                  emptyTableLabel="&quot;&quot;"
+                  listViewStyle="minimalStyle">
+                  <RowIterator
+                    checkBoxVisible="false"
+                    editable="true"
+                    elementName="riskField"
+                    hasCheckBoxes="true"
+                    hideCheckBoxesIfReadOnly="true"
+                    id="riskFieldsRight"
+                    pageSize="0"
+                    toCreateAndAdd="riskCoverable.createAndAddField()"
+                    toRemove="riskCoverable.removeField(riskField)"
+                    value="availableFields.where(\f -&gt; f.Attribute.Sequence &gt; middleSequence)"
+                    valueType="APDRiskField[]">
+                    <IteratorSort
+                      sortBy="riskField.Attribute.Sequence"
+                      sortOrder="1"/>
+                    <ToolbarFlag
+                      condition="riskField.Attribute.Jurisdiction != true"
+                      name="canDelete"/>
+                    <Row>
+                      <TextCell
+                        enableSort="false"
+                        grow="true"
+                        id="FieldLabel"
+                        value="riskField.Attribute.Label"/>
+                      <ModalCellRef
+                        def="APDDataFieldValue(riskField, edition)"
+                        editable="riskField.Availability == APDDataExistenceType.TC_CAPTURED or riskField.Availability == APDDataExistenceType.TC_CAPTUREDQUOTE or riskField.Availability == APDDataExistenceType.TC_CAPTUREDBIND or riskField.Availability == APDDataExistenceType.TC_CAPTUREDISSUE"
+                        grow="true"
+                        id="value"
+                        mode="riskField.Attribute.Type"/>
+                    </Row>
+                  </RowIterator>
+                </ListViewPanel>
+              </ListViewInput>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelRef>
+      </Card>
+      <Card
+        id="Exposure"
+        title="riskCoverable.Coverable.ExposureLabel"
+        visible="riskCoverable.Coverable.HasExposure">
+        <PanelRef>
+          <Toolbar>
+            <ToolbarButton
+              action="APDNewExposurePopup.push(riskCoverable)"
+              hideIfReadOnly="true"
+              id="addExposureButton"
+              label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskExposure.Add&quot;)"
+              visible="userPreferences.canDesign()"/>
+          </Toolbar>
+          <DetailViewPanel>
+            <InputColumn>
+              <InputIterator
+                elementName="exposure"
+                id="Exposures"
+                value="riskCoverable.Coverable.Exposures"
+                valueType="APDExposure[]">
+                <InputSet>
+                  <Variable
+                    initialValue="riskCoverable.RiskExposuresInPeriod.where(\riskExposure -&gt; riskExposure.Exposure == exposure)"
+                    name="riskExposures"
+                    type="APDRiskExposure[]"/>
+                  <Variable
+                    initialValue="exposure.RatingType != APDExposureRatingType.TC_TERM"
+                    name="windowMode"
+                    type="Boolean"/>
+                  <ListViewInput
+                    def="APDRiskExposureLV(riskCoverable, exposure, edition)"
+                    disableUserCustomization="false"
+                    labelAbove="true"
+                    mode="exposure.RatingType">
+                    <Toolbar>
+                      <IteratorButtons
+                        addLabel="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.AddExposure&quot;, exposure.Name)"
+                        iterator="APDRiskExposureLV.riskExposureLV"
+                        removeLabel="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.RemoveExposure&quot;, exposure.Name)"/>
+                      <CheckedValuesToolbarButton
+                        allCheckedRowsAction="APDSplitRiskPopup.push(CheckedValues.toList())"
+                        hideIfReadOnly="true"
+                        id="SplitRiskExposures"
+                        iterator="APDRiskExposureLV.riskExposureLV"
+                        label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.SplitExposure&quot;)"
+                        visible="exposure.HasSplittableFields"/>
+                      <CheckedValuesToolbarButton
+                        allCheckedRowsAction="endExposure(CheckedValues)"
+                        confirmMessage="DisplayKey.get(&quot;Web.Policy.GL.ExposureUnits.Confirm.EndExposures&quot;)"
+                        hideIfReadOnly="true"
+                        id="End"
+                        iterator="APDRiskExposureLV.riskExposureLV"
+                        label="DisplayKey.get(&quot;Button.End&quot;)"
+                        visible="riskCoverable.Branch.Job typeis PolicyChange and exposure.RatingType != APDExposureRatingType.TC_TERM"/>
+                      <CheckedValuesToolbarButton
+                        allCheckedRowsAction="splitExposure(CheckedValues)"
+                        confirmMessage="DisplayKey.get(&quot;Web.Policy.GL.ExposureUnits.Confirm.SplitExposures&quot;)"
+                        hideIfReadOnly="true"
+                        id="Split"
+                        iterator="APDRiskExposureLV.riskExposureLV"
+                        label="DisplayKey.get(&quot;Button.Split&quot;)"
+                        visible="riskCoverable.Branch.Job typeis PolicyChange and exposure.RatingType != APDExposureRatingType.TC_TERM"/>
+                      <ToolbarButton
+                        action="APDNewExposureFieldPopup.push(riskExposures, exposure, edition); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDExposureField)"
+                        hideIfReadOnly="true"
+                        id="addColumn"
+                        iterator="APDRiskExposureLV.exposureHeading"
+                        label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskCoverable.Exposure.AddColumn&quot;)"
+                        visible="userPreferences.canDesign()"/>
+                      <ToolbarButton
+                        action="exposure.removeExposure(riskCoverable); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, APDExposure)"
+                        hideIfReadOnly="true"
+                        id="removeExposureButton"
+                        label="DisplayKey.get(&quot;Web.Policy.ManualLine.RiskExposure.Remove&quot;)"
+                        visible="userPreferences.canDesign()"/>
+                    </Toolbar>
+                  </ListViewInput>
+                </InputSet>
+              </InputIterator>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelRef>
+      </Card>
+      <CardIterator
+        elementName="clauseCategory"
+        value="riskCoverable.Coverable.ItemisedCoverageCategories"
+        valueType="APDClauseCategory[]">
+        <Card
+          id="Coverages"
+          title="clauseCategory.Name">
+          <PanelRef>
+            <Toolbar
+              visible="userPreferences.canDesign()">
+              <ToolbarButton
+                action="riskCoverable.Coverable.addCoverage(clauseCategory)"
+                hideIfReadOnly="true"
+                id="AddCoverage"
+                label="DisplayKey.get(&quot;Button.Add&quot;)"/>
+            </Toolbar>
+            <DetailViewPanel>
+              <InputColumn>
+                <InputSetRef
+                  def="APDRiskClauseInputSet(riskCoverable, (openForEdit ? riskCoverable.Coverable.getItemisedCoverages(clauseCategory) : riskCoverable.getRiskItemisedCoverages(clauseCategory)).where(\coverage -&gt; coverage.IsTopLevelClause), coverDefinitionHelper, edition, openForEdit)"/>
+              </InputColumn>
+            </DetailViewPanel>
+          </PanelRef>
+        </Card>
+      </CardIterator>
+      <Card
+        id="OtherCoverCard"
+        title="DisplayKey.get(&quot;Web.Policy.APDRiskCoverable.AdditionalCover&quot;)"
+        visible="riskCoverable.Coverable.HasCoverageLibrary or userPreferences.canDesign()">
+        <PanelRef>
+          <Toolbar>
+            <PickerToolbarButton
+              action="APDClauseSearchPopup.push(riskCoverable, CoveragePatternSearchType.TC_COVERAGE, riskCoverable.Coverable.CoverageLibraryCategories, userPreferences)"
+              hideIfReadOnly="true"
+              id="AddCoverages"
+              label="DisplayKey.get(&quot;Web.Policy.Coverages.AddCoverages&quot;)"
+              onPick="createClauseList(PickedValue.whereTypeIs(APDCoverage).toList())"/>
+          </Toolbar>
+          <DetailViewPanel>
+            <InputColumn>
+              <InputSetRef
+                def="APDRiskClauseInputSet(riskCoverable, riskCoverable.SelectedCoverageLibraryClauses.where(\coverage -&gt; coverage.IsTopLevelClause), coverDefinitionHelper, edition, openForEdit)"
+                id="OtherCover"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelRef>
+      </Card>
+      <Card
+        id="ConditionsAndExclusionsCard"
+        title="DisplayKey.get(&quot;Web.Policy.APDRiskCoverable.ConditionsAndExclusions&quot;)"
+        visible="riskCoverable.Coverable.HasConditionAndExclusionLibrary or userPreferences.canDesign()">
+        <PanelRef>
+          <Toolbar>
+            <PickerToolbarButton
+              action="APDClauseSearchPopup.push(riskCoverable, CoveragePatternSearchType.TC_EXCLCOND, riskCoverable.Coverable.ConditionAndExclusionLibraryCategories, userPreferences)"
+              hideIfReadOnly="true"
+              id="AddClauses"
+              label="DisplayKey.get(&quot;Web.Policy.Coverables.AddConditionsAndExclusions&quot;)"
+              onPick="createClauseList(PickedValue.toList())"/>
+          </Toolbar>
+          <DetailViewPanel>
+            <InputColumn>
+              <InputSetRef
+                def="APDRiskClauseInputSet(riskCoverable, riskCoverable.SelectedExclusionConditionLibraryClauses.where(\clause -&gt; clause.IsTopLevelClause), coverDefinitionHelper, edition, openForEdit)"
+                id="ConditionsAndExclusions"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+    <Code><![CDATA[uses pcf.api.Wizard
+
+      function endExposure(exposures: APDRiskExposure[]) {
+        if ((CurrentLocation as Wizard).saveDraft()) { // to keep the data up-to-date before changing LV PL-5377
+          for (exp in exposures) {
+            exp.endDateWM(riskCoverable.Branch.EditEffectiveDate)
+          }
+        }
+      }
+
+    function splitExposure(exposures : APDRiskExposure[]){
+      if((CurrentLocation as Wizard).saveDraft()){ // to keep the data up-to-date before changing LV PL-5377
+        for(exp in exposures){
+          exp.splitWM(riskCoverable.Branch.EditEffectiveDate)
+        }
+      }
+    }
+
+      function createClauseList(patterns: java.util.List<APDClause>) {
+        for (pattern in patterns) {
+          pattern.buidlRiskClause(riskCoverable)
+        }
+      }
+
+      function getMiddleFieldSequence(fieldList : APDRiskField[]) : Integer {
+        var size = fieldList.Count
+        var seq = size == 0 ? 0 : fieldList.orderBy(\f -> f.Attribute.Sequence).toTypedArray()[((size+1)/2)-1].Attribute.Sequence
+        return seq
+      }]]></Code>
+  </PanelSet>
+</PCF>

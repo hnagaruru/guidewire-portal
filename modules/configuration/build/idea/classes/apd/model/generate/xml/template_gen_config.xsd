@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Root element for the template generator configuration -->
+  <xs:element name="Config">
+    <xs:complexType>
+      <xs:sequence>
+        <!-- Cross policy line configuration -->
+        <xs:element name="AllLines" type="PolicyLineBase" minOccurs="0">
+          <!-- All types must have unique names for the cross line configuration -->
+          <xs:key name="uniqueCrossLineType">
+            <xs:selector xpath="Type"/>
+            <xs:field xpath="@name"/>
+          </xs:key>
+        </xs:element>
+        <!-- Policy line specific configuration -->
+        <xs:element name="PolicyLine" type="NamedPolicyLine" minOccurs="0" maxOccurs="unbounded">
+          <!-- All types must have unique names within a line -->
+          <xs:unique name="uniquePolicyLineType">
+            <xs:selector xpath="Type"/>
+            <xs:field xpath="@name"/>
+          </xs:unique>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <!-- All lines must have unique codes -->
+    <xs:unique name="uniquePolicyLine">
+      <xs:selector xpath="PolicyLine"/>
+      <xs:field xpath="@code"/>
+    </xs:unique>
+  </xs:element>
+
+  <!-- Cross policy line configuration -->
+  <xs:complexType name="PolicyLineBase">
+    <xs:sequence>
+      <!-- Cross type configuration -->
+      <xs:element name="AllTypes" type="TypeBase" minOccurs="0">
+        <!-- All fields must have unique names for the cross line configuration -->
+        <xs:unique name="uniqueCrossTypeField">
+          <xs:selector xpath="Field"/>
+          <xs:field xpath="@name"/>
+        </xs:unique>
+      </xs:element>
+      <!-- Type specific configuration -->
+      <xs:element name="Type" type="NamedType" minOccurs="0" maxOccurs="unbounded">
+        <!-- All fields must have unique names within a type -->
+        <xs:unique name="uniqueTypeField">
+          <xs:selector xpath="Field"/>
+          <xs:field xpath="@name"/>
+        </xs:unique>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Policy line specific configuration -->
+  <xs:complexType name="NamedPolicyLine">
+    <xs:complexContent>
+      <xs:extension base="PolicyLineBase">
+        <!-- Code identifier of this policy line -->
+        <xs:attribute name="code" type="codeIdentifier" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Cross type configuration -->
+  <xs:complexType name="TypeBase">
+    <xs:sequence>
+      <!-- Field specific configuration -->
+      <xs:element name="Field" type="Field" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Type specific configuration -->
+  <xs:complexType name="NamedType">
+    <xs:complexContent>
+      <xs:extension base="TypeBase">
+        <!-- Name of this type in the database -->
+        <xs:attribute name="name" use="required"/>
+        <!-- Special handling needed by this type, if any -->
+        <xs:attribute name="handling" type="typeHandling" default="none"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Field specific configuration -->
+  <xs:complexType name="Field">
+    <!-- Name of this field in the database -->
+    <xs:attribute name="name" use="required"/>
+    <!-- Whether or not to ignore this field -->
+    <xs:attribute name="ignored" type="xs:boolean" default="false"/>
+    <!-- Whether or not to mark this field as scalable -->
+    <xs:attribute name="scalable" type="xs:boolean" default="false"/>
+    <!-- Whether or not to mark this field as split -->
+    <xs:attribute name="split" type="xs:boolean" default="false"/>
+  </xs:complexType>
+
+  <!-- Code identifier restrictions -->
+  <xs:simpleType name="codeIdentifier">
+    <xs:restriction base="xs:string">
+      <!-- This length matches ProductModelObjectBase.DEFAULT_CODEIDENTIFIER_LENGTH -->
+      <xs:maxLength value="128"/>
+      <!-- This pattern matches CodeIdentifierValidator.LEGAL_CODE_PATTERN -->
+      <xs:pattern value="[A-Za-z][A-Za-z0-9_]*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Type handling enumeration -->
+  <xs:simpleType name="typeHandling">
+    <xs:restriction base="xs:string">
+      <!-- This type should be treated as a coverable even if not one by default -->
+      <xs:enumeration value="coverable"/>
+      <!-- This type should be treated as an exposure even if not one by default -->
+      <xs:enumeration value="exposure"/>
+      <!-- This type should be treated as a location coverable even if not one by default -->
+      <xs:enumeration value="location"/>
+      <!-- This type is only included in order to configure information about child fields -->
+      <xs:enumeration value="none"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

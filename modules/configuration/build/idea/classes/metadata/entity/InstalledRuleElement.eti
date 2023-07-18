@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="InstalledRuleElement"
+  type="retireable"
+  desc="A rule element, which represents a variant of a rule"
+  exportable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="installedruleelement">
+  <column
+    desc="Gosu expression to evaluate."
+    name="Condition"
+    nullok="false"
+    type="longtext"/>
+  <typekey
+    desc="Existence type if this rule element condition is true. This column is only valid for existence rules."
+    name="Existence"
+    nullok="true"
+    typelist="APDDataExistenceType"/>
+  <column
+    desc="The default for a boolean value"
+    name="DefaultBooleanValue"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The default for a date value"
+    name="DefaultDateValue"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The default for a decimal value"
+    name="DefaultDecimalValue"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="2"/>
+    <columnParam
+      name="precision"
+      value="14"/>
+  </column>
+  <column
+    desc="The default for an integer value"
+    name="DefaultIntegerValue"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The default for a string value"
+    name="DefaultStringValue"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The code for a default typekey value"
+    name="DefaultTypekeyValue"
+    nullok="true"
+    type="patterncode"/>
+  <column
+    desc="Order in which this element should be evaluated, relative to other elements in the rule."
+    name="Sequence"
+    nullok="false"
+    type="integer"/>
+  <foreignkey
+    desc="The rule that this element belongs to"
+    fkentity="InstalledRule"
+    name="InstalledRule"
+    nullok="false"/>
+  <column
+    desc="The description of the validation issue for this element"
+    name="Issue"
+    nullok="true"
+    type="text"/>
+  <column
+    desc="Whether or not this element is valid and can be evaluated"
+    name="Valid"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Comma delimited string of targets for condition"
+    name="ConditionTargets"
+    nullok="true"
+    type="longtext"/>
+  <!-- Add an index on Sequence, InstalledRule and Retired to prevent duplicate sequence numbers on a rule -->
+</entity>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The scale of the basis to which the rate is applied"
+  name="RatingScale">
+  <typecode
+    code="1"
+    desc="Rate applies to basis amount"
+    name="Per Unit"/>
+  <typecode
+    code="100"
+    desc="Rate applies per 100 basis amount"
+    name="Per 100"/>
+  <typecode
+    code="1000"
+    desc="Rate applies per 1000 basis amount"
+    name="Per 1000"/>
+</typelist>

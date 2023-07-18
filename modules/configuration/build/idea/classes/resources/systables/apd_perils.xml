@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<import>
+  <APDPeril
+    public-id="fire">
+    <CodeIdentifier><![CDATA[fire]]></CodeIdentifier>
+    <Name><![CDATA[Fire]]></Name>
+    <Description><![CDATA[Fire]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="water">
+    <CodeIdentifier><![CDATA[water]]></CodeIdentifier>
+    <Name><![CDATA[Tap Water]]></Name>
+    <Description><![CDATA[Tap Water]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="storm">
+    <CodeIdentifier><![CDATA[storm]]></CodeIdentifier>
+    <Name><![CDATA[Storm]]></Name>
+    <Description><![CDATA[Storm]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="theft">
+    <CodeIdentifier><![CDATA[theft]]></CodeIdentifier>
+    <Name><![CDATA[Theft]]></Name>
+    <Description><![CDATA[Theft]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="rodents">
+    <CodeIdentifier><![CDATA[rodents]]></CodeIdentifier>
+    <Name><![CDATA[Rodent Damage]]></Name>
+    <Description><![CDATA[Rodent Damage]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="maliciousdamage">
+    <CodeIdentifier><![CDATA[maliciousdamage]]></CodeIdentifier>
+    <Name><![CDATA[Vandalism/Malicious Damage]]></Name>
+    <Description><![CDATA[Vandalism/Malicious Damage]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="unauteriseddamage">
+    <CodeIdentifier><![CDATA[unauteriseddamage]]></CodeIdentifier>
+    <Name><![CDATA[Damage by Third Party]]></Name>
+    <Description><![CDATA[Damage caused by unauthorizedthird parties]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="sonic">
+    <CodeIdentifier><![CDATA[sonic]]></CodeIdentifier>
+    <Name><![CDATA[Sonic Boom]]></Name>
+    <Description><![CDATA[Sonic Boom]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="riot">
+    <CodeIdentifier><![CDATA[riot]]></CodeIdentifier>
+    <Name><![CDATA[Riot and Strike]]></Name>
+    <Description><![CDATA[Riot and Strike]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="flood">
+    <CodeIdentifier><![CDATA[flood]]></CodeIdentifier>
+    <Name><![CDATA[Flood]]></Name>
+    <Description><![CDATA[Flood]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="lanslip">
+    <CodeIdentifier><![CDATA[lanslip]]></CodeIdentifier>
+    <Name><![CDATA[Landslip]]></Name>
+    <Description><![CDATA[Landslip]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="earthquake">
+    <CodeIdentifier><![CDATA[earthquake]]></CodeIdentifier>
+    <Name><![CDATA[Earthquake]]></Name>
+    <Description><![CDATA[Earthquake]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="tpbi">
+    <CodeIdentifier><![CDATA[tpbi]]></CodeIdentifier>
+    <Name><![CDATA[TP Bodily Injury]]></Name>
+    <Description><![CDATA[Third party bodily injury]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="tppr">
+    <CodeIdentifier><![CDATA[tppr]]></CodeIdentifier>
+    <Name><![CDATA[TP Property Damage]]></Name>
+    <Description><![CDATA[Third party property]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="collision">
+    <CodeIdentifier><![CDATA[collision]]></CodeIdentifier>
+    <Name><![CDATA[Collision]]></Name>
+    <Description><![CDATA[Vehicle collision]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="mallorca">
+    <CodeIdentifier><![CDATA[mallorca]]></CodeIdentifier>
+    <Name><![CDATA[Mallorca Protection]]></Name>
+    <Description><![CDATA[Mallorca protection]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="tpvehicles">
+    <CodeIdentifier><![CDATA[tpvehicles]]></CodeIdentifier>
+    <Name><![CDATA[TP Vehicle Damage]]></Name>
+    <Description><![CDATA[Third Party Vehicle Damage]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="losskeys">
+    <CodeIdentifier><![CDATA[losskeys]]></CodeIdentifier>
+    <Name><![CDATA[Loss of Keys]]></Name>
+    <Description><![CDATA[Loss of Keys]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="lightning">
+    <CodeIdentifier><![CDATA[lightning]]></CodeIdentifier>
+    <Name><![CDATA[Lightning]]></Name>
+    <Description><![CDATA[Lightning]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="animaldamage">
+    <CodeIdentifier><![CDATA[animaldamage]]></CodeIdentifier>
+    <Name><![CDATA[Animal Damage]]></Name>
+    <Description><![CDATA[ADamaged casued by hitting animals]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="animalbite">
+    <CodeIdentifier><![CDATA[animalbite]]></CodeIdentifier>
+    <Name><![CDATA[Animal Bite]]></Name>
+    <Description><![CDATA[Animal bite damage]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="specialequipdam">
+    <CodeIdentifier><![CDATA[specialequipdam]]></CodeIdentifier>
+    <Name><![CDATA[Special Equipment Damage]]></Name>
+    <Description><![CDATA[Special equipment damage]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="windcreendam">
+    <CodeIdentifier><![CDATA[windcreendam]]></CodeIdentifier>
+    <Name><![CDATA[Windscreen Damage]]></Name>
+    <Description><![CDATA[Windscreen damage]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="hail">
+    <CodeIdentifier><![CDATA[hail]]></CodeIdentifier>
+    <Name><![CDATA[Hail]]></Name>
+    <Description><![CDATA[Hail]]></Description>
+  </APDPeril>
+  <APDPeril
+    public-id="tpowndamage">
+    <CodeIdentifier><![CDATA[tpowndamage]]></CodeIdentifier>
+    <Name><![CDATA[Own Property Liability]]></Name>
+    <Description><![CDATA[Damage caused to own property not directly insured]]></Description>
+  </APDPeril>
+</import>

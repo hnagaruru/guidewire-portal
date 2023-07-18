@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="APDProductScreen">
+    <Require
+      name="product"
+      type="APDProduct"/>
+    <Require
+      name="policyPeriod"
+      type="PolicyPeriod"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser().inDevelopMode()"
+      name="inDevelopMode"
+      type="Boolean"/>
+    <Variable
+      initialValue="policyPeriod != null ? policyPeriod.OpenForEdit : CurrentLocation.InEditMode"
+      name="openForEdit"
+      recalculateOnRefresh="true"
+      type="Boolean"/>
+    <Toolbar>
+      <ToolbarButton
+        action="CurrentLocation.commit(); CurrentLocation.startEditing()"
+        hideIfReadOnly="true"
+        id="Save"
+        label="DisplayKey.get(&quot;Button.Save&quot;)"
+        shortcut="S"
+        visible="openForEdit"/>
+      <ToolbarButton
+        action="CurrentLocation.cancel(); APDProductManagementPage.go()"
+        hideIfReadOnly="true"
+        id="Cancel"
+        label="DisplayKey.get(&quot;Web.APDProduct.Button.Cancel&quot;)"
+        shortcut="L"
+        visible="policyPeriod == null"/>
+      <ToolbarButton
+        hideIfReadOnly="true"
+        id="Generate"
+        label="DisplayKey.get(&quot;Web.APDProduct.Button.Generate&quot;)"
+        visible="inDevelopMode">
+        <MenuItem
+          action="CurrentLocation.commit(); CurrentLocation.startEditing(); GenerateSourceCodePopup.push(product, ALL)"
+          id="GenerateAllMenuItem"
+          label="DisplayKey.get(&quot;Web.APDProduct.Button.Generate.GenerateAllMenuItem&quot;)"/>
+        <MenuItem
+          action="CurrentLocation.commit(); CurrentLocation.startEditing(); GenerateSourceCodePopup.push(product, BASE_CODE)"
+          id="GenerateBaseCodeMenuItem"
+          label="DisplayKey.get(&quot;Web.APDProduct.Button.Generate.GenerateBaseCodeMenuItem&quot;)"/>
+        <MenuItem
+          action="CurrentLocation.commit(); CurrentLocation.startEditing(); GenerateSourceCodePopup.push(product, EXTERNAL)"
+          id="GenerateExternalMenuItem"
+          label="DisplayKey.get(&quot;Web.APDProduct.Button.Generate.GenerateExternalMenuItem&quot;)"/>
+      </ToolbarButton>
+      <ToolbarButton
+        action="APDValidationResultsPopup.push(new gw.apd.model.generate.ProductGeneratorHelper(product, null))"
+        hideIfReadOnly="true"
+        id="Validate"
+        label="DisplayKey.get(&quot;Web.APDProduct.Button.Validate&quot;)"
+        shortcut="V"/>
+    </Toolbar>
+    <DetailViewPanel
+      editable="openForEdit">
+      <InputColumn>
+        <InputSetRef
+          def="APDProductInputSet(product, inDevelopMode)"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelRef
+      def="LocalizedValuesDV(product, {&quot;Name&quot;, &quot;Description&quot;}, {DisplayKey.get(&quot;Web.APDProductScreen.APDProduct.Name&quot;), DisplayKey.get(&quot;Web.APDProductScreen.APDProduct.Description&quot;)})"
+      editable="openForEdit"
+      id="ProductLocalizedValues"/>
+    <PanelRef
+      def="APDProductLinesCV(product, policyPeriod, openForEdit)"
+      editable="openForEdit"
+      mode="product.Multiline ? &quot;multi&quot; : &quot;single&quot;"/>
+  </Screen>
+</PCF>

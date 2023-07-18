@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The set of perils that can be claimed against for a cause of loss"
+  entity="APDPerilCause"
+  exportable="true"
+  loadable="false"
+  table="apdperilcause"
+  type="retireable">
+  <foreignkey
+    columnName="APDPerilID"
+    desc="The peril that owns this link"
+    fkentity="APDPeril"
+    name="Peril"
+    nullok="false"/>
+  <foreignkey
+    columnName="LossCauseID"
+    desc="The cause of loss that can result in a claim for this peril"
+    fkentity="APDLossCause"
+    name="LossCause"
+    nullok="false"/>
+</entity>

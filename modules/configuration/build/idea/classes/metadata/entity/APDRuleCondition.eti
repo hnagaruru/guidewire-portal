@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<entity
+  exportable="true"
+  final="false"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="APDRuleCondition"
+  desc="A condition to match"
+  table="apdrulecondition"
+  type="retireable">
+  <foreignkey
+    columnName="RuleElementID"
+    desc="The rule element for with this a data match component"
+    fkentity="APDRuleElement"
+    name="RuleElement"
+    nullok="false"/>
+  <foreignkey
+    columnName="AttributeID"
+    desc="The attribute that is to be compared. Either Attribute or Clause must have a value, but not both."
+    fkentity="APDAttribute"
+    name="Attribute"
+    nullok="true"/>
+  <foreignkey
+    columnName="ClauseID"
+    desc="The clause that is to be compared. Either Attribute or Clause must have a value, but not both."
+    fkentity="APDClause"
+    name="Clause"
+    nullok="true"/>
+  <column
+    desc="The value that will be used to evaluate this condition"
+    name="ConditionValue"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    fkentity="APDDropdownEntry"
+    name="CodeValue"
+    nullok="true"/>
+  <typekey
+    default="equals"
+    desc="The type of comparison to perform between the attribute and the value"
+    name="Operator"
+    nullok="false"
+    typelist="APDRuleConditionOperator"/>
+</entity>

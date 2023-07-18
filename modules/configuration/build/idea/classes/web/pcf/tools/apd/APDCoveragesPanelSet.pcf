@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="APDCoveragesPanelSet">
+    <Require
+      name="coverable"
+      type="APDCoverable"/>
+    <Require
+      name="parentClause"
+      type="APDClause"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="inDevelopMode"
+      type="boolean"/>
+    <Variable
+      initialValue="parentClause as APDCoverage"
+      name="parentCoverage"
+      type="APDCoverage"/>
+    <Variable
+      initialValue="parentCoverage == null"
+      name="isTopLevel"
+      type="boolean"/>
+    <Variable
+      initialValue="isTopLevel ? coverable.TopLevelCoverages : parentCoverage.SubCoverages"
+      name="coverages"
+      recalculateOnRefresh="true"
+      type="APDCoverage[]"/>
+    <Variable
+      initialValue="parentCoverage.AvailableSubClauses?.map(\cov -&gt; new gw.apd.web.APDClauseWrapper(cov))"
+      name="availableSubClauses"
+      recalculateOnRefresh="true"
+      type="gw.apd.web.APDClauseWrapper[]"/>
+    <ListDetailPanel
+      selectionName="coverageDetails"
+      selectionType="APDCoverage">
+      <PanelRef>
+        <Toolbar>
+          <ToolbarButton
+            id="AddChildCoverage"
+            label="DisplayKey.get(&quot;Web.APDCoverableCV.AddSubClauseButton&quot;)"
+            shortcut="A"
+            visible="openForEdit &amp;&amp; !isTopLevel">
+            <AddMenuItem
+              id="AddNewCoverage"
+              iterator="CoveragesLV"
+              label="DisplayKey.get(&quot;Web.APDCoverableCV.AddNewCoverage&quot;)"/>
+            <MenuItem
+              id="ExistingCoverages"
+              label="DisplayKey.get(&quot;Web.APDCoverableCV.ExistingCoverages&quot;)">
+              <MenuItemIterator
+                elementName="availableSubCov"
+                id="AvailableSubCoveragesIterator"
+                value="availableSubClauses"
+                valueType="gw.apd.web.APDClauseWrapper[]">
+                <IteratorSort
+                  sortBy="availableSubCov.Label"
+                  sortOrder="1"/>
+                <MenuItem
+                  action="availableSubCov.Clause.assignParent(parentCoverage)"
+                  id="ExistingCoverage"
+                  label="availableSubCov.Label"/>
+              </MenuItemIterator>
+            </MenuItem>
+          </ToolbarButton>
+          <AddButton
+            id="Add"
+            iterator="CoveragesLV"
+            label="DisplayKey.get(&quot;Button.Add&quot;)"
+            shortcut="A"
+            visible="openForEdit &amp;&amp; isTopLevel"/>
+          <RemoveButton
+            confirmMessage="DisplayKey.get(&quot;Web.APDCoverableCV.RemoveClause.ConfirmMessage&quot;)"
+            id="Remove"
+            iterator="CoveragesLV"
+            label="DisplayKey.get(&quot;Button.Remove&quot;)"
+            shortcut="R"/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="gw.apd.web.APDClauseHierarchyUIHelper.unassignParent(CheckedValues); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, entity.APDCoverage)"
+            id="UnassignSubClause"
+            iterator="CoveragesLV"
+            label="DisplayKey.get(&quot;Web.APDCoverableCV.UnassignSubClauseButton&quot;)"
+            shortcut="U"
+            visible="!isTopLevel"/>
+          <ToolbarDivider/>
+          <ToolbarButton
+            action="APDManageClauseCategoriesPopup.push(coverable, openForEdit)"
+            id="ManageCoverageCategories"
+            label="DisplayKey.get( &quot;Web.APDCoverableCV.ManageClauseCategoriesButton&quot; )"
+            shortcut="M"
+            visible="isTopLevel"/>
+        </Toolbar>
+        <ListViewPanel
+          id="CoveragesLV">
+          <RowIterator
+            editable="true"
+            elementName="coverage"
+            toCreateAndAdd="isTopLevel ? coverable.addCoverage(null) : parentCoverage.createAndAddSubCoverage()"
+            toRemove="coverable.removeClause(coverage)"
+            type="APDCoverage"
+            value="coverages"
+            valueType="APDCoverage[]">
+            <IteratorSort
+              sortBy="coverage.Sequence"
+              sortOrder="1"/>
+            <Row>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="Name"
+                label="DisplayKey.get(&quot;Web.APDCoverableCV.Name&quot;)"
+                required="true"
+                value="coverage.Name"/>
+              <TextCell
+                action="APDClauseTermsPopup.push(coverage, edition, openForEdit)"
+                enableSort="false"
+                id="TermsButton"
+                label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Terms&quot;)"
+                value="DisplayKey.get(&quot;Web.APDCoverableCV.EditTerms&quot;, gw.apd.util.APDStringUtil.makeLabelCount(coverage.Terms.Count))"/>
+              <TextCell
+                action="APDSubCoveragesPopup.push(coverage, edition, openForEdit, inDevelopMode)"
+                enableSort="false"
+                id="SubClausesButton"
+                label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.SubClauses&quot;)"
+                value="DisplayKey.get(&quot;Web.APDCoverableCV.EditSubClauses&quot;, gw.apd.util.APDStringUtil.makeLabelCount(coverage.SubCoverages.Count))"/>
+              <TextCell
+                action="APDCoveragePopup.push(coverage, openForEdit)"
+                enableSort="false"
+                id="EditButton"
+                label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Details&quot;)"
+                value="DisplayKey.get(&quot;Web.APDCoverableCV.EditCoverageDetails&quot;)"/>
+              <RangeCell
+                actionAvailable="isTopLevel"
+                editable="isTopLevel"
+                enableSort="false"
+                id="ClauseCategory"
+                label="DisplayKey.get(&quot;Web.APDCoverableCV.ClauseCategory&quot;)"
+                required="true"
+                value="coverage.ClauseCategory"
+                valueRange="coverage.Coverable.ClauseCategories"
+                valueType="APDClauseCategory">
+                <MenuItem
+                  action="APDClauseCategoryPopup.push(coverage.ClauseCategory, CurrentLocation.InEditMode)"
+                  available="coverage.ClauseCategory != null"
+                  id="EditCategory"
+                  label="DisplayKey.get(&quot;Web.APDCoverableCV.EditClauseCategory&quot;)"/>
+                <PickerMenuItem
+                  action="APDNewLibraryCategoryPopup.push(coverable)"
+                  id="AddNewCategory"
+                  label="DisplayKey.get(&quot;Web.APDCoverageSearchResultsLV.AddNewCategoryMenu&quot;)"
+                  onPick="coverage.ClauseCategory = PickedValue"/>
+              </RangeCell>
+              <RangeCell
+                action="APDClauseRulePopup.push(coverage.getEditionRule(edition, APDRuleType.TC_EXISTENCE), coverage, APDRuleType.TC_EXISTENCE, edition, openForEdit)"
+                enableSort="false"
+                id="Usage"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDCoverableCV.ExistenceRule&quot;)"
+                value="coverage.getEditionRule(edition, APDRuleType.TC_EXISTENCE).DefaultExistence ?: APDDataExistenceType.TC_OPTIONAL"
+                valueRange="APDDataExistenceType.getTypeKeys(false)"
+                valueType="APDDataExistenceType"/>
+              <TextCell
+                action="APDTagPopup.push(coverage, openForEdit)"
+                editable="false"
+                enableSort="false"
+                id="Tags"
+                label="DisplayKey.get(&quot;Web.APDProductScreen.APDCoverableCV.Tags&quot;)"
+                value="coverage.TagDisplayValue"
+                visible="false"/>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="Description"
+                label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverableCV.Description&quot;))"
+                value="coverage.Description"/>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="CodeIdentifier"
+                label="DisplayKey.get(&quot;Web.APD.RequiredForGeneration&quot;, DisplayKey.get(&quot;Web.APDCoverableCV.CodeIdentifier&quot;, coverable.LinePrefix))"
+                value="coverage.CodeIdentifier"
+                visible="inDevelopMode"/>
+              <ButtonCell
+                hideIfDisabled="false"
+                hideIfReadOnly="true"
+                id="MoveButton"
+                label="DisplayKey.get(&quot;Web.APD.LVColumnHeading.Move&quot;)"
+                value="DisplayKey.get(&quot;Web.APDProductScreen.APDField.Move&quot;)">
+                <MenuItem
+                  action="coverage.moveUp()"
+                  available="coverage.canMoveUp()"
+                  id="MoveUp"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDCoverage.Move.Up&quot;)"/>
+                <MenuItem
+                  action="coverage.moveDown()"
+                  available="coverage.canMoveDown()"
+                  id="MoveDown"
+                  label="DisplayKey.get(&quot;Web.APDProductScreen.APDCoverage.Move.Down&quot;)"/>
+              </ButtonCell>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+      <CardViewPanel
+        hideTabIfSingle="true">
+        <Card
+          id="CoverageDetails"
+          title="&quot;&quot;">
+          <PanelRow>
+            <PanelColumn>
+              <PanelRef
+                def="LocalizedValuesDV(coverageDetails, {&quot;Name&quot;, &quot;Description&quot;}, {DisplayKey.get(&quot;Web.APDCoverableCV.Name&quot;), DisplayKey.get(&quot;Web.APDCoverableCV.Description&quot;)})"
+                id="CoverageLocalizedValues"/>
+            </PanelColumn>
+          </PanelRow>
+        </Card>
+      </CardViewPanel>
+    </ListDetailPanel>
+  </PanelSet>
+</PCF>

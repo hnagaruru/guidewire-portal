@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterCommit="if (account != null &amp;&amp; selectionOfProducer != null) {newProduct.createSubmission(account, selectionOfProducer)}"
+    afterEnter="newProduct.addDefaultSingleLine()"
+    beforeCommit="if (newProduct.Multiline) newProduct.addDefaultSingleLine()"
+    canEdit="true"
+    canVisit="true"
+    id="APDNewProductPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDNewProduct.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDNewProductPopup(account : Account, selectionOfProducer: ProducerSelection)"/>
+    <Variable
+      name="account"
+      type="Account"/>
+    <Variable
+      name="selectionOfProducer"
+      type="ProducerSelection"/>
+    <Variable
+      initialValue="new APDProduct()"
+      name="newProduct"
+      type="APDProduct"/>
+    <Variable
+      initialValue="User.util.CurrentUser"
+      name="currentUser"
+      type="User"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSetRef
+            def="APDProductAndLineInputSet(newProduct)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

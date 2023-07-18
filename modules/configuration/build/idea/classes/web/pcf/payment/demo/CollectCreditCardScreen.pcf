@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    editable="true"
+    id="CollectCreditCardScreen">
+    <Require
+      name="jobNumber"
+      type="String"/>
+    <Variable
+      initialValue="loadJob(jobNumber)"
+      name="job"
+      type="Job"/>
+    <Variable
+      initialValue="new gw.payment.paymentgateway.impl.TokenizedCreditCardDetails()"
+      name="tokenizedCard"
+      type="gw.payment.paymentgateway.impl.TokenizedCreditCardDetails"/>
+    <DetailViewPanel
+      editable="true">
+      <InputColumn>
+        <Label
+          label="DisplayKey.get('Web.UpFrontPayment.Demo.CardDetails')"/>
+        <TextInput
+          editable="false"
+          id="CardName"
+          label="DisplayKey.get('Web.PaymentIntegration.CollectCreditCardPage.CardName')"
+          value="tokenizedCard.CardName"
+          valueType="String"/>
+        <TextInput
+          editable="false"
+          id="CardToken"
+          label="DisplayKey.get('Web.PaymentIntegration.CollectCreditCardPage.Token')"
+          value="tokenizedCard.Token"
+          valueType="String"/>
+        <ContentInput>
+          <Link
+            action="CollectCreditCardPopup.push(jobNumber, tokenizedCard)"
+            id="CollectCreditCardButton"
+            label="DisplayKey.get('Web.PaymentIntegration.CollectCreditCardPage.CollectCardButton')"
+            styleClass="bigButton"/>
+          <Link
+            action="AccountFile_Summary.go(job.Policy.Account)"
+            id="ReturnToAccountButton"
+            label="DisplayKey.get('Web.PaymentIntegration.CollectCreditCardPage.ReturnToAccountDetails')"
+            styleClass="bigButton"/>
+        </ContentInput>
+      </InputColumn>
+    </DetailViewPanel>
+    <Code>uses gw.api.util.DisplayableException
+
+function loadJob(jobNumnber : String) : Job {
+  var aJob = Job.finder.findJobByJobNumber(jobNumber)
+  var currentUser: User = User.util.CurrentUser
+  if (not currentUser.canView(aJob)) {
+    throw new DisplayableException(DisplayKey.get("Java.Error.Permission.View", "job"))
+  }
+  return aJob
+}
+
+    </Code>
+  </Screen>
+</PCF>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    editable="openForEdit"
+    id="APDRiskScreen">
+    <Require
+      name="apdLine"
+      type="APDRiskPolicyLine"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="new gw.apd.model.CoverDefinitionHelper()"
+      name="coverDefinitionHelper"
+      type="gw.apd.model.CoverDefinitionHelper"/>
+    <Variable
+      initialValue="apdLine.APDEdition"
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Variable
+      initialValue="new gw.api.web.userpreference.UserPreferencesOfCurrentUser()"
+      name="userPreferences"
+      type="gw.api.web.userpreference.UserPreferencesOfCurrentUser"/>
+    <Toolbar>
+      <ToolbarButton
+        action="userPreferences.toggleProductDesignMode()"
+        id="ToggleProductDesignMode"
+        label="userPreferences.inUseMode() ? DisplayKey.get(&quot;Job.Operation.ToggleDesignerMode&quot;) : DisplayKey.get(&quot;Job.Operation.ToggleUserMode&quot;)"
+        visible="gw.api.system.PCDependenciesGateway.ServerMode.isDev()"/>
+      <WizardButtons/>
+      <ToolbarButtonSetRef
+        mode="apdLine.Branch.Job.Subtype"
+        toolbarButtonSet="JobWizardToolbarButtonSet(apdLine.Branch, apdLine.Branch.Job, jobWizardHelper)"/>
+    </Toolbar>
+    <PanelRef
+      def="OOSEPanelSet(apdLine.Branch, jobWizardHelper)"/>
+    <PanelRef
+      def="APDRiskCoverablePanelSet(apdLine, openForEdit, jobWizardHelper, coverDefinitionHelper, edition)"/>
+  </Screen>
+</PCF>

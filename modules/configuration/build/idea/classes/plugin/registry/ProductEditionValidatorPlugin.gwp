@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IStartablePlugin"
+  name="ProductEditionValidatorPlugin">
+  <plugin-gosu
+    gosuclass="gw.plugin.productedition.ProductEditionValidatorPlugin"/>
+</plugin>

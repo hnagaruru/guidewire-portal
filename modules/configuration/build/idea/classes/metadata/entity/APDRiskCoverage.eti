@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A coverage clause covering a risk"
+  entity="APDRiskCoverage"
+  supertype="APDRiskClause">
+  <foreignkey
+    columnName="CoverageID"
+    desc="The coverage pattern defining this coverage"
+    fkentity="APDCoverage"
+    name="Coverage"
+    nullok="false"/>
+  <foreignkey
+    columnName="ThirdPartyUnerwriterID"
+    desc="The organisation that underwrites the coverage"
+    exportasid="true"
+    fkentity="ProducerCode"
+    name="ThirdPartyUnderwriter"
+    nullok="true"/>
+  <array
+    arrayentity="APDRiskCovCost"
+    desc="The cost of this coverage (itemised)"
+    name="RiskCovCosts"/>
+  <array
+    arrayentity="APDRiskCovPricing"
+    desc="Pricing for this coverage that are used to create costs"
+    name="CostPricing"
+    owner="true"/>
+</subtype>

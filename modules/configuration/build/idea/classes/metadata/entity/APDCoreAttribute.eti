@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="APDCoreAttribute"
+  desc="Core application field; used for definition of core fields in rules etc."
+  supertype="APDAttribute">
+  <foreignkey
+    desc="The entity to which this attribute belongs"
+    fkentity="APDCoverable"
+    name="Coverable"
+    nullok="true"/>
+  <typekey
+    desc="The core field"
+    name="FieldType"
+    nullok="false"
+    typelist="APDCoreFieldType"/>
+</subtype>

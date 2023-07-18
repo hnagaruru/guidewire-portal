@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    editable="isEditable"
+    id="CovTermInputSet"
+    mode="default"
+    visible="isVisible">
+    <Require
+      name="term"
+      type="gw.api.domain.covterm.CovTerm"/>
+    <Require
+      name="openForEdit"
+      type="boolean"/>
+    <Require
+      name="jobWizardHelper"
+      type="gw.api.web.job.JobWizardHelper"/>
+    <Variable
+      initialValue="term.Clause.OwningCoverable"
+      name="coverable"
+      type="Coverable"/>
+    <Variable
+      initialValue="gw.web.rules.APDRulesHelper.isVisible(coverable, term.Pattern)"
+      name="isVisible"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.web.rules.APDRulesHelper.isEditable(coverable, term.Pattern)"
+      name="isEditable"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <TextInput
+      editable="true"
+      id="DefaultInput"
+      label="term.Pattern.DisplayName"
+      required="term.Pattern.Required"
+      value="term"
+      valueType="gw.api.domain.covterm.CovTerm">
+      <PostOnChange
+        deferUpdate="false"
+        disablePostOnEnter="not gw.web.rules.APDRulesHelper.hasDependents(coverable, term.Pattern)"
+        onChange="gw.web.rules.APDRulesHelper.onChange(coverable, jobWizardHelper)"/>
+    </TextInput>
+  </InputSet>
+</PCF>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="if(parent == null) (cbl as APDProductLine).buildRiskPolicyLine(lineContainer) else cbl.buildRiskCoverable(parent)"
+    canEdit="true"
+    canVisit="true"
+    id="APDNewCoverablePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDNewCoverable.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDNewCoverablePopup(parent: APDRiskCoverable)"/>
+    <LocationEntryPoint
+      signature="APDNewCoverablePopup(lineContainer: APDManualPolicyLine)"/>
+    <Variable
+      name="parent"
+      type="APDRiskCoverable"/>
+    <Variable
+      name="lineContainer"
+      type="APDManualPolicyLine"/>
+    <Variable
+      initialValue="lineContainer.Branch.Policy.APDProduct"
+      name="product"
+      type="APDProduct"/>
+    <Variable
+      initialValue="parent == null ? product.createAndAddProductLine() : parent.Coverable.addCoverable()"
+      name="cbl"
+      type="APDCoverable"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSetRef
+            def="APDCoverableInputSet(cbl)"
+            mode="cbl typeis APDProductLine ? &quot;line&quot; : null"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

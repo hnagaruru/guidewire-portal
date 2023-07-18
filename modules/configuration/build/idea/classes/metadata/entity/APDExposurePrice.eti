@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The price for an exposure where exposure pricing is used"
+  effDatedBranchType="PolicyPeriod"
+  entity="APDExposurePrice"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="apdexposureprice"
+  type="effdated">
+  <foreignkey
+    columnName="CoveragePricingID"
+    desc="The coverage pricing to which this exposure price belongs"
+    fkentity="APDRiskCovPricing"
+    name="CoveragePricing"
+    nullok="false"/>
+  <foreignkey
+    columnName="RiskExposureID"
+    desc="The risk exposure being priced"
+    fkentity="APDRiskExposure"
+    name="RiskExposure"
+    nullok="true"/>
+  <foreignkey
+    columnName="RiskCoverableID"
+    desc="The risk coverable (as an exposure) being priced"
+    fkentity="APDRiskCoverable"
+    name="RiskCoverable"
+    nullok="true"/>
+  <column
+    desc="The rate, excluding adjustments, to apply to the basis"
+    name="Rate"
+    nullok="true"
+    type="rate">
+  </column>
+</entity>

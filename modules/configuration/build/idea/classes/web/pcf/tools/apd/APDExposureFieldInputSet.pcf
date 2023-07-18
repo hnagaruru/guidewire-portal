@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="APDExposureFieldInputSet">
+    <Require
+      name="field"
+      type="APDExposureField"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <InputSetRef
+      def="APDAttributeInputSet(field, edition)"/>
+    <TypeKeyInput
+      editable="not field.Jurisdiction and not field.ExposureParty"
+      id="Type"
+      label="DisplayKey.get(&quot;Web.Policy.ManualLine.APDField.Type&quot;)"
+      required="true"
+      value="field.Type"
+      valueType="APDFieldType">
+      <PostOnChange
+        onChange="field.DropDownType = field.Type == APDFieldType.TC_TYPEKEY ? APDDropDownType.TC_TYPELIST : null"/>
+    </TypeKeyInput>
+    <BooleanRadioInput
+      editable="true"
+      falseLabel="DisplayKey.get(&quot;Web.Policy.ManualLine.APDField.Jurisdiction.Disabled&quot;)"
+      id="Jurisdiction"
+      label="DisplayKey.get(&quot;Web.Policy.ManualLine.APDField.Jurisdiction&quot;)"
+      trueLabel="DisplayKey.get(&quot;Web.Policy.ManualLine.APDField.Jurisdiction.Enabled&quot;)"
+      value="field.Jurisdiction"
+      visible="field.Type == APDFieldType.TC_LOCATION">
+      <PostOnChange/>
+    </BooleanRadioInput>
+  </InputSet>
+</PCF>

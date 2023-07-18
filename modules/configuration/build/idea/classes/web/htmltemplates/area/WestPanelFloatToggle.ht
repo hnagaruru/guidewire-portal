@@ -1,0 +1,3 @@
+<div role="button" data-gw-click="gwWestPanel.toggleMinMax" data-gw-draggable="gwWestPanel" id="${renderId}" aria-label="${label}">
+  <div class="gw-icon"></div>
+</div>

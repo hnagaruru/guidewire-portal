@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="APDTagApplicability" desc="Defines whether or not a tag is applicable to its owning element">
+  <typecode
+    code="applies"
+    desc="Applies"
+    name="Applies"
+    priority="10"/>
+  <typecode
+    code="doesnotapply"
+    desc="Does not apply"
+    name="Does not apply"
+    priority="20"/>
+</typelist>

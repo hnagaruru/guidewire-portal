@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<subtype
+  desc="Involved Party Account Contact Role"
+  xmlns="http://guidewire.com/datamodel"
+  entity="APDInvolvedParty"
+  supertype="AccountContactRole"></subtype>

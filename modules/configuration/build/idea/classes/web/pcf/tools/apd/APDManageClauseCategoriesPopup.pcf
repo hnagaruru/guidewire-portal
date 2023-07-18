@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="coverable.ProductLine.productLineUpdated()"
+    canEdit="startInEditMode"
+    id="APDManageClauseCategoriesPopup"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.APDManageClauseCategoriesPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDManageClauseCategoriesPopup( coverable : APDCoverable )"/>
+    <LocationEntryPoint
+      signature="APDManageClauseCategoriesPopup( coverable : APDCoverable, startInEditMode : boolean)"/>
+    <Variable
+      name="coverable"
+      type="APDCoverable"/>
+    <Variable
+      initialValue="false"
+      name="startInEditMode"
+      type="boolean"/>
+    <Screen
+      editable="true"
+      id="ListAndDetailClausecategoriesScreen">
+      <ListDetailPanel
+        selectionName="clauseCategory"
+        selectionType="APDClauseCategory">
+        <PanelRef
+          def="APDClauseCategoryLV( coverable )"
+          id="ClauseCategories">
+          <Toolbar>
+            <EditButtons/>
+            <IteratorButtons
+              id="AddRemoveButtons"
+              iterator="ClauseCategories.CategoryIterator"
+              removeFlags="no isUsedOnCoverable"/>
+          </Toolbar>
+        </PanelRef>
+        <CardViewPanel
+          hideTabIfSingle="true">
+          <Card
+            id="ClauseCategoryDetails"
+            title="DisplayKey.get(&quot;Web.APDManageClauseCategoriesPopup.Details&quot;)">
+            <DetailViewPanel>
+              <InputColumn>
+                <InputSetRef
+                  def="APDClauseCategoryInputSet(clauseCategory, false)"/>
+              </InputColumn>
+            </DetailViewPanel>
+            <PanelRef
+              def="LocalizedValuesDV(clauseCategory, {&quot;Name&quot;, &quot;Description&quot;}, {DisplayKey.get(&quot;Web.APDClauseCategoryInputSet.Name&quot;), DisplayKey.get(&quot;Web.APDClauseCategoryInputSet.Description&quot;)})"
+              id="LocalizedFields"/>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </Screen>
+  </Popup>
+</PCF>

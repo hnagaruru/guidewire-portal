@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterEnter="riskScheduleItems.each(\si -&gt; term.buildScheduleTerm(si))"
+    canEdit="true"
+    canVisit="true"
+    id="APDNewScheduleTermPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Policy.ManualLine.APDNewScheduleTerm.Title&quot;)">
+    <LocationEntryPoint
+      signature="APDNewScheduleTermPopup(riskScheduleItems: APDRiskScheduleItem[], clause: APDClause, edition : APDProductLineEdition)"/>
+    <Variable
+      name="riskScheduleItems"
+      type="APDRiskScheduleItem[]"/>
+    <Variable
+      name="clause"
+      type="APDClause"/>
+    <Variable
+      name="edition"
+      type="APDProductLineEdition"/>
+    <Variable
+      initialValue="clause.createAndAddScheduleTerm()"
+      name="term"
+      type="APDTerm"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSetRef
+            def="APDScheduleTermInputSet(term, edition)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="LocalizedValuesDV(term, {&quot;Label&quot;, &quot;Description&quot;}, {DisplayKey.get(&quot;Web.Policy.ManualLine.APDAttribute.Label&quot;), DisplayKey.get(&quot;Web.Policy.ManualLine.APDAttribute.Description&quot;)})"
+        id="ScheduleTermLocalizedValues"/>
+    </Screen>
+  </Popup>
+</PCF>

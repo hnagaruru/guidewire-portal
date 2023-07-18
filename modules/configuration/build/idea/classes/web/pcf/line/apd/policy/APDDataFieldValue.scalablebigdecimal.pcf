@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ModalCell
+    id="APDDataFieldValue"
+    mode="scalablebigdecimal">
+    <Require
+      name="dataField"
+      type="APDDataField"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <TextCell
+      editable="true"
+      id="value"
+      validationExpression="dataField.MinMaxError"
+      value="dataField.ScalableDecimalValue"
+      valueType="java.math.BigDecimal"
+      valueVisible="dataField.VisibleInUI"/>
+  </ModalCell>
+</PCF>

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ModalCell
+    id="APDDataFieldValue"
+    mode="party">
+    <Require
+      name="dataField"
+      type="APDDataField"/>
+    <Require
+      name="edition"
+      type="APDProductLineEdition"/>
+    <RangeCell
+      align="left"
+      editable="true"
+      id="value"
+      value="dataField.Party"
+      valueRange="dataField.Branch.PolicyContactRoles.whereTypeIs(APDPolicyInvolvedParty)"
+      valueType="PolicyContactRole"
+      valueVisible="dataField.VisibleInUI">
+      <PickerMenuItem
+        onPick="dataField.Party = dataField.Branch.addNewPolicyContactRoleForContact(PickedValue, TC_APDPOLICYINVOLVEDPARTY)"
+        id="AddFromSearch"
+        label="DisplayKey.get(&quot;Web.Policy.Contact.FromAddressBook&quot;)"
+        action="ContactSearchPopup.push(TC_APDINVOLVEDPARTY)"/>
+      <MenuItemIterator
+        elementName="contactType"
+        id="addNewContactType"
+        value="gw.plugin.Plugins.get(gw.plugin.contact.IContactConfigPlugin).getAllowedContactTypesForPolicyContactRoleType(TC_APDPOLICYINVOLVEDPARTY)"
+        valueType="typekey.ContactType[]">
+        <IteratorSort
+          sortBy="contactType.DisplayName"
+          sortOrder="1"/>
+        <PickerMenuItem
+          id="ContactType"
+          label="DisplayKey.get(&quot;Web.Contact.AddNewOfType&quot;, contactType)"
+          action="NewAPDPolicyInvolvedPartyPopup.push(dataField.Branch.ManualLine,contactType)"
+          onPick="dataField.Party = PickedValue"/>
+      </MenuItemIterator>
+      <MenuItem
+        id="existingInvolvedParties"
+        label="DisplayKey.get(&quot;Web.Policy.Contact.AddExisting&quot;,APDPolicyInvolvedParty.Type.TypeInfo.DisplayName)">
+        <MenuItemIterator
+          elementName="availableInvolvedParty"
+          id="AddOtherInvolvedParty"
+          value="dataField.Branch.UnassignedAPDInvolvedParties"
+          valueType="entity.AccountContactView[]">
+          <MenuItem
+            action="dataField.Party = dataField.Branch.ManualLine.addNewAPDPolicyInvolvedPartyForContact(availableInvolvedParty.AccountContact.Contact)"
+            id="OtherInvolvedParty"
+            label="availableInvolvedParty.DisplayName"/>
+        </MenuItemIterator>
+      </MenuItem>
+      <MenuItem
+        id="availableContacts"
+        label="DisplayKey.get(&quot;Web.Policy.Contact.AddOtherContacts&quot;)">
+        <MenuItemIterator
+          elementName="availableContact"
+          id="AddOtherContact"
+          value="dataField.Branch.APDInvolvedPartyOtherCandidates"
+          valueType="entity.AccountContactView[]">
+          <MenuItem
+            action="dataField.Party = dataField.Branch.ManualLine.addNewAPDPolicyInvolvedPartyForContact(availableContact.AccountContact.Contact)"
+            id="OtherContact"
+            label="availableContact.DisplayName"/>
+        </MenuItemIterator>
+      </MenuItem>
+    </RangeCell>
+  </ModalCell>
+</PCF>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A column for a value associated with a dropdown entry "
+  entity="APDDropdownColumn"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="apddropdowncolumn"
+  type="retireable">
+  <column
+    desc="The name that describes the value within a package"
+    name="Name"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="dropdownvaluename"/>
+  </column>
+  <typekey
+    desc="The type of value"
+    name="ValueType"
+    nullok="true"
+    typelist="CovTermModelVal"/>
+  <column
+    desc="The sequence the values are to be listed within a package"
+    name="Sequence"
+    nullok="true"
+    type="integer"/>
+  <foreignkey
+    columnName="TermID"
+    desc="The attribute for which this is the dropdown code column definition"
+    fkentity="APDTerm"
+    name="Term"
+    nullok="false"/>
+</entity>

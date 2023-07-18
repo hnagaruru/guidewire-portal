@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The value of an option/package term"
+  entity="APDDropdownValue"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="apddropdownvalue"
+  type="retireable">
+  <column
+    desc="The value if a number"
+    name="DecimalValue"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="2"/>
+    <columnParam
+      name="precision"
+      value="14"/>
+  </column>
+  <column
+    desc="The value if an integer"
+    name="IntegerValue"
+    nullok="true"
+    type="integer"/>
+  <foreignkey
+    columnName="DropdownID"
+    desc="The dropdown entry for which this is the value"
+    fkentity="APDDropdownEntry"
+    name="Dropdown"
+    nullok="false"/>
+  <foreignkey
+    columnName="DropdownColumnID"
+    desc="The column to which the value belongs within the entry"
+    fkentity="APDDropdownColumn"
+    name="DropdownColumn"
+    nullok="false"/>
+</entity>
