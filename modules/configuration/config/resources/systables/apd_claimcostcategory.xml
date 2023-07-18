@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<import>
+  <APDClaimCostCategory
+    public-id="repairs">
+    <CodeIdentifier><![CDATA[repairs]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Property Repairs]]></Name>
+    <Description><![CDATA[Property Repairs]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="replacement">
+    <CodeIdentifier><![CDATA[replacement]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Property Replacement]]></Name>
+    <Description><![CDATA[Property Replacement]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="lostrent">
+    <CodeIdentifier><![CDATA[lostrent]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Loss of Rent]]></Name>
+    <Description><![CDATA[Loss of Rent]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="demolition">
+    <CodeIdentifier><![CDATA[demolition]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Site Clearance]]></Name>
+    <Description><![CDATA[Demolition and site clearance]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="supportequip">
+    <CodeIdentifier><![CDATA[supportequip]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Age/Disabled Equipment]]></Name>
+    <Description><![CDATA[Reconstruction of age/disabled equipment]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="alternateaccom">
+    <CodeIdentifier><![CDATA[alternateaccom]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Alternate Accommodations]]></Name>
+    <Description><![CDATA[Alternate Accommodations]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="vehiclerepairs">
+    <CodeIdentifier><![CDATA[vehiclerepairs]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Vehicle Repairs]]></Name>
+    <Description><![CDATA[Vehicle Repairs]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="vehicletowing">
+    <CodeIdentifier><![CDATA[vehicletowing]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Vehicle Recovery]]></Name>
+    <Description><![CDATA[Vehicle recovery]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="windscreen">
+    <CodeIdentifier><![CDATA[windscreen]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Windscreen]]></Name>
+    <Description><![CDATA[Windscreen]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="legal">
+    <CodeIdentifier><![CDATA[legal]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Legal]]></Name>
+    <Description><![CDATA[Legal]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="medical">
+    <CodeIdentifier><![CDATA[medical]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Medical]]></Name>
+    <Description><![CDATA[Medical]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="earnings">
+    <CodeIdentifier><![CDATA[earnings]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Loss of Earnings]]></Name>
+    <Description><![CDATA[Loss of Earnings]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="compensation">
+    <CodeIdentifier><![CDATA[compensation]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Compensation (general)]]></Name>
+    <Description><![CDATA[Compensation (general)]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="vehiclereplacement">
+    <CodeIdentifier><![CDATA[vehiclereplacement]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Vehicle Replacement]]></Name>
+    <Description><![CDATA[Vehicle replacement]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="substitutecar">
+    <CodeIdentifier><![CDATA[substitutecar]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Rental Vehicle]]></Name>
+    <Description><![CDATA[Rental Vehicle]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="carvalet">
+    <CodeIdentifier><![CDATA[carvalet]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Car Valet]]></Name>
+    <Description><![CDATA[Car Valet]]></Description>
+  </APDClaimCostCategory>
+  <APDClaimCostCategory
+    public-id="lockskeys">
+    <CodeIdentifier><![CDATA[lockskeys]]></CodeIdentifier>
+    <CostType><![CDATA[claimscost]]></CostType>
+    <Name><![CDATA[Locks and Keys]]></Name>
+    <Description><![CDATA[Locks and keys]]></Description>
+  </APDClaimCostCategory>
+</import>

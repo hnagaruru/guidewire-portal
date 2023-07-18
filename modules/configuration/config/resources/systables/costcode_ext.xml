@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<import>
+  <CostCode public-id="gst">
+    <ChargePatern>PremiumIncludingTaxes</ChargePatern>
+    <CostCode>gst</CostCode>
+    <CostName>GST</CostName>
+    <Description>Goods and Services Tax</Description>
+    <Overrideable>false</Overrideable>
+    <ProrationMethod>ProRataByDays</ProrationMethod>
+    <RateAmountType>TaxSurcharge</RateAmountType>
+  </CostCode>
+  <CostCode public-id="incomePrem">
+    <ChargePatern>PremiumIncludingTaxes</ChargePatern>
+    <CostCode>incomePrem</CostCode>
+    <CostName>Income Premium</CostName>
+    <Description>Income Replacement Premium</Description>
+    <Overrideable>false</Overrideable>
+    <ProrationMethod>ProRataByDays</ProrationMethod>
+    <RateAmountType>StdPremium</RateAmountType>
+  </CostCode>
+  <CostCode public-id="ipt">
+    <ChargePatern>PremiumIncludingTaxes</ChargePatern>
+    <CostCode>ipt</CostCode>
+    <CostName>IPT</CostName>
+    <Description>Insurance premium tax</Description>
+    <Overrideable>false</Overrideable>
+    <ProrationMethod>ProRataByDays</ProrationMethod>
+    <RateAmountType>TaxSurcharge</RateAmountType>
+  </CostCode>
+  <CostCode public-id="premium">
+    <ChargePatern>PremiumIncludingTaxes</ChargePatern>
+    <CostCode>premium</CostCode>
+    <CostName>Premium</CostName>
+    <Description>General premium</Description>
+    <Overrideable>false</Overrideable>
+    <ProrationMethod>ProRataByDays</ProrationMethod>
+    <RateAmountType>StdPremium</RateAmountType>
+  </CostCode>
+  <CostCode public-id="stampDuty">
+    <ChargePatern>PremiumIncludingTaxes</ChargePatern>
+    <CostCode>stampDuty</CostCode>
+    <CostName>Stamp Duty</CostName>
+    <Description>Stamp Duty</Description>
+    <Overrideable>false</Overrideable>
+    <ProrationMethod>ProRataByDays</ProrationMethod>
+    <RateAmountType>TaxSurcharge</RateAmountType>
+  </CostCode>
+  <CostCode public-id="tax">
+    <ChargePatern>Taxes</ChargePatern>
+    <CostCode>tax</CostCode>
+    <CostName>Tax</CostName>
+    <Description>Tax</Description>
+    <Overrideable>false</Overrideable>
+    <ProrationMethod>Flat</ProrationMethod>
+    <RateAmountType>TaxSurcharge</RateAmountType>
+  </CostCode>
+  <CostCode public-id="vat">
+    <ChargePatern>PremiumIncludingTaxes</ChargePatern>
+    <CostCode>vat</CostCode>
+    <CostName>VAT</CostName>
+    <Description>Value Added Tax</Description>
+    <Overrideable>false</Overrideable>
+    <ProrationMethod>ProRataByDays</ProrationMethod>
+    <RateAmountType>TaxSurcharge</RateAmountType>
+  </CostCode>
+</import>

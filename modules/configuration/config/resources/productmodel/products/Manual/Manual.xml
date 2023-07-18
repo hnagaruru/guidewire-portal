@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Product
+  abbreviation="APD"
+  codeIdentifier="Manual"
+  daysUntilQuoteNeeded="14"
+  defaultTermType="Annual"
+  priority="50"
+  productAccountType="Any"
+  productType="Commercial"
+  public-id="Manual"
+  quoteRoundingLevel="2"
+  quoteRoundingMode="HALF_EVEN">
+  <ProductPolicyLinePatterns>
+    <ProductPolicyLinePattern
+      codeIdentifier="zbbiepbhnto3veh11e1jrjvt1ha"
+      policyLinePattern="ManualLine"
+      public-id="zbbiepbhnto3veh11e1jrjvt1ha"/>
+  </ProductPolicyLinePatterns>
+  <ProductQuestionSetPatterns/>
+  <DocTemplateRefs/>
+  <AvailablePolicyTerms>
+    <AvailablePolicyTerm
+      codeIdentifier="z6jji9lasvk203kj4nhsi8pqfc9"
+      public-id="z6jji9lasvk203kj4nhsi8pqfc9"
+      termType="Other"/>
+    <AvailablePolicyTerm
+      codeIdentifier="z4ugonk22lcs8fnnnqtmpn2nn7a"
+      public-id="z4ugonk22lcs8fnnnqtmpn2nn7a"
+      termType="Annual"/>
+  </AvailablePolicyTerms>
+  <ProductModifierPatterns/>
+</Product>
