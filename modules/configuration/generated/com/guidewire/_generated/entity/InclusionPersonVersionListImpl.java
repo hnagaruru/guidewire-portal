@@ -1,0 +1,25 @@
+package com.guidewire._generated.entity;
+
+@javax.annotation.Generated(value = "com.guidewire.pl.metadata.codegen.Codegen", comments = "InclusionPerson.eti;InclusionPerson.eix;InclusionPerson.etx")
+@java.lang.SuppressWarnings(value = {"deprecation", "unchecked"})
+public class InclusionPersonVersionListImpl extends com.guidewire.pl.system.entity.proxy.EffDatedVersionListImpl implements entity.windowed.InclusionPersonVersionList {
+  public InclusionPersonVersionListImpl(entity.InclusionPerson base)  {
+    super(base);
+  }
+  
+  public InclusionPersonVersionListImpl(gw.pl.persistence.core.Bundle bundle, gw.pl.persistence.core.effdate.EffDatedKey effDatedKey)  {
+    super(bundle, effDatedKey);
+  }
+  
+  @java.lang.Override
+  public entity.InclusionPerson AsOf(java.util.Date date) {
+    return (entity.InclusionPerson)getVersionAsOf(date);
+  }
+  
+  @java.lang.Override
+  public java.util.List<? extends entity.InclusionPerson> getAllVersions() {
+    return (java.util.List)getAllVersionsUntyped();
+  }
+  
+  
+}

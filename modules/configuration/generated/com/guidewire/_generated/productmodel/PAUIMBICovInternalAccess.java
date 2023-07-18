@@ -1,0 +1,12 @@
+package com.guidewire._generated.productmodel;
+
+@javax.annotation.Generated(comments = "config/resources/productmodel/policylinepatterns/PersonalAutoLine/coveragepatterns/PAUIMBICov.xml", date = "", value = "com.guidewire.pc.productmodel.codegen.ProductModelCodegen")
+public class PAUIMBICovInternalAccess {
+  public static final com.guidewire.pl.system.internal.FriendAccessor<com.guidewire.pc.domain.productmodel.ProductModelFriendAccess<productmodel.PAUIMBICov>> FRIEND_ACCESSOR = new com.guidewire.pl.system.internal.FriendAccessor<com.guidewire.pc.domain.productmodel.ProductModelFriendAccess<productmodel.PAUIMBICov>>(productmodel.PAUIMBICov.class);
+  
+  private PAUIMBICovInternalAccess()  {
+    
+  }
+  
+  
+}
