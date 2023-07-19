@@ -1,0 +1,14 @@
+{
+  "schemaName": "exavalu.pc.response.account-1.0",
+  "mappers": {
+    "Account": {
+      "schemaDefinition": "Account",
+      "root": "entity.Account",
+      "properties": {
+        "accountNumber": {
+          "path": "Account.AccountNumber"
+        }
+      }
+    }
+  }
+}
