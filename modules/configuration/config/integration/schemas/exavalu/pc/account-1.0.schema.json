@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "Account": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "dateOfBirth": {
+          "type": "string"
+        },
+        "maritalStatus": {
+          "type": "string",
+          "x-gw-type": "typekey.MaritalStatus"
+        },
+        "primaryPhone": {
+          "type": "string",
+          "x-gw-type": "typekey.PrimaryPhoneType"
+        },
+        "homePhone": {
+          "type": "string"
+        },
+        "workPhone": {
+          "type": "string"
+        },
+        "mobilePhone": {
+          "type": "string"
+        },
+        "faxPhone": {
+          "type": "string"
+        },
+        "primaryEmail": {
+          "type": "string"
+        },
+        "secondaryEmail": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string",
+          "x-gw-type": "typekey.Country"
+        },
+        "address1": {
+          "type": "string"
+        },
+        "address2": {
+          "type": "string"
+        },
+        "address3": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "county": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "x-gw-type": "typekey.State"
+        },
+        "zipCode": {
+          "type": "string"
+        },
+        "addressType": {
+          "type": "string",
+          "x-gw-type": "typekey.AddressType"
+        },
+        "addressDescription": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "licenseState": {
+          "type": "string",
+          "x-gw-type": "typekey.State"
+        },
+        "ssn": {
+          "type": "string"
+        },
+        "orgType": {
+          "type": "string",
+          "x-gw-type": "typekey.AccountOrgType"
+        },
+        "contactSubtype": {
+          "type": "string",
+          "x-gw-type": "typekey.ContactType"
+        }
+      }
+    }
+  }
+}

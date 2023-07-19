@@ -1,0 +1,36 @@
+swagger: "2.0"
+info:
+  title: "AccountAPI"
+  description: "Creating an account."
+  version: "1.0"
+basePath: /account/v1
+x-gw-schema-import:
+  createNewAccount: exavalu.pc.account-1.0
+  accountResponse: exavalu.pc.response.account-1.0
+x-gw-apihandlers:
+  - exavalu.pc.account.v1.AgentPortalAccountApiHandler
+produces:
+  - application/json
+consumes:
+  - application/json
+paths:
+  /createNewAccount:
+    put:
+      summary: "Create the account"
+      description: "Create the account and return the account number"
+      operationId: createNewAccount
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "createNewAccount#/definitions/Account"
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      responses:
+        200:
+          description: "Account Created Successfully"
+          schema:
+            $ref: "accountResponse#/definitions/Account"
