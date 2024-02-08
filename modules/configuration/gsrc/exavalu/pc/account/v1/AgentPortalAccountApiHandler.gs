@@ -65,6 +65,7 @@ class AgentPortalAccountApiHandler {
     account.addToAccountLocations(accountLocation)
     account.PrimaryLocation = accountLocation
   }
+//test for gw comparison tool
 }
 
 
