@@ -10,6 +10,7 @@ public class PersonalAuto_VehicleDV extends com.guidewire.pl.web.codegen.Section
   function refreshVariables ($vehicle :  PersonalVehicle, $policyPeriod :  PolicyPeriod, $line :  PersonalAutoLine, $openForEdit :  Boolean, $jobWizardHelper :  gw.api.web.job.JobWizardHelper) : void {
     __widgetOf(this, pcf.PersonalAuto_VehicleDV, SECTION_WIDGET_CLASS).setVariables(true, {$vehicle, $policyPeriod, $line, $openForEdit, $jobWizardHelper})
   }
-  
+
+//test commit
   
 }
