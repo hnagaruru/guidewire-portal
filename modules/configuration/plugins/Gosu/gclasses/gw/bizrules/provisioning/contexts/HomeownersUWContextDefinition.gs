@@ -16,4 +16,5 @@ class HomeownersUWContextDefinition extends GenericUWRuleContextDefinition {
   override function appliesToPolicyLines(lines: typekey.PolicyLine[]): boolean {
     return lines.HasElements and lines.allMatch(\line -> line == typekey.PolicyLine.TC_HOPLINE)
   }
+//test commit
 }
